@@ -10,6 +10,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_dotenv: ^5.2.1
+  flutter_launcher_icons: ^0.14.3
   http: ^1.3.0
   provider: ^6.1.2
   shared_preferences: ^2.5.2
@@ -25,3 +26,10 @@ flutter:
   assets:
     - assets/images/
     - assets/icons/
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/bossloot-logo-margin.png"
+  adaptive_icon_foreground: "assets/images/bossloot-logo-margin.png"
+  adaptive_icon_background: "#FFFFFF"

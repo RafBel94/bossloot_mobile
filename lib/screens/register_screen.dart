@@ -34,201 +34,207 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: LayoutBuilder(
-        builder: (BuildContext context, BoxConstraints constraints) {
-          return SingleChildScrollView(
-            child: ConstrainedBox(
-              constraints: BoxConstraints(minHeight: constraints.maxHeight),
-              child: IntrinsicHeight(
-                child: Container(
-                  height: double.infinity,
-                  width: double.infinity,
-                  alignment: Alignment.center,
-                  decoration: const BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage('assets/images/background-2.jpeg'),
-                      fit: BoxFit.fill,
-                    ),
-                  ),
-                  child: AnimatedOpacity(
-                    opacity: _opacity,
-                    duration: const Duration(milliseconds: 800),
-                    curve: Curves.easeIn,
-      
-                    // Main Container
-                    child: Container(
-                      width: double.infinity,
-                      margin: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 100),
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.white),
-                        borderRadius: BorderRadius.circular(15),
-                        color: const Color.fromARGB(41, 207, 207, 207),
+    return PopScope(
+      canPop: false,
+      onPopInvokedWithResult: (didPop, result) {
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const LoginScreen()));
+      },
+      child: Scaffold(
+        body: LayoutBuilder(
+          builder: (BuildContext context, BoxConstraints constraints) {
+            return SingleChildScrollView(
+              child: ConstrainedBox(
+                constraints: BoxConstraints(minHeight: constraints.maxHeight),
+                child: IntrinsicHeight(
+                  child: Container(
+                    height: double.infinity,
+                    width: double.infinity,
+                    alignment: Alignment.center,
+                    decoration: const BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage('assets/images/background-2.jpeg'),
+                        fit: BoxFit.fill,
                       ),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(20),
-                        child: BackdropFilter(
-                          filter: ImageFilter.blur(sigmaY: 5, sigmaX: 5),
-                          child: Padding(
-                            padding: const EdgeInsets.all(25.0),
-      
-                            // Form
-                            child: Form(
-                              key: _formKey,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const Spacer(),
-      
-                                  // Register Title
-                                  Container(
-                                    margin: const EdgeInsets.only(bottom: 20),
-                                    child: const Center(
-                                      child: Text(
-                                        "Register",
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 30,
-                                          fontWeight: FontWeight.bold,
+                    ),
+                    child: AnimatedOpacity(
+                      opacity: _opacity,
+                      duration: const Duration(milliseconds: 800),
+                      curve: Curves.easeIn,
+        
+                      // Main Container
+                      child: Container(
+                        width: double.infinity,
+                        margin: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 100),
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.white),
+                          borderRadius: BorderRadius.circular(15),
+                          color: const Color.fromARGB(41, 207, 207, 207),
+                        ),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(20),
+                          child: BackdropFilter(
+                            filter: ImageFilter.blur(sigmaY: 5, sigmaX: 5),
+                            child: Padding(
+                              padding: const EdgeInsets.all(25.0),
+        
+                              // Form
+                              child: Form(
+                                key: _formKey,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    const Spacer(),
+        
+                                    // Register Title
+                                    Container(
+                                      margin: const EdgeInsets.only(bottom: 20),
+                                      child: const Center(
+                                        child: Text(
+                                          "Register",
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 30,
+                                            fontWeight: FontWeight.bold,
+                                          ),
                                         ),
                                       ),
                                     ),
-                                  ),
-      
-                                  const Spacer(),
-      
-                                  // Name Field
-                                  TextUtil(text: "Name", isBold: true, size: 18, color: Colors.white),
-                                  Container(
-                                    height: 35,
-                                    margin: const EdgeInsets.only(bottom: 10),
-                                    decoration: const BoxDecoration(
-                                      border: Border(bottom: BorderSide(color: Colors.white)),
-                                    ),
-                                    child: TextFormField(
-                                      onTapOutside: (event) => FocusScope.of(context).unfocus(),
-                                      controller: _nameController,
-                                      style: const TextStyle(color: Colors.white),
-                                      decoration: const InputDecoration(
-                                        suffixIcon: Icon(Icons.supervised_user_circle_outlined, color: Colors.white),
-                                        fillColor: Colors.white,
-                                        border: InputBorder.none,
+        
+                                    const Spacer(),
+        
+                                    // Name Field
+                                    TextUtil(text: "Name", isBold: true, size: 18, color: Colors.white),
+                                    Container(
+                                      height: 35,
+                                      margin: const EdgeInsets.only(bottom: 10),
+                                      decoration: const BoxDecoration(
+                                        border: Border(bottom: BorderSide(color: Colors.white)),
                                       ),
-                                      validator: (value) => FieldValidator(value: value).validateName(),
-                                    ),
-                                  ),
-      
-                                  const Spacer(),
-      
-                                  // Email Field
-                                  TextUtil(text: "Email", isBold: true, size: 18, color: Colors.white),
-                                  Container(
-                                    height: 35,
-                                    margin: const EdgeInsets.only(bottom: 10),
-                                    decoration: const BoxDecoration(
-                                      border: Border(bottom: BorderSide(color: Colors.white)),
-                                    ),
-                                    child: TextFormField(
-                                      onTapOutside: (event) => FocusScope.of(context).unfocus(),
-                                      controller: _emailController,
-                                      style: const TextStyle(color: Colors.white),
-                                      decoration: const InputDecoration(
-                                        suffixIcon: Icon(Icons.mail, color: Colors.white),
-                                        fillColor: Colors.white,
-                                        border: InputBorder.none,
-                                      ),
-                                      validator: (value) => FieldValidator(value: value).validateEmail(),
-                                    ),
-                                  ),
-      
-                                  const Spacer(),
-      
-                                  // Password Field
-                                  TextUtil(text: "Password", isBold: true, size: 18, color: Colors.white),
-                                  Container(
-                                    height: 35,
-                                    margin: const EdgeInsets.only(bottom: 10),
-                                    decoration: const BoxDecoration(
-                                      border: Border(bottom: BorderSide(color: Colors.white)),
-                                    ),
-                                    child: TextFormField(
-                                      onTapOutside: (event) => FocusScope.of(context).unfocus(),
-                                      controller: _passwordController,
-                                      style: const TextStyle(color: Colors.white),
-                                      decoration: InputDecoration(
-                                        suffixIcon: IconButton(
-                                          onPressed: () {
-                                            setState(() {
-                                              _passwordHidden = !_passwordHidden;
-                                            });
-                                          },
-                                          icon: _passwordHidden ? const Icon(Icons.visibility_off, color: Colors.white) : const Icon(Icons.visibility, color: Colors.white),
+                                      child: TextFormField(
+                                        onTapOutside: (event) => FocusScope.of(context).unfocus(),
+                                        controller: _nameController,
+                                        style: const TextStyle(color: Colors.white),
+                                        decoration: const InputDecoration(
+                                          suffixIcon: Icon(Icons.supervised_user_circle_outlined, color: Colors.white),
+                                          fillColor: Colors.white,
+                                          border: InputBorder.none,
                                         ),
-                                        fillColor: Colors.white,
-                                        border: InputBorder.none,
+                                        validator: (value) => FieldValidator(value: value).validateName(),
                                       ),
-                                      obscureText: _passwordHidden,
-                                      validator: (value) => FieldValidator(value: value).validatePassword(),
                                     ),
-                                  ),
-      
-                                  const Spacer(),
-      
-                                  // Repeat Password Field
-                                  TextUtil(text: "Repeat password", isBold: true, size: 18, color: Colors.white),
-                                  Container(
-                                    height: 35,
-                                    margin: const EdgeInsets.only(bottom: 20),
-                                    decoration: const BoxDecoration(border: Border(bottom: BorderSide(color: Colors.white))),
-                                    child: TextFormField(
-                                      onTapOutside: (event) => FocusScope.of(context).unfocus(),
-                                      controller: _repeatPasswordController,
-                                      style: const TextStyle(color: Colors.white),
-                                      decoration: InputDecoration(
-                                        suffixIcon: IconButton(
-                                          onPressed: () {
-                                            setState(() {
-                                              _passwordHidden = !_passwordHidden;
-                                            });
-                                          },
-                                          icon: _passwordHidden ? const Icon(Icons.visibility_off, color: Colors.white) : const Icon(Icons.visibility, color: Colors.white),
+        
+                                    const Spacer(),
+        
+                                    // Email Field
+                                    TextUtil(text: "Email", isBold: true, size: 18, color: Colors.white),
+                                    Container(
+                                      height: 35,
+                                      margin: const EdgeInsets.only(bottom: 10),
+                                      decoration: const BoxDecoration(
+                                        border: Border(bottom: BorderSide(color: Colors.white)),
+                                      ),
+                                      child: TextFormField(
+                                        onTapOutside: (event) => FocusScope.of(context).unfocus(),
+                                        controller: _emailController,
+                                        style: const TextStyle(color: Colors.white),
+                                        decoration: const InputDecoration(
+                                          suffixIcon: Icon(Icons.mail, color: Colors.white),
+                                          fillColor: Colors.white,
+                                          border: InputBorder.none,
                                         ),
+                                        validator: (value) => FieldValidator(value: value).validateEmail(),
                                       ),
-                                      obscureText: _passwordHidden,
-                                      validator: (value) => FieldValidator(value: value).validateRepeatPassword(_passwordController.text),
                                     ),
-                                  ),
-      
-                                  const Spacer(),
-      
-                                  // Register Button
-                                  Center(
-                                    child: RegisterButton(
-                                      emailController: _emailController,
-                                      passwordController: _passwordController,
-                                      repeatPasswordController: _repeatPasswordController,
-                                      nameController: _nameController,
-                                      formKey: _formKey,
-                                    ),
-                                  ),
-      
-                                  const SizedBox(height: 10),
-      
-                                  // Back Button
-                                  Center(
-                                    child: IconButton(
-                                      icon: const Icon(Icons.arrow_back, color: Colors.white),
-                                      style: IconButton.styleFrom(
-                                        backgroundColor: const Color.fromARGB(255, 141, 70, 154),
-                                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                                        side: BorderSide(color: Colors.white),
+        
+                                    const Spacer(),
+        
+                                    // Password Field
+                                    TextUtil(text: "Password", isBold: true, size: 18, color: Colors.white),
+                                    Container(
+                                      height: 35,
+                                      margin: const EdgeInsets.only(bottom: 10),
+                                      decoration: const BoxDecoration(
+                                        border: Border(bottom: BorderSide(color: Colors.white)),
                                       ),
-                                      onPressed: () {
-                                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const LoginScreen()));
-                                      },
+                                      child: TextFormField(
+                                        onTapOutside: (event) => FocusScope.of(context).unfocus(),
+                                        controller: _passwordController,
+                                        style: const TextStyle(color: Colors.white),
+                                        decoration: InputDecoration(
+                                          suffixIcon: IconButton(
+                                            onPressed: () {
+                                              setState(() {
+                                                _passwordHidden = !_passwordHidden;
+                                              });
+                                            },
+                                            icon: _passwordHidden ? const Icon(Icons.visibility_off, color: Colors.white) : const Icon(Icons.visibility, color: Colors.white),
+                                          ),
+                                          fillColor: Colors.white,
+                                          border: InputBorder.none,
+                                        ),
+                                        obscureText: _passwordHidden,
+                                        validator: (value) => FieldValidator(value: value).validatePassword(),
+                                      ),
                                     ),
-                                  )
-                                ],
+        
+                                    const Spacer(),
+        
+                                    // Repeat Password Field
+                                    TextUtil(text: "Repeat password", isBold: true, size: 18, color: Colors.white),
+                                    Container(
+                                      height: 35,
+                                      margin: const EdgeInsets.only(bottom: 20),
+                                      decoration: const BoxDecoration(border: Border(bottom: BorderSide(color: Colors.white))),
+                                      child: TextFormField(
+                                        onTapOutside: (event) => FocusScope.of(context).unfocus(),
+                                        controller: _repeatPasswordController,
+                                        style: const TextStyle(color: Colors.white),
+                                        decoration: InputDecoration(
+                                          suffixIcon: IconButton(
+                                            onPressed: () {
+                                              setState(() {
+                                                _passwordHidden = !_passwordHidden;
+                                              });
+                                            },
+                                            icon: _passwordHidden ? const Icon(Icons.visibility_off, color: Colors.white) : const Icon(Icons.visibility, color: Colors.white),
+                                          ),
+                                        ),
+                                        obscureText: _passwordHidden,
+                                        validator: (value) => FieldValidator(value: value).validateRepeatPassword(_passwordController.text),
+                                      ),
+                                    ),
+        
+                                    const Spacer(),
+        
+                                    // Register Button
+                                    Center(
+                                      child: RegisterButton(
+                                        emailController: _emailController,
+                                        passwordController: _passwordController,
+                                        repeatPasswordController: _repeatPasswordController,
+                                        nameController: _nameController,
+                                        formKey: _formKey,
+                                      ),
+                                    ),
+        
+                                    const SizedBox(height: 10),
+        
+                                    // Back Button
+                                    Center(
+                                      child: IconButton(
+                                        icon: const Icon(Icons.arrow_back, color: Colors.white),
+                                        style: IconButton.styleFrom(
+                                          backgroundColor: const Color.fromARGB(255, 141, 70, 154),
+                                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                                          side: BorderSide(color: Colors.white),
+                                        ),
+                                        onPressed: () {
+                                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const LoginScreen()));
+                                        },
+                                      ),
+                                    )
+                                  ],
+                                ),
                               ),
                             ),
                           ),
@@ -238,9 +244,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                 ),
               ),
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
     );
   }

@@ -11,7 +11,6 @@ void resendVerificationAction(BuildContext context) async {
   await userProvider.resendEmailVerification(userProvider.temporalUserEmail!);
 
   if (userProvider.errorMessage != null) {
-    print(userProvider.errorMessage);
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(userProvider.errorMessage!)));
     return;
   } 

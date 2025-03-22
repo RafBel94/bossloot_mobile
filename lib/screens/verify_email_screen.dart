@@ -1,12 +1,11 @@
 import 'dart:ui';
+
 import 'package:bossloot_mobile/actions/login_action.dart';
 import 'package:bossloot_mobile/actions/resend_verification_action.dart';
-import 'package:bossloot_mobile/providers/user_provider.dart';
 import 'package:bossloot_mobile/screens/login_screen.dart';
 import 'package:bossloot_mobile/screens/register_screen.dart';
 import 'package:bossloot_mobile/utils/text_util.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class VerifyEmailScreen extends StatefulWidget {
   const VerifyEmailScreen({super.key});

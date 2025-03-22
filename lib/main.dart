@@ -27,7 +27,7 @@ class MainApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Libridex',
+        title: 'BossLoot',
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 110, 72, 121)),
           useMaterial3: true,
