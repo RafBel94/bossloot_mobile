@@ -5,21 +5,18 @@ import 'package:bossloot_mobile/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-void registerAction(BuildContext context, String name, String email, String password, String repeatPassword) async {
+void resendVerificationAction(BuildContext context) async {
   final userProvider = context.read<UserProvider>();
 
-  await userProvider.registerUser(name, email, password, repeatPassword);
+  await userProvider.resendEmailVerification(userProvider.temporalUserEmail!);
 
   if (userProvider.errorMessage != null) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(userProvider.errorMessage!)),
-    );
-
+    print(userProvider.errorMessage);
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(userProvider.errorMessage!)));
     return;
-  }
+  } 
 
-  ScaffoldMessenger.of(context).showSnackBar(
-    SnackBar(content: Text("Registration successful! Please verify your email.")),
-  );
+  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Verification email resent!")));
+
   Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const LoginScreen()));
 }

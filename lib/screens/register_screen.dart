@@ -194,7 +194,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                           icon: _passwordHidden ? const Icon(Icons.visibility_off, color: Colors.white) : const Icon(Icons.visibility, color: Colors.white),
                                         ),
                                       ),
-                                      obscureText: true,
+                                      obscureText: _passwordHidden,
                                       validator: (value) => FieldValidator(value: value).validateRepeatPassword(_passwordController.text),
                                     ),
                                   ),
@@ -221,6 +221,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       style: IconButton.styleFrom(
                                         backgroundColor: const Color.fromARGB(255, 141, 70, 154),
                                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                                        side: BorderSide(color: Colors.white),
                                       ),
                                       onPressed: () {
                                         Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const LoginScreen()));

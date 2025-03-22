@@ -2,6 +2,7 @@
 
 import 'package:bossloot_mobile/providers/user_provider.dart';
 import 'package:bossloot_mobile/screens/home_screen.dart';
+import 'package:bossloot_mobile/screens/verify_email_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -10,10 +11,17 @@ void loginAction(BuildContext context, String email, String password) async {
 
   await userProvider.loginUser(email, password);
 
-  if (userProvider.errorMessage != null) {
+  if (userProvider.errorMessage != "Please confirm your email before logging in." && userProvider.errorMessage != null) {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(userProvider.errorMessage!)));
-
     return;
+  } else {
+
+    await userProvider.checkEmailVerification(email);
+    
+    if (userProvider.errorMessage != null) {
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const VerifyEmailScreen()));
+      return;
+    }
   }
 
   Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const HomeScreen()));

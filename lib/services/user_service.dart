@@ -4,7 +4,7 @@ import 'package:bossloot_mobile/domain/models/api_response.dart';
 import 'package:http/http.dart' as http;
 
 class UserService {
-  final String baseUrl = 'http://10.0.2.2:8000/api';
+  final String baseUrl = 'https://bossloot-api-uvwil.ondigitalocean.app/api';
 
   // Login endpoint
   Future<ApiResponse> login(String email, String password) async {
@@ -19,6 +19,7 @@ class UserService {
         'password': password,
       }),
     );
+    print(response.body);
     return ApiResponse.fromJson(json.decode(response.body));
   }
 
@@ -35,6 +36,38 @@ class UserService {
         'email': email,
         'password': password,
         'repeatPassword': repeatPassword,
+      }),
+    );
+    print(response.body);
+    return ApiResponse.fromJson(json.decode(response.body));
+  }
+
+  // Check email verification endpoint
+  Future<ApiResponse> checkEmailVerification(String email) async {
+    final endpoint = '$baseUrl/check-verification';
+    final response = await http.post(
+      Uri.parse(endpoint),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: jsonEncode({
+        'email': email,
+      }),
+    );
+    print(response.body);
+    return ApiResponse.fromJson(json.decode(response.body));
+  }
+
+  // Resend email verification endpoint
+  Future<ApiResponse> resendEmailVerification(String email) async {
+    final endpoint = '$baseUrl/resend-verification';
+    final response = await http.post(
+      Uri.parse(endpoint),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: jsonEncode({
+        'email': email,
       }),
     );
     print(response.body);

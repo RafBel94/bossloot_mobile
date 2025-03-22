@@ -8,6 +8,7 @@ class UserProvider extends ChangeNotifier {
   final TokenService tokenService;
   User? currentUser;
   String? errorMessage;
+  String? temporalUserEmail;
 
   UserProvider(this.tokenService, this.userService);
 
@@ -52,5 +53,42 @@ class UserProvider extends ChangeNotifier {
     currentUser = null;
     await tokenService.clearToken();
     notifyListeners();
+  }
+
+  // Check email verification
+  Future<void> checkEmailVerification(String email) async {
+    try {
+      errorMessage = null;
+
+      ApiResponse checkEmailResponse = await userService.checkEmailVerification(email);
+
+      if (checkEmailResponse.success) {
+        errorMessage = null;
+      } else {
+        errorMessage = checkEmailResponse.data['error'] ?? 'Email verification failed';
+        temporalUserEmail = email;
+      }
+    } catch (error) {
+      errorMessage = 'Error: ${error.toString()}';
+    } finally {
+      notifyListeners();
+    }
+  }
+
+  // Resend email verification
+  Future<void> resendEmailVerification(String email) async {
+    try {
+      ApiResponse resendEmailResponse = await userService.resendEmailVerification(email);
+      
+      if (resendEmailResponse.success) {
+        errorMessage = null;
+      } else {
+        errorMessage = resendEmailResponse.data['error'] ?? 'Resend email verification failed';
+      }
+    } catch (error) {
+      errorMessage = 'Error: ${error.toString()}';
+    } finally {
+      notifyListeners();
+    }
   }
 }

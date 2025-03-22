@@ -9,7 +9,7 @@ class ApiResponse {
     return ApiResponse(
       success: json['success'],
       message: json['message'],
-      data: json['data'],
+      data: json['data'] ?? <String, dynamic>{'error': 'Empty error information'},
     );
   }
 }

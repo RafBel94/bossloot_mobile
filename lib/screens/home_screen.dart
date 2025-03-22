@@ -1,3 +1,4 @@
+import 'package:bossloot_mobile/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -12,9 +13,9 @@ class HomeScreen extends StatelessWidget {
       body: Center(
         child: ElevatedButton(
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const LoginScreen()));
           },
-          child: const Text('Hello to home screen!'),
+          child: const Text('Back to login screen!'),
         ),
       ),
     );
