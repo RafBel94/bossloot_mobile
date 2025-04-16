@@ -1,5 +1,5 @@
 import 'package:bossloot_mobile/providers/user_provider.dart';
-import 'package:bossloot_mobile/screens/login_screen.dart';
+import 'package:bossloot_mobile/screens/auth/login_screen.dart';
 import 'package:bossloot_mobile/services/token_service.dart';
 import 'package:bossloot_mobile/services/user_service.dart';
 import 'package:flutter/material.dart';

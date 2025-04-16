@@ -1,4 +1,4 @@
-import 'package:bossloot_mobile/screens/login_screen.dart';
+import 'package:bossloot_mobile/screens/auth/login_screen.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {

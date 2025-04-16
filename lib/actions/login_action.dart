@@ -2,7 +2,7 @@
 
 import 'package:bossloot_mobile/providers/user_provider.dart';
 import 'package:bossloot_mobile/screens/home_screen.dart';
-import 'package:bossloot_mobile/screens/verify_email_screen.dart';
+import 'package:bossloot_mobile/screens/auth/verify_email_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

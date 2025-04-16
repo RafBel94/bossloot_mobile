@@ -6,7 +6,7 @@ import 'package:bossloot_mobile/domain/models/api_response.dart';
 import 'package:http/http.dart' as http;
 
 class UserService {
-  final String baseUrl = 'https://bossloot-api-uvwil.ondigitalocean.app/api';
+  final String baseUrl = 'https://bossloot-kbsiw.ondigitalocean.app/api';
 
   // Login endpoint
   Future<ApiResponse> login(String email, String password) async {
@@ -21,7 +21,6 @@ class UserService {
         'password': password,
       }),
     );
-    print(response.body);
     return ApiResponse.fromJson(json.decode(response.body));
   }
 
