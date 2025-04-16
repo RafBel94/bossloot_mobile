@@ -46,155 +46,154 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
         
           // Animated opacity for fade-in effect
-          child: Column(
-            children: [
-              SizedBox(height: sizes.height * 0.05),
-        
-              Image(
-                image: AssetImage('assets/images/bossloot-logo-full.png'),
-                height: sizes.height * 0.17,
-              ),
-        
-              SizedBox(height: sizes.height * 0.05),
-        
-              AnimatedOpacity(
-                opacity: _opacity,
-                duration: Duration(milliseconds: 800),
-                curve: Curves.easeIn,
-              
-                // Main content container
-                child: Container(
-                  height: sizes.height * 0.62,
-                  width: double.infinity,
-                  margin: const EdgeInsets.symmetric(horizontal: 30.0),
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.white),
-                    borderRadius: BorderRadius.circular(15),
-                    color: const Color.fromARGB(71, 207, 207, 207),
-                  ),
-              
-                  // Blurred background filter
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(20),
-                    child: BackdropFilter(
-                      filter: ImageFilter.blur(sigmaY: 5, sigmaX: 5),
-              
-                      // Padding for inner content
-                      child: Padding(
-                        padding: const EdgeInsets.all(25.0),
-                        child: Form(
-                          key: _formKey,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Spacer(),
-              
-                              // Login title
-                              Container(
-                                margin: const EdgeInsets.only(bottom: 20),
-                                child: Center(
-                                  child: Text(
-                                    "Login",
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 33,
-                                      fontWeight: FontWeight.bold,
+          child: Padding(
+            padding: EdgeInsets.symmetric(vertical: sizes.height * 0.06),
+            child: Column(
+              children: [
+                Image(
+                  image: AssetImage('assets/images/bossloot-logo-full.png'),
+                  height: sizes.height * 0.17,
+                ),
+                    
+                SizedBox(height: sizes.height * 0.05),
+                    
+                AnimatedOpacity(
+                  opacity: _opacity,
+                  duration: Duration(milliseconds: 800),
+                  curve: Curves.easeIn,
+                
+                  // Main content container
+                  child: Container(
+                    height: sizes.height * 0.62,
+                    width: double.infinity,
+                    margin: const EdgeInsets.symmetric(horizontal: 30.0),
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.white),
+                      borderRadius: BorderRadius.circular(15),
+                      color: const Color.fromARGB(71, 207, 207, 207),
+                    ),
+                
+                    // Blurred background filter
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(20),
+                      child: BackdropFilter(
+                        filter: ImageFilter.blur(sigmaY: 5, sigmaX: 5),
+                
+                        // Padding for inner content
+                        child: Padding(
+                          padding: const EdgeInsets.all(25.0),
+                          child: Form(
+                            key: _formKey,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Spacer(),
+                
+                                // Login title
+                                Container(
+                                  margin: const EdgeInsets.only(bottom: 20),
+                                  child: Center(
+                                    child: Text(
+                                      "Login",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 33,
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
-              
-                              const Spacer(),
-                              // Email label
-                              TextUtil(text: "Email", isBold: true, size: 20, color: Colors.white),
-              
-                              // Email input field
-                              Container(
-                                height: 35,
-                                decoration: const BoxDecoration(
-                                  border: Border(bottom: BorderSide(color: Colors.white)),
-                                ),
-                                child: TextFormField(
-                                  onTapOutside: (event) {
-                                    FocusScope.of(context).unfocus();
-                                  },
-                                  controller: _emailController,
-                                  style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-                                  decoration: const InputDecoration(
-                                    suffixIcon: Icon(Icons.mail, color: Colors.white),
-                                    fillColor: Colors.white,
-                                    border: InputBorder.none,
+                
+                                const Spacer(),
+                                // Email label
+                                TextUtil(text: "Email", isBold: true, size: 20, color: Colors.white),
+                
+                                // Email input field
+                                Container(
+                                  height: 35,
+                                  decoration: const BoxDecoration(
+                                    border: Border(bottom: BorderSide(color: Colors.white)),
                                   ),
-                                  validator: (value) {
-                                    if (value == null || value.isEmpty) {
-                                      return 'Please enter a valid email';
-                                    }
-                                    return null;
-                                  },
-                                ),
-                              ),
-              
-                              const Spacer(),
-                              const Spacer(),
-                              // Password label
-                              TextUtil(text: "Password", isBold: true, size: 20, color: Colors.white),
-              
-                              // Password input field
-                              Container(
-                                height: 35,
-                                decoration: const BoxDecoration(
-                                  border: Border(bottom: BorderSide(color: Colors.white)),
-                                ),
-                                child: TextFormField(
-                                  onTapOutside: (event) {
-                                    FocusScope.of(context).unfocus();
-                                  },
-                                  controller: _passwordController,
-                                  style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-                                  decoration: const InputDecoration(
-                                    suffixIcon: Icon(Icons.visibility, color: Colors.white),
-                                    fillColor: Colors.white,
-                                    border: InputBorder.none,
+                                  child: TextFormField(
+                                    onTapOutside: (event) {
+                                      FocusScope.of(context).unfocus();
+                                    },
+                                    controller: _emailController,
+                                    style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                                    decoration: const InputDecoration(
+                                      suffixIcon: Icon(Icons.mail, color: Colors.white),
+                                      fillColor: Colors.white,
+                                      border: InputBorder.none,
+                                    ),
+                                    validator: (value) {
+                                      if (value == null || value.isEmpty) {
+                                        return 'Please enter a valid email';
+                                      }
+                                      return null;
+                                    },
                                   ),
-                                  obscureText: true,
-                                  validator: (value) {
-                                    if (value == null || value.isEmpty) {
-                                      return 'Please enter your password';
-                                    }
-                                    return null;
-                                  },
                                 ),
-                              ),
-              
-                              const Spacer(),
-                              // Login button
-                              LoginButton(formKey: _formKey, emailController: _emailController, passwordController: _passwordController,),
-              
-                              const Spacer(),
-                              // Register section
-                              Center(
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    TextUtil(text: "Don't have an account?", isBold: true, color: Colors.white),
-              
-                                    const SizedBox(height: 7),
-              
-                                    RegisterButton(),
-                                  ],
+                
+                                const Spacer(),
+                                const Spacer(),
+                                // Password label
+                                TextUtil(text: "Password", isBold: true, size: 20, color: Colors.white),
+                
+                                // Password input field
+                                Container(
+                                  height: 35,
+                                  decoration: const BoxDecoration(
+                                    border: Border(bottom: BorderSide(color: Colors.white)),
+                                  ),
+                                  child: TextFormField(
+                                    onTapOutside: (event) {
+                                      FocusScope.of(context).unfocus();
+                                    },
+                                    controller: _passwordController,
+                                    style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                                    decoration: const InputDecoration(
+                                      suffixIcon: Icon(Icons.visibility, color: Colors.white),
+                                      fillColor: Colors.white,
+                                      border: InputBorder.none,
+                                    ),
+                                    obscureText: true,
+                                    validator: (value) {
+                                      if (value == null || value.isEmpty) {
+                                        return 'Please enter your password';
+                                      }
+                                      return null;
+                                    },
+                                  ),
                                 ),
-                              ),
-                            ],
+                
+                                const Spacer(),
+                                // Login button
+                                LoginButton(formKey: _formKey, emailController: _emailController, passwordController: _passwordController,),
+                
+                                const Spacer(),
+                                // Register section
+                                Center(
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      TextUtil(text: "Don't have an account?", isBold: true, color: Colors.white),
+                
+                                      const SizedBox(height: 7),
+                
+                                      RegisterButton(),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
                     ),
                   ),
                 ),
-              ),
-        
-              SizedBox(height: sizes.height * 0.05),
-            ],
+              ],
+            ),
           ),
         ),
       ),
