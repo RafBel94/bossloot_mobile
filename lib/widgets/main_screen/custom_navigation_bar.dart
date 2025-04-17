@@ -2,17 +2,12 @@
 
 import 'package:flutter/material.dart';
 
-class CustomNavigationBar extends StatefulWidget {
-  int selectedIndex;
-  PageController pageController;
+class CustomNavigationBar extends StatelessWidget {
+  final int selectedIndex;
+  final ValueChanged<int> onTap;
 
-  CustomNavigationBar({super.key, required this.selectedIndex, required this.pageController});
+  const CustomNavigationBar({super.key, required this.selectedIndex, required this.onTap});
 
-  @override
-  State<CustomNavigationBar> createState() => _CustomNavigationBarState();
-}
-
-class _CustomNavigationBarState extends State<CustomNavigationBar> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -23,13 +18,8 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
         ),
         child: NavigationBar(
           elevation: 20,
-          selectedIndex: widget.selectedIndex,
-          onDestinationSelected: (int index) {
-            setState(() {
-              widget.selectedIndex = index;
-            });
-            widget.pageController.jumpToPage(index);
-          },
+          selectedIndex: selectedIndex,
+          onDestinationSelected: onTap,
           destinations: const [
             NavigationDestination(
               icon: Icon(Icons.star_border_outlined),

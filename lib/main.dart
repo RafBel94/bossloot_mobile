@@ -1,5 +1,5 @@
 import 'package:bossloot_mobile/providers/user_provider.dart';
-import 'package:bossloot_mobile/screens/main_screen/main_screen.dart';
+import 'package:bossloot_mobile/screens/auth/login_screen.dart';
 import 'package:bossloot_mobile/services/token_service.dart';
 import 'package:bossloot_mobile/services/user_service.dart';
 import 'package:flutter/material.dart';
@@ -32,7 +32,7 @@ class MainApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 110, 72, 121)),
           useMaterial3: true,
         ),
-        home: const MainScreen(),
+        home: SafeArea(child: const LoginScreen()),
       ),
     );
   }
