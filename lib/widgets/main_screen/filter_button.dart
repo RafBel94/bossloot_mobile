@@ -26,7 +26,7 @@ class _FilterButtonState extends State<FilterButton> {
             bottomLeft: Radius.circular(10),
             )
           ),
-          backgroundColor: Color(0xFFECD3FF),
+          backgroundColor: Color.fromARGB(255, 238, 211, 248),
           padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 25),
           ),
         child: Row(

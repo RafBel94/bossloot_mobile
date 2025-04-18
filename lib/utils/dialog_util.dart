@@ -28,4 +28,41 @@ class DialogUtil {
       ),
     );
   }
+
+  static void showProductImageDialog(BuildContext context, String imageUrl) {
+    showDialog(context: context, builder: (context) {
+          return Dialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10.0)
+            ),
+            child: SizedBox(
+              height: 300,
+              width: 200,
+              child: Stack(
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: NetworkImage(imageUrl),
+                        fit: BoxFit.fill,
+                      ),
+                    ),
+                  ),
+
+                  Positioned(
+                    top: 5,
+                    right: 5,
+                    child: IconButton(
+                      icon: const Icon(Icons.close),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        });
+  }
 }

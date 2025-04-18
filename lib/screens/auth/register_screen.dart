@@ -123,11 +123,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 border: Border(bottom: BorderSide(color: Colors.white)),
                               ),
                               child: TextFormField(
-                                onTapOutside: (event) => FocusScope.of(context).unfocus(),
+                                onTapOutside: (event) => FocusManager.instance.primaryFocus?.unfocus(),
                                 controller: _nameController,
                                 style: const TextStyle(color: Colors.white),
                                 decoration: const InputDecoration(
-                                  suffixIcon: Icon(Icons.supervised_user_circle_outlined, color: Colors.white),
+                                  suffixIcon: Icon(Icons.person, color: Colors.white),
                                   fillColor: Colors.white,
                                   border: InputBorder.none,
                                 ),
@@ -146,7 +146,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 border: Border(bottom: BorderSide(color: Colors.white)),
                               ),
                               child: TextFormField(
-                                onTapOutside: (event) => FocusScope.of(context).unfocus(),
+                                onTapOutside: (event) => FocusManager.instance.primaryFocus?.unfocus(),
                                 controller: _emailController,
                                 style: const TextStyle(color: Colors.white),
                                 decoration: const InputDecoration(
@@ -169,7 +169,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 border: Border(bottom: BorderSide(color: Colors.white)),
                               ),
                               child: TextFormField(
-                                onTapOutside: (event) => FocusScope.of(context).unfocus(),
+                                onTapOutside: (event) => FocusManager.instance.primaryFocus?.unfocus(),
                                 controller: _passwordController,
                                 style: const TextStyle(color: Colors.white),
                                 decoration: InputDecoration(
@@ -198,7 +198,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               margin: const EdgeInsets.only(bottom: 20),
                               decoration: const BoxDecoration(border: Border(bottom: BorderSide(color: Colors.white))),
                               child: TextFormField(
-                                onTapOutside: (event) => FocusScope.of(context).unfocus(),
+                                onTapOutside: (event) => FocusManager.instance.primaryFocus?.unfocus(),
                                 controller: _repeatPasswordController,
                                 style: const TextStyle(color: Colors.white),
                                 decoration: InputDecoration(

@@ -1,5 +1,9 @@
+import 'package:bossloot_mobile/providers/category_provider.dart';
+import 'package:bossloot_mobile/providers/product_provider.dart';
 import 'package:bossloot_mobile/providers/user_provider.dart';
 import 'package:bossloot_mobile/screens/auth/login_screen.dart';
+import 'package:bossloot_mobile/services/category_service.dart';
+import 'package:bossloot_mobile/services/product_service.dart';
 import 'package:bossloot_mobile/services/token_service.dart';
 import 'package:bossloot_mobile/services/user_service.dart';
 import 'package:flutter/material.dart';
@@ -23,6 +27,12 @@ class MainApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(
           create: (_) => UserProvider(TokenService(), UserService()),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => CategoryProvider(CategoryService(TokenService())),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => ProductProvider(ProductService(TokenService())),
         ),
       ],
       child: MaterialApp(

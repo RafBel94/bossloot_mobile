@@ -13,6 +13,7 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   double _opacity = 0.0;
+  bool _passwordVisible = false;
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -116,7 +117,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   ),
                                   child: TextFormField(
                                     onTapOutside: (event) {
-                                      FocusScope.of(context).unfocus();
+                                      FocusManager.instance.primaryFocus?.unfocus();
                                     },
                                     controller: _emailController,
                                     style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
@@ -147,16 +148,26 @@ class _LoginScreenState extends State<LoginScreen> {
                                   ),
                                   child: TextFormField(
                                     onTapOutside: (event) {
-                                      FocusScope.of(context).unfocus();
+                                      FocusManager.instance.primaryFocus?.unfocus();
                                     },
                                     controller: _passwordController,
                                     style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-                                    decoration: const InputDecoration(
-                                      suffixIcon: Icon(Icons.visibility, color: Colors.white),
+                                    decoration: InputDecoration(
                                       fillColor: Colors.white,
                                       border: InputBorder.none,
+                                      suffixIcon: IconButton(
+                                        icon: Icon(
+                                          _passwordVisible ? Icons.visibility : Icons.visibility_off,
+                                          color: Colors.white,
+                                        ),
+                                        onPressed: () {
+                                          setState(() {
+                                            _passwordVisible = !_passwordVisible;
+                                          });
+                                        },
+                                      ),
                                     ),
-                                    obscureText: true,
+                                    obscureText: !_passwordVisible,
                                     validator: (value) {
                                       if (value == null || value.isEmpty) {
                                         return 'Please enter your password';
