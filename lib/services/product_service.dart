@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:bossloot_mobile/domain/models/api_response.dart';
 import 'package:bossloot_mobile/domain/models/fetch_response.dart';
 import 'package:http/http.dart' as http;
 
@@ -20,6 +21,20 @@ class ProductService {
     );
     
     return FetchResponse.fromJson(json.decode(response.body));
+  }
+
+  // Method to fetch product details by ID
+  Future<ApiResponse> getProductDetails(int id) async {
+    final endpoint = '$baseUrl/products/detailed/$id';
+
+    final response = await http.get(
+      Uri.parse(endpoint),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    );
+
+    return ApiResponse.fromJson(json.decode(response.body));
   }
 
   // Method to fetch featured products or added last week

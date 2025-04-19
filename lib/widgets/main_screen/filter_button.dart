@@ -29,14 +29,7 @@ class _FilterButtonState extends State<FilterButton> {
           backgroundColor: Color.fromARGB(255, 238, 211, 248),
           padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 25),
           ),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: const [
-            Icon(Icons.filter_alt, color: Colors.black, size: 22,),
-            SizedBox(width: 8),
-            Text("Filter", style: TextStyle(fontSize: 16, color: Colors.black, fontWeight: FontWeight.bold)),
-          ],
-        ),
+        child: Icon(Icons.filter_alt, color: Colors.black, size: 22,)
       ),
     );
   }

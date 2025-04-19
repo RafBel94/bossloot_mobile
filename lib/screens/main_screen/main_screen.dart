@@ -1,3 +1,4 @@
+import 'package:bossloot_mobile/providers/category_provider.dart';
 import 'package:bossloot_mobile/providers/product_provider.dart';
 import 'package:bossloot_mobile/screens/loading_screen/loading_screen.dart';
 import 'package:bossloot_mobile/screens/main_screen/cart_screen/cart_screen.dart';
@@ -38,23 +39,26 @@ class MainScreenState extends State<MainScreen> {
       ),
     );
 
-    _initializeAllProducts();
+    _initializeAllProductsAndCategories();
     _pageController = PageController(initialPage: _selectedIndex);
   }
 
-  Future<void> _initializeAllProducts() async {
-    final startTime = DateTime.now(); // Registrar tiempo de inicio
+  Future<void> _initializeAllProductsAndCategories() async {
+    final startTime = DateTime.now();
     
+    final categoryProvider = context.read<CategoryProvider>();
     final productProvider = context.read<ProductProvider>();
     await productProvider.fetchCatalogProducts();
     await productProvider.fetchFeaturedProducts();
+    await categoryProvider.fetchCategories();
+
 
     if (mounted) {
-      final elapsed = DateTime.now().difference(startTime); // Calcular tiempo transcurrido
-      final remaining = Duration(seconds: 3) - elapsed; // Calcular tiempo restante para 3 segundos
+      final elapsed = DateTime.now().difference(startTime);
+      final remaining = Duration(seconds: 3) - elapsed;
       
       if (remaining > Duration.zero) {
-        await Future.delayed(remaining); // Esperar tiempo restante si es necesario
+        await Future.delayed(remaining);
       }
       
       setState(() {
@@ -84,16 +88,14 @@ class MainScreenState extends State<MainScreen> {
       canPop: false,
       onPopInvokedWithResult: (didPop, result) {
         if (_showingProductDetails) {
-        hideProductDetails();
-      } else {
-        DialogUtil.showLogoutDialog(context);
-      }
+          hideProductDetails();
+        }
       },
       child: SafeArea(
         child: Scaffold(
           key: _scaffoldKey,
           body: _isLoading 
-          ? LoadingScreen()
+        ? LoadingScreen()
         : Stack(
             children: [
               Column(
@@ -111,11 +113,11 @@ class MainScreenState extends State<MainScreen> {
                           children: _screens,
                         ),
                       
-                        
-                        FilterButton(scaffoldKey: _scaffoldKey),
+                        if(_selectedIndex == 0 || _selectedIndex == 1)
+                          FilterButton(scaffoldKey: _scaffoldKey),
 
-                        if (_showingProductDetails)
-                        ProductDetailsScreen(productId: _currentProductId, onBackPressed: hideProductDetails),
+                        if (_showingProductDetails && (_selectedIndex == 0 || _selectedIndex == 1))
+                          ProductDetailsScreen(productId: _currentProductId, onBackPressed: hideProductDetails),
                       ]
                     ),
                   ),
@@ -123,13 +125,9 @@ class MainScreenState extends State<MainScreen> {
               ),
             ],
           ),   
+
           // ------- Custom EndDrawer
-          endDrawer: CustomEndDrawer(),
-          onEndDrawerChanged: (isOpened) {
-            if (isOpened) {
-              FocusManager.instance.primaryFocus?.unfocus();
-            }
-          },
+          endDrawer: _selectedIndex == 0 || _selectedIndex == 1 ? CustomEndDrawer() : null,
         
           // ------- Custom Navigation Bar
           bottomNavigationBar: _isLoading ? null: CustomNavigationBar(selectedIndex: _selectedIndex, onTap: _onNavigationBarTapped,)
@@ -142,7 +140,8 @@ class MainScreenState extends State<MainScreen> {
     setState(() {
       _selectedIndex = index;
     });
-    _pageController.jumpToPage(index);
+    // _pageController.jumpToPage(index);
+    _pageController.animateToPage(index, duration: Duration(milliseconds: 500), curve: Curves.easeInOut);
   }
 
   void showProductDetails(int productId) {
