@@ -1,3 +1,5 @@
+import 'package:bossloot_mobile/providers/product_provider.dart';
+import 'package:bossloot_mobile/screens/loading_screen/loading_screen.dart';
 import 'package:bossloot_mobile/screens/main_screen/cart_screen/cart_screen.dart';
 import 'package:bossloot_mobile/screens/main_screen/catalog_screen/catalog_screen.dart';
 import 'package:bossloot_mobile/screens/main_screen/custom_drawer/custom_end_drawer.dart';
@@ -10,6 +12,7 @@ import 'package:bossloot_mobile/widgets/main_screen/custom_navigation_bar.dart';
 import 'package:bossloot_mobile/widgets/main_screen/filter_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -22,6 +25,7 @@ class MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
   bool _showingProductDetails = false;
   int _currentProductId = 0;
+  bool _isLoading = true;
   late PageController _pageController;
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -33,8 +37,31 @@ class MainScreenState extends State<MainScreen> {
         statusBarColor: Colors.black
       ),
     );
+
+    _initializeAllProducts();
     _pageController = PageController(initialPage: _selectedIndex);
   }
+
+  Future<void> _initializeAllProducts() async {
+    final startTime = DateTime.now(); // Registrar tiempo de inicio
+    
+    final productProvider = context.read<ProductProvider>();
+    await productProvider.fetchCatalogProducts();
+    await productProvider.fetchFeaturedProducts();
+
+    if (mounted) {
+      final elapsed = DateTime.now().difference(startTime); // Calcular tiempo transcurrido
+      final remaining = Duration(seconds: 3) - elapsed; // Calcular tiempo restante para 3 segundos
+      
+      if (remaining > Duration.zero) {
+        await Future.delayed(remaining); // Esperar tiempo restante si es necesario
+      }
+      
+      setState(() {
+        _isLoading = false;
+      });
+    }
+}
 
   @override
   void dispose() {
@@ -65,7 +92,9 @@ class MainScreenState extends State<MainScreen> {
       child: SafeArea(
         child: Scaffold(
           key: _scaffoldKey,
-          body: Stack(
+          body: _isLoading 
+          ? LoadingScreen()
+        : Stack(
             children: [
               Column(
                 children: [
@@ -103,7 +132,7 @@ class MainScreenState extends State<MainScreen> {
           },
         
           // ------- Custom Navigation Bar
-          bottomNavigationBar: CustomNavigationBar(selectedIndex: _selectedIndex, onTap: _onNavigationBarTapped,)
+          bottomNavigationBar: _isLoading ? null: CustomNavigationBar(selectedIndex: _selectedIndex, onTap: _onNavigationBarTapped,)
         ),
       ),
     );

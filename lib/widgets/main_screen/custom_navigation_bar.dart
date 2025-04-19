@@ -11,6 +11,7 @@ class CustomNavigationBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+        height: 70,
         decoration: const BoxDecoration(
           border: Border(
             top: BorderSide(color: Color.fromARGB(255, 229, 229, 229), width: 3),

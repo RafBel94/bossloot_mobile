@@ -11,17 +11,15 @@ class CatalogScreen extends StatefulWidget {
 }
 
 class _CatalogScreenState extends State<CatalogScreen> {
-  bool _isLoading = true;
+  bool _isLoading = false;
 
   @override
   void initState() {
     super.initState();
-    _initializeCatalogProducts();
   }
 
-  Future<void> _initializeCatalogProducts() async {
-    final productProvider = context.read<ProductProvider>();
-    await productProvider.fetchCatalogProducts();
+  Future<void> _refreshCatalogProducts() async {
+    await context.read<ProductProvider>().fetchCatalogProducts();
 
     if (mounted) {
       setState(() {
@@ -48,32 +46,35 @@ class _CatalogScreenState extends State<CatalogScreen> {
             child: const CircularProgressIndicator(color: Colors.white),
           )
         )
-      : Container(
-          height: double.infinity,
-          width: double.infinity,
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [Color(0xFF270140), Color.fromARGB(255, 141, 24, 112)],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            )
-          ),
-          child: Padding(
-            padding: const EdgeInsets.only(top: 8.0, left: 8.0, right: 8.0),
-            child: GridView.builder(
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                crossAxisSpacing: 8.0,
-                mainAxisSpacing: 8.0,
-                mainAxisExtent: 289
+      : RefreshIndicator(
+          onRefresh: () => _refreshCatalogProducts(),
+        child: Container(
+            height: double.infinity,
+            width: double.infinity,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [Color(0xFF270140), Color.fromARGB(255, 141, 24, 112)],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              )
+            ),
+            child: Padding(
+              padding: const EdgeInsets.only(top: 5.0, left: 8.0, right: 8.0),
+              child: GridView.builder(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 8.0,
+                  mainAxisSpacing: 8.0,
+                  mainAxisExtent: 289
+                ),
+                itemCount: context.read<ProductProvider>().catalogProductList.length,
+                itemBuilder: (context, index) {
+                  final product = context.read<ProductProvider>().catalogProductList[index];
+                  return CatalogProductCard(product: product);
+                },
               ),
-              itemCount: context.read<ProductProvider>().catalogProductList.length,
-              itemBuilder: (context, index) {
-                final product = context.read<ProductProvider>().catalogProductList[index];
-                return CatalogProductCard(product: product);
-              },
             ),
           ),
-        );
+      );
   }
 }

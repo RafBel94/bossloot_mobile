@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 class ProductProvider extends ChangeNotifier{
   ProductService productService;
   List<CatalogProduct> catalogProductList = [];
+  List<CatalogProduct> featuredProductList = [];
 
   String? errorMessage;
 
@@ -24,6 +25,28 @@ class ProductProvider extends ChangeNotifier{
       }
     } catch (e) {
       errorMessage = 'Failed to load products: $e';
+      print(errorMessage);
+    } finally {
+      notifyListeners();
+    }
+  }
+
+
+
+
+  // ----- FEATURED PRODUCTS -----
+  /// Fetches featured and latest added products from the product service and updates the state.
+  Future<void> fetchFeaturedProducts() async {
+    try {
+      FetchResponse response = await productService.getFeaturedProducts();
+      if (response.success) {
+        featuredProductList = response.data.map((item) => CatalogProduct.fromJson(item)).toList();
+        errorMessage = null;
+      } else {
+        errorMessage = response.message[0];
+      }
+    } catch (e) {
+      errorMessage = 'Failed to load featured products: $e';
       print(errorMessage);
     } finally {
       notifyListeners();

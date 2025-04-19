@@ -39,7 +39,7 @@ class CatalogProduct {
       json['quantity'],
       json['on_offer'] == 1,
       double.parse(json['discount'].toString()),
-      json['on_offer'] == 1,
+      json['featured'] == 1,
       json['image'],
       json['points'],
       json['category'],

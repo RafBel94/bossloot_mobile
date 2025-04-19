@@ -1,10 +1,9 @@
-import 'package:bossloot_mobile/domain/models/category.dart';
 import 'package:bossloot_mobile/providers/category_provider.dart';
+import 'package:bossloot_mobile/screens/main_screen/custom_drawer/custom_drawer_buttons/drawer_apply_button.dart';
+import 'package:bossloot_mobile/screens/main_screen/custom_drawer/custom_drawer_buttons/drawer_clear_button.dart';
 import 'package:bossloot_mobile/screens/main_screen/custom_drawer/custom_expansion_tiles/brand_filter_expansion_tile.dart';
 import 'package:bossloot_mobile/screens/main_screen/custom_drawer/custom_expansion_tiles/category_filter_expansion_tile.dart';
 import 'package:bossloot_mobile/screens/main_screen/custom_drawer/custom_expansion_tiles/date_filter_expansion_tile.dart';
-import 'package:bossloot_mobile/screens/main_screen/custom_drawer/custom_drawer_buttons/drawer_apply_button.dart';
-import 'package:bossloot_mobile/screens/main_screen/custom_drawer/custom_drawer_buttons/drawer_clear_button.dart';
 import 'package:bossloot_mobile/screens/main_screen/custom_drawer/custom_expansion_tiles/price_filter_expansion_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

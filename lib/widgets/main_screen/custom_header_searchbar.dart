@@ -87,7 +87,7 @@ class _CustomHeaderSearchbarState extends State<CustomHeaderSearchbar>
                 padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
                 child: TextField(
                   focusNode: _searchFocusNode,
-                  onTapOutside: (event) => FocusScope.of(context).unfocus(),
+                  onTapOutside: (event) => FocusManager.instance.primaryFocus?.unfocus(),
                   controller: _searchBarController,
                   decoration: InputDecoration(
                     hintText: 'Search in the catalogue...',

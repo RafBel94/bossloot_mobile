@@ -3,8 +3,8 @@ import 'package:bossloot_mobile/screens/main_screen/main_screen.dart';
 import 'package:bossloot_mobile/utils/dialog_util.dart';
 import 'package:flutter/material.dart';
 
-class CatalogProductCard extends StatelessWidget {
-  const CatalogProductCard({
+class SpotlightProductCard extends StatelessWidget {
+  const SpotlightProductCard({
     super.key,
     required this.product,
   });
@@ -28,15 +28,15 @@ class CatalogProductCard extends StatelessWidget {
       },
       child: Container(
         decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(2.0),
-        boxShadow: [
-          BoxShadow(
-          color: const Color.fromRGBO(0, 0, 0, 0.1),
-          blurRadius: 4.0,
-          offset: Offset(0, 2),
-          ),
-        ],
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(2.0),
+          boxShadow: [
+            BoxShadow(
+            color: const Color.fromRGBO(0, 0, 0, 0.1),
+            blurRadius: 4.0,
+            offset: Offset(0, 2),
+            ),
+          ],
         ),
         child: Column(
         mainAxisSize: MainAxisSize.max,
@@ -65,6 +65,29 @@ class CatalogProductCard extends StatelessWidget {
                         topLeft: Radius.circular(5.0),
                         topRight: Radius.circular(5.0),
                       ),
+                    ),
+                  ),
+
+                  if (!product.featured)
+                  Positioned(
+                    top: 0,
+                    left: 0,
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 2.0),
+                      alignment: Alignment.center,
+                      height: 35,
+                      width: 50,
+                      decoration: BoxDecoration(
+                        color: const Color.fromARGB(255, 69, 127, 215),
+                        gradient: LinearGradient(colors: [
+                          const Color.fromARGB(255, 69, 127, 215),
+                          const Color.fromARGB(255, 139, 89, 206),
+                        ], begin: Alignment.topLeft, end: Alignment.bottomRight),
+                        borderRadius: BorderRadius.only(
+                          bottomRight: Radius.circular(5.0),
+                        )
+                      ),
+                      child: Text('NEW!', style: const TextStyle(color: Colors.white, fontSize: 12.0, fontWeight: FontWeight.bold, overflow: TextOverflow.ellipsis), textAlign: TextAlign.center),
                     ),
                   ),
 
