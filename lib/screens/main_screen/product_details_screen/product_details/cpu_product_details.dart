@@ -22,7 +22,7 @@ class CpuProductDetails extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Icon(Icons.extension),
+                Icon(Icons.extension_outlined),
                 SizedBox(width: 5,),
                 TextUtil(text: 'Socket: ', isBold: true, size: 16,),
                 TextUtil(text: product.socket, size: 16,),
@@ -55,7 +55,7 @@ class CpuProductDetails extends StatelessWidget {
                 Icon(Icons.bolt),
                 SizedBox(width: 5,),
                 TextUtil(text: 'Base clock speed: ', isBold: true, size: 16,),
-                TextUtil(text: '${product.base_clock} MHz', size: 16,),
+                TextUtil(text: '${product.base_clock} GHz', size: 16,),
               ],
             ),
         
@@ -65,7 +65,7 @@ class CpuProductDetails extends StatelessWidget {
                 Icon(Icons.rocket),
                 SizedBox(width: 5,),
                 TextUtil(text: 'Boost clock speed: ', isBold: true, size: 16,),
-                TextUtil(text: '${product.boost_clock} MHz', size: 16,),
+                TextUtil(text: '${product.boost_clock} GHz', size: 16,),
               ],
             ),
         
