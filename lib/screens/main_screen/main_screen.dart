@@ -7,7 +7,6 @@ import 'package:bossloot_mobile/screens/main_screen/custom_drawer/custom_end_dra
 import 'package:bossloot_mobile/screens/main_screen/product_details_screen/product_details_screen.dart';
 import 'package:bossloot_mobile/screens/main_screen/profile_screen/profile_screen.dart';
 import 'package:bossloot_mobile/screens/main_screen/spotlight_screen/spotlight_screen.dart';
-import 'package:bossloot_mobile/utils/dialog_util.dart';
 import 'package:bossloot_mobile/widgets/main_screen/custom_header_searchbar.dart';
 import 'package:bossloot_mobile/widgets/main_screen/custom_navigation_bar.dart';
 import 'package:bossloot_mobile/widgets/main_screen/filter_button.dart';
@@ -127,10 +126,10 @@ class MainScreenState extends State<MainScreen> {
           ),   
 
           // ------- Custom EndDrawer
-          endDrawer: _selectedIndex == 0 || _selectedIndex == 1 ? CustomEndDrawer() : null,
+          endDrawer: (_selectedIndex == 0 || _selectedIndex == 1) && !_showingProductDetails  ? CustomEndDrawer() : null,
         
           // ------- Custom Navigation Bar
-          bottomNavigationBar: _isLoading ? null: CustomNavigationBar(selectedIndex: _selectedIndex, onTap: _onNavigationBarTapped,)
+          bottomNavigationBar: _isLoading || _showingProductDetails ? null: CustomNavigationBar(selectedIndex: _selectedIndex, onTap: _onNavigationBarTapped,)
         ),
       ),
     );

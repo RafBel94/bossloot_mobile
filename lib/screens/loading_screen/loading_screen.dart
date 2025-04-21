@@ -91,8 +91,8 @@ class _LoadingScreenState extends State<LoadingScreen>
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              const Color.fromARGB(255, 66, 2, 108),
-              const Color.fromARGB(255, 98, 18, 78)
+              const Color.fromARGB(255, 36, 1, 60),
+              const Color.fromARGB(255, 62, 11, 48)
             ],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,

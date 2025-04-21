@@ -1,17 +1,5 @@
-// ignore_for_file: type_literal_in_constant_pattern
-
-import 'package:bossloot_mobile/domain/models/products/case_product.dart';
-import 'package:bossloot_mobile/domain/models/products/cooler_product.dart';
-import 'package:bossloot_mobile/domain/models/products/cpu_product.dart';
-import 'package:bossloot_mobile/domain/models/products/display_product.dart';
-import 'package:bossloot_mobile/domain/models/products/gpu_product.dart';
-import 'package:bossloot_mobile/domain/models/products/keyboard_product.dart';
-import 'package:bossloot_mobile/domain/models/products/motherboard_product.dart';
-import 'package:bossloot_mobile/domain/models/products/mouse_product.dart';
-import 'package:bossloot_mobile/domain/models/products/psu_product.dart';
-import 'package:bossloot_mobile/domain/models/products/ram_product.dart';
-import 'package:bossloot_mobile/domain/models/products/storage_product.dart';
 import 'package:bossloot_mobile/providers/product_provider.dart';
+import 'package:bossloot_mobile/screens/main_screen/product_details_screen/product_details/general_product_details.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -26,7 +14,6 @@ class ProductDetailsScreen extends StatefulWidget {
 }
 
 class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
-
   bool _isLoading = true;
   late ProductProvider productProvider;
 
@@ -64,10 +51,8 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
           child: const CircularProgressIndicator(color: Colors.white),
         )
       )
-    : Center(
-        child: Container(
-          height: double.infinity,
-          width: double.infinity,
+    : Scaffold(
+        body: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
               colors: [Color(0xFF270140), Color.fromARGB(255, 141, 24, 112)],
@@ -75,48 +60,53 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               end: Alignment.bottomRight,
             ),
           ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+          child: SingleChildScrollView(
+            padding: EdgeInsets.only(bottom: 80),
+            child: GeneralProductDetails(product: productProvider.currentProductDetails),
+          ),
+        ),
+
+        bottomSheet: Container(
+          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 5),
+          height: 70,
+          decoration: BoxDecoration(
+            color: const Color.fromARGB(255, 255, 255, 255),
+            border: Border(
+              top: BorderSide(color: Color.fromARGB(255, 229, 229, 229), width: 3),
+            ),
+          ),
+          child: Row(
             children: [
-              _productDetails(productProvider.currentProductDetails),
+              Expanded(
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.purple[800],
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+                  ),
+                  onPressed: () {
+                    // Add to cart logic
+                  },
+                  child: Text('Add to cart', style: TextStyle(color: Colors.white)),
+                ),
+              ),
 
-              SizedBox(height: 20),
+              SizedBox(width: 16),
 
-              Center(
-                child: ElevatedButton(onPressed: widget.onBackPressed, child: Text('Volver')),
+              Expanded(
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color.fromARGB(255, 131, 85, 255),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+                  ),
+                  onPressed: () {
+                    // Buy now logic
+                  },
+                  child: Text('Buy now', style: TextStyle(color: Colors.white)),
+                ),
               ),
             ],
           ),
         ),
       );
-  }
-
-  Widget _productDetails(dynamic product) {
-    switch (product.runtimeType) {
-      case RamProduct:
-        return Text('THIS IS A RAM PRODUCT', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),);      
-      case GpuProduct:
-        return Text('THIS IS A GPU PRODUCT', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),);
-      case CpuProduct:
-        return Text('THIS IS A CPU PRODUCT', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),);
-      case StorageProduct:
-        return Text('THIS IS A STORAGE PRODUCT', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),);
-      case PsuProduct:
-        return Text('THIS IS A PSU PRODUCT', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),);
-      case CoolerProduct:
-        return Text('THIS IS A COOLER PRODUCT', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),);
-      case CaseProduct:
-        return Text('THIS IS A CASE PRODUCT', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),);
-      case MotherboardProduct:
-        return Text('THIS IS A MOTHERBOARD PRODUCT', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),);
-      case DisplayProduct:
-        return Text('THIS IS A DISPLAY PRODUCT', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),);
-      case KeyboardProduct:
-        return Text('THIS IS A KEYBOARD PRODUCT', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),);
-      case MouseProduct:
-        return Text('THIS IS A MOUSE PRODUCT', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),);
-      default:
-        return const Text('Tipo de producto no soportado');
-    }
   }
 }
