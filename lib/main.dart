@@ -1,5 +1,9 @@
+import 'package:bossloot_mobile/providers/category_provider.dart';
+import 'package:bossloot_mobile/providers/product_provider.dart';
 import 'package:bossloot_mobile/providers/user_provider.dart';
-import 'package:bossloot_mobile/screens/login_screen.dart';
+import 'package:bossloot_mobile/screens/main_screen/main_screen.dart';
+import 'package:bossloot_mobile/services/category_service.dart';
+import 'package:bossloot_mobile/services/product_service.dart';
 import 'package:bossloot_mobile/services/token_service.dart';
 import 'package:bossloot_mobile/services/user_service.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +28,12 @@ class MainApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => UserProvider(TokenService(), UserService()),
         ),
+        ChangeNotifierProvider(
+          create: (_) => CategoryProvider(CategoryService()),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => ProductProvider(ProductService()),
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -32,7 +42,7 @@ class MainApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 110, 72, 121)),
           useMaterial3: true,
         ),
-        home: const LoginScreen(),
+        home: SafeArea(child: const MainScreen()),
       ),
     );
   }

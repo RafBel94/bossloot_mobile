@@ -1,7 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:bossloot_mobile/providers/user_provider.dart';
-import 'package:bossloot_mobile/screens/login_screen.dart';
+import 'package:bossloot_mobile/screens/auth/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

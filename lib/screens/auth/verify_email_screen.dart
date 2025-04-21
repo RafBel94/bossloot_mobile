@@ -2,8 +2,8 @@ import 'dart:ui';
 
 import 'package:bossloot_mobile/actions/login_action.dart';
 import 'package:bossloot_mobile/actions/resend_verification_action.dart';
-import 'package:bossloot_mobile/screens/login_screen.dart';
-import 'package:bossloot_mobile/screens/register_screen.dart';
+import 'package:bossloot_mobile/screens/auth/login_screen.dart';
+import 'package:bossloot_mobile/screens/auth/register_screen.dart';
 import 'package:bossloot_mobile/utils/text_util.dart';
 import 'package:flutter/material.dart';
 
@@ -36,7 +36,7 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
         alignment: Alignment.center,
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/images/background-2.jpeg'),
+            image: AssetImage('assets/images/retrowave-bg-1.jpg'),
             fit: BoxFit.fill,
           ),
         ),
