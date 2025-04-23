@@ -50,4 +50,18 @@ class ProductService {
 
     return FetchResponse.fromJson(json.decode(response.body));
   }
+
+  // Method to fetch products by category
+  Future<FetchResponse> getProductsByCategory(String category) async {
+    final endpoint = '$baseUrl/products/category/$category';
+
+    final response = await http.get(
+      Uri.parse(endpoint),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    );
+
+    return FetchResponse.fromJson(json.decode(response.body));
+  }
 }

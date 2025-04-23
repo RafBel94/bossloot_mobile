@@ -4,6 +4,7 @@ import 'package:bossloot_mobile/screens/loading_screen/loading_screen.dart';
 import 'package:bossloot_mobile/screens/main_screen/cart_screen/cart_screen.dart';
 import 'package:bossloot_mobile/screens/main_screen/catalog_screen/catalog_screen.dart';
 import 'package:bossloot_mobile/screens/main_screen/custom_drawer/custom_end_drawer.dart';
+import 'package:bossloot_mobile/screens/main_screen/home_screen/home_screen.dart';
 import 'package:bossloot_mobile/screens/main_screen/product_details_screen/product_details_screen.dart';
 import 'package:bossloot_mobile/screens/main_screen/profile_screen/profile_screen.dart';
 import 'package:bossloot_mobile/screens/main_screen/spotlight_screen/spotlight_screen.dart';
@@ -75,8 +76,9 @@ class MainScreenState extends State<MainScreen> {
   final List<Widget> _screens = [
     SpotlightScreen(),
     CatalogScreen(),
+    HomeScreen(),
     CartScreen(),
-    ProfileScreen()
+    ProfileScreen(),
   ];
 
   @override
@@ -139,7 +141,6 @@ class MainScreenState extends State<MainScreen> {
     setState(() {
       _selectedIndex = index;
     });
-    // _pageController.jumpToPage(index);
     _pageController.animateToPage(index, duration: Duration(milliseconds: 500), curve: Curves.easeInOut);
   }
 
@@ -151,8 +152,8 @@ class MainScreenState extends State<MainScreen> {
   }
 
   void hideProductDetails() {
-  setState(() {
-    _showingProductDetails = false;
-  });
-}
+    setState(() {
+      _showingProductDetails = false;
+    });
+  }
 }

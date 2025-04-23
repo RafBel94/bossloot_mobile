@@ -1,3 +1,4 @@
+import 'package:bossloot_mobile/domain/models/catalog_product.dart';
 import 'package:bossloot_mobile/providers/product_provider.dart';
 import 'package:bossloot_mobile/screens/main_screen/product_details_screen/product_details/general_product_details.dart';
 import 'package:flutter/material.dart';
@@ -66,6 +67,8 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
           ),
         ),
 
+
+        // Buttons to buy and add to cart
         bottomSheet: Container(
           padding: EdgeInsets.symmetric(horizontal: 16, vertical: 5),
           height: 70,
