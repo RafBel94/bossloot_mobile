@@ -63,6 +63,24 @@ class ProductProvider extends ChangeNotifier{
     }
   }
 
+  // Fetch products by category
+  Future<void> fetchProductsByCategory(String category) async {
+    try {
+      FetchResponse response = await productService.getProductsByCategory(category);
+      if (response.success) {
+        catalogProductList = response.data.map((item) => CatalogProduct.fromJson(item)).toList();
+        errorMessage = null;
+      } else {
+        errorMessage = response.message[0];
+      }
+    } catch (e) {
+      errorMessage = 'Failed to load products: $e';
+      print(errorMessage);
+    } finally {
+      notifyListeners();
+    }
+  }
+
   /// Determines the product type and returns the appropriate product object.
   void _determineProductTypeAndReturn(Map<String, dynamic> productData) {
     String category = productData['category'];

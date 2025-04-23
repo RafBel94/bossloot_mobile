@@ -7,7 +7,10 @@ class ProductDetailsScreen extends StatefulWidget {
   final int productId;
   final VoidCallback onBackPressed;
 
-  const ProductDetailsScreen({super.key, required this.productId, required this.onBackPressed});
+  ProductDetailsScreen({
+    required this.productId, 
+    required this.onBackPressed,
+  }) : super(key: ValueKey(productId));
 
   @override
   State<ProductDetailsScreen> createState() => _ProductDetailsScreenState();
@@ -66,6 +69,8 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
           ),
         ),
 
+
+        // Buttons to buy and add to cart
         bottomSheet: Container(
           padding: EdgeInsets.symmetric(horizontal: 16, vertical: 5),
           height: 70,

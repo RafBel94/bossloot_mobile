@@ -4,6 +4,7 @@ import 'package:bossloot_mobile/screens/loading_screen/loading_screen.dart';
 import 'package:bossloot_mobile/screens/main_screen/cart_screen/cart_screen.dart';
 import 'package:bossloot_mobile/screens/main_screen/catalog_screen/catalog_screen.dart';
 import 'package:bossloot_mobile/screens/main_screen/custom_drawer/custom_end_drawer.dart';
+import 'package:bossloot_mobile/screens/main_screen/home_screen/home_screen.dart';
 import 'package:bossloot_mobile/screens/main_screen/product_details_screen/product_details_screen.dart';
 import 'package:bossloot_mobile/screens/main_screen/profile_screen/profile_screen.dart';
 import 'package:bossloot_mobile/screens/main_screen/spotlight_screen/spotlight_screen.dart';
@@ -22,7 +23,7 @@ class MainScreen extends StatefulWidget {
 }
 
 class MainScreenState extends State<MainScreen> {
-  int _selectedIndex = 0;
+  int _selectedIndex = 2;
   bool _showingProductDetails = false;
   int _currentProductId = 0;
   bool _isLoading = true;
@@ -75,8 +76,9 @@ class MainScreenState extends State<MainScreen> {
   final List<Widget> _screens = [
     SpotlightScreen(),
     CatalogScreen(),
+    HomeScreen(),
     CartScreen(),
-    ProfileScreen()
+    ProfileScreen(),
   ];
 
   @override
@@ -115,7 +117,7 @@ class MainScreenState extends State<MainScreen> {
                         if(_selectedIndex == 0 || _selectedIndex == 1)
                           FilterButton(scaffoldKey: _scaffoldKey),
 
-                        if (_showingProductDetails && (_selectedIndex == 0 || _selectedIndex == 1))
+                        if (_showingProductDetails && (_selectedIndex == 0 || _selectedIndex == 1 || _selectedIndex == 2))
                           ProductDetailsScreen(productId: _currentProductId, onBackPressed: hideProductDetails),
                       ]
                     ),
@@ -139,20 +141,22 @@ class MainScreenState extends State<MainScreen> {
     setState(() {
       _selectedIndex = index;
     });
-    // _pageController.jumpToPage(index);
     _pageController.animateToPage(index, duration: Duration(milliseconds: 500), curve: Curves.easeInOut);
   }
 
   void showProductDetails(int productId) {
     setState(() {
-      _showingProductDetails = true;
       _currentProductId = productId;
+      
+      if (!_showingProductDetails) {
+        _showingProductDetails = true;
+      }
     });
   }
 
   void hideProductDetails() {
-  setState(() {
-    _showingProductDetails = false;
-  });
-}
+    setState(() {
+      _showingProductDetails = false;
+    });
+  }
 }
