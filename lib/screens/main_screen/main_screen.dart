@@ -146,8 +146,11 @@ class MainScreenState extends State<MainScreen> {
 
   void showProductDetails(int productId) {
     setState(() {
-      _showingProductDetails = true;
       _currentProductId = productId;
+      
+      if (!_showingProductDetails) {
+        _showingProductDetails = true;
+      }
     });
   }
 

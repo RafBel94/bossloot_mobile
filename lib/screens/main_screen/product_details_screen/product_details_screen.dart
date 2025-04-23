@@ -1,4 +1,3 @@
-import 'package:bossloot_mobile/domain/models/catalog_product.dart';
 import 'package:bossloot_mobile/providers/product_provider.dart';
 import 'package:bossloot_mobile/screens/main_screen/product_details_screen/product_details/general_product_details.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +7,10 @@ class ProductDetailsScreen extends StatefulWidget {
   final int productId;
   final VoidCallback onBackPressed;
 
-  const ProductDetailsScreen({super.key, required this.productId, required this.onBackPressed});
+  ProductDetailsScreen({
+    required this.productId, 
+    required this.onBackPressed,
+  }) : super(key: ValueKey(productId));
 
   @override
   State<ProductDetailsScreen> createState() => _ProductDetailsScreenState();
