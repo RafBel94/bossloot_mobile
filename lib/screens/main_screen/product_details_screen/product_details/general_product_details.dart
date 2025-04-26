@@ -25,6 +25,7 @@ import 'package:bossloot_mobile/screens/main_screen/product_details_screen/produ
 import 'package:bossloot_mobile/screens/main_screen/product_details_screen/product_details/psu_product_details.dart';
 import 'package:bossloot_mobile/screens/main_screen/product_details_screen/product_details/ram_product_details.dart';
 import 'package:bossloot_mobile/screens/main_screen/product_details_screen/product_details/storage_product_details.dart';
+import 'package:bossloot_mobile/screens/main_screen/product_details_screen/product_details/valorations/product_valorations.dart';
 import 'package:bossloot_mobile/utils/dialog_util.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -32,7 +33,7 @@ import 'package:provider/provider.dart';
 class GeneralProductDetails extends StatefulWidget {
   final dynamic product;
 
-  GeneralProductDetails({super.key, required this.product});
+  const GeneralProductDetails({super.key, required this.product});
 
   @override
   State<GeneralProductDetails> createState() => _GeneralProductDetailsState();
@@ -40,13 +41,23 @@ class GeneralProductDetails extends StatefulWidget {
 
 class _GeneralProductDetailsState extends State<GeneralProductDetails> {
   late List<CatalogProduct> similarProducts;
+  late ScrollController _scrollController;
+  late GlobalKey _ratingsKey;
 
   @override
   void initState() {
     super.initState();
+    _scrollController = ScrollController();
+    _ratingsKey = GlobalKey();
     similarProducts = context.read<ProductProvider>().catalogProductList
       .where((product) => product.category == widget.product.category && product.id != widget.product.id)
       .toList();
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
   }
 
   @override
@@ -57,6 +68,7 @@ class _GeneralProductDetailsState extends State<GeneralProductDetails> {
     String productPrice = (widget.product.price - (widget.product.price * (widget.product.discount / 100))).toStringAsFixed(2);
 
     return SingleChildScrollView(
+      controller: _scrollController,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 5.0, vertical: 5),
         child: Column(
@@ -188,15 +200,24 @@ class _GeneralProductDetailsState extends State<GeneralProductDetails> {
                   
             
                         // ---- Product valorations
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.only(bottom: 2, right: 3),
-                              child: Icon(Icons.star_half, color: const Color.fromARGB(255, 221, 204, 50), size: 24)),
-                            Text('4.5  |  ', style: TextStyle(fontSize: 16, )),
-                            Text('3 Valorations', style: TextStyle(fontSize: 13,)),
-                          ],
+                        GestureDetector(
+                          onTap:() {
+                            Scrollable.ensureVisible(
+                            _ratingsKey.currentContext!,
+                            duration: Duration(milliseconds: 500),
+                            curve: Curves.easeInOut,
+                          );
+                          },
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.only(bottom: 2, right: 3),
+                                child: Icon(Icons.star_half, color: const Color.fromARGB(255, 221, 204, 50), size: 24)),
+                              Text(widget.product.valorations.length > 0 ? '${widget.product.avg_rating}' : '0', style: TextStyle(fontSize: 16, )),
+                              Text('  |  Based on ${widget.product.valorations.length} ratings', style: TextStyle(fontSize: 13,)),
+                            ],
+                          ),
                         ),
                       ],
                     ),
@@ -256,9 +277,26 @@ class _GeneralProductDetailsState extends State<GeneralProductDetails> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.only(top: 5, bottom: 10),
-                    child: Text('You may like...', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
+                  Container(
+                    alignment: Alignment.center,
+                    padding: const EdgeInsets.symmetric(horizontal: 8),
+                    margin: const EdgeInsets.only(bottom: 10),
+                    decoration: BoxDecoration(
+                      color: const Color.fromARGB(255, 255, 255, 255),
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(color: const Color.fromARGB(255, 227, 210, 251), width: 1),
+                      boxShadow: [
+                        BoxShadow(
+                          color: const Color.fromARGB(51, 115, 23, 168),
+                          spreadRadius: 1,
+                          blurRadius: 5,
+                          offset: const Offset(0, 3),
+                        ),
+                      ],
+                    ),
+                    width: double.infinity,
+                    height: 45,
+                    child: FittedBox(child: Text('We though you may like...', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold))),
                   ),
                   SizedBox(
                     height: 290,
@@ -282,6 +320,21 @@ class _GeneralProductDetailsState extends State<GeneralProductDetails> {
                   ),
                 ],
               ),
+            ),
+          
+          
+            SizedBox(height: 10),
+
+            // ---- Valorations
+            Container(
+              key: _ratingsKey,
+              padding: const EdgeInsets.all(5),
+              width: MediaQuery.of(context).size.width,
+              decoration: BoxDecoration(
+                color: const Color.fromARGB(255, 245, 245, 245),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: ProductValorations(valorations: widget.product.valorations),
             ),
           ],
         ),

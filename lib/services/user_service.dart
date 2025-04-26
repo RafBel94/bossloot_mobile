@@ -43,6 +43,18 @@ class UserService {
     return ApiResponse.fromJson(json.decode(response.body));
   }
 
+  // Get user by ID endpoint
+  Future<ApiResponse> getUserById(int userId) async {
+    final endpoint = '$baseUrl/user/$userId';
+    final response = await http.get(
+      Uri.parse(endpoint),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    );
+    return ApiResponse.fromJson(json.decode(response.body));
+  }
+
   // Check email verification endpoint
   Future<ApiResponse> checkEmailVerification(String email) async {
     final endpoint = '$baseUrl/check-verification';

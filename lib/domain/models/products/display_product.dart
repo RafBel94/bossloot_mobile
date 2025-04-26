@@ -1,6 +1,7 @@
 // ignore_for_file: non_constant_identifier_names
 
 import 'package:bossloot_mobile/domain/models/products/product.dart';
+import 'package:bossloot_mobile/domain/models/valoration.dart';
 
 class DisplayProduct extends Product{
   String resolution;
@@ -31,6 +32,8 @@ class DisplayProduct extends Product{
     required super.featured,
     required super.image,
     required super.points,
+    required super.valorations,
+    required super.avg_rating,
     required this.resolution,
     required this.refresh_rate,
     required this.response_time,
@@ -61,6 +64,10 @@ class DisplayProduct extends Product{
       featured: json['featured'] == 1,
       image: json['image'],
       points: json['points'],
+      valorations: (json['valorations'] as List)
+          .map((valoration) => Valoration.fromJson(valoration))
+          .toList(),
+      avg_rating: double.parse(json['avg_rating'].toString()),
       resolution: json['specs']['resolution'],
       refresh_rate: json['specs']['refresh_rate'],
       response_time: json['specs']['response_time'],

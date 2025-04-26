@@ -1,6 +1,7 @@
 // ignore_for_file: non_constant_identifier_names
 
 import 'package:bossloot_mobile/domain/models/products/product.dart';
+import 'package:bossloot_mobile/domain/models/valoration.dart';
 
 class PsuProduct extends Product {
   final String efficiency_rating;
@@ -22,6 +23,8 @@ class PsuProduct extends Product {
     required super.featured,
     required super.image,
     required super.points,
+    required super.valorations,
+    required super.avg_rating,
     required this.efficiency_rating,
     required this.wattage,
     required this.modular,
@@ -43,6 +46,10 @@ class PsuProduct extends Product {
       featured: json['featured'] == 1,
       image: json['image'],
       points: json['points'],
+      valorations: (json['valorations'] as List)
+          .map((valoration) => Valoration.fromJson(valoration))
+          .toList(),
+      avg_rating: double.parse(json['avg_rating'].toString()),
       efficiency_rating: json['specs']['efficiency_rating'],
       wattage: json['specs']['wattage'],
       modular: json['specs']['modular'] == 1,

@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 class UserProvider extends ChangeNotifier {
   final UserService userService;
   final TokenService tokenService;
+
   User? currentUser;
   String? errorMessage;
   String? temporalUserEmail;
@@ -53,6 +54,24 @@ class UserProvider extends ChangeNotifier {
     currentUser = null;
     await tokenService.clearToken();
     notifyListeners();
+  }
+
+  // Get user by ID
+  Future<void> getUserById(int userId) async {
+    try {
+      ApiResponse userResponse = await userService.getUserById(userId);
+      
+      if (userResponse.success) {
+        currentUser = User.fromJson(userResponse.data);
+        errorMessage = null;
+      } else {
+        errorMessage = userResponse.data['error'] ?? 'Failed to fetch user data';
+      }
+    } catch (error) {
+      errorMessage = 'Error: ${error.toString()}';
+    } finally {
+      notifyListeners();
+    }
   }
 
   // Check email verification

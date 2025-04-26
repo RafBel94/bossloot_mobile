@@ -1,5 +1,7 @@
 // ignore_for_file: non_constant_identifier_names
 
+import 'package:bossloot_mobile/domain/models/valoration.dart';
+
 class Product {
   int id;
   String name;
@@ -14,6 +16,8 @@ class Product {
   bool featured;
   String image;
   int points;
+  List<Valoration> valorations;
+  double avg_rating;
 
   Product({
     required this.id,
@@ -29,6 +33,8 @@ class Product {
     required this.featured,
     required this.image,
     required this.points,
+    required this.valorations,
+    required this.avg_rating,
   });
   
 

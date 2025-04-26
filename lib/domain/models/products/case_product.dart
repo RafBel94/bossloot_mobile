@@ -1,6 +1,7 @@
 // ignore_for_file: non_constant_identifier_names
 
 import 'package:bossloot_mobile/domain/models/products/product.dart';
+import 'package:bossloot_mobile/domain/models/valoration.dart';
 
 class CaseProduct extends Product {
   final String case_type;
@@ -30,6 +31,8 @@ class CaseProduct extends Product {
     required super.featured,
     required super.image,
     required super.points,
+    required super.valorations,
+    required super.avg_rating,
     required this.case_type,
     required this.form_factor_support,
     required this.tempered_glass,
@@ -49,8 +52,8 @@ class CaseProduct extends Product {
       id: json['id'],
       name: json['name'],
       description: json['description'],
-      category: json['category'],
-      brand: json['brand'],
+      category: json['category'] ?? 'None',
+      brand: json['brand'] ?? 'None',
       model: json['model'],
       price: double.parse(json['price'].toString()),
       discount: double.parse(json['discount'].toString()),
@@ -59,6 +62,10 @@ class CaseProduct extends Product {
       featured: json['featured'] == 1,
       image: json['image'],
       points: json['points'],
+      valorations: (json['valorations'] as List)
+          .map((valoration) => Valoration.fromJson(valoration))
+          .toList(),
+      avg_rating: double.parse(json['avg_rating'].toString()),
       case_type: json['specs']['case_type'],
       form_factor_support: json['specs']['form_factor_support'],
       tempered_glass: json['specs']['tempered_glass'] == 1,
