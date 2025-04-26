@@ -6,9 +6,8 @@ class Valoration {
   final int productId;
   final double rating;
   final String? comment;
-  final int likes;
-  final int dislikes;
   final User user;
+  final String? image;
   final DateTime createdAt;
   final DateTime updatedAt;
 
@@ -18,9 +17,8 @@ class Valoration {
     required this.productId,
     required this.rating,
     this.comment,
-    required this.likes,
-    required this.dislikes,
     required this.user,
+    this.image,
     required this.createdAt,
     required this.updatedAt,
   });
@@ -32,9 +30,8 @@ class Valoration {
       productId: json['product_id'],
       rating: double.parse(json['rating'].toString()),
       comment: json['comment'],
-      likes: json['likes'],
-      dislikes: json['dislikes'],
       user: User.fromValorationJson(json['user']),
+      image: json['image'],
       createdAt: DateTime.parse(json['created_at']),
       updatedAt: DateTime.parse(json['updated_at']),
     );
@@ -47,8 +44,6 @@ class Valoration {
       'product_id': productId,
       'rating': rating,
       'comment': comment,
-      'likes': likes,
-      'dislikes': dislikes,
       'created_at': createdAt,
       'updated_at': updatedAt,
     };
