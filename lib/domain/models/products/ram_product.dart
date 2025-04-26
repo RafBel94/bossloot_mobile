@@ -1,6 +1,7 @@
 // ignore_for_file: non_constant_identifier_names
 
 import 'package:bossloot_mobile/domain/models/products/product.dart';
+import 'package:bossloot_mobile/domain/models/valoration.dart';
 
 class RamProduct extends Product {
   final int speed;
@@ -22,6 +23,8 @@ class RamProduct extends Product {
     required super.featured,
     required super.image,
     required super.points,
+    required super.valorations,
+    required super.avg_rating,
     required this.speed,
     required this.memory,
     required this.memory_type,
@@ -43,6 +46,10 @@ class RamProduct extends Product {
       featured: json['featured'] == 1,
       image: json['image'],
       points: json['points'],
+      valorations: (json['valorations'] as List)
+          .map((valoration) => Valoration.fromJson(valoration))
+          .toList(),
+      avg_rating: double.parse(json['avg_rating'].toString()),
       speed: json['specs']['speed'],
       memory: json['specs']['memory'],
       memory_type: json['specs']['memory_type'],

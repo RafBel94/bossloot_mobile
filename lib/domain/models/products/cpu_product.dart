@@ -1,6 +1,7 @@
 // ignore_for_file: non_constant_identifier_names
 
 import 'package:bossloot_mobile/domain/models/products/product.dart';
+import 'package:bossloot_mobile/domain/models/valoration.dart';
 
 class CpuProduct extends Product {
   final String socket;
@@ -25,6 +26,8 @@ class CpuProduct extends Product {
     required super.featured,
     required super.image,
     required super.points,
+    required super.valorations,
+    required super.avg_rating,
     required this.socket,
     required this.coreCount,
     required this.thread_count,
@@ -49,6 +52,10 @@ class CpuProduct extends Product {
       featured: json['featured'] == 1,
       image: json['image'],
       points: json['points'],
+      valorations: (json['valorations'] as List)
+          .map((valoration) => Valoration.fromJson(valoration))
+          .toList(),
+      avg_rating: double.parse(json['avg_rating'].toString()),
       socket: json['specs']['socket'],
       coreCount: json['specs']['core_count'],
       thread_count: json['specs']['thread_count'],

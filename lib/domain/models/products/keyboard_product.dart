@@ -1,6 +1,7 @@
 // ignore_for_file: non_constant_identifier_names
 
 import 'package:bossloot_mobile/domain/models/products/product.dart';
+import 'package:bossloot_mobile/domain/models/valoration.dart';
 
 class KeyboardProduct extends Product {
   String type;
@@ -23,6 +24,8 @@ class KeyboardProduct extends Product {
     required super.featured,
     required super.image,
     required super.points,
+    required super.valorations,
+    required super.avg_rating,
     required this.type,
     required this.switch_type,
     required this.width,
@@ -45,6 +48,10 @@ class KeyboardProduct extends Product {
       featured: json['featured'] == 1,
       image: json['image'],
       points: json['points'],
+      valorations: (json['valorations'] as List)
+          .map((valoration) => Valoration.fromJson(valoration))
+          .toList(),
+      avg_rating: double.parse(json['avg_rating'].toString()),
       type: json['specs']['type'],
       switch_type: json['specs']['switch_type'],
       width: double.parse(json['specs']['width'].toString()),

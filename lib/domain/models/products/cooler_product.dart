@@ -1,6 +1,7 @@
 // ignore_for_file: non_constant_identifier_names
 
 import 'package:bossloot_mobile/domain/models/products/product.dart';
+import 'package:bossloot_mobile/domain/models/valoration.dart';
 
 class CoolerProduct extends Product {
   final String type;
@@ -24,6 +25,8 @@ class CoolerProduct extends Product {
     required super.featured,
     required super.image,
     required super.points,
+    required super.valorations,
+    required super.avg_rating,
     required this.type,
     required this.fan_rpm,
     required this.consumption,
@@ -47,6 +50,10 @@ class CoolerProduct extends Product {
       featured: json['featured'] == 1,
       image: json['image'],
       points: json['points'],
+      valorations: (json['valorations'] as List)
+          .map((valoration) => Valoration.fromJson(valoration))
+          .toList(),
+      avg_rating: double.parse(json['avg_rating'].toString()),
       type: json['specs']['type'],
       fan_rpm: json['specs']['fan_rpm'],
       consumption: json['specs']['consumption'],

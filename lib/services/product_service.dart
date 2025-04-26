@@ -33,7 +33,6 @@ class ProductService {
         'Content-Type': 'application/json',
       },
     );
-
     return ApiResponse.fromJson(json.decode(response.body));
   }
 

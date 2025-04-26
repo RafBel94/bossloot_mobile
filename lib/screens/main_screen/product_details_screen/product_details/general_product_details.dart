@@ -25,6 +25,7 @@ import 'package:bossloot_mobile/screens/main_screen/product_details_screen/produ
 import 'package:bossloot_mobile/screens/main_screen/product_details_screen/product_details/psu_product_details.dart';
 import 'package:bossloot_mobile/screens/main_screen/product_details_screen/product_details/ram_product_details.dart';
 import 'package:bossloot_mobile/screens/main_screen/product_details_screen/product_details/storage_product_details.dart';
+import 'package:bossloot_mobile/screens/main_screen/product_details_screen/product_details/valorations/product_valorations.dart';
 import 'package:bossloot_mobile/utils/dialog_util.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -258,7 +259,7 @@ class _GeneralProductDetailsState extends State<GeneralProductDetails> {
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(top: 5, bottom: 10),
-                    child: Text('You may like...', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
+                    child: Text('Other adventurers liked...', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
                   ),
                   SizedBox(
                     height: 290,
@@ -282,6 +283,20 @@ class _GeneralProductDetailsState extends State<GeneralProductDetails> {
                   ),
                 ],
               ),
+            ),
+          
+          
+            SizedBox(height: 10),
+
+            // ---- Valorations
+            Container(
+              padding: const EdgeInsets.all(5),
+              width: MediaQuery.of(context).size.width,
+              decoration: BoxDecoration(
+                color: const Color.fromARGB(255, 245, 245, 245),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: ProductValorations(valorations: widget.product.valorations),
             ),
           ],
         ),
