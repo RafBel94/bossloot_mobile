@@ -135,7 +135,7 @@ class _CustomHeaderSearchbarState extends State<CustomHeaderSearchbar>
               width: double.infinity,
               padding: _isSearchExpanded ?  null : EdgeInsets.symmetric(vertical: 3),
               decoration: BoxDecoration(
-                color: const Color.fromARGB(255, 221, 221, 221),
+                color: const Color.fromARGB(255, 231, 231, 231),
                 border: Border(
                   top: BorderSide(
                     color: const Color.fromARGB(255, 190, 190, 190),

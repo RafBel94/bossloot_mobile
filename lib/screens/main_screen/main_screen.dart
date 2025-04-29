@@ -141,7 +141,7 @@ class MainScreenState extends State<MainScreen> {
     setState(() {
       _selectedIndex = index;
     });
-    _pageController.animateToPage(index, duration: Duration(milliseconds: 500), curve: Curves.easeInOut);
+    _pageController.jumpToPage(index);
   }
 
   void showProductDetails(int productId) {

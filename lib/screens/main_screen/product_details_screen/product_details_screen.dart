@@ -1,4 +1,5 @@
 import 'package:bossloot_mobile/providers/product_provider.dart';
+import 'package:bossloot_mobile/screens/loading_screen/data_loading_screen.dart';
 import 'package:bossloot_mobile/screens/main_screen/product_details_screen/product_details/general_product_details.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -39,21 +40,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return _isLoading
-    ? Center(
-        child: Container(
-          height: double.infinity,
-          width: double.infinity,
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [Color(0xFF270140), Color.fromARGB(255, 141, 24, 112)],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            )
-          ),
-          child: const CircularProgressIndicator(color: Colors.white),
-        )
-      )
+    ? DataLoadingScreen()
     : Scaffold(
         body: Container(
           decoration: BoxDecoration(

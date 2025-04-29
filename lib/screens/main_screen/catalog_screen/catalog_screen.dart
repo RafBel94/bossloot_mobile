@@ -52,19 +52,19 @@ class _CatalogScreenState extends State<CatalogScreen> {
             height: double.infinity,
             width: double.infinity,
             decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [Color(0xFF270140), Color.fromARGB(255, 141, 24, 112)],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              )
+              image: DecorationImage(
+                image: AssetImage('assets/images/ladder-background.png'),
+                fit: BoxFit.fill,
+                repeat: ImageRepeat.repeat
+              ),
             ),
             child: Padding(
               padding: const EdgeInsets.only(top: 5.0, left: 8.0, right: 8.0),
               child: GridView.builder(
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
-                  crossAxisSpacing: 8.0,
-                  mainAxisSpacing: 8.0,
+                  crossAxisSpacing: 9.0,
+                  mainAxisSpacing: 9.0,
                   mainAxisExtent: 289
                 ),
                 itemCount: context.read<ProductProvider>().catalogProductList.length,
