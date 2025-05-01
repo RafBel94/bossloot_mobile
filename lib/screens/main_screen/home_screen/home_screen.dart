@@ -32,7 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/images/ladder-background.png'),
+            image: AssetImage('assets/images/background-image-workshop.png'),
             fit: BoxFit.fill,
             repeat: ImageRepeat.repeat
           ),
@@ -48,7 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   height: 400,
                   decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: AssetImage('assets/images/gnome-greetings.png'),
+                    image: AssetImage('assets/images/gnome-greetings-2.png'),
                     fit: BoxFit.cover,
                     alignment: Alignment.center,
                   ),
@@ -80,8 +80,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       decoration: BoxDecoration(
                         color: const Color.fromARGB(142, 255, 255, 255),
                         borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(10),
-                          topRight: Radius.circular(10),
+                          topLeft: Radius.circular(5),
+                          topRight: Radius.circular(5),
                         ),
                         border: Border.all(
                           color: const Color.fromARGB(255, 191, 191, 191),
@@ -89,7 +89,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                     child: Text(
-                      'Our featured products',
+                      'For real adventurers!',
                       style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: const Color.fromARGB(255, 0, 0, 0)),
                     ),
                   ),
@@ -99,13 +99,13 @@ class _HomeScreenState extends State<HomeScreen> {
 
               // Featured Products Section
               Container(
-                height: 320,
+                height: 312,
                 margin: EdgeInsets.symmetric(horizontal: 5),
                 decoration: BoxDecoration(
                   color: const Color.fromARGB(255, 233, 233, 233),
                   borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(10),
-                    bottomRight: Radius.circular(10),
+                    bottomLeft: Radius.circular(5),
+                    bottomRight: Radius.circular(5),
                   ),
                   border: Border.all(
                     color: const Color.fromARGB(255, 191, 191, 191),
@@ -142,8 +142,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   decoration: BoxDecoration(
                     color: const Color.fromARGB(142, 255, 255, 255),
                     borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(10),
-                      topRight: Radius.circular(10),
+                      topLeft: Radius.circular(5),
+                      topRight: Radius.circular(5),
                     ),
                     border: Border.all(
                       color: const Color.fromARGB(255, 191, 191, 191),
@@ -156,13 +156,13 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               Container(
-                height: 320,
+                height: 312,
                 margin: EdgeInsets.symmetric(horizontal: 5),
                 decoration: BoxDecoration(
                   color: const Color.fromARGB(255, 233, 233, 233),
                   borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(10),
-                    bottomRight: Radius.circular(10),
+                    bottomLeft: Radius.circular(5),
+                    bottomRight: Radius.circular(5),
                   ),
                   border: Border.all(
                     color: const Color.fromARGB(255, 191, 191, 191),
@@ -199,8 +199,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   decoration: BoxDecoration(
                     color: const Color.fromARGB(142, 255, 255, 255),
                     borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(10),
-                      topRight: Radius.circular(10),
+                      topLeft: Radius.circular(5),
+                      topRight: Radius.circular(5),
                     ),
                     border: Border.all(
                       color: const Color.fromARGB(255, 191, 191, 191),
@@ -213,13 +213,13 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               Container(
-                height: 320,
+                height: 312,
                 margin: EdgeInsets.symmetric(horizontal: 5),
                 decoration: BoxDecoration(
                   color: const Color.fromARGB(255, 233, 233, 233),
                   borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(10),
-                    bottomRight: Radius.circular(10),
+                    bottomLeft: Radius.circular(5),
+                    bottomRight: Radius.circular(5),
                   ),
                   border: Border.all(
                     color: const Color.fromARGB(255, 191, 191, 191),

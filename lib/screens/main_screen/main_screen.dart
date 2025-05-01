@@ -101,29 +101,32 @@ class MainScreenState extends State<MainScreen> {
             children: [
               Column(
                 children: [
-                  // Search bar
-                  const CustomHeaderSearchbar(),
-                      
                   // PageView
                   Expanded(
-                    child: Stack(
-                      children: [
-                        PageView(
-                          physics: const NeverScrollableScrollPhysics(),
-                          controller: _pageController,
-                          children: _screens,
-                        ),
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 75),
+                      child: Stack(
+                        children: [
+                          PageView(
+                            physics: const NeverScrollableScrollPhysics(),
+                            controller: _pageController,
+                            children: _screens,
+                          ),
+                        
+                          if(_selectedIndex == 0 || _selectedIndex == 1)
+                            FilterButton(scaffoldKey: _scaffoldKey),
                       
-                        if(_selectedIndex == 0 || _selectedIndex == 1)
-                          FilterButton(scaffoldKey: _scaffoldKey),
-
-                        if (_showingProductDetails && (_selectedIndex == 0 || _selectedIndex == 1 || _selectedIndex == 2))
-                          ProductDetailsScreen(productId: _currentProductId, onBackPressed: hideProductDetails),
-                      ]
+                          if (_showingProductDetails && (_selectedIndex == 0 || _selectedIndex == 1 || _selectedIndex == 2))
+                            ProductDetailsScreen(productId: _currentProductId, onBackPressed: hideProductDetails),
+                        ]
+                      ),
                     ),
                   ),
                 ],
               ),
+
+              // Search bar
+              const CustomHeaderSearchbar(),
             ],
           ),   
 
@@ -141,7 +144,7 @@ class MainScreenState extends State<MainScreen> {
     setState(() {
       _selectedIndex = index;
     });
-    _pageController.animateToPage(index, duration: Duration(milliseconds: 500), curve: Curves.easeInOut);
+    _pageController.jumpToPage(index);
   }
 
   void showProductDetails(int productId) {
