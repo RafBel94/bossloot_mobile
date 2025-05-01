@@ -1,5 +1,7 @@
 // ignore_for_file: use_build_context_synchronously, must_be_immutable
 
+import 'dart:ui';
+
 import 'package:bossloot_mobile/domain/models/user.dart';
 import 'package:bossloot_mobile/providers/user_provider.dart';
 import 'package:bossloot_mobile/screens/auth/login_screen.dart';
@@ -145,22 +147,39 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             children: [
                                 
                               // Profile Button
-                              Expanded( child: CustomElevatedButton( text: 'My Profile', icon: Icons.person, ), ),
+                              CustomElevatedButton( text: 'My Profile', icon: Icons.person, userProvider: userProvider ),
                             
                               const SizedBox(height: 10),
                             
                               // Orders Button
-                              Expanded( child: CustomElevatedButton( text: 'My Orders', icon: Icons.shopping_cart, ), ),
+                              CustomElevatedButton( text: 'My Orders', icon: Icons.shopping_cart, userProvider: userProvider ),
                             
                               const SizedBox(height: 10),
                             
                               // Favorites Button
-                              Expanded( child: CustomElevatedButton( text: 'My favorites', icon: Icons.favorite, ), ),
+                              CustomElevatedButton( text: 'My favorites', icon: Icons.favorite, userProvider: userProvider ),
 
                               const SizedBox(height: 10),
                               
                               // Settings Button
-                              Expanded(child: CustomElevatedButton(text: 'Settings', icon: Icons.settings,),),
+                              ElevatedButton.icon(
+                                onPressed: () {
+
+                                },
+                                icon: Icon( Icons.settings,  color: const Color.fromARGB(255, 49, 49, 49),  size: 30, ),
+                                label: Text( 'Settings', style: const TextStyle( color: Colors.black,  fontSize: 20,  fontWeight: FontWeight.w400, ), ),
+                                style: ElevatedButton.styleFrom(
+                                  alignment: Alignment.centerLeft,
+                                  elevation: 3,
+                                  backgroundColor: Colors.white,
+                                  side: const BorderSide(color: Color.fromARGB(78, 77, 16, 112)),
+                                  shadowColor: const Color.fromARGB(142, 119, 24, 173),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(5),
+                                  ),
+                                  minimumSize: const Size(double.infinity, 80),
+                                ),
+                              ),
 
                             ],
                           ),
@@ -221,6 +240,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 }
 
 class CustomElevatedButton extends StatelessWidget {
+  UserProvider userProvider;
   String text;
   IconData icon;
 
@@ -228,28 +248,74 @@ class CustomElevatedButton extends StatelessWidget {
     super.key,
     required this.text,
     required this.icon,
+    required this.userProvider,
   });
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton.icon(
-      onPressed: () {},
-      icon: Icon(icon, color: const Color.fromARGB(255, 49, 49, 49), size: 30,),
-      label: Text(
-        text,
-        style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.w400),
-      ),
-      style: ElevatedButton.styleFrom(
-        alignment: Alignment.centerLeft,
-        elevation: 3,
-        backgroundColor: Colors.white,
-        side: const BorderSide(color: Color.fromARGB(78, 77, 16, 112)),
-        shadowColor: const Color.fromARGB(142, 119, 24, 173),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(5),
+    return Stack(
+      children: [
+        // Botón base
+        ElevatedButton.icon(
+          onPressed: userProvider.currentUser != null 
+          ? () { 
+            // TODO : Implement navigation
+          }
+          : null,
+          icon: Icon( icon,  color: const Color.fromARGB(255, 49, 49, 49),  size: 30, ),
+          label: Text( text, style: const TextStyle( color: Colors.black,  fontSize: 20,  fontWeight: FontWeight.w400, ), ),
+          style: ElevatedButton.styleFrom(
+            alignment: Alignment.centerLeft,
+            elevation: 3,
+            backgroundColor: Colors.white,
+            side: const BorderSide(color: Color.fromARGB(78, 77, 16, 112)),
+            shadowColor: const Color.fromARGB(142, 119, 24, 173),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(5),
+            ),
+            minimumSize: const Size(double.infinity, 80),
+          ),
         ),
-        minimumSize: const Size(double.infinity, 70),
-      ),
+
+        // BLURRY BLOCKER
+        if (userProvider.currentUser == null)
+          Positioned.fill(
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(5),
+              child: BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: 3, sigmaY: 3),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: const Color.fromARGB(168, 229, 217, 254),
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  child: Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Icon(
+                          Icons.lock_outline,
+                          color: Colors.black87,
+                          size: 32,
+                        ),
+                        const SizedBox(height: 5),
+                        Text(
+                          'Log In to access this feature!',
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black87,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+      ],
     );
   }
 }
