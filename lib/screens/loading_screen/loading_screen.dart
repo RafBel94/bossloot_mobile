@@ -89,14 +89,18 @@ class _LoadingScreenState extends State<LoadingScreen>
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
-              const Color.fromARGB(255, 36, 1, 60),
-              const Color.fromARGB(255, 62, 11, 48)
-            ],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
+          image: DecorationImage(
+            image: const AssetImage('assets/images/background-image-workshop-3.png'),
+            fit: BoxFit.cover,
           ),
+          // gradient: LinearGradient(
+          //   colors: [
+          //     const Color.fromARGB(255, 36, 1, 60),
+          //     const Color.fromARGB(255, 62, 11, 48)
+          //   ],
+          //   begin: Alignment.topLeft,
+          //   end: Alignment.bottomRight,
+          // ),
         ),
         child: Center(
           child: Column(

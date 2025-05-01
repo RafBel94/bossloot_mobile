@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:bossloot_mobile/providers/category_provider.dart';
 import 'package:bossloot_mobile/providers/product_provider.dart';
 import 'package:bossloot_mobile/screens/loading_screen/loading_screen.dart';
@@ -51,6 +53,9 @@ class MainScreenState extends State<MainScreen> {
     await productProvider.fetchCatalogProducts();
     await productProvider.fetchFeaturedProducts();
     await categoryProvider.fetchCategories();
+
+    // Preload images
+    await _preloadImages();
 
 
     if (mounted) {
@@ -161,5 +166,20 @@ class MainScreenState extends State<MainScreen> {
     setState(() {
       _showingProductDetails = false;
     });
+  }
+
+  Future<void> _preloadImages() async {
+    precacheImage(AssetImage('assets/images/avatar-placeholder.png'), context,);
+    precacheImage(AssetImage('assets/images/background-image-workshop.png'), context,);
+    precacheImage(AssetImage('assets/images/background-image-workshop-2.png'), context,);
+    precacheImage(AssetImage('assets/images/bossloot-logo-full.png'), context,);
+    precacheImage(AssetImage('assets/images/bossloot-logo-margin.png'), context,);
+    precacheImage(AssetImage('assets/images/bossloot-title-only.png'), context,);
+    precacheImage(AssetImage('assets/images/gnome-greetings.png'), context,);
+    precacheImage(AssetImage('assets/images/gnome-greetings-2.png'), context,);
+    precacheImage(AssetImage('assets/images/ladder-background.png'), context,);
+    precacheImage(AssetImage('assets/images/loading-frame.png'), context,);
+    precacheImage(AssetImage('assets/images/loading-image.png'), context,);
+    precacheImage(AssetImage('assets/images/welcome-boss.gif'), context,);
   }
 }
