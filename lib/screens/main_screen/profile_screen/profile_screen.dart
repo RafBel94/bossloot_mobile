@@ -61,7 +61,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 padding: const EdgeInsets.all(3),
                 child: Container(
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: const Color.fromARGB(117, 237, 237, 237),
                     borderRadius: BorderRadius.circular(5),
                     border: Border.all(
                       color: const Color.fromARGB(57, 58, 12, 84),
@@ -81,6 +81,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           elevation: 5,
                           shadowColor: const Color.fromARGB(132, 115, 23, 168),
                           color: const Color.fromARGB(255, 245, 245, 245),
+                          borderRadius: BorderRadius.circular(5),
                           surfaceTintColor: Colors.transparent,
                           child: Container(
                             padding: EdgeInsets.only(
@@ -135,24 +136,34 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         const SizedBox(height: 15),
 
                         // Buttons
-                        Padding(
+                        Expanded(
+                          child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 10),
                           child: Column(
-                            spacing: 15,
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
+                                
                               // Profile Button
-                              CustomElevatedButton(text: 'My Profile', icon: Icons.person,),
-                          
+                              Expanded( child: CustomElevatedButton( text: 'My Profile', icon: Icons.person, ), ),
+                            
+                              const SizedBox(height: 10),
+                            
                               // Orders Button
-                              CustomElevatedButton(text: 'My Orders', icon: Icons.shopping_cart,),
-                          
+                              Expanded( child: CustomElevatedButton( text: 'My Orders', icon: Icons.shopping_cart, ), ),
+                            
+                              const SizedBox(height: 10),
+                            
                               // Favorites Button
-                              CustomElevatedButton(text: 'My favorites', icon: Icons.favorite,),
+                              Expanded( child: CustomElevatedButton( text: 'My favorites', icon: Icons.favorite, ), ),
 
-                              // Settings Button
-                              CustomElevatedButton(text: 'Settings', icon: Icons.settings,),
+                              const SizedBox(height: 10),
                               
+                              // Settings Button
+                              Expanded(child: CustomElevatedButton(text: 'Settings', icon: Icons.settings,),),
+
                             ],
+                          ),
                           ),
                         )
                         
@@ -217,7 +228,7 @@ class CustomElevatedButton extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(5),
         ),
-        minimumSize: const Size(double.infinity, 50),
+        minimumSize: const Size(double.infinity, 70),
       ),
     );
   }
@@ -268,7 +279,7 @@ class LoginButton extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(5),
           side: const BorderSide(
-            color: Color.fromARGB(255, 197, 197, 197),
+            color: Color.fromARGB(98, 100, 11, 151),
             width: 2,
           ),
         ),
