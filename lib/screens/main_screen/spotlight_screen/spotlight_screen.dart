@@ -41,7 +41,7 @@ class _SpotlightScreenState extends State<SpotlightScreen> {
             width: double.infinity,
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage('assets/images/ladder-background.png'),
+                image: AssetImage('assets/images/loading-image.png'),
                 fit: BoxFit.fill,
                 repeat: ImageRepeat.repeat
               ),

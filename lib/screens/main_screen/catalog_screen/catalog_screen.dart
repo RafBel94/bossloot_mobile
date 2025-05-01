@@ -53,7 +53,7 @@ class _CatalogScreenState extends State<CatalogScreen> {
             width: double.infinity,
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage('assets/images/ladder-background.png'),
+                image: AssetImage('assets/images/loading-image.png'),
                 fit: BoxFit.fill,
                 repeat: ImageRepeat.repeat
               ),

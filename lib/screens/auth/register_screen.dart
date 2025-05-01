@@ -50,8 +50,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
             alignment: Alignment.center,
             decoration: const BoxDecoration(
               image: DecorationImage(
-                image: AssetImage('assets/images/retrowave-bg-1.jpg'),
-                fit: BoxFit.fill,
+                image: AssetImage('assets/images/background-image-workshop.png'),
+                fit: BoxFit.cover,
               ),
             ),
             child: AnimatedOpacity(

@@ -32,7 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/images/ladder-background.png'),
+            image: AssetImage('assets/images/background-image-workshop.png'),
             fit: BoxFit.fill,
             repeat: ImageRepeat.repeat
           ),

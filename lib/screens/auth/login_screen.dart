@@ -41,14 +41,14 @@ class _LoginScreenState extends State<LoginScreen> {
           alignment: Alignment.center,
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage('assets/images/retrowave-bg-1.jpg'),
-              fit: BoxFit.fill,
+              image: AssetImage('assets/images/background-image-workshop.png'),
+              fit: BoxFit.cover,
             ),
           ),
         
           // Animated opacity for fade-in effect
           child: Padding(
-            padding: EdgeInsets.symmetric(vertical: sizes.height * 0.06),
+            padding: EdgeInsets.symmetric(vertical: sizes.height * 0.08),
             child: Column(
               children: [
                 Image(
@@ -56,7 +56,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   height: sizes.height * 0.17,
                 ),
                     
-                SizedBox(height: sizes.height * 0.05),
+                SizedBox(height: sizes.height * 0.02),
                     
                 AnimatedOpacity(
                   opacity: _opacity,
