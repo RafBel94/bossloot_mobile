@@ -44,10 +44,9 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
     : Scaffold(
         body: Container(
           decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [Color(0xFF270140), Color.fromARGB(255, 141, 24, 112)],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
+            image: DecorationImage(
+              image: AssetImage('assets/images/background-image-workshop.png'),
+              fit: BoxFit.cover,
             ),
           ),
           child: SingleChildScrollView(

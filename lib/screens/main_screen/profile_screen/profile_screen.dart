@@ -189,8 +189,28 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
               child: CircleAvatar(
                 radius: 50,
-                backgroundImage: NetworkImage(currentUser != null ? currentUser!.profilePicture : 'https://res.cloudinary.com/dlmbw4who/image/upload/v1742850142/avatar-placeholder_qiq5pb.png'),
                 backgroundColor: const Color.fromARGB(255, 226, 226, 226),
+                child: ClipOval(
+                  child: Image.network(
+                    currentUser != null
+                        ? currentUser!.profilePicture
+                        : 'https://res.cloudinary.com/dlmbw4who/image/upload/v1742850142/avatar-placeholder_qiq5pb.png',
+                    fit: BoxFit.cover,
+                    width: 100,
+                    height: 100,
+                    loadingBuilder: (context, child, loadingProgress) {
+                      if (loadingProgress == null) return child;
+                      return const SizedBox(
+                        width: 100,
+                        height: 100,
+                        child: Center(child: CircularProgressIndicator()),
+                      );
+                    },
+                    errorBuilder: (context, error, stackTrace) {
+                      return const Icon(Icons.broken_image, size: 50);
+                    },
+                  ),
+                ),
               ),
             ),
           ),

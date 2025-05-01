@@ -77,7 +77,7 @@ class _GeneralProductDetailsState extends State<GeneralProductDetails> {
             Container(
               padding: const EdgeInsets.all(4),
               decoration: BoxDecoration(
-                color: const Color.fromARGB(255, 245, 245, 245),
+                color: const Color.fromARGB(220, 239, 239, 239),
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Column(
@@ -271,7 +271,7 @@ class _GeneralProductDetailsState extends State<GeneralProductDetails> {
             Container(
               padding: const EdgeInsets.all(5),
               decoration: BoxDecoration(
-                color: const Color.fromARGB(255, 245, 245, 245),
+                color: const Color.fromARGB(220, 239, 239, 239),
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Column(
@@ -331,7 +331,7 @@ class _GeneralProductDetailsState extends State<GeneralProductDetails> {
               padding: const EdgeInsets.all(5),
               width: MediaQuery.of(context).size.width,
               decoration: BoxDecoration(
-                color: const Color.fromARGB(255, 245, 245, 245),
+                color: const Color.fromARGB(220, 239, 239, 239),
                 borderRadius: BorderRadius.circular(10),
               ),
               child: ProductValorations(valorations: widget.product.valorations),

@@ -1,6 +1,7 @@
 import 'package:bossloot_mobile/domain/models/catalog_product.dart';
 import 'package:bossloot_mobile/screens/main_screen/main_screen.dart';
 import 'package:bossloot_mobile/utils/dialog_util.dart';
+import 'package:bossloot_mobile/widgets/shared/product_image.dart';
 import 'package:flutter/material.dart';
 
 class SpotlightProductCard extends StatelessWidget {
@@ -54,19 +55,8 @@ class SpotlightProductCard extends StatelessWidget {
               child: Stack(
                 children: [
                     
-                  Container(
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: NetworkImage(product.image),
-                        fit: BoxFit.cover,
-                      ),
-                      borderRadius: const BorderRadius.only(
-                        topLeft: Radius.circular(5.0),
-                        topRight: Radius.circular(5.0),
-                      ),
-                    ),
-                  ),
+                  // PRODUCT IMAGE
+                  ProductImage(image: product.image,),
 
                   if (!product.featured)
                   Positioned(
