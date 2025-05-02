@@ -1,6 +1,7 @@
 // ignore_for_file: avoid_print
 
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:bossloot_mobile/domain/models/api_response.dart';
 import 'package:http/http.dart' as http;
@@ -41,6 +42,55 @@ class UserService {
     );
     print(response.body);
     return ApiResponse.fromJson(json.decode(response.body));
+  }
+
+  // Update user endpoint
+  Future<ApiResponse> updateUser(String? token, int userId, String name, String mobilePhone, String address1, String address2, File? profilePicture) async {
+    final endpoint = '$baseUrl/users/update-profile/$userId';
+
+    var request = http.MultipartRequest('POST', Uri.parse(endpoint));
+
+    // Add fields to the request
+    request.fields.addAll({
+      'name': name,
+      'mobile_phone': mobilePhone,
+      'address_1': address1,
+      'address_2': address2,
+    });
+
+    // Add file to the request if it exists
+    if (profilePicture != null) {
+      final extension = profilePicture.path.split('.').last.toLowerCase();
+      
+      request.files.add(
+        await http.MultipartFile.fromPath(
+          'profile_picture', 
+          profilePicture.path,
+          filename: 'profile_$userId.$extension',
+        ),
+      );
+    }
+
+    // Add headers to the request
+    request.headers.addAll({
+      'Accept': 'application/json',
+      'Authorization': 'Bearer $token',
+    });
+
+    // Debug: Imprime los datos enviados
+    print('Sending to: $endpoint');
+    print('Fields: ${request.fields}');
+    print('Files: ${request.files.map((f) => f.field + ': ' + f.filename!).join(', ')}');
+
+    var response = await request.send();
+
+    if (response.statusCode == 200) {
+      final responseData = await response.stream.bytesToString();
+      return ApiResponse.fromJson(json.decode(responseData));
+    } else {
+      final errorData = await response.stream.bytesToString();
+      throw Exception('Error: ${response.statusCode} - $errorData');
+    }
   }
 
   // Get user by ID endpoint

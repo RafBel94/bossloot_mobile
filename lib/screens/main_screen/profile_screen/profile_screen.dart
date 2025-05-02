@@ -20,18 +20,17 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  late UserProvider userProvider;
   late User? currentUser;
 
   @override
   void initState() {
     super.initState();
-    userProvider = context.read<UserProvider>();
-    currentUser = userProvider.currentUser;
   }
 
   @override
   Widget build(BuildContext context) {
+    UserProvider userProvider = context.watch<UserProvider>();
+    currentUser = userProvider.currentUser;
     return Container(
       height: double.infinity,
       width: double.infinity,

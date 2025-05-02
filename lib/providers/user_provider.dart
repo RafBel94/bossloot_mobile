@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:bossloot_mobile/domain/models/api_response.dart';
 import 'package:bossloot_mobile/domain/models/user.dart';
 import 'package:bossloot_mobile/services/token_service.dart';
@@ -44,6 +46,26 @@ class UserProvider extends ChangeNotifier {
       }
     } catch (error) {
       errorMessage = 'Error: ${error.toString()}';
+    } finally {
+      notifyListeners();
+    }
+  }
+
+  // Update user
+  Future<void> updateUser(int userId, String name, String mobilePhone, String address1, String address2, File? profilePicture) async {
+    try {
+      String? token = currentUser?.token;
+      ApiResponse updateResponse = await userService.updateUser(token, userId, name, mobilePhone, address1, address2, profilePicture);
+      
+      if (updateResponse.success) {
+        currentUser = User.fromJson(updateResponse.data);
+        errorMessage = null;
+      } else {
+        errorMessage = updateResponse.data['error'] ?? 'Update Failed';
+      }
+    } catch (error) {
+      errorMessage = 'Error: ${error.toString()}';
+      print(errorMessage);
     } finally {
       notifyListeners();
     }

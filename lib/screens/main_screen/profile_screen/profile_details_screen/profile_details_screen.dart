@@ -1,7 +1,10 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:io';
 
 import 'package:bossloot_mobile/domain/models/user.dart';
 import 'package:bossloot_mobile/providers/user_provider.dart';
+import 'package:bossloot_mobile/screens/auth/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
@@ -55,20 +58,32 @@ class _ProfileDetailsScreenState extends State<ProfileDetailsScreen> {
     }
   }
 
-  void _saveProfile() {
+  void _saveProfile() async {
     if (_formKey.currentState!.validate()) {
-      // Aquí guardarías los cambios, por ejemplo:
-      // userProvider.updateUserProfile(
-      //   name: _nameController.text,
-      //   mobilePhone: _mobilePhoneController.text,
-      //   address1: _address1Controller.text,
-      //   address2: _address2Controller.text,
-      //   profilePicture: _selectedImage,
-      // );
-      
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Profile updated!')),
+      // Save the profile data
+      await userProvider.updateUser(
+        user!.id,
+        _nameController.text,
+        _mobilePhoneController.text,
+        _address1Controller.text,
+        _address2Controller.text,
+        _selectedImage
       );
+      
+      if (userProvider.errorMessage != null) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(userProvider.errorMessage!)),
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Profile updated successfully! Please log in again')),
+        );
+
+        userProvider.logoutUser();
+        Navigator.pushReplacement(context, MaterialPageRoute(
+          builder: (context) => const LoginScreen(),
+        ));
+      }
     }
   }
 
@@ -116,6 +131,7 @@ class _ProfileDetailsScreenState extends State<ProfileDetailsScreen> {
                     borderRadius: BorderRadius.circular(5),
                   ),
                   child: SingleChildScrollView(
+                    padding: EdgeInsets.only(bottom: 20),
                     child: Form(
                       key: _formKey,
                       child: Column(
@@ -378,7 +394,7 @@ class _ProfileDetailsScreenState extends State<ProfileDetailsScreen> {
                 ),
               ),
 
-              // Botón de interrogación (esquina superior derecha)
+              // Help Icon
               Positioned(
                 top: 10,
                 right: 10,
@@ -504,7 +520,7 @@ class _ProfileDetailsScreenState extends State<ProfileDetailsScreen> {
   }
 }
 
-// Widget auxiliar para secciones
+// Info Section Widget for the dialog
 Widget _buildInfoSection({
   required IconData icon,
   required String title,
