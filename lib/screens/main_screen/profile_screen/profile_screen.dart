@@ -354,7 +354,7 @@ class LoginButton extends StatelessWidget {
                 TextButton(
                   onPressed: () async {
                     await userProvider.logoutUser();
-                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const MainScreen(),));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => const MainScreen(),));
                   },
                   child: const Text('Log Out', style: TextStyle(),),
                 ),
