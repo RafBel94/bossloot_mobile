@@ -6,8 +6,10 @@ import 'package:bossloot_mobile/domain/models/user.dart';
 import 'package:bossloot_mobile/providers/user_provider.dart';
 import 'package:bossloot_mobile/screens/auth/login_screen.dart';
 import 'package:bossloot_mobile/screens/main_screen/main_screen.dart';
+import 'package:bossloot_mobile/screens/main_screen/profile_screen/profile_details_screen/profile_details_screen.dart';
 import 'package:bossloot_mobile/utils/text_util.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -147,39 +149,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             children: [
                                 
                               // Profile Button
-                              CustomElevatedButton( text: 'My Profile', icon: Icons.person, userProvider: userProvider ),
+                              CustomElevatedButton( text: 'Profile', svgIconPath: 'assets/icons/profile-icon.svg', userProvider: userProvider , onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const ProfileDetailsScreen(),))),
                             
                               const SizedBox(height: 10),
                             
                               // Orders Button
-                              CustomElevatedButton( text: 'My Orders', icon: Icons.shopping_cart, userProvider: userProvider ),
+                              CustomElevatedButton( text: 'Orders', svgIconPath: 'assets/icons/orders-icon.svg', userProvider: userProvider , onPressed: () {}, ),
                             
                               const SizedBox(height: 10),
                             
                               // Favorites Button
-                              CustomElevatedButton( text: 'My favorites', icon: Icons.favorite, userProvider: userProvider ),
+                              CustomElevatedButton( text: 'Favorites', svgIconPath: 'assets/icons/favorites-icon.svg', userProvider: userProvider , onPressed:() {}, ),
 
                               const SizedBox(height: 10),
                               
                               // Settings Button
-                              ElevatedButton.icon(
-                                onPressed: () {
-
-                                },
-                                icon: Icon( Icons.settings,  color: const Color.fromARGB(255, 49, 49, 49),  size: 30, ),
-                                label: Text( 'Settings', style: const TextStyle( color: Colors.black,  fontSize: 20,  fontWeight: FontWeight.w400, ), ),
-                                style: ElevatedButton.styleFrom(
-                                  alignment: Alignment.centerLeft,
-                                  elevation: 3,
-                                  backgroundColor: Colors.white,
-                                  side: const BorderSide(color: Color.fromARGB(78, 77, 16, 112)),
-                                  shadowColor: const Color.fromARGB(142, 119, 24, 173),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(5),
-                                  ),
-                                  minimumSize: const Size(double.infinity, 80),
-                                ),
-                              ),
+                              CustomElevatedButton( text: 'Settings', svgIconPath: 'assets/icons/settings-icon.svg', userProvider: userProvider , onPressed:() {}, ),
 
                             ],
                           ),
@@ -240,82 +225,104 @@ class _ProfileScreenState extends State<ProfileScreen> {
 }
 
 class CustomElevatedButton extends StatelessWidget {
-  UserProvider userProvider;
-  String text;
-  IconData icon;
+  final UserProvider userProvider;
+  final String text;
+  final String svgIconPath;
+  final VoidCallback onPressed;
 
-  CustomElevatedButton({
+  const CustomElevatedButton({
     super.key,
     required this.text,
-    required this.icon,
+    required this.svgIconPath,
     required this.userProvider,
+    required this.onPressed,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        // Botón base
-        ElevatedButton.icon(
-          onPressed: userProvider.currentUser != null 
-          ? () { 
-            // TODO : Implement navigation
-          }
-          : null,
-          icon: Icon( icon,  color: const Color.fromARGB(255, 49, 49, 49),  size: 30, ),
-          label: Text( text, style: const TextStyle( color: Colors.black,  fontSize: 20,  fontWeight: FontWeight.w400, ), ),
-          style: ElevatedButton.styleFrom(
-            alignment: Alignment.centerLeft,
-            elevation: 3,
-            backgroundColor: Colors.white,
-            side: const BorderSide(color: Color.fromARGB(78, 77, 16, 112)),
-            shadowColor: const Color.fromARGB(142, 119, 24, 173),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(5),
+    final bool userLoggedIn = userProvider.currentUser != null;
+    
+    return GestureDetector(
+      onTap: userLoggedIn ? () => onPressed() : null,
+      child: Container(
+        alignment: Alignment.center,
+        width: double.infinity,
+        height: 80,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(5),
+          border: Border.all(color: const Color.fromARGB(78, 77, 16, 112)),
+          boxShadow: const [
+            BoxShadow(
+              color: Color.fromARGB(142, 119, 24, 173),
+              blurRadius: 3,
+              offset: Offset(0, 2),
             ),
-            minimumSize: const Size(double.infinity, 80),
-          ),
+          ],
         ),
-
-        // BLURRY BLOCKER
-        if (userProvider.currentUser == null)
-          Positioned.fill(
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(5),
-              child: BackdropFilter(
-                filter: ImageFilter.blur(sigmaX: 3, sigmaY: 3),
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: const Color.fromARGB(168, 229, 217, 254),
-                    borderRadius: BorderRadius.circular(5),
+        child: Stack(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(left: 15.0),
+              child: Row(
+                children: [
+                  ShaderMask(
+                    shaderCallback: (Rect bounds) {
+                      return LinearGradient(
+                        colors: const [
+                          Color(0xFF7B1FA2),
+                          Color(0xFF673AB7),
+                          Color(0xFFE91E63),
+                          Color(0xFFF57F17),
+                        ],
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                      ).createShader(bounds);
+                    },
+                    blendMode: BlendMode.srcATop,
+                    child: SvgPicture.asset(
+                      svgIconPath,
+                      width: 60,
+                      height: 60,
+                    ),
                   ),
-                  child: Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Icon(
-                          Icons.lock_outline,
-                          color: Colors.black87,
-                          size: 32,
-                        ),
-                        const SizedBox(height: 5),
-                        Text(
-                          'Log In to access this feature!',
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black87,
-                          ),
-                        ),
-                      ],
+
+                  const SizedBox(width: 20),
+
+                  Text( text, style: const TextStyle( color: Colors.black, fontSize: 24, fontWeight: FontWeight.w500, ), ),
+                ],
+              ),
+            ),
+
+            // BLUR EFFECT
+            if (!userLoggedIn && text != 'Settings')
+              ClipRRect(
+                borderRadius: BorderRadius.circular(5),
+                child: BackdropFilter(
+                  filter: ImageFilter.blur(sigmaX: 3, sigmaY: 3),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: const Color.fromARGB(168, 229, 217, 254),
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    child: const Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon( Icons.lock_outline, color: Colors.black87, size: 32, ),
+
+                          SizedBox(height: 5),
+
+                          Text( 'Log In to access this feature!', textAlign: TextAlign.center, style: TextStyle( fontSize: 15, fontWeight: FontWeight.bold, color: Colors.black87, ), ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-          ),
-      ],
+          ],
+        ),
+      ),
     );
   }
 }
