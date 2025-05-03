@@ -65,7 +65,6 @@ class UserProvider extends ChangeNotifier {
       }
     } catch (error) {
       errorMessage = 'Error: ${error.toString()}';
-      print(errorMessage);
     } finally {
       notifyListeners();
     }

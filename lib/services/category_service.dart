@@ -4,7 +4,8 @@ import 'package:bossloot_mobile/domain/models/fetch_response.dart';
 import 'package:http/http.dart' as http;
 
 class CategoryService {
-  final String baseUrl = 'https://bossloot-kbsiw.ondigitalocean.app/api';
+  // final String baseUrl = 'https://bossloot-kbsiw.ondigitalocean.app/api';
+  final String baseUrl = 'http://192.168.1.49:8000/api';
 
   CategoryService();
 

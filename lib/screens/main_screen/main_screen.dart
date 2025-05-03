@@ -122,7 +122,7 @@ class MainScreenState extends State<MainScreen> {
                           if(_selectedIndex == 0 || _selectedIndex == 1)
                             FilterButton(scaffoldKey: _scaffoldKey),
                       
-                          if (_showingProductDetails && (_selectedIndex == 0 || _selectedIndex == 1 || _selectedIndex == 2))
+                          if (_showingProductDetails)
                             ProductDetailsScreen(productId: _currentProductId, onBackPressed: hideProductDetails),
                         ]
                       ),

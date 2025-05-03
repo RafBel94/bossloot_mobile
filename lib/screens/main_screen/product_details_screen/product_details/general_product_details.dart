@@ -1,4 +1,4 @@
-// ignore_for_file: type_literal_in_constant_pattern, must_be_immutable
+// ignore_for_file: type_literal_in_constant_pattern, must_be_immutable, use_build_context_synchronously
 
 import 'package:bossloot_mobile/domain/models/catalog_product.dart';
 import 'package:bossloot_mobile/domain/models/products/case_product.dart';
@@ -12,7 +12,9 @@ import 'package:bossloot_mobile/domain/models/products/mouse_product.dart';
 import 'package:bossloot_mobile/domain/models/products/psu_product.dart';
 import 'package:bossloot_mobile/domain/models/products/ram_product.dart';
 import 'package:bossloot_mobile/domain/models/products/storage_product.dart';
+import 'package:bossloot_mobile/providers/favorite_provider.dart';
 import 'package:bossloot_mobile/providers/product_provider.dart';
+import 'package:bossloot_mobile/providers/user_provider.dart';
 import 'package:bossloot_mobile/screens/main_screen/catalog_screen/catalog_product_card.dart';
 import 'package:bossloot_mobile/screens/main_screen/product_details_screen/product_details/case_product_details.dart';
 import 'package:bossloot_mobile/screens/main_screen/product_details_screen/product_details/cooler_product_details.dart';
@@ -40,6 +42,7 @@ class GeneralProductDetails extends StatefulWidget {
 }
 
 class _GeneralProductDetailsState extends State<GeneralProductDetails> {
+  late UserProvider userProvider;
   late List<CatalogProduct> similarProducts;
   late ScrollController _scrollController;
   late GlobalKey _ratingsKey;
@@ -49,6 +52,9 @@ class _GeneralProductDetailsState extends State<GeneralProductDetails> {
     super.initState();
     _scrollController = ScrollController();
     _ratingsKey = GlobalKey();
+    userProvider = context.read<UserProvider>();
+
+    // Get similar products
     similarProducts = context.read<ProductProvider>().catalogProductList
       .where((product) => product.category == widget.product.category && product.id != widget.product.id)
       .toList();
@@ -66,6 +72,11 @@ class _GeneralProductDetailsState extends State<GeneralProductDetails> {
       ? widget.product.discount.toStringAsFixed(0) 
       : widget.product.discount.toString();
     String productPrice = (widget.product.price - (widget.product.price * (widget.product.discount / 100))).toStringAsFixed(2);
+
+    // Check if the product is in the favorites list
+    final favoriteProvider = context.watch<FavoriteProvider>();
+    final bool isFavorite = favoriteProvider.favoriteList.any((favorite) => 
+      favorite.productId == widget.product.id);
 
     return SingleChildScrollView(
       controller: _scrollController,
@@ -117,6 +128,46 @@ class _GeneralProductDetailsState extends State<GeneralProductDetails> {
                           ),
                           icon: const Icon(Icons.zoom_in, color: Colors.white),
                           onPressed: () => DialogUtil.showProductImageDialog(context, widget.product.image),
+                        ),
+                      ),
+
+                      // ---- Favorite Button
+                      if (userProvider.currentUser != null)
+                      Positioned(
+                        bottom: 12,
+                        left: 12,
+                        child: Container(
+                          height: 55,
+                          width: 55,
+                          decoration: BoxDecoration(
+                            color: const Color.fromARGB(204, 255, 255, 255),
+                            borderRadius: BorderRadius.circular(5),
+                            border: Border.all(color: const Color.fromARGB(137, 200, 200, 200), width: 1),
+                            boxShadow: const [
+                              BoxShadow(
+                                color: Color.fromARGB(100, 134, 134, 134),
+                                spreadRadius: 1,
+                                blurRadius: 5,
+                                offset: Offset(0, 3),
+                              ),
+                            ],
+                          ),
+                          child: IconButton(
+                            icon: Icon(
+                              isFavorite ? Icons.favorite : Icons.favorite_border, 
+                              color: Colors.red, 
+                              size: 35
+                            ),
+                            onPressed: () {
+                              DialogUtil.showFavoriteDialog(
+                                context,
+                                userProvider,
+                                favoriteProvider,
+                                widget.product,
+                                isFavorite
+                              );
+                            },
+                          ),
                         ),
                       ),
                     ],

@@ -5,6 +5,7 @@ import 'dart:ui';
 import 'package:bossloot_mobile/domain/models/user.dart';
 import 'package:bossloot_mobile/providers/user_provider.dart';
 import 'package:bossloot_mobile/screens/auth/login_screen.dart';
+import 'package:bossloot_mobile/screens/main_screen/favorite_screen/favorite_screen.dart';
 import 'package:bossloot_mobile/screens/main_screen/profile_screen/profile_details_screen/profile_details_screen.dart';
 import 'package:bossloot_mobile/utils/dialog_util.dart';
 import 'package:bossloot_mobile/utils/text_util.dart';
@@ -52,19 +53,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
               height: double.infinity,
               width: double.infinity,
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                  border: Border.all(
-                    color: const Color.fromARGB(150, 223, 64, 251),
-                    width: 1,
-                  ),
-                  boxShadow: [
-                    BoxShadow(
-                      color: const Color.fromRGBO(156, 39, 176, 0.5),
-                      blurRadius: 10,
-                      spreadRadius: 3,
-                    ),
-                  ],
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(
+                  color: const Color.fromARGB(150, 223, 64, 251),
+                  width: 1,
                 ),
+                boxShadow: [
+                  BoxShadow(
+                    color: const Color.fromRGBO(156, 39, 176, 0.5),
+                    blurRadius: 10,
+                    spreadRadius: 3,
+                  ),
+                ],
+              ),
 
               // Inside Container
               child: Padding(
@@ -124,7 +125,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   padding: const EdgeInsets.only(top: 5),
                                   child: FittedBox(
                                     child: Text(
-                                      '${currentUser!.name.split(' ')[0]} ${currentUser!.name.split(' ')[1]}',
+                                      currentUser!.name.split(' ').length > 1 ? '${currentUser!.name.split(' ')[0]} ${currentUser!.name.split(' ')[1]}' : currentUser!.name,
                                       style: GoogleFonts.orbitron(
                                         fontSize: 24,
                                         fontWeight: FontWeight.bold,
@@ -161,7 +162,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               const SizedBox(height: 10),
                             
                               // Favorites Button
-                              CustomElevatedButton( text: 'My Favorites', svgIconPath: 'assets/icons/favorites-icon.svg', userProvider: userProvider , onPressed:() {}, ),
+                              CustomElevatedButton( text: 'My Favorites', svgIconPath: 'assets/icons/favorites-icon.svg', userProvider: userProvider , onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => FavoriteScreen(user: currentUser,),))),
 
                               const SizedBox(height: 10),
                               

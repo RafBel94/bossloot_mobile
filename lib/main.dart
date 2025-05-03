@@ -1,8 +1,10 @@
 import 'package:bossloot_mobile/providers/category_provider.dart';
+import 'package:bossloot_mobile/providers/favorite_provider.dart';
 import 'package:bossloot_mobile/providers/product_provider.dart';
 import 'package:bossloot_mobile/providers/user_provider.dart';
 import 'package:bossloot_mobile/screens/main_screen/main_screen.dart';
 import 'package:bossloot_mobile/services/category_service.dart';
+import 'package:bossloot_mobile/services/favorite_service.dart';
 import 'package:bossloot_mobile/services/product_service.dart';
 import 'package:bossloot_mobile/services/token_service.dart';
 import 'package:bossloot_mobile/services/user_service.dart';
@@ -33,6 +35,9 @@ class MainApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (_) => ProductProvider(ProductService()),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => FavoriteProvider(favoriteService: FavoriteService(), tokenService: TokenService(),),
         ),
       ],
       child: MaterialApp(

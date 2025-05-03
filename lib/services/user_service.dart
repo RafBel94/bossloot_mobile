@@ -7,7 +7,8 @@ import 'package:bossloot_mobile/domain/models/api_response.dart';
 import 'package:http/http.dart' as http;
 
 class UserService {
-  final String baseUrl = 'https://bossloot-kbsiw.ondigitalocean.app/api';
+  // final String baseUrl = 'https://bossloot-kbsiw.ondigitalocean.app/api';
+  final String baseUrl = 'http://192.168.1.49:8000/api';
 
   // Login endpoint
   Future<ApiResponse> login(String email, String password) async {
@@ -40,7 +41,6 @@ class UserService {
         'repeatPassword': repeatPassword,
       }),
     );
-    print(response.body);
     return ApiResponse.fromJson(json.decode(response.body));
   }
 
@@ -77,11 +77,6 @@ class UserService {
       'Authorization': 'Bearer $token',
     });
 
-    // Debug: Imprime los datos enviados
-    print('Sending to: $endpoint');
-    print('Fields: ${request.fields}');
-    print('Files: ${request.files.map((f) => f.field + ': ' + f.filename!).join(', ')}');
-
     var response = await request.send();
 
     if (response.statusCode == 200) {
@@ -117,7 +112,6 @@ class UserService {
         'email': email,
       }),
     );
-    print(response.body);
     return ApiResponse.fromJson(json.decode(response.body));
   }
 
@@ -133,7 +127,6 @@ class UserService {
         'email': email,
       }),
     );
-    print(response.body);
     return ApiResponse.fromJson(json.decode(response.body));
   }
 }

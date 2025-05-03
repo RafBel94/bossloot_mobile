@@ -209,7 +209,7 @@ class _ProfileDetailsScreenState extends State<ProfileDetailsScreen> {
                           
                           const SizedBox(height: 20),
               
-                          // User Level Image
+                          // User Level
                           Container(
                             alignment: Alignment.center,
                             width: double.infinity,
@@ -228,10 +228,10 @@ class _ProfileDetailsScreenState extends State<ProfileDetailsScreen> {
                                 ).createShader(bounds);
                               },
                               child: Text(
-                                "Level: ${user!.level}",
+                                "LEVEL: ${user!.level}",
                                 maxLines: 1,
                                 style: GoogleFonts.pressStart2p(
-                                  fontSize: 18,
+                                  fontSize: 17,
                                   color: Colors.white,
                                   shadows: [
                                     Shadow(
@@ -266,10 +266,10 @@ class _ProfileDetailsScreenState extends State<ProfileDetailsScreen> {
                                 ).createShader(bounds);
                               },
                               child: Text(
-                                "Experience: ${user!.points}",
+                                "EXPERIENCE: ${user!.points}",
                                 maxLines: 1,
                                 style: GoogleFonts.pressStart2p(
-                                  fontSize: 16,
+                                  fontSize: 15,
                                   color: Colors.white,
                                   shadows: [
                                     Shadow(
