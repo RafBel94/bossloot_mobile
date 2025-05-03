@@ -410,134 +410,156 @@ class DialogUtil {
     dynamic product, 
     bool isFavorite
   ) {
+    bool isProcessing = false; // Variable para controlar el estado del botón
+    
     return showDialog(
       context: context,
-      builder: (context) => Dialog(
-        backgroundColor: Colors.transparent,
-        child: Container(
-          padding: EdgeInsets.all(20),
-          decoration: BoxDecoration(
-            color: Color(0xFF2A0E4D),
-            borderRadius: BorderRadius.circular(10),
-            border: Border.all(
-              color: Colors.purpleAccent,
-              width: 2,
-            ),
-            boxShadow: [
-              BoxShadow(
-                color: const Color.fromRGBO(156, 39, 176, 0.5),
-                blurRadius: 10,
-                spreadRadius: 3,
-              ),
-            ],
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-
-              // Title
-              FittedBox(
-                child: Text(
-                  isFavorite ? "REMOVE FAVORITE" : "ADD FAVORITE",
-                  style: GoogleFonts.pressStart2p(
-                    fontSize: 18,
-                    color: Colors.amber,
-                    shadows: [
-                      Shadow(
-                        color: Colors.purple,
-                        offset: Offset(2, 2),
-                        blurRadius: 0,
-                      ),
-                    ],
-                  ),
+      builder: (context) => StatefulBuilder(
+        builder: (context, setState) {
+          return Dialog(
+            backgroundColor: Colors.transparent,
+            child: Container(
+              padding: EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                color: Color(0xFF2A0E4D),
+                borderRadius: BorderRadius.circular(10),
+                border: Border.all(
+                  color: Colors.purpleAccent,
+                  width: 2,
                 ),
-              ),
-              
-              SizedBox(height: 25),
-              
-              // General Information
-              _buildInfoSection(
-                icon: isFavorite ? Icons.heart_broken : Icons.favorite,
-                color: Colors.red,
-                title: isFavorite ? "REMOVE FROM FAVORITES?" : "ADD TO FAVORITES?",
-                content: '',
-              ),
-              
-              SizedBox(height: 20),
-              
-              // Buttons
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  // Yes Button
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.purple,
-                      foregroundColor: Colors.white,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
-                        side: BorderSide(color: Colors.white, width: 2),
-                      ),
-                      padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-                    ),
-                    onPressed: () async {
-                      if (isFavorite) {
-                        // Remove from favorites
-                        await favoriteProvider.removeFavorite(
-                          userProvider.currentUser!.id.toString(),
-                          product.id.toString()
-                        );
-                        await favoriteProvider.fetchFavorites(userProvider.currentUser!.id.toString());
-                      } else {
-                        // Add to favorites
-                        await favoriteProvider.addFavorite(
-                          userProvider.currentUser!.id.toString(),
-                          product.id.toString() 
-                        );
-                        await favoriteProvider.fetchFavorites(userProvider.currentUser!.id.toString());
-                      }
-
-                      // Close the dialog
-                      Navigator.pop(context);
-
-                      // Open new dialog with success message
-                      showSuccessDialog(context, isFavorite);
-                    },
-                    child: Text(
-                      "YES",
-                      style: GoogleFonts.pressStart2p(
-                        fontSize: 12,
-                        letterSpacing: 1,
-                      ),
-                    ),
-                  ),
-
-                  // No Button
-                  ElevatedButton(
-                    onPressed: () => Navigator.pop(context),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.purple,
-                      foregroundColor: Colors.white,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
-                        side: BorderSide(color: Colors.white, width: 2),
-                      ),
-                      padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-                    ),
-                    child: Text(
-                      "NO",
-                      style: GoogleFonts.pressStart2p(
-                        fontSize: 12,
-                        letterSpacing: 1,
-                      ),
-                    ),
+                boxShadow: [
+                  BoxShadow(
+                    color: const Color.fromRGBO(156, 39, 176, 0.5),
+                    blurRadius: 10,
+                    spreadRadius: 3,
                   ),
                 ],
-              )
-            ],
-          ),
-        ),
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Title
+                  FittedBox(
+                    child: Text(
+                      isFavorite ? "REMOVE FAVORITE" : "ADD FAVORITE",
+                      style: GoogleFonts.pressStart2p(
+                        fontSize: 18,
+                        color: Colors.amber,
+                        shadows: [
+                          Shadow(
+                            color: Colors.purple,
+                            offset: Offset(2, 2),
+                            blurRadius: 0,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  
+                  SizedBox(height: 25),
+                  
+                  // General Information
+                  _buildInfoSection(
+                    icon: isFavorite ? Icons.heart_broken : Icons.favorite,
+                    color: Colors.red,
+                    title: isFavorite ? "REMOVE FROM FAVORITES?" : "ADD TO FAVORITES?",
+                    content: '',
+                  ),
+                  
+                  SizedBox(height: 20),
+                  
+                  // Buttons
+                  Row(
+                    mainAxisAlignment: isProcessing ? MainAxisAlignment.center : MainAxisAlignment.spaceEvenly,
+                    children: [
+                      // Yes Button
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.purple,
+                          foregroundColor: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                            side: isProcessing 
+                            ? BorderSide.none 
+                            : BorderSide(color: Colors.white, width: 2),
+                          ),
+                          padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                        ),
+                        onPressed: isProcessing 
+                            ? null 
+                            : () async {
+                                setState(() => isProcessing = true);
+                                
+                                try {
+                                  if (isFavorite) {
+                                    await favoriteProvider.removeFavorite(
+                                      userProvider.currentUser!.id.toString(),
+                                      product.id.toString()
+                                    );
+                                  } else {
+                                    await favoriteProvider.addFavorite(
+                                      userProvider.currentUser!.id.toString(),
+                                      product.id.toString() 
+                                    );
+                                  }
+                                  
+                                  await favoriteProvider.fetchFavorites(
+                                    userProvider.currentUser!.id.toString()
+                                  );
+                                  
+                                  Navigator.pop(context);
+                                  showSuccessDialog(context, isFavorite);
+                                } catch (e) {
+                                  setState(() => isProcessing = false);
+                                }
+                              },
+                        child: isProcessing
+                          ? SizedBox(
+                              width: 40,
+                              height: 40,
+                              child: CircularProgressIndicator(
+                                strokeWidth: 2,
+                                color: Colors.white,
+                              ),
+                            )
+                          : Text(
+                              "YES",
+                              style: GoogleFonts.pressStart2p(
+                                fontSize: 12,
+                                letterSpacing: 1,
+                              ),
+                            ),
+                      ),
+
+                      // No Button
+                      if (!isProcessing)
+                      ElevatedButton(
+                        onPressed: () => Navigator.pop(context),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.purple,
+                          foregroundColor: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                            side: BorderSide(color: Colors.white, width: 2),
+                          ),
+                          padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                        ),
+                        child: Text(
+                          "NO",
+                          style: GoogleFonts.pressStart2p(
+                            fontSize: 12,
+                            letterSpacing: 1,
+                          ),
+                        ),
+                      ),
+                    ],
+                  )
+                ],
+              ),
+            ),
+          );
+        },
       ),
     );
   }
@@ -568,18 +590,20 @@ class DialogUtil {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                isFavorite ? "FAVORITE REMOVED" : "FAVORITE ADDED",
-                style: GoogleFonts.pressStart2p(
-                  fontSize: 18,
-                  color: Colors.amber,
-                  shadows: [
-                    Shadow(
-                      color: Colors.purple,
-                      offset: Offset(2, 2),
-                      blurRadius: 0,
-                    ),
-                  ],
+              FittedBox(
+                child: Text(
+                  isFavorite ? "FAVORITE REMOVED" : "FAVORITE ADDED",
+                  style: GoogleFonts.pressStart2p(
+                    fontSize: 18,
+                    color: Colors.amber,
+                    shadows: [
+                      Shadow(
+                        color: Colors.purple,
+                        offset: Offset(2, 2),
+                        blurRadius: 0,
+                      ),
+                    ],
+                  ),
                 ),
               ),
               
