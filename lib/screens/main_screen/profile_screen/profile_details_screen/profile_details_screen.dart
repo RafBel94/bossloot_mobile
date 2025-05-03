@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:bossloot_mobile/domain/models/user.dart';
 import 'package:bossloot_mobile/providers/user_provider.dart';
 import 'package:bossloot_mobile/screens/auth/login_screen.dart';
+import 'package:bossloot_mobile/screens/loading_screen/loading_screen.dart';
 import 'package:bossloot_mobile/utils/dialog_util.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -27,6 +28,7 @@ class _ProfileDetailsScreenState extends State<ProfileDetailsScreen> {
   final TextEditingController _address1Controller = TextEditingController();
   final TextEditingController _address2Controller = TextEditingController();
   File? _selectedImage;
+  bool _isLoading = false;
 
   @override
   void initState() {
@@ -61,6 +63,10 @@ class _ProfileDetailsScreenState extends State<ProfileDetailsScreen> {
 
   void _saveProfile() async {
     if (_formKey.currentState!.validate()) {
+      setState(() {
+        _isLoading = true;
+      });
+
       // Save the profile data
       await userProvider.updateUser(
         user!.id,
@@ -103,7 +109,9 @@ class _ProfileDetailsScreenState extends State<ProfileDetailsScreen> {
       body: SafeArea(
 
         // MAIN CONTAINER (Background Image)
-        child: Container(
+        child: _isLoading 
+        ? LoadingScreen()
+        : Container(
           height: double.infinity,
           decoration: const BoxDecoration(
             image: DecorationImage(
