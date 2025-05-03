@@ -1,6 +1,8 @@
 import 'package:bossloot_mobile/providers/product_provider.dart';
+import 'package:bossloot_mobile/providers/user_provider.dart';
 import 'package:bossloot_mobile/screens/loading_screen/data_loading_screen.dart';
 import 'package:bossloot_mobile/screens/main_screen/product_details_screen/product_details/general_product_details.dart';
+import 'package:bossloot_mobile/utils/dialog_util.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -39,6 +41,9 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
+
+    UserProvider userProvider = context.read<UserProvider>();
+
     return _isLoading
     ? DataLoadingScreen()
     : Scaffold(
@@ -75,7 +80,10 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
                   ),
                   onPressed: () {
-                    // Add to cart logic
+                    if (userProvider.currentUser == null) {
+                      DialogUtil.showLoginRequiredDialog(context);
+                      return;
+                    }
                   },
                   child: Text('Add to cart', style: TextStyle(color: Colors.white)),
                 ),
@@ -90,7 +98,10 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
                   ),
                   onPressed: () {
-                    // Buy now logic
+                    if (userProvider.currentUser == null) {
+                      DialogUtil.showLoginRequiredDialog(context);
+                      return;
+                    }
                   },
                   child: Text('Buy now', style: TextStyle(color: Colors.white)),
                 ),

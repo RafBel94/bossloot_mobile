@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:bossloot_mobile/domain/models/user.dart';
 import 'package:bossloot_mobile/providers/user_provider.dart';
 import 'package:bossloot_mobile/screens/auth/login_screen.dart';
+import 'package:bossloot_mobile/utils/dialog_util.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
@@ -63,10 +64,10 @@ class _ProfileDetailsScreenState extends State<ProfileDetailsScreen> {
       // Save the profile data
       await userProvider.updateUser(
         user!.id,
-        _nameController.text,
-        _mobilePhoneController.text,
-        _address1Controller.text,
-        _address2Controller.text,
+        _nameController.text.replaceAll(RegExp(r'\s+'), ' ').trim(),
+        _mobilePhoneController.text.replaceAll(RegExp(r'\s+'), ' ').trim(),
+        _address1Controller.text.replaceAll(RegExp(r'\s+'), ' ').trim(),
+        _address2Controller.text.replaceAll(RegExp(r'\s+'), ' ').trim(),
         _selectedImage
       );
       
@@ -400,7 +401,7 @@ class _ProfileDetailsScreenState extends State<ProfileDetailsScreen> {
                 right: 10,
                 child: GestureDetector(
                   onTap: () {
-                    showUserProfileGuideDialog(context);
+                    DialogUtil.showUserProfileGuideDialog(context);
                   },
                   child: Container(
                     padding: EdgeInsets.all(8),
@@ -423,135 +424,4 @@ class _ProfileDetailsScreenState extends State<ProfileDetailsScreen> {
       ),
     );
   }
-
-  Future<dynamic> showUserProfileGuideDialog(BuildContext context) {
-    return showDialog(
-      context: context,
-      builder: (context) => Dialog(
-        backgroundColor: Colors.transparent,
-        child: Container(
-          padding: EdgeInsets.all(20),
-          decoration: BoxDecoration(
-            color: Color(0xFF2A0E4D),
-            borderRadius: BorderRadius.circular(10),
-            border: Border.all(
-              color: Colors.purpleAccent,
-              width: 2,
-            ),
-            boxShadow: [
-              BoxShadow(
-                color: const Color.fromRGBO(156, 39, 176, 0.5),
-                blurRadius: 10,
-                spreadRadius: 3,
-              ),
-            ],
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // Título con estilo retro
-              Text(
-                "USER PROFILE",
-                style: GoogleFonts.pressStart2p(
-                  fontSize: 18,
-                  color: Colors.amber,
-                  shadows: [
-                    Shadow(
-                      color: Colors.purple,
-                      offset: Offset(2, 2),
-                      blurRadius: 0,
-                    ),
-                  ],
-                ),
-              ),
-              
-              SizedBox(height: 25),
-              
-              // General Information
-              _buildInfoSection(
-                icon: Icons.person,
-                title: "YOUR PROFILE",
-                content: "Here you can edit your personal information and profile image",
-                color: Colors.pinkAccent,
-              ),
-              
-              SizedBox(height: 20),
-              
-              // Level and experience points
-              _buildInfoSection(
-                icon: Icons.star,
-                title: "LEVEL SYSTEM",
-                content: "• Your level unlocks special discounts\n"
-                        "• Earn XP by purchasing products\n"
-                        "• Max level: 3 (better rewards!)",
-                color: Colors.lightBlueAccent,
-              ),
-              
-              SizedBox(height: 20),
-              
-              // Botón con estilo gaming
-              Center(
-                child: ElevatedButton(
-                  onPressed: () => Navigator.pop(context),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.purple,
-                    foregroundColor: Colors.white,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
-                      side: BorderSide(color: Colors.white, width: 2),
-                    ),
-                    padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-                  ),
-                  child: Text(
-                    "GOT IT!",
-                    style: GoogleFonts.pressStart2p(
-                      fontSize: 12,
-                      letterSpacing: 1,
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-// Info Section Widget for the dialog
-Widget _buildInfoSection({
-  required IconData icon,
-  required String title,
-  required String content,
-  required Color color,
-}) {
-  return Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      Row(
-        children: [
-          Icon(icon, color: color, size: 20),
-          SizedBox(width: 8),
-          Text(
-            title,
-            style: GoogleFonts.pressStart2p(
-              fontSize: 12,
-              color: color,
-            ),
-          ),
-        ],
-      ),
-      SizedBox(height: 8),
-      Text(
-        content,
-        style: TextStyle(
-          color: Colors.white70,
-          fontSize: 14,
-          height: 1.4,
-        ),
-      ),
-    ],
-  );
 }

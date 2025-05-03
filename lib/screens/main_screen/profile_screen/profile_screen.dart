@@ -7,6 +7,7 @@ import 'package:bossloot_mobile/providers/user_provider.dart';
 import 'package:bossloot_mobile/screens/auth/login_screen.dart';
 import 'package:bossloot_mobile/screens/main_screen/main_screen.dart';
 import 'package:bossloot_mobile/screens/main_screen/profile_screen/profile_details_screen/profile_details_screen.dart';
+import 'package:bossloot_mobile/utils/dialog_util.dart';
 import 'package:bossloot_mobile/utils/text_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -194,10 +195,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 radius: 50,
                 backgroundColor: const Color.fromARGB(255, 226, 226, 226),
                 child: ClipOval(
-                  child: Image.network(
-                    currentUser != null
-                        ? currentUser!.profilePicture
-                        : 'https://res.cloudinary.com/dlmbw4who/image/upload/v1742850142/avatar-placeholder_qiq5pb.png',
+                  child: currentUser != null 
+                  ? Image.network(
+                    currentUser!.profilePicture,
                     fit: BoxFit.cover,
                     width: 100,
                     height: 100,
@@ -212,6 +212,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     errorBuilder: (context, error, stackTrace) {
                       return const Icon(Icons.broken_image, size: 50);
                     },
+                  )
+                  : Image.asset(
+                    'assets/images/avatar-placeholder.png',
+                    fit: BoxFit.cover,
+                    width: 100,
+                    height: 100,
                   ),
                 ),
               ),
@@ -339,27 +345,7 @@ class LoginButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: () {
         if (user != null) {
-          showDialog(context: context, builder: (context) {
-            return AlertDialog(
-              title: const Text('Log Out'),
-              content: const Text('Are you sure you want to log out?'),
-              actions: [
-                TextButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: const Text('Cancel'),
-                ),
-                TextButton(
-                  onPressed: () async {
-                    await userProvider.logoutUser();
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => const MainScreen(),));
-                  },
-                  child: const Text('Log Out', style: TextStyle(),),
-                ),
-              ],
-            );
-          },);
+          DialogUtil.showLogoutDialog(context, userProvider);
         } else {
           Navigator.push(context, MaterialPageRoute(
             builder: (context) => const LoginScreen(),

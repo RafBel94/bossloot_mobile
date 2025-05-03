@@ -16,7 +16,7 @@ class DataLoadingScreen extends StatelessWidget{
             Container(
               decoration: const BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage('assets/images/loading-image.png'),
+                  image: AssetImage('assets/images/loading-image-2.png'),
                   fit: BoxFit.cover,
                   repeat: ImageRepeat.repeat
                 ),

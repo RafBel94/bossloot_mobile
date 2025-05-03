@@ -1,8 +1,10 @@
 import 'package:bossloot_mobile/domain/models/catalog_product.dart';
+import 'package:bossloot_mobile/providers/user_provider.dart';
 import 'package:bossloot_mobile/screens/main_screen/main_screen.dart';
 import 'package:bossloot_mobile/utils/dialog_util.dart';
 import 'package:bossloot_mobile/widgets/shared/product_image.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class CatalogProductCard extends StatelessWidget {
   const CatalogProductCard({
@@ -14,6 +16,9 @@ class CatalogProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    UserProvider userProvider = context.read<UserProvider>();
+
     String formatedDiscount = product.discount % 1 == 0 
       ? product.discount.toStringAsFixed(0) 
       : product.discount.toString();
@@ -176,7 +181,9 @@ class CatalogProductCard extends StatelessWidget {
                     ),
                     child: const Icon(Icons.add_shopping_cart, color: Color.fromARGB(255, 255, 255, 255), size: 30,),
                     onPressed: () {
-                      // Handle add to cart action
+                      if (userProvider.currentUser == null) {
+                        DialogUtil.showLoginRequiredDialog(context);
+                      }
                     },
                   ),
                 ),

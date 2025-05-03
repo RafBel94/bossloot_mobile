@@ -1,8 +1,10 @@
 import 'package:bossloot_mobile/domain/models/catalog_product.dart';
+import 'package:bossloot_mobile/providers/user_provider.dart';
 import 'package:bossloot_mobile/screens/main_screen/main_screen.dart';
 import 'package:bossloot_mobile/utils/dialog_util.dart';
 import 'package:bossloot_mobile/widgets/shared/product_image.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class SpotlightProductCard extends StatelessWidget {
   const SpotlightProductCard({
@@ -18,6 +20,7 @@ class SpotlightProductCard extends StatelessWidget {
       ? product.discount.toStringAsFixed(0) 
       : product.discount.toString();
     String productPrice = (product.price - (product.price * (product.discount / 100))).toStringAsFixed(2);
+    UserProvider userProvider = context.read<UserProvider>();
 
     return GestureDetector(
       onLongPress: () {
@@ -199,7 +202,9 @@ class SpotlightProductCard extends StatelessWidget {
                     ),
                     child: const Icon(Icons.add_shopping_cart, color: Color.fromARGB(255, 255, 255, 255), size: 30,),
                     onPressed: () {
-                      // Handle add to cart action
+                      if (userProvider.currentUser == null) {
+                        DialogUtil.showLoginRequiredDialog(context);
+                      }
                     },
                   ),
                 ),

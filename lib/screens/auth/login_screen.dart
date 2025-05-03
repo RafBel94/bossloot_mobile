@@ -257,7 +257,7 @@ class LoginButton extends StatelessWidget {
           ),
           onPressed: () {
             if (_formKey.currentState!.validate()) {
-              loginAction(context, emailController.text, passwordController.text);
+              loginAction(context, emailController.text.trim(), passwordController.text.trim());
             }
           },
           child: Text(

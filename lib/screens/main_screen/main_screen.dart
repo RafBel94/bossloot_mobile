@@ -15,6 +15,7 @@ import 'package:bossloot_mobile/widgets/main_screen/custom_navigation_bar.dart';
 import 'package:bossloot_mobile/widgets/main_screen/filter_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 
 class MainScreen extends StatefulWidget {
@@ -172,6 +173,7 @@ class MainScreenState extends State<MainScreen> {
     precacheImage(AssetImage('assets/images/avatar-placeholder.png'), context,);
     precacheImage(AssetImage('assets/images/background-image-workshop.png'), context,);
     precacheImage(AssetImage('assets/images/background-image-workshop-2.png'), context,);
+    precacheImage(AssetImage('assets/images/background-image-workshop-3.png'), context,);
     precacheImage(AssetImage('assets/images/bossloot-logo-full.png'), context,);
     precacheImage(AssetImage('assets/images/bossloot-logo-margin.png'), context,);
     precacheImage(AssetImage('assets/images/bossloot-title-only.png'), context,);
@@ -180,6 +182,17 @@ class MainScreenState extends State<MainScreen> {
     precacheImage(AssetImage('assets/images/ladder-background.png'), context,);
     precacheImage(AssetImage('assets/images/loading-frame.png'), context,);
     precacheImage(AssetImage('assets/images/loading-image.png'), context,);
+    precacheImage(AssetImage('assets/images/loading-image-2.png'), context,);
     precacheImage(AssetImage('assets/images/welcome-boss.gif'), context,);
+
+    const profileIconLoader = SvgAssetLoader('assets/icons/profile-icon.svg');
+    svg.cache.putIfAbsent(profileIconLoader.cacheKey(null), () => profileIconLoader.loadBytes(null));
+    const ordersIconLoader = SvgAssetLoader('assets/icons/orders-icon.svg');
+    svg.cache.putIfAbsent(ordersIconLoader.cacheKey(null), () => ordersIconLoader.loadBytes(null));
+    const favoritesIconLoader = SvgAssetLoader('assets/icons/favorites-icon.svg');
+    svg.cache.putIfAbsent(favoritesIconLoader.cacheKey(null), () => favoritesIconLoader.loadBytes(null));
+    const settingsIconLoader = SvgAssetLoader('assets/icons/settings-icon.svg');
+    svg.cache.putIfAbsent(settingsIconLoader.cacheKey(null), () => settingsIconLoader.loadBytes(null));
+    
   }
 }
