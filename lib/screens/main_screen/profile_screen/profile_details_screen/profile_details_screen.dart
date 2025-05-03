@@ -158,22 +158,30 @@ class _ProfileDetailsScreenState extends State<ProfileDetailsScreen> {
                                     radius: 75,
                                     backgroundColor: const Color.fromARGB(255, 226, 226, 226),
                                     child: ClipOval(
-                                      child: Image.network('${user?.profilePicture}',
-                                        fit: BoxFit.cover,
-                                        width: 150,
-                                        height: 150,
-                                        loadingBuilder: (context, child, loadingProgress) {
-                                          if (loadingProgress == null) return child;
-                                          return const SizedBox(
-                                            width: 100,
-                                            height: 100,
-                                            child: Center(child: CircularProgressIndicator()),
-                                          );
-                                        },
-                                        errorBuilder: (context, error, stackTrace) {
-                                          return const Icon(Icons.broken_image, size: 50);
-                                        },
-                                      ),
+                                      child: _selectedImage != null
+                                          ? Image.file(
+                                              _selectedImage!,
+                                              fit: BoxFit.cover,
+                                              width: 150,
+                                              height: 150,
+                                            )
+                                          : Image.network(
+                                              '${user?.profilePicture}',
+                                              fit: BoxFit.cover,
+                                              width: 150,
+                                              height: 150,
+                                              loadingBuilder: (context, child, loadingProgress) {
+                                                if (loadingProgress == null) return child;
+                                                return const SizedBox(
+                                                  width: 100,
+                                                  height: 100,
+                                                  child: Center(child: CircularProgressIndicator()),
+                                                );
+                                              },
+                                              errorBuilder: (context, error, stackTrace) {
+                                                return const Icon(Icons.broken_image, size: 50);
+                                              },
+                                            ),
                                     ),
                                   ),
                                 ),

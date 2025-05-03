@@ -2,6 +2,7 @@ import 'package:bossloot_mobile/domain/models/catalog_product.dart';
 import 'package:bossloot_mobile/providers/product_provider.dart';
 import 'package:bossloot_mobile/screens/main_screen/catalog_screen/catalog_product_card.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -74,23 +75,32 @@ class _HomeScreenState extends State<HomeScreen> {
                   left: 0,
                   right: 0,
                   child: Container(
-                    margin: EdgeInsets.symmetric(horizontal: 5),
+                    margin: EdgeInsets.symmetric(horizontal: 10),
                     height: 50,
                     alignment: Alignment.center,
                       decoration: BoxDecoration(
-                        color: const Color.fromARGB(142, 255, 255, 255),
+                        gradient: LinearGradient(
+                          colors: [Color.fromARGB(200, 140, 82, 255), Color.fromARGB(200, 221, 94, 136)],
+                          begin: Alignment.topLeft,
+                          end: Alignment.topRight,
+                        ),
                         borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(5),
                           topRight: Radius.circular(5),
                         ),
-                        border: Border.all(
-                          color: const Color.fromARGB(255, 191, 191, 191),
-                          width: 2,
-                        ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: const Color.fromRGBO(156, 39, 176, 0.5),
+                            blurRadius: 10,
+                            spreadRadius: 3,
+                          ),
+                        ],
                       ),
-                    child: Text(
-                      'For real adventurers!',
-                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: const Color.fromARGB(255, 0, 0, 0)),
+                    child: FittedBox(
+                      child: Text(
+                        'FOR REAL ADVENTURERS',
+                        style: GoogleFonts.pressStart2p(fontSize: 14, color: Colors.white,),
+                      ),
                     ),
                   ),
                 ),
@@ -100,17 +110,20 @@ class _HomeScreenState extends State<HomeScreen> {
               // Featured Products Section
               Container(
                 height: 312,
-                margin: EdgeInsets.symmetric(horizontal: 5),
+                margin: EdgeInsets.symmetric(horizontal: 10),
                 decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 233, 233, 233),
+                  color: const Color.fromARGB(150, 233, 233, 233),
                   borderRadius: BorderRadius.only(
                     bottomLeft: Radius.circular(5),
                     bottomRight: Radius.circular(5),
                   ),
-                  border: Border.all(
-                    color: const Color.fromARGB(255, 191, 191, 191),
-                    width: 2,
-                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: const Color.fromRGBO(156, 39, 176, 0.5),
+                      blurRadius: 10,
+                      spreadRadius: 3,
+                    ),
+                  ]
                 ),
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
@@ -123,6 +136,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           color: const Color.fromARGB(255, 225, 225, 225),
                           width: 2,
                         ),
+                        borderRadius: BorderRadius.circular(4),
                       ),
                       width: 200,
                       margin: EdgeInsets.only(right: 8),
@@ -136,38 +150,43 @@ class _HomeScreenState extends State<HomeScreen> {
 
               // On Offer Products Section
               Container(
-                margin: EdgeInsets.symmetric(horizontal: 5),
+                margin: EdgeInsets.symmetric(horizontal: 10),
                 height: 50,
                 alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    color: const Color.fromARGB(142, 255, 255, 255),
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(5),
-                      topRight: Radius.circular(5),
-                    ),
-                    border: Border.all(
-                      color: const Color.fromARGB(255, 191, 191, 191),
-                      width: 2,
-                    ),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(5),
+                    topRight: Radius.circular(5),
                   ),
-                child: Text(
-                  'Get these while they last!',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: const Color.fromARGB(255, 0, 0, 0)),
+                  gradient: LinearGradient(
+                    colors: [Color.fromARGB(200, 140, 82, 255), Color.fromARGB(200, 221, 94, 136)],
+                    begin: Alignment.topLeft,
+                    end: Alignment.topRight,
+                  ),
+                ),
+                child: FittedBox(
+                  child: Text(
+                    'THE BEST DEALS',
+                    style: GoogleFonts.pressStart2p(fontSize: 15, color: Colors.white,),
+                  ),
                 ),
               ),
               Container(
                 height: 312,
-                margin: EdgeInsets.symmetric(horizontal: 5),
+                margin: EdgeInsets.symmetric(horizontal: 10),
                 decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 233, 233, 233),
+                  color: const Color.fromARGB(150, 233, 233, 233),
                   borderRadius: BorderRadius.only(
                     bottomLeft: Radius.circular(5),
                     bottomRight: Radius.circular(5),
                   ),
-                  border: Border.all(
-                    color: const Color.fromARGB(255, 191, 191, 191),
-                    width: 2,
-                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: const Color.fromRGBO(156, 39, 176, 0.5),
+                      blurRadius: 10,
+                      spreadRadius: 3,
+                    ),
+                  ]
                 ),
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
@@ -180,6 +199,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           color: const Color.fromARGB(255, 225, 225, 225),
                           width: 2,
                         ),
+                        borderRadius: BorderRadius.circular(4),
                       ),
                       width: 200,
                       margin: EdgeInsets.only(right: 8),
@@ -193,38 +213,43 @@ class _HomeScreenState extends State<HomeScreen> {
 
               // Recently Added Products Section
               Container(
-                margin: EdgeInsets.symmetric(horizontal: 5),
+                margin: EdgeInsets.symmetric(horizontal: 10),
                 height: 50,
                 alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    color: const Color.fromARGB(142, 255, 255, 255),
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(5),
-                      topRight: Radius.circular(5),
-                    ),
-                    border: Border.all(
-                      color: const Color.fromARGB(255, 191, 191, 191),
-                      width: 2,
-                    ),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(5),
+                    topRight: Radius.circular(5),
                   ),
-                child: Text(
-                  'The best of the best!',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: const Color.fromARGB(255, 0, 0, 0)),
+                  gradient: LinearGradient(
+                    colors: [Color.fromARGB(200, 140, 82, 255), Color.fromARGB(200, 221, 94, 136)],
+                    begin: Alignment.topLeft,
+                    end: Alignment.topRight,
+                  ),
+                ),
+                child: FittedBox(
+                  child: Text(
+                    'RIGHT FROM THE DUNGEON',
+                    style: GoogleFonts.pressStart2p(fontSize: 14, color: Colors.white,),
+                  ),
                 ),
               ),
               Container(
                 height: 312,
-                margin: EdgeInsets.symmetric(horizontal: 5),
+                margin: EdgeInsets.symmetric(horizontal: 10),
                 decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 233, 233, 233),
+                  color: const Color.fromARGB(150, 233, 233, 233),
                   borderRadius: BorderRadius.only(
                     bottomLeft: Radius.circular(5),
                     bottomRight: Radius.circular(5),
                   ),
-                  border: Border.all(
-                    color: const Color.fromARGB(255, 191, 191, 191),
-                    width: 2,
-                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: const Color.fromRGBO(156, 39, 176, 0.5),
+                      blurRadius: 10,
+                      spreadRadius: 3,
+                    ),
+                  ]
                 ),
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
@@ -237,6 +262,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           color: const Color.fromARGB(255, 225, 225, 225),
                           width: 2,
                         ),
+                        borderRadius: BorderRadius.circular(4),
                       ),
                       width: 200,
                       margin: EdgeInsets.only(right: 8),

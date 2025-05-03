@@ -5,12 +5,12 @@ import 'dart:ui';
 import 'package:bossloot_mobile/domain/models/user.dart';
 import 'package:bossloot_mobile/providers/user_provider.dart';
 import 'package:bossloot_mobile/screens/auth/login_screen.dart';
-import 'package:bossloot_mobile/screens/main_screen/main_screen.dart';
 import 'package:bossloot_mobile/screens/main_screen/profile_screen/profile_details_screen/profile_details_screen.dart';
 import 'package:bossloot_mobile/utils/dialog_util.dart';
 import 'package:bossloot_mobile/utils/text_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -52,25 +52,27 @@ class _ProfileScreenState extends State<ProfileScreen> {
               height: double.infinity,
               width: double.infinity,
               decoration: BoxDecoration(
-                color: const Color.fromARGB(255, 234, 234, 234),
-                borderRadius: BorderRadius.circular(5),
-                border: Border.all(
-                  color: const Color.fromARGB(146, 141, 100, 195),
-                  width: 2,
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(
+                    color: const Color.fromARGB(150, 223, 64, 251),
+                    width: 1,
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: const Color.fromRGBO(156, 39, 176, 0.5),
+                      blurRadius: 10,
+                      spreadRadius: 3,
+                    ),
+                  ],
                 ),
-              ),
 
               // Inside Container
               child: Padding(
                 padding: const EdgeInsets.all(3),
                 child: Container(
                   decoration: BoxDecoration(
-                    color: const Color.fromARGB(117, 237, 237, 237),
+                    color: const Color.fromARGB(199, 194, 194, 194),
                     borderRadius: BorderRadius.circular(5),
-                    border: Border.all(
-                      color: const Color.fromARGB(57, 58, 12, 84),
-                      width: 2,
-                    ),
                   ),
 
                   // Inside Content
@@ -119,12 +121,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 // User Name
                                 if (currentUser != null)
                                 Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                                  padding: const EdgeInsets.only(top: 5),
                                   child: FittedBox(
                                     child: Text(
-                                      currentUser != null ? currentUser!.name : 'Anonymous',
-                                      style: const TextStyle(
-                                        fontSize: 25,
+                                      '${currentUser!.name.split(' ')[0]} ${currentUser!.name.split(' ')[1]}',
+                                      style: GoogleFonts.orbitron(
+                                        fontSize: 24,
                                         fontWeight: FontWeight.bold,
                                         color: Color.fromARGB(255, 45, 45, 45),
                                       ),
@@ -137,7 +139,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         ),
 
 
-                        const SizedBox(height: 15),
+                        const SizedBox(height: 10),
 
                         // Buttons
                         Expanded(
@@ -149,17 +151,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             children: [
                                 
                               // Profile Button
-                              CustomElevatedButton( text: 'Profile', svgIconPath: 'assets/icons/profile-icon.svg', userProvider: userProvider , onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const ProfileDetailsScreen(),))),
+                              CustomElevatedButton( text: 'My Profile', svgIconPath: 'assets/icons/profile-icon.svg', userProvider: userProvider , onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const ProfileDetailsScreen(),))),
                             
                               const SizedBox(height: 10),
                             
                               // Orders Button
-                              CustomElevatedButton( text: 'Orders', svgIconPath: 'assets/icons/orders-icon.svg', userProvider: userProvider , onPressed: () {}, ),
+                              CustomElevatedButton( text: 'My Orders', svgIconPath: 'assets/icons/orders-icon.svg', userProvider: userProvider , onPressed: () {}, ),
                             
                               const SizedBox(height: 10),
                             
                               // Favorites Button
-                              CustomElevatedButton( text: 'Favorites', svgIconPath: 'assets/icons/favorites-icon.svg', userProvider: userProvider , onPressed:() {}, ),
+                              CustomElevatedButton( text: 'My Favorites', svgIconPath: 'assets/icons/favorites-icon.svg', userProvider: userProvider , onPressed:() {}, ),
 
                               const SizedBox(height: 10),
                               
@@ -294,7 +296,7 @@ class CustomElevatedButton extends StatelessWidget {
 
                   const SizedBox(width: 20),
 
-                  Text( text, style: const TextStyle( color: Colors.black, fontSize: 24, fontWeight: FontWeight.w500, ), ),
+                  Text( text, style: GoogleFonts.orbitron( color: Colors.black, fontSize: 20, fontWeight: FontWeight.w600, ), ),
                 ],
               ),
             ),
@@ -310,7 +312,7 @@ class CustomElevatedButton extends StatelessWidget {
                       color: const Color.fromARGB(168, 229, 217, 254),
                       borderRadius: BorderRadius.circular(5),
                     ),
-                    child: const Center(
+                    child: Center(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -318,7 +320,7 @@ class CustomElevatedButton extends StatelessWidget {
 
                           SizedBox(height: 5),
 
-                          Text( 'Log In to access this feature!', textAlign: TextAlign.center, style: TextStyle( fontSize: 15, fontWeight: FontWeight.bold, color: Colors.black87, ), ),
+                          Text( 'Log In to access this feature!', textAlign: TextAlign.center, style: GoogleFonts.orbitron( fontSize: 15, fontWeight: FontWeight.bold, color: Colors.black87, ), ),
                         ],
                       ),
                     ),
