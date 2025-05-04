@@ -4,8 +4,9 @@ import 'dart:io';
 
 import 'package:bossloot_mobile/domain/models/user.dart';
 import 'package:bossloot_mobile/providers/user_provider.dart';
-import 'package:bossloot_mobile/screens/auth/login_screen.dart';
 import 'package:bossloot_mobile/screens/loading_screen/loading_screen.dart';
+import 'package:bossloot_mobile/screens/loading_screen/loading_screen_plain.dart';
+import 'package:bossloot_mobile/screens/main_screen/main_screen.dart';
 import 'package:bossloot_mobile/utils/dialog_util.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -88,7 +89,7 @@ class _ProfileDetailsScreenState extends State<ProfileDetailsScreen> {
 
         userProvider.logoutUser();
         Navigator.pushReplacement(context, MaterialPageRoute(
-          builder: (context) => const LoginScreen(),
+          builder: (context) => const MainScreen(withPageIndex: 4,),
         ));
       }
     }
@@ -110,7 +111,7 @@ class _ProfileDetailsScreenState extends State<ProfileDetailsScreen> {
 
         // MAIN CONTAINER (Background Image)
         child: _isLoading 
-        ? LoadingScreen()
+        ? LoadingScreenPlain()
         : Container(
           height: double.infinity,
           decoration: const BoxDecoration(
@@ -335,25 +336,24 @@ class _ProfileDetailsScreenState extends State<ProfileDetailsScreen> {
                           const SizedBox(height: 20),
                           
                           // Mobile Phone Field
-                          TextFormField(
+                            TextFormField(
                             onTapUpOutside: (event) => FocusManager.instance.primaryFocus?.unfocus(),
                             controller: _mobilePhoneController,
                             decoration: InputDecoration(
                               labelText: 'Mobile Phone',
                               hintText: 'Your mobile phone number',
                               border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(8),
+                              borderRadius: BorderRadius.circular(8),
                               ),
                               prefixIcon: const Icon(Icons.phone_android),
                             ),
                             keyboardType: TextInputType.phone,
                             validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'Please enter your mobile phone number';
-                              }
-                              // Basic validation for phone number
-                              if (!RegExp(r'^\d{9,}$').hasMatch(value)) {
-                                return 'Please enter a valid phone number';
+                              if (value != null && value.isNotEmpty) {
+                                // Validate phone number only if it has a value
+                                if (!RegExp(r'^\d{9,}$').hasMatch(value)) {
+                                  return 'Please enter a valid phone number';
+                                }
                               }
                               return null;
                             },
@@ -374,9 +374,6 @@ class _ProfileDetailsScreenState extends State<ProfileDetailsScreen> {
                               prefixIcon: const Icon(Icons.home),
                             ),
                             validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'Please enter your address';
-                              }
                               return null;
                             },
                           ),
