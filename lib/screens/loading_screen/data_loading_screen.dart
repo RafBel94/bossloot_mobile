@@ -39,7 +39,7 @@ class DataLoadingScreen extends StatelessWidget{
 
             // Loading indicator
             Align(
-              alignment: const Alignment(0, 0.13),
+              alignment: const Alignment(0, 0.11),
               child: SizedBox(
                 height: 40,
                 width: 40,

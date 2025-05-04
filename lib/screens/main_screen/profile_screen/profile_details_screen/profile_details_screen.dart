@@ -126,11 +126,22 @@ class _ProfileDetailsScreenState extends State<ProfileDetailsScreen> {
             children: [
               Container(
                 height: double.infinity,
-                padding: const EdgeInsets.all(5),
+                padding: const EdgeInsets.all(4),
                 decoration: BoxDecoration(
-                  color: const Color.fromARGB(88, 255, 255, 255),
-                  borderRadius: BorderRadius.circular(5),
+                color: const Color.fromARGB(204, 136, 25, 156),
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(
+                  color: const Color.fromARGB(150, 223, 64, 251),
+                  width: 1,
                 ),
+                boxShadow: const [
+                  BoxShadow(
+                    color: Color.fromRGBO(156, 39, 176, 0.5),
+                    blurRadius: 6,
+                    spreadRadius: 3,
+                  ),
+                ],
+              ),
               
                 // INNER CARD
                 child: Container(
