@@ -1,0 +1,13 @@
+{
+    "@@locale": "es",
+    
+    "app_searchbar_open": "Toca para abrir la barra de búsqueda",
+    "@app_searchbar_open": {
+        "description": "Text for the search bar open button"
+    },
+
+    "app_searchbar_field_hint": "Buscar en el catálogo...",
+    "@app_searchbar_field_hint": {
+        "description": "Hint text for the search bar field"
+    }
+}

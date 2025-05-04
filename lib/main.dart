@@ -11,13 +11,25 @@ import 'package:bossloot_mobile/services/user_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() {
   runApp(const MainApp());
 }
 
-class MainApp extends StatelessWidget {
+class MainApp extends StatefulWidget {
+
+
   const MainApp({super.key});
+
+  @override
+  State<MainApp> createState() => _MainAppState();
+}
+
+class _MainAppState extends State<MainApp> {
+
+  Locale _locale = const Locale('en');
 
   @override
   Widget build(BuildContext context) {
@@ -50,6 +62,17 @@ class MainApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'BossLoot',
+        localizationsDelegates: const [
+          AppLocalizations.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        locale: _locale,
+        supportedLocales: const [
+          Locale('en'),
+          Locale('es'),
+        ],
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 110, 72, 121)),
           useMaterial3: true,
@@ -57,5 +80,11 @@ class MainApp extends StatelessWidget {
         home: SafeArea(child: const LoadingScreen()),
       ),
     );
+  }
+
+  void _changeLanguage(Locale locale){
+    setState(() {
+      _locale = locale;
+    });
   }
 }

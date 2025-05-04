@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CustomHeaderSearchbar extends StatefulWidget {
   const CustomHeaderSearchbar({super.key});
@@ -90,7 +91,7 @@ class _CustomHeaderSearchbarState extends State<CustomHeaderSearchbar>
                   onTapOutside: (event) => FocusManager.instance.primaryFocus?.unfocus(),
                   controller: _searchBarController,
                   decoration: InputDecoration(
-                    hintText: 'Search in the catalogue...',
+                    hintText: AppLocalizations.of(context)!.app_searchbar_field_hint,
                     prefixIcon: Icon(Icons.search, size: 24),
                     prefixIconConstraints: BoxConstraints(
                       minWidth: 30,
@@ -150,7 +151,7 @@ class _CustomHeaderSearchbarState extends State<CustomHeaderSearchbar>
                   if (!_isSearchExpanded)
                     Padding(
                       padding: const EdgeInsets.only(right: 4),
-                      child: Text('Tap to open search bar',style: TextStyle(color: Colors.black,fontSize: 12,)),
+                      child: Text(AppLocalizations.of(context)!.app_searchbar_open,style: TextStyle(color: Colors.black,fontSize: 12,)),
                     ),
                   Icon(
                     _isSearchExpanded 
