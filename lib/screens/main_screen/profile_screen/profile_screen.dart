@@ -1,15 +1,14 @@
 // ignore_for_file: use_build_context_synchronously, must_be_immutable
 
-import 'dart:ui';
-
 import 'package:bossloot_mobile/domain/models/user.dart';
 import 'package:bossloot_mobile/providers/user_provider.dart';
 import 'package:bossloot_mobile/screens/auth/login_screen.dart';
+import 'package:bossloot_mobile/screens/main_screen/favorite_screen/favorite_screen.dart';
+import 'package:bossloot_mobile/screens/main_screen/profile_screen/profile_button.dart';
 import 'package:bossloot_mobile/screens/main_screen/profile_screen/profile_details_screen/profile_details_screen.dart';
 import 'package:bossloot_mobile/utils/dialog_util.dart';
 import 'package:bossloot_mobile/utils/text_util.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
@@ -52,19 +51,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
               height: double.infinity,
               width: double.infinity,
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                  border: Border.all(
-                    color: const Color.fromARGB(150, 223, 64, 251),
-                    width: 1,
-                  ),
-                  boxShadow: [
-                    BoxShadow(
-                      color: const Color.fromRGBO(156, 39, 176, 0.5),
-                      blurRadius: 10,
-                      spreadRadius: 3,
-                    ),
-                  ],
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(
+                  color: const Color.fromARGB(150, 223, 64, 251),
+                  width: 1,
                 ),
+                boxShadow: [
+                  BoxShadow(
+                    color: const Color.fromRGBO(156, 39, 176, 0.5),
+                    blurRadius: 6,
+                    spreadRadius: 3,
+                  ),
+                ],
+              ),
 
               // Inside Container
               child: Padding(
@@ -124,7 +123,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   padding: const EdgeInsets.only(top: 5),
                                   child: FittedBox(
                                     child: Text(
-                                      '${currentUser!.name.split(' ')[0]} ${currentUser!.name.split(' ')[1]}',
+                                      currentUser!.name.split(' ').length > 1 ? '${currentUser!.name.split(' ')[0]} ${currentUser!.name.split(' ')[1]}' : currentUser!.name,
                                       style: GoogleFonts.orbitron(
                                         fontSize: 24,
                                         fontWeight: FontWeight.bold,
@@ -151,22 +150,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             children: [
                                 
                               // Profile Button
-                              CustomElevatedButton( text: 'My Profile', svgIconPath: 'assets/icons/profile-icon.svg', userProvider: userProvider , onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const ProfileDetailsScreen(),))),
+                              ProfileButton( text: 'My Profile', svgIconPath: 'assets/icons/profile-icon.svg', userProvider: userProvider , onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const ProfileDetailsScreen(),))),
                             
                               const SizedBox(height: 10),
                             
                               // Orders Button
-                              CustomElevatedButton( text: 'My Orders', svgIconPath: 'assets/icons/orders-icon.svg', userProvider: userProvider , onPressed: () {}, ),
+                              ProfileButton( text: 'My Orders', svgIconPath: 'assets/icons/orders-icon.svg', userProvider: userProvider , onPressed: () {}, ),
                             
                               const SizedBox(height: 10),
                             
                               // Favorites Button
-                              CustomElevatedButton( text: 'My Favorites', svgIconPath: 'assets/icons/favorites-icon.svg', userProvider: userProvider , onPressed:() {}, ),
+                              ProfileButton( text: 'My Favorites', svgIconPath: 'assets/icons/favorites-icon.svg', userProvider: userProvider , onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => FavoriteScreen(user: currentUser,),))),
 
                               const SizedBox(height: 10),
                               
                               // Settings Button
-                              CustomElevatedButton( text: 'Settings', svgIconPath: 'assets/icons/settings-icon.svg', userProvider: userProvider , onPressed:() {}, ),
+                              ProfileButton( text: 'Settings', svgIconPath: 'assets/icons/settings-icon.svg', userProvider: userProvider , onPressed:() {}, ),
 
                             ],
                           ),
@@ -226,109 +225,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
           ),
         ],
-      ),
-    );
-  }
-}
-
-class CustomElevatedButton extends StatelessWidget {
-  final UserProvider userProvider;
-  final String text;
-  final String svgIconPath;
-  final VoidCallback onPressed;
-
-  const CustomElevatedButton({
-    super.key,
-    required this.text,
-    required this.svgIconPath,
-    required this.userProvider,
-    required this.onPressed,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final bool userLoggedIn = userProvider.currentUser != null;
-    
-    return GestureDetector(
-      onTap: userLoggedIn ? () => onPressed() : null,
-      child: Container(
-        alignment: Alignment.center,
-        width: double.infinity,
-        height: 80,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(5),
-          border: Border.all(color: const Color.fromARGB(78, 77, 16, 112)),
-          boxShadow: const [
-            BoxShadow(
-              color: Color.fromARGB(142, 119, 24, 173),
-              blurRadius: 3,
-              offset: Offset(0, 2),
-            ),
-          ],
-        ),
-        child: Stack(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 15.0),
-              child: Row(
-                children: [
-                  ShaderMask(
-                    shaderCallback: (Rect bounds) {
-                      return LinearGradient(
-                        colors: const [
-                          Color(0xFF7B1FA2),
-                          Color(0xFF673AB7),
-                          Color(0xFFE91E63),
-                          Color(0xFFF57F17),
-                        ],
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                      ).createShader(bounds);
-                    },
-                    blendMode: BlendMode.srcATop,
-                    child: SvgPicture.asset(
-                      svgIconPath,
-                      width: 60,
-                      height: 60,
-                    ),
-                  ),
-
-                  const SizedBox(width: 20),
-
-                  Text( text, style: GoogleFonts.orbitron( color: Colors.black, fontSize: 20, fontWeight: FontWeight.w600, ), ),
-                ],
-              ),
-            ),
-
-            // BLUR EFFECT
-            if (!userLoggedIn && text != 'Settings')
-              ClipRRect(
-                borderRadius: BorderRadius.circular(5),
-                child: BackdropFilter(
-                  filter: ImageFilter.blur(sigmaX: 3, sigmaY: 3),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: const Color.fromARGB(168, 229, 217, 254),
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                    child: Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon( Icons.lock_outline, color: Colors.black87, size: 32, ),
-
-                          SizedBox(height: 5),
-
-                          Text( 'Log In to access this feature!', textAlign: TextAlign.center, style: GoogleFonts.orbitron( fontSize: 15, fontWeight: FontWeight.bold, color: Colors.black87, ), ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-          ],
-        ),
       ),
     );
   }

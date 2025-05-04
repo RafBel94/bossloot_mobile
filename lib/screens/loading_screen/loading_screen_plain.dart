@@ -1,18 +1,14 @@
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:bossloot_mobile/providers/category_provider.dart';
-import 'package:bossloot_mobile/providers/product_provider.dart';
 import 'package:bossloot_mobile/screens/main_screen/main_screen.dart';
+import 'package:flutter/material.dart';
 
-class LoadingScreen extends StatefulWidget {
-  const LoadingScreen({super.key});
+class LoadingScreenPlain extends StatefulWidget {
+  const LoadingScreenPlain({super.key});
 
   @override
-  State<LoadingScreen> createState() => _LoadingScreenState();
+  State<LoadingScreenPlain> createState() => _LoadingScreenPlainState();
 }
 
-class _LoadingScreenState extends State<LoadingScreen>
+class _LoadingScreenPlainState extends State<LoadingScreenPlain>
     with TickerProviderStateMixin {
   late AnimationController _rotationController;
   late AnimationController _scaleController;
@@ -66,16 +62,15 @@ class _LoadingScreenState extends State<LoadingScreen>
     );
     
     // Start animations and load data
-    _startAnimationsAndLoadData();
+    _startAnimations();
     }
 
-    Future<void> _startAnimationsAndLoadData() async {
+    Future<void> _startAnimations() async {
     // 1. Start rotation
     _rotationController.forward();
     
     // 2. Load data while the animation is displayed
     final startTime = DateTime.now();
-    await _initializeAllProductsAndCategories();
 
     // 3. Start heartbeat effect
     await _scaleController.forward();
@@ -94,47 +89,9 @@ class _LoadingScreenState extends State<LoadingScreen>
     // 6. Navigate to MainScreen
     if (mounted) {
       Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => const MainScreen())
+        MaterialPageRoute(builder: (context) => const MainScreen(withPageIndex: 4,))
       );
     }
-  }
-
-  Future<void> _initializeAllProductsAndCategories() async {
-    final categoryProvider = context.read<CategoryProvider>();
-    final productProvider = context.read<ProductProvider>();
-    
-    await productProvider.fetchCatalogProducts();
-    await productProvider.fetchFeaturedProducts();
-    await categoryProvider.fetchCategories();
-
-    // Preload images
-    await _preloadImages();
-  }
-
-  Future<void> _preloadImages() async {
-    precacheImage(const AssetImage('assets/images/avatar-placeholder.png'), context);
-    precacheImage(const AssetImage('assets/images/background-image-workshop.png'), context);
-    precacheImage(const AssetImage('assets/images/background-image-workshop-2.png'), context);
-    precacheImage(const AssetImage('assets/images/background-image-workshop-3.png'), context);
-    precacheImage(const AssetImage('assets/images/bossloot-logo-full.png'), context);
-    precacheImage(const AssetImage('assets/images/bossloot-logo-margin.png'), context);
-    precacheImage(const AssetImage('assets/images/bossloot-title-only.png'), context);
-    precacheImage(const AssetImage('assets/images/gnome-greetings.png'), context);
-    precacheImage(const AssetImage('assets/images/gnome-greetings-2.png'), context);
-    precacheImage(const AssetImage('assets/images/ladder-background.png'), context);
-    precacheImage(const AssetImage('assets/images/loading-frame.png'), context);
-    precacheImage(const AssetImage('assets/images/loading-image.png'), context);
-    precacheImage(const AssetImage('assets/images/loading-image-2.png'), context);
-    precacheImage(const AssetImage('assets/images/welcome-boss.gif'), context);
-
-    const profileIconLoader = SvgAssetLoader('assets/icons/profile-icon.svg');
-    svg.cache.putIfAbsent(profileIconLoader.cacheKey(null), () => profileIconLoader.loadBytes(null));
-    const ordersIconLoader = SvgAssetLoader('assets/icons/orders-icon.svg');
-    svg.cache.putIfAbsent(ordersIconLoader.cacheKey(null), () => ordersIconLoader.loadBytes(null));
-    const favoritesIconLoader = SvgAssetLoader('assets/icons/favorites-icon.svg');
-    svg.cache.putIfAbsent(favoritesIconLoader.cacheKey(null), () => favoritesIconLoader.loadBytes(null));
-    const settingsIconLoader = SvgAssetLoader('assets/icons/settings-icon.svg');
-    svg.cache.putIfAbsent(settingsIconLoader.cacheKey(null), () => settingsIconLoader.loadBytes(null));
   }
 
   @override

@@ -4,7 +4,9 @@ import 'dart:io';
 
 import 'package:bossloot_mobile/domain/models/user.dart';
 import 'package:bossloot_mobile/providers/user_provider.dart';
-import 'package:bossloot_mobile/screens/auth/login_screen.dart';
+import 'package:bossloot_mobile/screens/loading_screen/loading_screen.dart';
+import 'package:bossloot_mobile/screens/loading_screen/loading_screen_plain.dart';
+import 'package:bossloot_mobile/screens/main_screen/main_screen.dart';
 import 'package:bossloot_mobile/utils/dialog_util.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -27,6 +29,7 @@ class _ProfileDetailsScreenState extends State<ProfileDetailsScreen> {
   final TextEditingController _address1Controller = TextEditingController();
   final TextEditingController _address2Controller = TextEditingController();
   File? _selectedImage;
+  bool _isLoading = false;
 
   @override
   void initState() {
@@ -61,6 +64,10 @@ class _ProfileDetailsScreenState extends State<ProfileDetailsScreen> {
 
   void _saveProfile() async {
     if (_formKey.currentState!.validate()) {
+      setState(() {
+        _isLoading = true;
+      });
+
       // Save the profile data
       await userProvider.updateUser(
         user!.id,
@@ -82,7 +89,7 @@ class _ProfileDetailsScreenState extends State<ProfileDetailsScreen> {
 
         userProvider.logoutUser();
         Navigator.pushReplacement(context, MaterialPageRoute(
-          builder: (context) => const LoginScreen(),
+          builder: (context) => const MainScreen(withPageIndex: 4,),
         ));
       }
     }
@@ -103,7 +110,9 @@ class _ProfileDetailsScreenState extends State<ProfileDetailsScreen> {
       body: SafeArea(
 
         // MAIN CONTAINER (Background Image)
-        child: Container(
+        child: _isLoading 
+        ? LoadingScreenPlain()
+        : Container(
           height: double.infinity,
           decoration: const BoxDecoration(
             image: DecorationImage(
@@ -118,11 +127,22 @@ class _ProfileDetailsScreenState extends State<ProfileDetailsScreen> {
             children: [
               Container(
                 height: double.infinity,
-                padding: const EdgeInsets.all(5),
+                padding: const EdgeInsets.all(4),
                 decoration: BoxDecoration(
-                  color: const Color.fromARGB(88, 255, 255, 255),
-                  borderRadius: BorderRadius.circular(5),
+                color: const Color.fromARGB(204, 136, 25, 156),
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(
+                  color: const Color.fromARGB(150, 223, 64, 251),
+                  width: 1,
                 ),
+                boxShadow: const [
+                  BoxShadow(
+                    color: Color.fromRGBO(156, 39, 176, 0.5),
+                    blurRadius: 6,
+                    spreadRadius: 3,
+                  ),
+                ],
+              ),
               
                 // INNER CARD
                 child: Container(
@@ -209,7 +229,7 @@ class _ProfileDetailsScreenState extends State<ProfileDetailsScreen> {
                           
                           const SizedBox(height: 20),
               
-                          // User Level Image
+                          // User Level
                           Container(
                             alignment: Alignment.center,
                             width: double.infinity,
@@ -228,10 +248,10 @@ class _ProfileDetailsScreenState extends State<ProfileDetailsScreen> {
                                 ).createShader(bounds);
                               },
                               child: Text(
-                                "Level: ${user!.level}",
+                                "LEVEL: ${user!.level}",
                                 maxLines: 1,
                                 style: GoogleFonts.pressStart2p(
-                                  fontSize: 18,
+                                  fontSize: 17,
                                   color: Colors.white,
                                   shadows: [
                                     Shadow(
@@ -266,10 +286,10 @@ class _ProfileDetailsScreenState extends State<ProfileDetailsScreen> {
                                 ).createShader(bounds);
                               },
                               child: Text(
-                                "Experience: ${user!.points}",
+                                "EXPERIENCE: ${user!.points}",
                                 maxLines: 1,
                                 style: GoogleFonts.pressStart2p(
-                                  fontSize: 16,
+                                  fontSize: 15,
                                   color: Colors.white,
                                   shadows: [
                                     Shadow(
@@ -316,25 +336,24 @@ class _ProfileDetailsScreenState extends State<ProfileDetailsScreen> {
                           const SizedBox(height: 20),
                           
                           // Mobile Phone Field
-                          TextFormField(
+                            TextFormField(
                             onTapUpOutside: (event) => FocusManager.instance.primaryFocus?.unfocus(),
                             controller: _mobilePhoneController,
                             decoration: InputDecoration(
                               labelText: 'Mobile Phone',
                               hintText: 'Your mobile phone number',
                               border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(8),
+                              borderRadius: BorderRadius.circular(8),
                               ),
                               prefixIcon: const Icon(Icons.phone_android),
                             ),
                             keyboardType: TextInputType.phone,
                             validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'Please enter your mobile phone number';
-                              }
-                              // Basic validation for phone number
-                              if (!RegExp(r'^\d{9,}$').hasMatch(value)) {
-                                return 'Please enter a valid phone number';
+                              if (value != null && value.isNotEmpty) {
+                                // Validate phone number only if it has a value
+                                if (!RegExp(r'^\d{9,}$').hasMatch(value)) {
+                                  return 'Please enter a valid phone number';
+                                }
                               }
                               return null;
                             },
@@ -355,9 +374,6 @@ class _ProfileDetailsScreenState extends State<ProfileDetailsScreen> {
                               prefixIcon: const Icon(Icons.home),
                             ),
                             validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'Please enter your address';
-                              }
                               return null;
                             },
                           ),
