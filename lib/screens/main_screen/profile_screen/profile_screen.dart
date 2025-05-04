@@ -6,6 +6,7 @@ import 'package:bossloot_mobile/screens/auth/login_screen.dart';
 import 'package:bossloot_mobile/screens/main_screen/favorite_screen/favorite_screen.dart';
 import 'package:bossloot_mobile/screens/main_screen/profile_screen/profile_button.dart';
 import 'package:bossloot_mobile/screens/main_screen/profile_screen/profile_details_screen/profile_details_screen.dart';
+import 'package:bossloot_mobile/screens/main_screen/settings_screen/settings_screen.dart';
 import 'package:bossloot_mobile/utils/dialog_util.dart';
 import 'package:bossloot_mobile/utils/text_util.dart';
 import 'package:flutter/material.dart';
@@ -165,7 +166,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               const SizedBox(height: 10),
                               
                               // Settings Button
-                              ProfileButton( text: 'Settings', svgIconPath: 'assets/icons/settings-icon.svg', userProvider: userProvider , onPressed:() {}, ),
+                              ProfileButton( text: 'Settings', svgIconPath: 'assets/icons/settings-icon.svg', userProvider: userProvider , onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => SettingsScreen(user: currentUser,),))),
 
                             ],
                           ),

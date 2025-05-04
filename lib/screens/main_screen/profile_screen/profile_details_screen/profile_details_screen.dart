@@ -4,7 +4,6 @@ import 'dart:io';
 
 import 'package:bossloot_mobile/domain/models/user.dart';
 import 'package:bossloot_mobile/providers/user_provider.dart';
-import 'package:bossloot_mobile/screens/loading_screen/loading_screen.dart';
 import 'package:bossloot_mobile/screens/loading_screen/loading_screen_plain.dart';
 import 'package:bossloot_mobile/screens/main_screen/main_screen.dart';
 import 'package:bossloot_mobile/utils/dialog_util.dart';
