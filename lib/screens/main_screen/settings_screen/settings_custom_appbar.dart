@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SettingsCustomAppbar extends StatelessWidget {
   const SettingsCustomAppbar({super.key});
@@ -38,7 +39,7 @@ class SettingsCustomAppbar extends StatelessWidget {
       child: AppBar(
         centerTitle: true,
         title: Text(
-          'SETTINGS',
+          AppLocalizations.of(context)!.settings_screen_title,
           style: GoogleFonts.pressStart2p(
             color: Colors.amber,
             shadows: const [

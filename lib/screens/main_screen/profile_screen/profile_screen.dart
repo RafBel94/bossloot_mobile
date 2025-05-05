@@ -12,6 +12,7 @@ import 'package:bossloot_mobile/utils/text_util.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -151,22 +152,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             children: [
                                 
                               // Profile Button
-                              ProfileButton( text: 'My Profile', svgIconPath: 'assets/icons/profile-icon.svg', userProvider: userProvider , onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const ProfileDetailsScreen(),))),
+                              ProfileButton( text: AppLocalizations.of(context)!.profile_screen_profile_button, svgIconPath: 'assets/icons/profile-icon.svg', userProvider: userProvider , onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const ProfileDetailsScreen(),))),
                             
                               const SizedBox(height: 10),
                             
                               // Orders Button
-                              ProfileButton( text: 'My Orders', svgIconPath: 'assets/icons/orders-icon.svg', userProvider: userProvider , onPressed: () {}, ),
+                              ProfileButton( text: AppLocalizations.of(context)!.profile_screen_orders_button, svgIconPath: 'assets/icons/orders-icon.svg', userProvider: userProvider , onPressed: () {}, ),
                             
                               const SizedBox(height: 10),
                             
                               // Favorites Button
-                              ProfileButton( text: 'My Favorites', svgIconPath: 'assets/icons/favorites-icon.svg', userProvider: userProvider , onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => FavoriteScreen(user: currentUser,),))),
+                              ProfileButton( text: AppLocalizations.of(context)!.profile_screen_favorites_button, svgIconPath: 'assets/icons/favorites-icon.svg', userProvider: userProvider , onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => FavoriteScreen(user: currentUser,),))),
 
                               const SizedBox(height: 10),
                               
                               // Settings Button
-                              ProfileButton( text: 'Settings', svgIconPath: 'assets/icons/settings-icon.svg', userProvider: userProvider , onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => SettingsScreen(user: currentUser,),))),
+                              ProfileButton( text: AppLocalizations.of(context)!.profile_screen_settings_button, svgIconPath: 'assets/icons/settings-icon.svg', userProvider: userProvider , onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => SettingsScreen(user: currentUser,),))),
 
                             ],
                           ),

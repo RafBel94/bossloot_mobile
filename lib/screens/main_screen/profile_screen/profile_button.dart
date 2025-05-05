@@ -5,6 +5,7 @@ import 'package:bossloot_mobile/providers/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ProfileButton extends StatelessWidget {
   final UserProvider userProvider;
@@ -95,7 +96,7 @@ class ProfileButton extends StatelessWidget {
 
                           SizedBox(height: 5),
 
-                          Text( 'Log In to access this feature!', textAlign: TextAlign.center, style: GoogleFonts.orbitron( fontSize: 15, fontWeight: FontWeight.bold, color: Colors.black87, ), ),
+                          Text(AppLocalizations.of(context)!.profile_screen_locked_feature, textAlign: TextAlign.center, style: GoogleFonts.orbitron( fontSize: 15, fontWeight: FontWeight.bold, color: Colors.black87, ), ),
                         ],
                       ),
                     ),

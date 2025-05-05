@@ -31,6 +31,7 @@ import 'package:bossloot_mobile/screens/main_screen/product_details_screen/produ
 import 'package:bossloot_mobile/utils/dialog_util.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class GeneralProductDetails extends StatefulWidget {
   final dynamic product;
@@ -266,7 +267,7 @@ class _GeneralProductDetailsState extends State<GeneralProductDetails> {
                                 padding: EdgeInsets.only(bottom: 2, right: 3),
                                 child: Icon(Icons.star_half, color: const Color.fromARGB(255, 221, 204, 50), size: 24)),
                               Text(widget.product.valorations.length > 0 ? '${widget.product.avg_rating}' : '0', style: TextStyle(fontSize: 16, )),
-                              Text('  |  Based on ${widget.product.valorations.length} ratings', style: TextStyle(fontSize: 13,)),
+                              Text('  |  ${AppLocalizations.of(context)!.product_details_screen_valoration_part1} ${widget.product.valorations.length} ${AppLocalizations.of(context)!.product_details_screen_valoration_part2}', style: TextStyle(fontSize: 13,)),
                             ],
                           ),
                         ),
@@ -290,7 +291,7 @@ class _GeneralProductDetailsState extends State<GeneralProductDetails> {
                       mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Description', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
+                        Text(AppLocalizations.of(context)!.product_details_screen_description_label, style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
                         SizedBox(height: 15),
                         Text(widget.product.description, style: TextStyle(fontSize: 16),),
                       ],
@@ -347,7 +348,7 @@ class _GeneralProductDetailsState extends State<GeneralProductDetails> {
                     ),
                     width: double.infinity,
                     height: 45,
-                    child: FittedBox(child: Text('We though you may like...', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold))),
+                    child: FittedBox(child: Text(AppLocalizations.of(context)!.product_details_screen_similar_products_label, style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold))),
                   ),
                   SizedBox(
                     height: 290,
@@ -418,7 +419,7 @@ class _GeneralProductDetailsState extends State<GeneralProductDetails> {
       case MouseProduct:
         return MouseProductDetails(product: product as MouseProduct);
       default:
-        return const Text('Tipo de producto no soportado');
+        return const Text('Product type not supported');
     }
   }
 }

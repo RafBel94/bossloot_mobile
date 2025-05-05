@@ -3,6 +3,7 @@ import 'package:bossloot_mobile/screens/main_screen/settings_screen/settings_cus
 import 'package:bossloot_mobile/screens/main_screen/settings_screen/settings_save_button.dart';
 import 'package:bossloot_mobile/screens/main_screen/settings_screen/settings_screen_dropdown.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SettingsScreen extends StatefulWidget {
   final User? user;
@@ -92,7 +93,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     children: [
 
                       // LANGUAGE DROPDOWN SECTION
-                      SettingsScreenDropdown(label: 'LANGUAGE', selectedValue: _selectedLanguage, options: _languages, onChanged: (String? newValue) {
+                      SettingsScreenDropdown(label: AppLocalizations.of(context)!.settings_screen_language_label, selectedValue: _selectedLanguage, options: _languages, onChanged: (String? newValue) {
                         if (newValue != null) {
                           setState(() {
                             _selectedLanguage = newValue;
@@ -101,7 +102,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       }),
                       
                       // CURRENCY DROPDOWN SECTION
-                      SettingsScreenDropdown(label: 'PREFERRED CURRENCY', selectedValue: _selectedCurrency, options: _currencies, onChanged: (String? newValue) {
+                      SettingsScreenDropdown(label: AppLocalizations.of(context)!.settings_screen_currency_label, selectedValue: _selectedCurrency, options: _currencies, onChanged: (String? newValue) {
                         if (newValue != null) {
                           setState(() {
                             _selectedCurrency = newValue;

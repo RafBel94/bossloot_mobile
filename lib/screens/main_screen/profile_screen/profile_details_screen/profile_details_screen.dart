@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ProfileDetailsScreen extends StatefulWidget {
   const ProfileDetailsScreen({super.key});
@@ -247,7 +248,7 @@ class _ProfileDetailsScreenState extends State<ProfileDetailsScreen> {
                                 ).createShader(bounds);
                               },
                               child: Text(
-                                "LEVEL: ${user!.level}",
+                                "${AppLocalizations.of(context)!.profile_details_level_label}: ${user!.level}",
                                 maxLines: 1,
                                 style: GoogleFonts.pressStart2p(
                                   fontSize: 17,
@@ -285,7 +286,7 @@ class _ProfileDetailsScreenState extends State<ProfileDetailsScreen> {
                                 ).createShader(bounds);
                               },
                               child: Text(
-                                "EXPERIENCE: ${user!.points}",
+                                "${AppLocalizations.of(context)!.profile_details_experience_label}: ${user!.points}",
                                 maxLines: 1,
                                 style: GoogleFonts.pressStart2p(
                                   fontSize: 15,
@@ -317,8 +318,8 @@ class _ProfileDetailsScreenState extends State<ProfileDetailsScreen> {
                             onTapUpOutside: (event) => FocusManager.instance.primaryFocus?.unfocus(),
                             controller: _nameController,
                             decoration: InputDecoration(
-                              labelText: 'Name',
-                              hintText: 'Your name',
+                              labelText: AppLocalizations.of(context)!.profile_details_name_field_label,
+                              hintText: AppLocalizations.of(context)!.profile_details_name_field_hint,
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(8),
                               ),
@@ -326,7 +327,7 @@ class _ProfileDetailsScreenState extends State<ProfileDetailsScreen> {
                             ),
                             validator: (value) {
                               if (value == null || value.isEmpty) {
-                                return 'Please enter your name';
+                                return AppLocalizations.of(context)!.app_empty_name;
                               }
                               return null;
                             },
@@ -339,8 +340,8 @@ class _ProfileDetailsScreenState extends State<ProfileDetailsScreen> {
                             onTapUpOutside: (event) => FocusManager.instance.primaryFocus?.unfocus(),
                             controller: _mobilePhoneController,
                             decoration: InputDecoration(
-                              labelText: 'Mobile Phone',
-                              hintText: 'Your mobile phone number',
+                              labelText: AppLocalizations.of(context)!.profile_details_phone_field_hint,
+                              hintText: AppLocalizations.of(context)!.profile_details_phone_field_hint,
                               border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8),
                               ),
@@ -351,7 +352,7 @@ class _ProfileDetailsScreenState extends State<ProfileDetailsScreen> {
                               if (value != null && value.isNotEmpty) {
                                 // Validate phone number only if it has a value
                                 if (!RegExp(r'^\d{9,}$').hasMatch(value)) {
-                                  return 'Please enter a valid phone number';
+                                  return AppLocalizations.of(context)!.app_invalid_phone_number;
                                 }
                               }
                               return null;
@@ -365,8 +366,8 @@ class _ProfileDetailsScreenState extends State<ProfileDetailsScreen> {
                             onTapUpOutside: (event) => FocusManager.instance.primaryFocus?.unfocus(),
                             controller: _address1Controller,
                             decoration: InputDecoration(
-                              labelText: 'Address 1',
-                              hintText: 'Your address',
+                              labelText: AppLocalizations.of(context)!.profile_details_address1_field_label,
+                              hintText: AppLocalizations.of(context)!.profile_details_address1_field_hint,
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(8),
                               ),
@@ -384,8 +385,8 @@ class _ProfileDetailsScreenState extends State<ProfileDetailsScreen> {
                             onTapUpOutside: (event) => FocusManager.instance.primaryFocus?.unfocus(),
                             controller: _address2Controller,
                             decoration: InputDecoration(
-                              labelText: 'Address 2',
-                              hintText: 'Your secondary address',
+                              labelText: AppLocalizations.of(context)!.profile_details_address2_field_label,
+                              hintText: AppLocalizations.of(context)!.profile_details_address2_field_hint,
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(8),
                               ),
@@ -406,8 +407,8 @@ class _ProfileDetailsScreenState extends State<ProfileDetailsScreen> {
                                 borderRadius: BorderRadius.circular(8),
                               ),
                             ),
-                            child: const Text(
-                              'Save Changes',
+                            child: Text(
+                              AppLocalizations.of(context)!.profile_details_save_button,
                               style: TextStyle(fontSize: 16),
                             ),
                           ),

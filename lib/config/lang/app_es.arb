@@ -1,13 +1,857 @@
 {
     "@@locale": "es",
-    
-    "app_searchbar_open": "Toca para abrir la barra de búsqueda",
+
+    "app_yes": "Sí",
+    "@app_yes": {
+        "description": "Text for the yes button"
+    },
+
+    "app_apply": "Aplicar",
+    "@app_apply": {
+        "description": "Text for apply"
+    },
+
+    "app_cancel": "Cancelar",
+    "@app_cancel": {
+        "description": "Text for cancel"
+    },
+
+    "app_clear": "Limpiar",
+    "@app_clear": {
+        "description": "Text for clear"
+    },
+
+    "app_category": "Categoría",
+    "@app_category": {
+        "description": "Text for category"
+    },
+
+    "app_from": "Desde",
+    "@app_from": {
+        "description": "Text for from"
+    },
+
+    "app_to": "Hasta",
+    "@app_to": {
+        "description": "Text for to"
+    },
+
+    "app_choose": "Elige",
+    "@app_choose": {
+        "description": "Text for choose"
+    },
+
+    "app_price": "Precio",
+    "@app_price": {
+        "description": "Text for price"
+    },
+
+    "app_date": "Fecha",
+    "@app_date": {
+        "description": "Text for date"
+    },
+
+    "app_ascending": "Ascendente",
+    "@app_ascending": {
+        "description": "Text for ascending order"
+    },
+
+    "app_descending": "Descendente",
+    "@app_descending": {
+        "description": "Text for descending order"
+    },
+
+    "app_minimum": "Mínimo",
+    "@app_minimum": {
+        "description": "Text for minimum"
+    },
+
+    "app_maximum": "Máximo",
+    "@app_maximum": {
+        "description": "Text for maximum"
+    },
+
+    "app_pinch_to_zoom": "Pellizca para hacer zoom",
+    "@app_pinch_to_zoom": {
+        "description": "Text for the pinch to zoom gesture"
+    },
+
+    "app_searchbar_open": "Pulsa para abrir el buscador",
     "@app_searchbar_open": {
         "description": "Text for the search bar open button"
     },
 
-    "app_searchbar_field_hint": "Buscar en el catálogo...",
+    "app_searchbar_field_hint": "Buscar en el catalogo...",
     "@app_searchbar_field_hint": {
         "description": "Hint text for the search bar field"
+    },
+
+    "app_invalid_email": "Introduce un email válido",
+    "@app_invalid_email": {
+        "description": "Text for the invalid email error message on the login screen"
+    },
+
+    "app_invalid_password": "Introduce una contraseña válida",
+    "@app_invalid_password": {
+        "description": "Text for the invalid password error message on the login screen"
+    },
+
+    "app_empty_password": "Introduce una contraseña",
+    "@app_empty_password": {
+        "description": "Text for the invalid password error message on the login screen"
+    },
+    
+    "app_name_invalid": "El nombre solo puede contener letras",
+    "@app_name_invalid": {
+        "description": "Error message for invalid name format"
+    },
+
+    "app_empty_name": "Introduce tu nombre",
+    "@app_empty_name": {
+        "description": "Text for the empty name error message on the register screen"
+    },
+
+    "app_name_too_long": "El nombre no debe tener más de 30 caracteres",
+    "@app_name_too_long": {
+        "description": "Text for the empty name error message on the register screen"
+    },
+
+    "app_empty_email": "Introduce tu correo electrónico",
+    "@app_empty_email": {
+        "description": "Text for the empty email error message on the register screen"
+    },
+
+    "app_password_too_long": "La contraseña no debe tener más de 30 caracteres",
+    "@app_password_too_long": {
+        "description": "Error message for password exceeding the maximum length"
+    },
+
+    "app_repeat_password_empty": "Repite tu contraseña",
+    "@app_repeat_password_empty": {
+        "description": "Error message for empty repeat password field"
+    },
+
+    "app_passwords_do_not_match": "Las contraseñas no coinciden",
+    "@app_passwords_do_not_match": {
+        "description": "Error message for mismatched passwords"
+    },
+
+    "app_invalid_phone_number": "Introduce un número de teléfono válido",
+    "@app_invalid_phone_number": {
+        "description": "Error message for mismatched passwords"
+    },
+
+    "app_adventurer_level": "Aventurero nivel:",
+    "@app_adventurer_level": {
+        "description": "Text for the adventurer level label"
+    },
+
+    "app_created": "Creado:",
+    "@app_created": {
+        "description": "Text for the adventurer level label"
+    },
+
+
+
+
+    "home_screen_featured_title": "LOS MAS CODICIADOS",
+    "@home_screen_featured_title": {
+        "description": "Text for the featured section on the home screen"
+    },
+
+    "home_screen_offers_title": "LAS MEJORES OFERTAS",
+    "@home_screen_offers_title": {
+        "description": "Text for the offers section on the home screen"
+    },
+
+    "home_screen_random_title": "DIRECTO DEL CALABOZO",
+    "@home_screen_random_title": {
+        "description": "Text for the random section on the home screen"
+    },
+
+
+
+
+    "profile_screen_profile_button": "Mi Perfil",
+    "@profile_screen_profile_button": {
+        "description": "Text for the profile button on the profile screen"
+    },
+
+    "profile_screen_orders_button": "Mis Pedidos",
+    "@profile_screen_orders_button": {
+        "description": "Text for the orders button on the profile screen"
+    },
+
+    "profile_screen_favorites_button": "Mis Favoritos",
+    "@profile_screen_favorites_button": {
+        "description": "Text for the favorites button on the profile screen"
+    },
+
+    "profile_screen_settings_button": "Configuración",
+    "@profile_screen_settings_button": {
+        "description": "Text for the settings button on the profile screen"
+    },
+
+    "profile_screen_locked_feature": "¡Logeate para acceder a esta función!",
+    "@profile_screen_locked_feature": {
+        "description": "Text for the locked feature on the profile screen"
+    },
+
+
+
+
+    "profile_details_level_label": "NIVEL",
+    "@profile_details_level_label": {
+        "description": "Text for the level label on the profile details screen"
+    },
+
+    "profile_details_experience_label": "EXPERIENCIA",
+    "@profile_details_experience_label": {
+        "description": "Text for the experience label on the profile details screen"
+    },
+
+    "profile_details_name_field_label": "Nombre",
+    "@profile_details_name_field_label": {
+        "description": "Text for the name field on the profile details screen"
+    },
+
+    "profile_details_name_field_hint": "Introduce tu nombre",
+    "@profile_details_name_field_hint": {
+        "description": "Hint text for the name field on the profile details screen"
+    },
+
+    "profile_details_mobile_field_label": "Móvil",
+    "@profile_details_mobile_field_label": {
+        "description": "Text for the mobile field on the profile details screen"
+    },
+
+    "profile_details_phone_field_hint": "Introduce tu número de teléfono",
+    "@profile_details_phone_field_hint": {
+        "description": "Hint text for the phone field on the profile details screen"
+    },
+
+    "profile_details_address1_field_label": "Dirección 1",
+    "@profile_details_address1_field_label": {
+        "description": "Text for the address 1 field on the profile details screen"
+    },
+
+    "profile_details_address1_field_hint": "Tu dirección 1",
+    "@profile_details_address1_field_hint": {
+        "description": "Hint text for the address 1 field on the profile details screen"
+    },
+
+    "profile_details_address2_field_label": "Dirección 2",
+    "@profile_details_address2_field_label": {
+        "description": "Text for the address 2 field on the profile details screen"
+    },
+
+    "profile_details_address2_field_hint": "Tu dirección 2",
+    "@profile_details_address2_field_hint": {
+        "description": "Hint text for the address 2 field on the profile details screen"
+    },
+
+    "profile_details_save_button": "Guardar Cambios",
+    "@profile_details_save_button": {
+        "description": "Text for the save button on the profile details screen"
+    },
+
+
+
+
+    "profile_details_help_dialog_title": "PERFIL DE USUARIO",
+    "@profile_details_help_dialog_title": {
+        "description": "Title for the help dialog on the profile details screen"
+    },
+
+    "profile_details_help_dialog_profile_label": "TU PERFIL",
+    "@profile_details_help_dialog_profile_label": {
+        "description": "Text for the profile label in the help dialog on the profile details screen"
+    },
+
+    "profile_details_help_dialog_profile_text": "Este es tu perfil. Aquí puedes editar tu información personal e imagen de usuario",
+    "@profile_details_help_dialog_profile_text": {
+        "description": "Text for the profile information in the help dialog on the profile details screen"
+    },
+
+    "profile_details_help_dialog_level_label": "SISTEMA DE NIVELES",
+    "@profile_details_help_dialog_level_label": {
+        "description": "Text for the level system label in the help dialog on the profile details screen"
+    },
+
+    "profile_details_help_dialog_level_text": "El sistema de niveles es una forma de recompensarte por tu actividad en la app. Puedes ganar puntos de experiencia realizando compras y, a medida que ganes experiencia, subirás de nivel y desbloquearás descuentos especiales",
+    "@profile_details_help_dialog_level_text": {
+        "description": "Text for the level system information in the help dialog on the profile details screen"
+    },
+
+    "profile_details_help_dialog_button": "¡ENTENDIDO!",
+    "@profile_details_help_dialog_button": {
+        "description": "Text for the button to close the help dialog on the profile details screen"
+    },
+
+    "profile_details_snackbar_message": "¡Perfil actualizado! ¡Por favor logea de nuevo!",
+    "@profile_details_snackbar_message": {
+        "description": "Text for the save button on the profile details screen"
+    },
+
+
+
+
+    "favorites_screen_title": "FAVORITOS",
+    "@favorites_screen_title": {
+        "description": "Title for the favorites screen"
+    },
+
+
+
+    "settings_screen_title": "CONFIGURACIÓN",
+    "@settings_screen_title": {
+        "description": "Title for the settings screen"
+    },
+
+    "settings_screen_language_label": "IDIOMA",
+    "@settings_screen_language_label": {
+        "description": "Text for the language label on the settings screen"
+    },
+
+    "settings_screen_currency_label": "MONEDA PREFERIDA",
+    "@settings_screen_currency_label": {
+        "description": "Text for the currency label on the settings screen"
+    },
+
+    "settings_screen_save_button": "GUARDAR",
+    "@settings_screen_save_button": {
+        "description": "Text for the save button on the settings screen"
+    },
+
+
+
+
+    "login_screen_email_field": "Email",
+    "@login_screen_email_field": {
+        "description": "Text for the email field on the login screen"
+    },
+
+    "login_screen_password_field": "Contraseña",
+    "@login_screen_password_field": {
+        "description": "Text for the password field on the login screen"
+    },
+
+    "login_screen_no_account_label": "¿No tienes cuenta?",
+    "@login_screen_no_account_label": {
+        "description": "Text for the no account label on the login screen"
+    },
+
+    "login_screen_register_button": "Registrarse",
+    "@login_screen_register_button": {
+        "description": "Text for the register button on the login screen"
+    },
+
+
+
+
+    "register_screen_name_field": "Nombre",
+    "@register_screen_name_field": {
+        "description": "Text for the name field on the register screen"
+    },
+
+    "register_screen_email_field": "Email",
+    "@register_screen_email_field": {
+        "description": "Text for the email field on the register screen"
+    },
+
+    "register_screen_password_field": "Contraseña",
+    "@register_screen_password_field": {
+        "description": "Text for the password field on the register screen"
+    },
+
+    "register_screen_repassword_field": "Repetir contraseña",
+    "@register_screen_repassword_field": {
+        "description": "Text for the repeat password field on the register screen"
+    },
+
+    "register_screen_register_button": "Registrarse",
+    "@register_screen_register_button": {
+        "description": "Text for the register button on the register screen"
+    },
+
+
+
+
+    "verify_email_screen_title": "Verifica tu correo",
+    "@verify_email_screen_title": {
+        "description": "Title for the email verification screen"
+    },
+
+    "verify_email_screen_text": "Te hemos enviado un correo para verificar tu cuenta. Por favor, revisa tu bandeja de entrada y haz clic en el enlace del correo para verificar tu cuenta.",
+    "@verify_email_screen_text": {
+        "description": "Text for the email verification message"
+    },
+
+    "verify_email_screen_resend": "¿Necesitas que enviemos el correo de nuevo?",
+    "@verify_email_screen_resend": {
+        "description": "Text for the resend email button on the email verification screen"
+    },
+
+    "verify_email_screen_resend_button": "Reenviar",
+    "@verify_email_screen_resend_button": {
+        "description": "Text for the resend email button on the email verification screen"
+    },
+
+
+
+
+    "product_details_screen_valoration_part1": "Basado en",
+    "@product_details_screen_valoration_part1": {
+        "description": "Text for the valoration label on the product details screen"
+    },
+
+    "product_details_screen_valoration_part2": "valoraciones",
+    "@product_details_screen_valoration_part2": {
+        "description": "Text for the ratings label on the product details screen"
+    },
+
+    "product_details_screen_description_label": "Descripción",
+    "@product_details_screen_description_label": {
+        "description": "Text for the description label on the product details screen"
+    },
+
+    "product_details_screen_specifications_label": "Especificaciones",
+    "@product_details_screen_specifications_label": {
+        "description": "Text for the specifications label on the product details screen"
+    },
+
+    "product_details_screen_similar_products_label": "Creemos que te podría gustar...",
+    "@product_details_screen_similar_products_label": {
+        "description": "Text for the similar products label on the product details screen"
+    },
+
+    "product_details_screen_valoration_label": "Otros aventureros dijeron...",
+    "@product_details_screen_valoration_label": {
+        "description": "Text for the valorations label on the product details screen"
+    },
+
+    "product_details_screen_no_valorations": "Nadie ha dicho nada aún...\n¿Serás el primero?",
+    "@product_details_screen_no_valorations": {
+        "description": "Text for the no valorations message on the product details screen"
+    },
+
+    "product_details_screen_catalog_button": "Catálogo",
+    "@product_details_screen_catalog_button": {
+        "description": "Text for the catalog button on the product details screen"
+    },
+
+    "product_details_screen_add_to_cart_button": "Al Carrito",
+    "@product_details_screen_add_to_cart_button": {
+        "description": "Text for the add to cart button on the product details screen"
+    },
+
+    "product_details_screen_buy_now_button": "Comprar",
+    "@product_details_screen_buy_now_button": {
+        "description": "Text for the buy now button on the product details screen"
+    },
+
+
+
+
+    "favorite_add_dialog_title": "AÑADIR A FAVORITOS",
+    "@favorite_add_dialog_title": {
+        "description": "Title for the add favorite dialog"
+    },
+
+    "favorite_add_dialog_text": "¿AÑADIR A FAVORITOS?",
+    "@favorite_add_dialog_text": {
+        "description": "Text for the add to favorites confirmation dialog"
+    },
+
+    "favorite_added_dialog_title": "FAVORITO AÑADIDO",
+    "@favorite_added_dialog_title": {
+        "description": "Title for the favorite added confirmation dialog"
+    },
+
+    "favorite_added_dialog_label": "¡AÑADIDO A FAVORITOS!",
+    "@favorite_added_dialog_label": {
+        "description": "Text for the favorite added confirmation message"
+    },
+
+    "favorite_added_dialog_text": "Este producto ha sido añadido a tu lista de favoritos. Puedes encontrarlo en la sección de perfil.",
+    "@favorite_added_dialog_text": {
+        "description": "Text for the favorite added confirmation message"
+    },
+
+    "favorite_added_dialog_button": "¡GENIAL!",
+    "@favorite_added_dialog_button": {
+        "description": "Text for the button to close the favorite added confirmation dialog"
+    },
+
+
+
+    "favorite_remove_dialog_title": "ELIMINAR FAVORITO",
+    "@favorite_remove_dialog_title": {
+        "description": "Title for the remove favorite dialog"
+    },
+
+    "favorite_remove_dialog_text": "¿ELIMINAR DE FAVORITOS?",
+    "@favorite_remove_dialog_text": {
+        "description": "Text for the remove from favorites confirmation dialog"
+    },
+
+    "favorite_removed_dialog_title": "FAVORITO ELIMINADO",
+    "@favorite_removed_dialog_title": {
+        "description": "Title for the favorite removed confirmation dialog"
+    },
+
+    "favorite_removed_dialog_label": "¡ELIMINADO DE FAVORITOS!",
+    "@favorite_removed_dialog_label": {
+        "description": "Text for the favorite removed confirmation message"
+    },
+
+    "favorite_removed_dialog_button": "¡ENTENDIDO!",
+    "@favorite_removed_dialog_button": {
+        "description": "Text for the button to close the favorite removed confirmation dialog"
+    },
+
+
+
+
+    "navigation_bar_spotlight": "Destacados",
+    "@navigation_bar_spotlight": {
+        "description": "Text for the spotlight tab in the navigation bar"
+    },
+
+    "navigation_bar_catalog": "Catálogo",
+    "@navigation_bar_catalog": {
+        "description": "Text for the catalog tab in the navigation bar"
+    },
+
+    "navigation_bar_cart": "Carrito",
+    "@navigation_bar_cart": {
+        "description": "Text for the cart tab in the navigation bar"
+    },
+
+    "navigation_bar_profile": "Perfil",
+    "@navigation_bar_profile": {
+        "description": "Text for the profile tab in the navigation bar"
+    },
+
+
+
+
+    "logout_dialog_title": "LOGOUT",
+    "@logout_dialog_title": {
+        "description": "Title for the logout confirmation dialog"
+    },
+
+    "logout_dialog_subtitle": "¡Estas a punto de cerrar sesión!",
+    "@logout_dialog_subtitle": {
+        "description": "Subtitle for the logout confirmation dialog"
+    },
+
+    "logout_dialog_text": "¿Estas seguro de que quieres hacerlo?\nTendrás que iniciar sesión de nuevo para acceder a tu perfil y favoritos",
+    "@logout_dialog_text": {
+        "description": "Text for the logout confirmation dialog"
+    },
+
+
+
+
+    "login_required_dialog_title": "INICIA SESIÓN",
+    "@login_required_dialog_title": {
+        "description": "Title for the login required dialog"
+    },
+
+    "login_required_dialog_subtitle": "¡Vaya, parece que has iniciado sesión!",
+    "@login_required_dialog_subtitle": {
+        "description": "Subtitle for the login required dialog"
+    },
+
+    "login_required_dialog_text": "Por favor, inicia sesión para acceder a esta función.\nSi no tienes cuenta, puedes registrarte desde la pantalla de inicio de sesión",
+    "@login_required_dialog_text": {
+        "description": "Text for the login required dialog"
+    },
+
+    "login_required_dialog_button": "¡DE ACUERDO!",
+    "@login_required_dialog_button": {
+        "description": "Text for the button to close the login required dialog"
+    },
+
+
+
+
+    "drawer_title": "FILTRAR",
+    "@drawer_title": {
+        "description": "Title for the filters drawer"
+    },
+
+
+
+
+    "product_spec_width": "Ancho",
+    "@product_spec_width": {
+        "description": "Text for the width specification"
+    },
+
+    "product_spec_height": "Altura",
+    "@product_spec_height": {
+        "description": "Text for the height specification"
+    },
+
+    "product_spec_depth": "Profundidad",
+    "@product_spec_depth": {
+        "description": "Text for the depth specification"
+    },
+
+    "product_spec_length": "Longitud",
+    "@product_spec_length": {
+        "description": "Text for the length specification"
+    },
+
+    "product_spec_weight": "Peso",
+    "@product_spec_weight": {
+        "description": "Text for the weight specification"
+    },
+
+    "product_spec_type": "Tipo",
+    "@product_spec_type": {
+        "description": "Text for the product type specification"
+    },
+
+    "product_spec_form_factor": "Factor de Forma",
+    "@product_spec_form_factor": {
+        "description": "Text for the product form factor specification"
+    },
+
+    "product_spec_form_factor_support": "Soporte de Factor de Forma",
+    "@product_spec_form_factor_support": {
+        "description": "Text for the product form factor support specification"
+    },
+
+    "product_spec_tempered_glass": "Cristal Templado",
+    "@product_spec_tempered_glass": {
+        "description": "Text for the tempered glass specification"
+    },
+
+    "product_spec_expansion_slots": "Ranuras Expansión",
+    "@product_spec_expansion_slots": {
+        "description": "Text for the expansion slots specification"
+    },
+
+    "product_spec_extra_fans_slots": "Ranuras Ventiladores Extra",
+    "@product_spec_extra_fans_slots": {
+        "description": "Text for the extra fans specification"
+    },
+
+    "product_spec_max_gpu_length": "Longitud Máxima de GPU",
+    "@product_spec_max_gpu_length": {
+        "description": "Text for the max GPU length specification"
+    },
+
+    "product_spec_max_cpu_cooler_height": "Altura Máxima del Disipador",
+    "@product_spec_max_cpu_cooler_height": {
+        "description": "Text for the max CPU cooler height specification"
+    },
+
+    "product_spec_fan_rpm": "RPM Ventilador",
+    "@product_spec_fan_rpm": {
+        "description": "Text for the fan RPM specification"
+    },
+
+    "product_spec_consumption": "Consumo",
+    "@product_spec_consumption": {
+        "description": "Text for the consumption specification"
+    },
+
+    "product_spec_socket_support": "Soporte de Socket",
+    "@product_spec_socket_support": {
+        "description": "Text for the socket support specification"
+    },
+
+    "product_spec_socket": "Zócalo",
+    "@product_spec_socket": {
+        "description": "Text for the socket specification"
+    },
+
+    "product_spec_cores": "Nucleos",
+    "@product_spec_cores": {
+        "description": "Text for the cores specification"
+    },
+
+    "product_spec_threads": "Hilos",
+    "@product_spec_threads": {
+        "description": "Text for the threads specification"
+    },
+
+    "product_spec_base_clock": "Frecuencia Base",
+    "@product_spec_base_clock": {
+        "description": "Text for the base clock specification"
+    },
+
+    "product_spec_boost_clock": "Frecuencia Turbo",
+    "@product_spec_boost_clock": {
+        "description": "Text for the boost clock specification"
+    },
+
+    "product_spec_integrated_graphics": "Gráficos Integrados",
+    "@product_spec_integrated_graphics": {
+        "description": "Text for the integrated graphics specification"
+    },
+
+    "product_spec_resolution": "Resolución",
+    "@product_spec_resolution": {
+        "description": "Text for the resolution specification"
+    },
+
+    "product_spec_refresh_rate": "Tasa de Refresco",
+    "@product_spec_refresh_rate": {
+        "description": "Text for the refresh rate specification"
+    },
+
+    "product_spec_response_time": "Tiempo de Respuesta",
+    "@product_spec_response_time": {
+        "description": "Text for the response time specification"
+    },
+
+    "product_spec_panel_type": "Tipo de Panel",
+    "@product_spec_panel_type": {
+        "description": "Text for the panel type specification"
+    },
+
+    "product_spec_aspect_ratio": "Relación de Aspecto",
+    "@product_spec_aspect_ratio": {
+        "description": "Text for the aspect ratio specification"
+    },
+
+    "product_spec_contrast_ratio": "Relación de Contraste",
+    "@product_spec_contrast_ratio": {
+        "description": "Text for the contrast ratio specification"
+    },
+
+    "product_spec_sync_type": "Tipo de Sincronización",
+    "@product_spec_sync_type": {
+        "description": "Text for the sync type specification"
+    },
+
+    "product_spec_curved": "Curvado",
+    "@product_spec_curved": {
+        "description": "Text for the curved specification"
+    },
+
+    "product_spec_brightness": "Brillo",
+    "@product_spec_brightness": {
+        "description": "Text for the brightness specification"
+    },
+
+    "product_spec_hdmi_ports": "Puertos HDMI",
+    "@product_spec_hdmi_ports": {
+        "description": "Text for the HDMI ports specification"
+    },
+
+    "product_spec_display_ports": "Puertos Display",
+    "@product_spec_display_ports": {
+        "description": "Text for the display ports specification"
+    },
+
+    "product_spec_inches": "Pulgadas",
+    "@product_spec_inches": {
+        "description": "Text for the inches specification"
+    },
+
+    "product_spec_memory_type": "Tipo de Memoria",
+    "@product_spec_memory_type": {
+        "description": "Text for the memory type specification"
+    },
+
+    "product_spec_memory": "Memoria",
+    "@product_spec_memory": {
+        "description": "Text for the memory specification"
+    },
+
+    "product_spec_switch_type": "Tipo de Switch",
+    "@product_spec_switch_type": {
+        "description": "Text for the switch type specification"
+    },
+
+    "product_spec_chipset": "Chipset",
+    "@product_spec_chipset": {
+        "description": "Text for the chipset specification"
+    },
+
+    "product_spec_maximum_memory": "Memoria Máxima",
+    "@product_spec_maximum_memory": {
+        "description": "Text for the maximum memory specification"
+    },
+
+    "product_spec_memory_slots": "Ranuras de Memoria",
+    "@product_spec_memory_slots": {
+        "description": "Text for the memory slots specification"
+    },
+
+    "product_spec_maximum_memory_speed": "Velocidad Máxima de Memoria",
+    "@product_spec_maximum_memory_speed": {
+        "description": "Text for the maximum memory speed specification"
+    },
+
+    "product_spec_sata_ports": "Puertos SATA",
+    "@product_spec_sata_ports": {
+        "description": "Text for the SATA ports specification"
+    },
+
+    "product_spec_m2_slots": "Ranuras M.2",
+    "@product_spec_m2_slots": {
+        "description": "Text for the M.2 slots specification"
+    },
+
+    "product_spec_pcie_slots": "Ranuras PCIe",
+    "@product_spec_pcie_slots": {
+        "description": "Text for the PCIe slots specification"
+    },
+
+    "product_spec_usb_ports": "Puertos USB",
+    "@product_spec_usb_ports": {
+        "description": "Text for the USB ports specification"
+    },
+
+    "product_spec_buttons": "Botones",
+    "@product_spec_buttons": {
+        "description": "Text for the buttons specification"
+    },
+
+    "product_spec_efficienty_rating": "Clasificación de Eficiencia",
+    "@product_spec_efficienty_rating": {
+        "description": "Text for the efficiency rating specification"
+    },
+
+    "product_spec_wattage": "Potencia",
+    "@product_spec_wattage": {
+        "description": "Text for the wattage specification"
+    },
+
+    "product_spec_fanless": "Sin Ventilador",
+    "@product_spec_fanless": {
+        "description": "Text for the fanless specification"
+    },
+
+    "product_spec_speed": "Velocidad",
+    "@product_spec_speed": {
+        "description": "Text for the speed specification"
+    },
+
+    "product_spec_latency": "Latencia",
+    "@product_spec_latency": {
+        "description": "Text for the latency specification"
+    },
+
+    "product_spec_capacity": "Capacidad",
+    "@product_spec_capacity": {
+        "description": "Text for the capacity specification"
+    },
+
+    "product_spec_read_speed": "Velocidad de Lectura",
+    "@product_spec_read_speed": {
+        "description": "Text for the read speed specification"
+    },
+
+    "product_spec_write_speed": "Velocidad de Escritura",
+    "@product_spec_write_speed": {
+        "description": "Text for the write speed specification"
     }
 }

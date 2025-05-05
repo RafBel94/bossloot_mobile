@@ -1,44 +1,48 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class FieldValidator {
+  final BuildContext context;
   final String? value;
 
-  const FieldValidator({required this.value});
+  const FieldValidator({required this.context, required this.value});
 
   String? validateEmail() {
     if (value == null || value!.trim().isEmpty) {
-      return 'Please enter your email';
+      return AppLocalizations.of(context)!.app_empty_email;
     } else if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(value!)) {
-      return 'Please enter a valid email';
+      return AppLocalizations.of(context)!.app_invalid_email;
     }
     return null;
   }
 
   String? validateName() {
     if (value == null || value!.trim().isEmpty) {
-      return 'Please enter your name';
+      return AppLocalizations.of(context)!.app_empty_name;
     } else if (value!.length > 40) {
-      return 'Name must not be more than 40 characters long';
+      return AppLocalizations.of(context)!.app_name_too_long;
     } else if (!RegExp(r'^[a-zA-Z]+( [a-zA-Z]+)*$').hasMatch(value!)) {
-      return 'Name can only contain letters';
+      return AppLocalizations.of(context)!.app_name_invalid;
     }
     return null;
   }
 
   String? validatePassword() {
     if (value == null || value!.trim().isEmpty) {
-      return 'Please enter a password';
+      return AppLocalizations.of(context)!.app_empty_password;
     } else if (value!.length > 30) {
-      return 'Password must not be more than 30 characters long';
+      return AppLocalizations.of(context)!.app_password_too_long;
     } else if (!RegExp(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#\$&*~.]).{1,}$').hasMatch(value!)) {
-      return 'Password must contain one uppercase, one lowercase, one number, and one special character including the point';
+      return AppLocalizations.of(context)!.app_invalid_password;
     }
     return null;
   }
 
   String? validateRepeatPassword(String password) {
     if (value == null || value!.trim().isEmpty) {
-      return 'Please repeat your password';
+      return AppLocalizations.of(context)!.app_repeat_password_empty;
     } else if (value != password) {
-      return 'Passwords do not match';
+      return AppLocalizations.of(context)!.app_passwords_do_not_match;
     }
     return null;
   }

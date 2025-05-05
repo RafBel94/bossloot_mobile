@@ -1,6 +1,7 @@
 import 'package:bossloot_mobile/domain/models/products/cooler_product.dart';
 import 'package:bossloot_mobile/utils/text_util.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CoolerProductDetails extends StatelessWidget {
   final CoolerProduct product;
@@ -11,7 +12,7 @@ class CoolerProductDetails extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        TextUtil(text: 'Specifications', isBold: true, size: 22,),
+        TextUtil(text: AppLocalizations.of(context)!.product_details_screen_specifications_label, isBold: true, size: 22,),
 
         SizedBox(height: 20,),
 
@@ -24,7 +25,7 @@ class CoolerProductDetails extends StatelessWidget {
               children: [
                 Icon(Icons.extension_outlined),
                 SizedBox(width: 5,),
-                TextUtil(text: 'Type: ', isBold: true, size: 16,),
+                TextUtil(text: '${AppLocalizations.of(context)!.product_spec_type}: ', isBold: true, size: 16,),
                 TextUtil(text: product.type, size: 16,),
               ],
             ),
@@ -34,7 +35,7 @@ class CoolerProductDetails extends StatelessWidget {
               children: [
                 Icon(Icons.speed),
                 SizedBox(width: 5,),
-                TextUtil(text: 'Fan RPM: ', isBold: true, size: 16,),
+                TextUtil(text: '${AppLocalizations.of(context)!.product_spec_fan_rpm}: ', isBold: true, size: 16,),
                 TextUtil(text: '${product.fan_rpm} rpm', size: 16,),
               ],
             ),
@@ -44,7 +45,7 @@ class CoolerProductDetails extends StatelessWidget {
               children: [
                 Icon(Icons.battery_5_bar),
                 SizedBox(width: 5,),
-                TextUtil(text: 'Consumption: ', isBold: true, size: 16,),
+                TextUtil(text: '${AppLocalizations.of(context)!.product_spec_consumption}: ', isBold: true, size: 16,),
                 TextUtil(text: '${product.consumption} W', size: 16,),
               ],
             ),
@@ -54,7 +55,7 @@ class CoolerProductDetails extends StatelessWidget {
               children: [
                 Icon(Icons.widgets_outlined),
                 SizedBox(width: 5,),
-                TextUtil(text: 'Socket support: ', isBold: true, size: 16,),
+                TextUtil(text: '${AppLocalizations.of(context)!.product_spec_socket_support}: ', isBold: true, size: 16,),
                 TextUtil(text: product.socket_support, size: 16,),
               ],
             ),
@@ -64,7 +65,7 @@ class CoolerProductDetails extends StatelessWidget {
               children: [
                 Icon(Icons.square_foot),
                 SizedBox(width: 5,),
-                TextUtil(text: 'Width: ', isBold: true, size: 16,),
+                TextUtil(text: '${AppLocalizations.of(context)!.product_spec_width}: ', isBold: true, size: 16,),
                 TextUtil(text: '${product.width.round()} mm', size: 16,),
               ],
             ),
@@ -74,7 +75,7 @@ class CoolerProductDetails extends StatelessWidget {
               children: [
                 Icon(Icons.square_foot),
                 SizedBox(width: 5,),
-                TextUtil(text: 'Height: ', isBold: true, size: 16,),
+                TextUtil(text: '${AppLocalizations.of(context)!.product_spec_height}: ', isBold: true, size: 16,),
                 TextUtil(text: '${product.height.round()} mm', size: 16,),
               ],
             ),

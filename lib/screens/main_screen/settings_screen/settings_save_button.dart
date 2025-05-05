@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SettingsSaveButton extends StatelessWidget {
   const SettingsSaveButton({
@@ -38,7 +39,7 @@ class SettingsSaveButton extends StatelessWidget {
           print('Settings saved: Language: $_selectedLanguage, Currency: $_selectedCurrency');
         },
         child: Text(
-          'SAVE',
+          AppLocalizations.of(context)!.settings_screen_save_button,
           style: GoogleFonts.pressStart2p(
             color: Colors.amber,
             fontSize: 14,

@@ -4,6 +4,7 @@ import 'package:bossloot_mobile/screens/main_screen/catalog_screen/catalog_produ
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -98,7 +99,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     child: FittedBox(
                       child: Text(
-                        'FOR REAL ADVENTURERS',
+                        AppLocalizations.of(context)!.home_screen_featured_title,
                         style: GoogleFonts.pressStart2p(fontSize: 14, color: Colors.white,),
                       ),
                     ),
@@ -166,7 +167,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 child: FittedBox(
                   child: Text(
-                    'THE BEST DEALS',
+                    AppLocalizations.of(context)!.home_screen_offers_title,
                     style: GoogleFonts.pressStart2p(fontSize: 15, color: Colors.white,),
                   ),
                 ),
@@ -229,7 +230,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 child: FittedBox(
                   child: Text(
-                    'RIGHT FROM THE DUNGEON',
+                    AppLocalizations.of(context)!.home_screen_random_title,
                     style: GoogleFonts.pressStart2p(fontSize: 14, color: Colors.white,),
                   ),
                 ),

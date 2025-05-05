@@ -6,6 +6,7 @@ import 'package:bossloot_mobile/screens/main_screen/product_details_screen/produ
 import 'package:bossloot_mobile/utils/dialog_util.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
   final int productId;
@@ -64,7 +65,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                 ),
               ),
 
-              // Botón de volver al catálogo
+              // Back to catalog button
               Positioned(
                 bottom: 80.0,
                 right: 0,
@@ -106,7 +107,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                         ),
                         SizedBox(width: 4),
                         Text(
-                          'Catalog',
+                          AppLocalizations.of(context)!.product_details_screen_catalog_button,
                           style: TextStyle(
                             color: const Color.fromARGB(255, 49, 49, 49),
                             fontWeight: FontWeight.bold,
@@ -150,7 +151,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                         return;
                       }
                     },
-                    child: Text('Add to cart', style: TextStyle(color: Colors.white)),
+                    child: Text(AppLocalizations.of(context)!.product_details_screen_add_to_cart_button, style: TextStyle(color: Colors.white)),
                   ),
                 ),
       
@@ -168,7 +169,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                         return;
                       }
                     },
-                    child: Text('Buy now', style: TextStyle(color: Colors.white)),
+                    child: Text(AppLocalizations.of(context)!.product_details_screen_buy_now_button, style: TextStyle(color: Colors.white)),
                   ),
                 ),
               ],

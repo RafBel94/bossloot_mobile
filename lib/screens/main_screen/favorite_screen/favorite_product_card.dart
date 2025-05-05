@@ -90,7 +90,6 @@ class FavoriteProductCard extends StatelessWidget {
           trailing: IconButton(
             icon: const Icon(Icons.delete, size: 30 , color: Color.fromARGB(255, 255, 18, 176), shadows: [Shadow(color: Color.fromARGB(255, 70, 16, 79), offset: Offset(2, 2), blurRadius: 1)],),
             onPressed: onRemoveFavorite,
-            tooltip: 'Remove from favorites',
           ),
         ),
       ),

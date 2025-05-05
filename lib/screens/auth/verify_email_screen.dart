@@ -1,11 +1,9 @@
 import 'dart:ui';
 
-import 'package:bossloot_mobile/actions/login_action.dart';
 import 'package:bossloot_mobile/actions/resend_verification_action.dart';
 import 'package:bossloot_mobile/screens/auth/login_screen.dart';
-import 'package:bossloot_mobile/screens/auth/register_screen.dart';
-import 'package:bossloot_mobile/utils/text_util.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class VerifyEmailScreen extends StatefulWidget {
   const VerifyEmailScreen({super.key});
@@ -77,7 +75,7 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
                         margin: const EdgeInsets.only(bottom: 10),
                         child: Center(
                           child: Text(
-                              "Oops!",
+                              AppLocalizations.of(context)!.verify_email_screen_title,
                               textAlign: TextAlign.center,
                               maxLines: 3,
                             style: TextStyle(
@@ -94,7 +92,7 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
                         margin: const EdgeInsets.only(bottom: 20),
                         child: Center(
                           child: Text(
-                              "Looks like you still have to verify your email.",
+                              AppLocalizations.of(context)!.verify_email_screen_text,
                               textAlign: TextAlign.center,
                               maxLines: 3,
                             style: TextStyle(
@@ -112,7 +110,7 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
                         margin: const EdgeInsets.only(bottom: 20),
                         child: Center(
                           child: Text(
-                              "Do you want to receive another verification email?",
+                              AppLocalizations.of(context)!.verify_email_screen_resend,
                               textAlign: TextAlign.center,
                               maxLines: 3,
                             style: TextStyle(
@@ -138,7 +136,7 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
                               resendVerificationAction(context);
                             },
                             child: Text(
-                              "Resend email",
+                              AppLocalizations.of(context)!.verify_email_screen_resend_button,
                               style: TextStyle(
                                 color: Colors.black,
                                 fontSize: 20,
@@ -168,68 +166,6 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
                   ),
                 ),
               ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class RegisterButton extends StatelessWidget {
-  const RegisterButton({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return ElevatedButton(
-      style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.white,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-      ),
-      onPressed: () {
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const RegisterScreen()));
-      },
-      child: TextUtil(text: "Register", isBold: true)
-    );
-  }
-}
-
-class LoginButton extends StatelessWidget {
-  final GlobalKey<FormState> _formKey;
-  final TextEditingController emailController;
-  final TextEditingController passwordController;
-
-  const LoginButton({
-    super.key,
-    required GlobalKey<FormState> formKey,
-    required this.emailController,
-    required this.passwordController,
-  }) : _formKey = formKey;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(top: 25, bottom: 10),
-      child: Center(
-        child: ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            padding: const EdgeInsets.symmetric(horizontal: 60, vertical: 7),
-            backgroundColor: Colors.white,
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
-          ),
-          onPressed: () {
-            if (_formKey.currentState!.validate()) {
-              loginAction(context, emailController.text, passwordController.text);
-            }
-          },
-          child: Text(
-            "Login",
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
             ),
           ),
         ),

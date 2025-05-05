@@ -1,6 +1,7 @@
 import 'package:bossloot_mobile/domain/models/products/motherboard_product.dart';
 import 'package:bossloot_mobile/utils/text_util.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class MotherboardProductDetails extends StatelessWidget {
   final MotherboardProduct product;
@@ -11,7 +12,7 @@ class MotherboardProductDetails extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        TextUtil(text: 'Specifications', isBold: true, size: 22,),
+        TextUtil(text: AppLocalizations.of(context)!.product_details_screen_specifications_label, isBold: true, size: 22,),
 
         SizedBox(height: 20,),
 
@@ -24,7 +25,7 @@ class MotherboardProductDetails extends StatelessWidget {
               children: [
                 Icon(Icons.extension_outlined),
                 SizedBox(width: 5,),
-                TextUtil(text: 'Socket: ', isBold: true, size: 16,),
+                TextUtil(text: '${AppLocalizations.of(context)!.product_spec_socket}: ', isBold: true, size: 16,),
                 TextUtil(text: product.socket, size: 16,),
               ],
             ),
@@ -34,7 +35,7 @@ class MotherboardProductDetails extends StatelessWidget {
               children: [
                 Icon(Icons.memory_outlined),
                 SizedBox(width: 5,),
-                TextUtil(text: 'Chipset: ', isBold: true, size: 16,),
+                TextUtil(text: '${AppLocalizations.of(context)!.product_spec_chipset}: ', isBold: true, size: 16,),
                 TextUtil(text: product.chipset, size: 16,),
               ],
             ),
@@ -44,7 +45,7 @@ class MotherboardProductDetails extends StatelessWidget {
               children: [
                 Icon(Icons.dashboard_outlined),
                 SizedBox(width: 5,),
-                TextUtil(text: 'Form factor: ', isBold: true, size: 16,),
+                TextUtil(text: '${AppLocalizations.of(context)!.product_spec_form_factor}: ', isBold: true, size: 16,),
                 TextUtil(text: product.form_factor, size: 16,),
               ],
             ),
@@ -54,7 +55,7 @@ class MotherboardProductDetails extends StatelessWidget {
               children: [
                 Icon(Icons.extension_outlined),
                 SizedBox(width: 5,),
-                TextUtil(text: 'Memory type: ', isBold: true, size: 16,),
+                TextUtil(text: '${AppLocalizations.of(context)!.product_spec_memory_type}: ', isBold: true, size: 16,),
                 TextUtil(text: product.memory_type, size: 16,),
               ],
             ),
@@ -64,7 +65,7 @@ class MotherboardProductDetails extends StatelessWidget {
               children: [
                 Icon(Icons.storage_outlined),
                 SizedBox(width: 5,),
-                TextUtil(text: 'Maximum memory: ', isBold: true, size: 16,),
+                TextUtil(text: '${AppLocalizations.of(context)!.product_spec_maximum_memory}: ', isBold: true, size: 16,),
                 TextUtil(text: '${product.memory_max} GB', size: 16,),
               ],
             ),
@@ -74,7 +75,7 @@ class MotherboardProductDetails extends StatelessWidget {
               children: [
                 Icon(Icons.playlist_add),
                 SizedBox(width: 5,),
-                TextUtil(text: 'Memory slots: ', isBold: true, size: 16,),
+                TextUtil(text: '${AppLocalizations.of(context)!.product_spec_memory_slots}: ', isBold: true, size: 16,),
                 TextUtil(text: '${product.memory_slots}', size: 16,),
               ],
             ),
@@ -84,7 +85,7 @@ class MotherboardProductDetails extends StatelessWidget {
               children: [
                 Icon(Icons.bolt),
                 SizedBox(width: 5,),
-                TextUtil(text: 'Maximum memory speed: ', isBold: true, size: 16,),
+                TextUtil(text: '${AppLocalizations.of(context)!.product_spec_maximum_memory_speed}: ', isBold: true, size: 16,),
                 TextUtil(text: '${product.memory_speed} MHz', size: 16,),
               ],
             ),
@@ -94,7 +95,7 @@ class MotherboardProductDetails extends StatelessWidget {
               children: [
                 Icon(Icons.adf_scanner_sharp),
                 SizedBox(width: 5,),
-                TextUtil(text: 'SATA ports: ', isBold: true, size: 16,),
+                TextUtil(text: '${AppLocalizations.of(context)!.product_spec_sata_ports}: ', isBold: true, size: 16,),
                 TextUtil(text: '${product.sata_ports}', size: 16,),
               ],
             ),
@@ -104,7 +105,7 @@ class MotherboardProductDetails extends StatelessWidget {
               children: [
                 Icon(Icons.adf_scanner_sharp),
                 SizedBox(width: 5,),
-                TextUtil(text: 'M2 ports: ', isBold: true, size: 16,),
+                TextUtil(text: '${AppLocalizations.of(context)!.product_spec_m2_slots}: ', isBold: true, size: 16,),
                 TextUtil(text: '${product.m_2_slots}', size: 16,),
               ],
             ),
@@ -114,7 +115,7 @@ class MotherboardProductDetails extends StatelessWidget {
               children: [
                 Icon(Icons.memory_outlined),
                 SizedBox(width: 5,),
-                TextUtil(text: 'PCI-E slots: ', isBold: true, size: 16,),
+                TextUtil(text: '${AppLocalizations.of(context)!.product_spec_pcie_slots}: ', isBold: true, size: 16,),
                 TextUtil(text: '${product.pcie_slots}', size: 16,),
               ],
             ),
@@ -124,7 +125,7 @@ class MotherboardProductDetails extends StatelessWidget {
               children: [
                 Icon(Icons.usb_outlined),
                 SizedBox(width: 5,),
-                TextUtil(text: 'USB slots: ', isBold: true, size: 16,),
+                TextUtil(text: '${AppLocalizations.of(context)!.product_spec_usb_ports}: ', isBold: true, size: 16,),
                 TextUtil(text: '${product.usb_ports}', size: 16,),
               ],
             ),
@@ -155,7 +156,7 @@ class MotherboardProductDetails extends StatelessWidget {
                 Icon(Icons.wifi),
                 SizedBox(width: 5,),
                 TextUtil(text: 'Wifi: ', isBold: true, size: 16,),
-                TextUtil(text: product.wifi ? 'Yes' : 'No', size: 16,),
+                TextUtil(text: product.wifi ? AppLocalizations.of(context)!.app_yes : 'No', size: 16,),
               ],
             ),
 
@@ -165,7 +166,7 @@ class MotherboardProductDetails extends StatelessWidget {
                 Icon(Icons.bluetooth),
                 SizedBox(width: 5,),
                 TextUtil(text: 'Bluetooth: ', isBold: true, size: 16,),
-                TextUtil(text: product.bluetooth ? 'Yes' : 'No', size: 16,),
+                TextUtil(text: product.bluetooth ? AppLocalizations.of(context)!.app_yes : 'No', size: 16,),
               ],
             ),
           ],

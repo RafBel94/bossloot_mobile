@@ -5,6 +5,7 @@ import 'package:bossloot_mobile/screens/auth/login_screen.dart';
 import 'package:bossloot_mobile/utils/field_validator.dart';
 import 'package:bossloot_mobile/utils/text_util.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -100,9 +101,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             // Register Title
                             Container(
                               margin: const EdgeInsets.only(bottom: 20),
-                              child: const Center(
+                              child: Center(
                                 child: Text(
-                                  "Register",
+                                  AppLocalizations.of(context)!.register_screen_register_button,
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 30,
@@ -115,7 +116,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             const Spacer(),
                   
                             // Name Field
-                            TextUtil(text: "Name", isBold: true, size: 18, color: Colors.white),
+                            TextUtil(text: AppLocalizations.of(context)!.register_screen_name_field, isBold: true, size: 18, color: Colors.white),
                             Container(
                               height: 35,
                               margin: const EdgeInsets.only(bottom: 10),
@@ -131,14 +132,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   fillColor: Colors.white,
                                   border: InputBorder.none,
                                 ),
-                                validator: (value) => FieldValidator(value: value).validateName(),
+                                validator: (value) => FieldValidator(value: value, context: context).validateName(),
                               ),
                             ),
                   
                             const Spacer(),
                   
                             // Email Field
-                            TextUtil(text: "Email", isBold: true, size: 18, color: Colors.white),
+                            TextUtil(text: AppLocalizations.of(context)!.register_screen_email_field, isBold: true, size: 18, color: Colors.white),
                             Container(
                               height: 35,
                               margin: const EdgeInsets.only(bottom: 10),
@@ -154,14 +155,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   fillColor: Colors.white,
                                   border: InputBorder.none,
                                 ),
-                                validator: (value) => FieldValidator(value: value).validateEmail(),
+                                validator: (value) => FieldValidator(value: value, context: context).validateEmail(),
                               ),
                             ),
                   
                             const Spacer(),
                   
                             // Password Field
-                            TextUtil(text: "Password", isBold: true, size: 18, color: Colors.white),
+                            TextUtil(text: AppLocalizations.of(context)!.register_screen_password_field, isBold: true, size: 18, color: Colors.white),
                             Container(
                               height: 35,
                               margin: const EdgeInsets.only(bottom: 10),
@@ -185,14 +186,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   border: InputBorder.none,
                                 ),
                                 obscureText: _passwordHidden,
-                                validator: (value) => FieldValidator(value: value).validatePassword(),
+                                validator: (value) => FieldValidator(value: value, context: context).validatePassword(),
                               ),
                             ),
                   
                             const Spacer(),
                   
                             // Repeat Password Field
-                            TextUtil(text: "Repeat password", isBold: true, size: 18, color: Colors.white),
+                            TextUtil(text: AppLocalizations.of(context)!.register_screen_repassword_field, isBold: true, size: 18, color: Colors.white),
                             Container(
                               height: 35,
                               margin: const EdgeInsets.only(bottom: 20),
@@ -212,7 +213,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   ),
                                 ),
                                 obscureText: _passwordHidden,
-                                validator: (value) => FieldValidator(value: value).validateRepeatPassword(_passwordController.text),
+                                validator: (value) => FieldValidator(value: value, context: context).validateRepeatPassword(_passwordController.text),
                               ),
                             ),
                   
@@ -278,7 +279,7 @@ class RegisterButton extends StatelessWidget {
             }
           },
           child: Text(
-            "Register",
+            AppLocalizations.of(context)!.register_screen_register_button,
             style: TextStyle(
               color: Colors.black,
               fontSize: 20,
