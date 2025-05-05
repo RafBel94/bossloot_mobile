@@ -102,7 +102,7 @@ class ProductValorations extends StatelessWidget {
                                     children: [
                                       Text(
                                         valorations[index].user.name.split(' ').take(2).join(' '),
-                                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                                        style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                                         overflow: TextOverflow.ellipsis,
                                         maxLines: 1,
                                       ),

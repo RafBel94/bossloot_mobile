@@ -340,7 +340,7 @@ class _ProfileDetailsScreenState extends State<ProfileDetailsScreen> {
                             onTapUpOutside: (event) => FocusManager.instance.primaryFocus?.unfocus(),
                             controller: _mobilePhoneController,
                             decoration: InputDecoration(
-                              labelText: AppLocalizations.of(context)!.profile_details_phone_field_hint,
+                              labelText: AppLocalizations.of(context)!.profile_details_mobile_field_label,
                               hintText: AppLocalizations.of(context)!.profile_details_phone_field_hint,
                               border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8),

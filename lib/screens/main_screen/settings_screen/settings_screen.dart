@@ -22,7 +22,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   String _selectedCurrency = 'USD';
   
   // Options for dropdowns
-  final List<String> _languages = ['English', 'Spanish'];
+  final List<String> _languages = ['English', 'Español'];
   final List<String> _currencies = ['USD', 'EUR'];
 
   @override
