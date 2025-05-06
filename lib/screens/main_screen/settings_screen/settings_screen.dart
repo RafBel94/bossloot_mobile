@@ -1,9 +1,11 @@
 import 'package:bossloot_mobile/domain/models/user.dart';
+import 'package:bossloot_mobile/providers/language_provider.dart';
 import 'package:bossloot_mobile/screens/main_screen/settings_screen/settings_custom_appbar.dart';
 import 'package:bossloot_mobile/screens/main_screen/settings_screen/settings_save_button.dart';
 import 'package:bossloot_mobile/screens/main_screen/settings_screen/settings_screen_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
 
 class SettingsScreen extends StatefulWidget {
   final User? user;
@@ -40,6 +42,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
+
+    LanguageProvider languageProvider = context.watch<LanguageProvider>();
 
     return Scaffold(
       body: SafeArea(
@@ -93,12 +97,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     children: [
 
                       // LANGUAGE DROPDOWN SECTION
-                      SettingsScreenDropdown(label: AppLocalizations.of(context)!.settings_screen_language_label, selectedValue: _selectedLanguage, options: _languages, onChanged: (String? newValue) {
-                        if (newValue != null) {
-                          setState(() {
-                            _selectedLanguage = newValue;
-                          });
-                        }
+                      SettingsScreenDropdown(
+                        label: AppLocalizations.of(context)!.settings_screen_language_label, 
+                        selectedValue: languageProvider.locale.languageCode == 'es' ? 'Español' : 'English', 
+                        options: _languages, 
+                        onChanged: (String? newValue) {
+                          if (newValue != null) {
+                            setState(() {
+                              _selectedLanguage = newValue;
+                              languageProvider.setLocale(Locale(newValue == 'Español' ? 'es' : 'en'));
+                            });
+                          }
                       }),
                       
                       // CURRENCY DROPDOWN SECTION

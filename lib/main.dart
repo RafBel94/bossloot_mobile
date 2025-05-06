@@ -1,5 +1,6 @@
 import 'package:bossloot_mobile/providers/category_provider.dart';
 import 'package:bossloot_mobile/providers/favorite_provider.dart';
+import 'package:bossloot_mobile/providers/language_provider.dart';
 import 'package:bossloot_mobile/providers/product_provider.dart';
 import 'package:bossloot_mobile/providers/user_provider.dart';
 import 'package:bossloot_mobile/screens/loading_screen/loading_screen.dart';
@@ -29,8 +30,6 @@ class MainApp extends StatefulWidget {
 
 class _MainAppState extends State<MainApp> {
 
-  Locale _locale = const Locale('en');
-
   @override
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations([
@@ -58,33 +57,34 @@ class _MainAppState extends State<MainApp> {
         ChangeNotifierProvider(
           create: (_) => FavoriteProvider(favoriteService: FavoriteService(), tokenService: TokenService(),),
         ),
-      ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'BossLoot',
-        localizationsDelegates: const [
-          AppLocalizations.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        locale: _locale,
-        supportedLocales: const [
-          Locale('en'),
-          Locale('es'),
-        ],
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 110, 72, 121)),
-          useMaterial3: true,
+        ChangeNotifierProvider(
+          create: (_) => LanguageProvider(),
         ),
-        home: SafeArea(child: const LoadingScreen()),
+      ],
+      child: Builder(
+        builder: (context) {
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            title: 'BossLoot',
+            localizationsDelegates: const [
+              AppLocalizations.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            locale: context.watch<LanguageProvider>().locale,
+            supportedLocales: const [
+              Locale('en'),
+              Locale('es'),
+            ],
+            theme: ThemeData(
+              colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 110, 72, 121)),
+              useMaterial3: true,
+            ),
+            home: SafeArea(child: const LoadingScreen()),
+          );
+        },
       ),
     );
-  }
-
-  void _changeLanguage(Locale locale){
-    setState(() {
-      _locale = locale;
-    });
   }
 }
