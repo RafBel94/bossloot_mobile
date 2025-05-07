@@ -1,6 +1,8 @@
 import 'package:bossloot_mobile/domain/models/catalog_product.dart';
+import 'package:bossloot_mobile/providers/coin_exchange_provider.dart';
 import 'package:bossloot_mobile/screens/main_screen/product_details_screen/product_details_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class FavoriteProductCard extends StatelessWidget {
   final CatalogProduct product;
@@ -14,7 +16,9 @@ class FavoriteProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String productPrice = (product.price - (product.price * (product.discount / 100))).toStringAsFixed(2);
+    final CoinExchangeProvider coinExchangeProvider = context.watch<CoinExchangeProvider>();
+    String productPriceWithDiscount = getProductPrice(product.price, product.discount, coinExchangeProvider);
+
 
     return GestureDetector(
       onTap: () async {
@@ -55,9 +59,11 @@ class FavoriteProductCard extends StatelessWidget {
             ),
           ),
           title: FittedBox(
+            fit: BoxFit.scaleDown,
+            alignment: Alignment.centerLeft,
             child: Text(
               product.name.split(' ').take(4).join(' '),
-              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 8),
+              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
             ),
@@ -67,10 +73,18 @@ class FavoriteProductCard extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  '\$$productPrice',
-                  style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w500, color: Color.fromARGB(255, 82, 3, 89)),
+                Expanded(
+                  child: FittedBox(
+                    fit: BoxFit.scaleDown,
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      productPriceWithDiscount,
+                      style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w500, color: Color.fromARGB(255, 82, 3, 89)),
+                    ),
+                  ),
                 ),
+
+                const SizedBox(width: 5),
 
                 if (product.onOffer)
                   Container(
@@ -94,5 +108,18 @@ class FavoriteProductCard extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  String getProductPrice(double price, double discount, CoinExchangeProvider coinExchangeProvider) {
+    double discountedPrice = (product.price - (product.price * (product.discount / 100)));
+    double exchangedPrice = coinExchangeProvider.convertPrice(discountedPrice);
+    String formatedPrice = coinExchangeProvider.formatPrice(exchangedPrice);
+    return formatedPrice;
+  }
+
+  String getProductPriceWithoutDiscount(double price, CoinExchangeProvider coinExchangeProvider) {
+    double exchangedPrice = coinExchangeProvider.convertPrice(price);
+    String formatedPrice = coinExchangeProvider.formatPrice(exchangedPrice);
+    return formatedPrice;
   }
 }

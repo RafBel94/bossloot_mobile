@@ -1,4 +1,5 @@
 import 'package:bossloot_mobile/domain/models/catalog_product.dart';
+import 'package:bossloot_mobile/providers/coin_exchange_provider.dart';
 import 'package:bossloot_mobile/providers/user_provider.dart';
 import 'package:bossloot_mobile/screens/main_screen/product_details_screen/product_details_screen.dart';
 import 'package:bossloot_mobile/utils/dialog_util.dart';
@@ -18,11 +19,13 @@ class CatalogProductCard extends StatelessWidget {
   Widget build(BuildContext context) {
 
     UserProvider userProvider = context.read<UserProvider>();
+    CoinExchangeProvider coinExchangeProvider = context.read<CoinExchangeProvider>();
 
     String formatedDiscount = product.discount % 1 == 0 
       ? product.discount.toStringAsFixed(0) 
       : product.discount.toString();
-    String productPrice = (product.price - (product.price * (product.discount / 100))).toStringAsFixed(2);
+    String productPriceWithoutDiscount = getProductPriceWithoutDiscount(product.price, coinExchangeProvider);
+    String productPriceWithDiscount = getProductPrice(product.price, product.discount, coinExchangeProvider);
 
     return GestureDetector(
       onLongPress: () {
@@ -134,7 +137,7 @@ class CatalogProductCard extends StatelessWidget {
                     elevation: 4,
                     borderRadius: BorderRadius.circular(5.0),
                     child: Container(
-                      padding: product.onOffer ? const EdgeInsets.only(top: 3.0) : const EdgeInsets.symmetric(vertical: 15.0, horizontal: 8.0),
+                      padding: product.onOffer ? const EdgeInsets.only(top: 3.0, left: 3, right: 3) : const EdgeInsets.symmetric(vertical: 15.0, horizontal: 8.0),
                       decoration: BoxDecoration(
                         color: Colors.white,
                         border: Border.all(
@@ -151,17 +154,17 @@ class CatalogProductCard extends StatelessWidget {
                               padding: EdgeInsets.only(left: 15.0),
                               alignment: Alignment.topLeft,
                               height: 15,
-                              child: Text('${product.price}\$', style: const TextStyle(color: Color.fromARGB(255, 181, 181, 181), fontSize: 13.0, fontWeight: FontWeight.bold, overflow: TextOverflow.ellipsis, decoration: TextDecoration.lineThrough)),
+                              child: FittedBox(fit: BoxFit.scaleDown, child: Text(productPriceWithoutDiscount, style: const TextStyle(color: Color.fromARGB(255, 181, 181, 181), fontSize: 16.0, fontWeight: FontWeight.bold, overflow: TextOverflow.ellipsis, decoration: TextDecoration.lineThrough))),
                             ),
                             Container(
                               alignment: Alignment.topCenter,
                               height: 25,
-                              child: Text('$productPrice\$', style: const TextStyle(color: Color.fromARGB(255, 198, 79, 79), fontSize: 16.0, fontWeight: FontWeight.bold, overflow: TextOverflow.ellipsis)),
+                              child: FittedBox(fit: BoxFit.scaleDown, child: Text(productPriceWithDiscount, style: const TextStyle(color: Color.fromARGB(255, 198, 79, 79), fontSize: 18.0, fontWeight: FontWeight.bold, overflow: TextOverflow.ellipsis))),
                             ),
                             SizedBox(height: 8,),
                           ]
                         )
-                      : Text('${product.price}\$', style: const TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold, overflow: TextOverflow.ellipsis), textAlign: TextAlign.center,)
+                      : FittedBox(fit: BoxFit.scaleDown, child: Text(productPriceWithoutDiscount, style: const TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold), textAlign: TextAlign.center,))
                     ),
                   ),
                 ),
@@ -196,4 +199,18 @@ class CatalogProductCard extends StatelessWidget {
       ),
     );
   }
+
+  String getProductPrice(double price, double discount, CoinExchangeProvider coinExchangeProvider) {
+    double discountedPrice = (product.price - (product.price * (product.discount / 100)));
+    double exchangedPrice = coinExchangeProvider.convertPrice(discountedPrice);
+    String formatedPrice = coinExchangeProvider.formatPrice(exchangedPrice);
+    return formatedPrice;
+  }
+
+  String getProductPriceWithoutDiscount(double price, CoinExchangeProvider coinExchangeProvider) {
+    double exchangedPrice = coinExchangeProvider.convertPrice(price);
+    String formatedPrice = coinExchangeProvider.formatPrice(exchangedPrice);
+    return formatedPrice;
+  }
 }
+

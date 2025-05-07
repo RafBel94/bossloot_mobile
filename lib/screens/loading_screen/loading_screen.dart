@@ -1,4 +1,5 @@
 import 'package:bossloot_mobile/providers/coin_exchange_provider.dart';
+import 'package:bossloot_mobile/providers/language_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_svg/svg.dart';
@@ -71,19 +72,14 @@ class _LoadingScreenState extends State<LoadingScreen>
     }
 
     Future<void> _startAnimationsAndLoadData() async {
-    // Start rotation
     _rotationController.forward();
     
-    // Load data while the animation is displayed
     final startTime = DateTime.now();
 
-    // Start heartbeat effect
     await _scaleController.forward();
     
-    // Show title with fade-in effect
     await _fadeTitleController.forward();
     
-    // Ensure minimum display time
     final elapsed = DateTime.now().difference(startTime);
     final minDisplayDuration = const Duration(seconds: 3);
     
@@ -102,10 +98,12 @@ class _LoadingScreenState extends State<LoadingScreen>
   }
 
   Future<void> _initializeData() async {
+    final LanguageProvider languageProvider = context.read<LanguageProvider>();
     final coinExchangeProvider = context.read<CoinExchangeProvider>();
     final categoryProvider = context.read<CategoryProvider>();
     final productProvider = context.read<ProductProvider>();
     
+    await languageProvider.initialize();
     await coinExchangeProvider.initialize();
     await productProvider.fetchCatalogProducts();
     await productProvider.fetchFeaturedProducts();

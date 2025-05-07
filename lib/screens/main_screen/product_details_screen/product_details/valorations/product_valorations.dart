@@ -100,15 +100,18 @@ class ProductValorations extends StatelessWidget {
                                   Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
-                                      Text(
-                                        valorations[index].user.name.split(' ').take(2).join(' '),
-                                        style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-                                        overflow: TextOverflow.ellipsis,
-                                        maxLines: 1,
+                                      FittedBox(
+                                        fit: BoxFit.scaleDown,
+                                        alignment: Alignment.centerLeft,
+                                        child: Text(
+                                          valorations[index].user.name.split(' ').take(2).join(' '),
+                                          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                                          maxLines: 1,
+                                        ),
                                       ),
                                       FittedBox(
                                         child: Text(
-                                          '${AppLocalizations.of(context)!.app_adventurer_level} ${valorations[index].user.level}', 
+                                          '${AppLocalizations.of(context)!.app_adventurer_level}${valorations[index].user.level}', 
                                           style: TextStyle(fontSize: 14, color: Colors.grey),
                                         ),
                                       ),

@@ -1,7 +1,7 @@
 import 'package:bossloot_mobile/domain/models/user.dart';
+import 'package:bossloot_mobile/providers/coin_exchange_provider.dart';
 import 'package:bossloot_mobile/providers/language_provider.dart';
 import 'package:bossloot_mobile/screens/main_screen/settings_screen/settings_custom_appbar.dart';
-import 'package:bossloot_mobile/screens/main_screen/settings_screen/settings_save_button.dart';
 import 'package:bossloot_mobile/screens/main_screen/settings_screen/settings_screen_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -19,13 +19,22 @@ class SettingsScreen extends StatefulWidget {
 class _SettingsScreenState extends State<SettingsScreen> {
   bool _isLoading = true;
   
-  // Selected values for dropdowns
-  String _selectedLanguage = 'English';
-  String _selectedCurrency = 'USD';
-  
   // Options for dropdowns
-  final List<String> _languages = ['English', 'Español'];
-  final List<String> _currencies = ['USD', 'EUR'];
+  final Map<String, String> _languageMap = {
+    'es': 'ESPAÑOL',
+    'en': 'ENGLISH',
+  };
+
+  final Map<String, String> _currencyMap = {
+    'EUR': 'EUR - EURO',
+    'USD': 'USD - UNITED STATES DOLLAR',
+    'CAD': 'CAD - CANADIAN DOLLAR',
+    'AUD': 'AUD - AUSTRALIAN DOLLAR',
+    'NZD': 'NZD - NEW ZEALAND DOLLAR',
+    'SGD': 'SGD - SINGAPORE DOLLAR',
+    'HKD': 'HKD - HONG KONG DOLLAR',
+    'TWD': 'TWD - NEW TAIWAN DOLLAR',
+  };
 
   @override
   void initState() {
@@ -44,6 +53,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Widget build(BuildContext context) {
 
     LanguageProvider languageProvider = context.watch<LanguageProvider>();
+    CoinExchangeProvider coinExchangeProvider = context.watch<CoinExchangeProvider>();
+    String selectedLanguage = languageProvider.locale.languageCode;
+    String selectedCurrency = coinExchangeProvider.selectedCurrency;
 
     return Scaffold(
       body: SafeArea(
@@ -84,7 +96,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               ),
               child: Container(
                 margin: const EdgeInsets.all(4),
-                padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 20),
+                padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 25),
                 decoration: BoxDecoration(
                   color: const Color.fromARGB(255, 30, 5, 40),
                   borderRadius: BorderRadius.circular(8),
@@ -98,29 +110,38 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
                       // LANGUAGE DROPDOWN SECTION
                       SettingsScreenDropdown(
-                        label: AppLocalizations.of(context)!.settings_screen_language_label, 
-                        selectedValue: languageProvider.locale.languageCode == 'es' ? 'Español' : 'English', 
-                        options: _languages, 
+                        label: AppLocalizations.of(context)!.settings_screen_language_label,
+                        selectedValue: selectedLanguage,
+                        options: _languageMap,
                         onChanged: (String? newValue) {
                           if (newValue != null) {
                             setState(() {
-                              _selectedLanguage = newValue;
-                              languageProvider.setLocale(Locale(newValue == 'Español' ? 'es' : 'en'));
+                              selectedLanguage = newValue;
+                              languageProvider.setLocale(Locale(newValue));
                             });
                           }
-                      }),
+                        },
+                      ),
+
+                      const SizedBox(height: 15),
                       
                       // CURRENCY DROPDOWN SECTION
-                      SettingsScreenDropdown(label: AppLocalizations.of(context)!.settings_screen_currency_label, selectedValue: _selectedCurrency, options: _currencies, onChanged: (String? newValue) {
-                        if (newValue != null) {
-                          setState(() {
-                            _selectedCurrency = newValue;
-                          });
-                        }
-                      }),
+                      SettingsScreenDropdown(
+                        label: AppLocalizations.of(context)!.settings_screen_currency_label,
+                        selectedValue: selectedCurrency,
+                        options: _currencyMap,
+                        onChanged: (String? newValue) {
+                          if (newValue != null) {
+                            setState(() {
+                              selectedCurrency = newValue;
+                              coinExchangeProvider.setSelectedCurrency(newValue);
+                            });
+                          }
+                        },
+                      ),
                       
                       // SAVE BUTTON
-                      SettingsSaveButton(selectedLanguage: _selectedLanguage, selectedCurrency: _selectedCurrency),
+                      // SettingsSaveButton(selectedLanguage: selectedLanguage, selectedCurrency: selectedCurrency),
                     ],
                   )
               ),

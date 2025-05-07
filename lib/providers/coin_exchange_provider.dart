@@ -131,11 +131,13 @@ class CoinExchangeProvider extends ChangeNotifier {
   
   // Format the price according to the selected currency
   String formatPrice(double price) {
+    final symbol = _getCurrencySymbol(_selectedCurrency);
     final formatter = NumberFormat.currency(
-      symbol: _getCurrencySymbol(_selectedCurrency),
+      symbol: _selectedCurrency == 'EUR' ? '' : symbol,
       decimalDigits: 2,
     );
-    return formatter.format(price);
+    final formattedPrice = formatter.format(price);
+    return _selectedCurrency == 'EUR' ? '$formattedPrice$symbol' : formattedPrice;
   }
   
   // Obtain the currency symbol based on the currency code
@@ -143,8 +145,12 @@ class CoinExchangeProvider extends ChangeNotifier {
     switch (currencyCode) {
       case 'EUR': return '€';
       case 'USD': return '\$';
-      case 'GBP': return '£';
-      case 'JPY': return '¥';
+      case 'CAD': return 'C\$';
+      case 'AUD': return 'A\$';
+      case 'NZD': return 'NZ\$';
+      case 'SGD': return 'S\$';
+      case 'HKD': return 'HK\$';
+      case 'TWD': return 'NT\$';
       default: return currencyCode;
     }
   }

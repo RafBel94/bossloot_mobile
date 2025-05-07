@@ -1,10 +1,12 @@
 import 'package:bossloot_mobile/domain/models/catalog_product.dart';
+import 'package:bossloot_mobile/providers/coin_exchange_provider.dart';
 import 'package:bossloot_mobile/providers/user_provider.dart';
 import 'package:bossloot_mobile/screens/main_screen/product_details_screen/product_details_screen.dart';
 import 'package:bossloot_mobile/utils/dialog_util.dart';
 import 'package:bossloot_mobile/widgets/shared/product_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SpotlightProductCard extends StatelessWidget {
   const SpotlightProductCard({
@@ -16,11 +18,15 @@ class SpotlightProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    UserProvider userProvider = context.read<UserProvider>();
+    CoinExchangeProvider coinExchangeProvider = context.read<CoinExchangeProvider>();
+
     String formatedDiscount = product.discount % 1 == 0 
       ? product.discount.toStringAsFixed(0) 
       : product.discount.toString();
-    String productPrice = (product.price - (product.price * (product.discount / 100))).toStringAsFixed(2);
-    UserProvider userProvider = context.read<UserProvider>();
+
+    String productPriceWithoutDiscount = getProductPriceWithoutDiscount(product.price, coinExchangeProvider);
+    String productPriceWithDiscount = getProductPrice(product.price, product.discount, coinExchangeProvider);
 
     return GestureDetector(
       onLongPress: () {
@@ -70,7 +76,7 @@ class SpotlightProductCard extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 2.0),
                       alignment: Alignment.center,
                       height: 35,
-                      width: 50,
+                      width: 55,
                       decoration: BoxDecoration(
                         color: const Color.fromARGB(255, 69, 127, 215),
                         gradient: LinearGradient(colors: [
@@ -81,7 +87,7 @@ class SpotlightProductCard extends StatelessWidget {
                           bottomRight: Radius.circular(5.0),
                         )
                       ),
-                      child: Text('NEW!', style: const TextStyle(color: Colors.white, fontSize: 12.0, fontWeight: FontWeight.bold, overflow: TextOverflow.ellipsis), textAlign: TextAlign.center),
+                      child: FittedBox(child: Text('${AppLocalizations.of(context)!.app_new}!', style: const TextStyle(color: Colors.white, fontSize: 12.0, fontWeight: FontWeight.bold, overflow: TextOverflow.ellipsis), textAlign: TextAlign.center)),
                     ),
                   ),
 
@@ -155,7 +161,7 @@ class SpotlightProductCard extends StatelessWidget {
                     elevation: 4,
                     borderRadius: BorderRadius.circular(5.0),
                     child: Container(
-                      padding: product.onOffer ? const EdgeInsets.only(top: 3.0) : const EdgeInsets.symmetric(vertical: 15.0, horizontal: 8.0),
+                      padding: product.onOffer ? const EdgeInsets.only(top: 3.0, left: 3, right: 3) : const EdgeInsets.symmetric(vertical: 15.0, horizontal: 8.0),
                       decoration: BoxDecoration(
                         color: Colors.white,
                         border: Border.all(
@@ -172,17 +178,17 @@ class SpotlightProductCard extends StatelessWidget {
                               padding: EdgeInsets.only(left: 15.0),
                               alignment: Alignment.topLeft,
                               height: 15,
-                              child: Text('${product.price}\$', style: const TextStyle(color: Color.fromARGB(255, 181, 181, 181), fontSize: 13.0, fontWeight: FontWeight.bold, overflow: TextOverflow.ellipsis, decoration: TextDecoration.lineThrough)),
+                              child: FittedBox(fit: BoxFit.scaleDown, child: Text(productPriceWithoutDiscount, style: const TextStyle(color: Color.fromARGB(255, 181, 181, 181), fontSize: 16.0, fontWeight: FontWeight.bold, overflow: TextOverflow.ellipsis, decoration: TextDecoration.lineThrough))),
                             ),
                             Container(
                               alignment: Alignment.topCenter,
                               height: 25,
-                              child: Text('$productPrice\$', style: const TextStyle(color: Color.fromARGB(255, 198, 79, 79), fontSize: 16.0, fontWeight: FontWeight.bold, overflow: TextOverflow.ellipsis)),
+                              child: FittedBox(fit: BoxFit.scaleDown, child: Text(productPriceWithDiscount, style: const TextStyle(color: Color.fromARGB(255, 198, 79, 79), fontSize: 18.0, fontWeight: FontWeight.bold, overflow: TextOverflow.ellipsis))),
                             ),
                             SizedBox(height: 8,),
                           ]
                         )
-                      : Text('${product.price}\$', style: const TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold, overflow: TextOverflow.ellipsis), textAlign: TextAlign.center,)
+                      : FittedBox(fit: BoxFit.scaleDown, child: Text(productPriceWithoutDiscount, style: const TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold), textAlign: TextAlign.center,))
                     ),
                   ),
                 ),
@@ -216,5 +222,18 @@ class SpotlightProductCard extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  String getProductPrice(double price, double discount, CoinExchangeProvider coinExchangeProvider) {
+    double discountedPrice = (product.price - (product.price * (product.discount / 100)));
+    double exchangedPrice = coinExchangeProvider.convertPrice(discountedPrice);
+    String formatedPrice = coinExchangeProvider.formatPrice(exchangedPrice);
+    return formatedPrice;
+  }
+
+  String getProductPriceWithoutDiscount(double price, CoinExchangeProvider coinExchangeProvider) {
+    double exchangedPrice = coinExchangeProvider.convertPrice(price);
+    String formatedPrice = coinExchangeProvider.formatPrice(exchangedPrice);
+    return formatedPrice;
   }
 }

@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 class SettingsScreenDropdown extends StatelessWidget {
   final String label;
   final String selectedValue;
-  final List<String> options;
+  final Map<String, String> options;
   final ValueChanged<String?> onChanged;
 
   const SettingsScreenDropdown({
@@ -23,7 +23,7 @@ class SettingsScreenDropdown extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
 
-          // Label for currency dropdown
+          // Label
           Padding(
             padding: const EdgeInsets.only(bottom: 8.0),
             child: Text(
@@ -41,7 +41,7 @@ class SettingsScreenDropdown extends StatelessWidget {
             ),
           ),
 
-          // Custom styled dropdown for currency
+          // Dropdown
           Container(
             height: 48,
             decoration: BoxDecoration(
@@ -71,11 +71,11 @@ class SettingsScreenDropdown extends StatelessWidget {
                     color: Colors.amber,
                     size: 24,
                   ),
-                  items: options.map((String currency) {
+                  items: options.entries.map((entry) {
                     return DropdownMenuItem<String>(
-                      value: currency,
+                      value: entry.key,
                       child: Text(
-                        currency,
+                        entry.value,
                         style: GoogleFonts.pressStart2p(
                           color: Colors.amber,
                           fontSize: 12,

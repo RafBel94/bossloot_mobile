@@ -21,6 +21,11 @@
         "description": "Text for clear"
     },
 
+    "app_new": "NEW",
+    "@app_new": {
+        "description": "Text for new"
+    },
+
     "app_category": "Category",
     "@app_category": {
         "description": "Text for category"
@@ -141,7 +146,7 @@
         "description": "Error message for mismatched passwords"
     },
 
-    "app_adventurer_level": "Adventurer level:",
+    "app_adventurer_level": "Adventurer level ",
     "@app_adventurer_level": {
         "description": "Text for the adventurer level label"
     },
@@ -421,12 +426,22 @@
         "description": "Text for the specifications label on the product details screen"
     },
 
+    "product_details_screen_model_label": "Model",
+    "@product_details_screen_model_label": {
+        "description": "Text for the model label on the product details screen"
+    },
+
+    "product_details_screen_brand_label": "Brand",
+    "@product_details_screen_brand_label": {
+        "description": "Text for the brand label on the product details screen"
+    },
+
     "product_details_screen_similar_products_label": "We thought you might like...",
     "@product_details_screen_similar_products_label": {
         "description": "Text for the similar products label on the product details screen"
     },
 
-    "product_details_screen_valoration_label": "Other adventurers said...",
+    "product_details_screen_valoration_label": "Adventurers Opinions",
     "@product_details_screen_valoration_label": {
         "description": "Text for the valorations label on the product details screen"
     },
