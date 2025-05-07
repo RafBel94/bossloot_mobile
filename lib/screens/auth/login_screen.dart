@@ -3,6 +3,7 @@ import 'package:bossloot_mobile/actions/login_action.dart';
 import 'package:bossloot_mobile/screens/auth/register_screen.dart';
 import 'package:bossloot_mobile/utils/text_util.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -95,7 +96,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   margin: const EdgeInsets.only(bottom: 20),
                                   child: Center(
                                     child: Text(
-                                      "Login",
+                                      'Login',
                                       style: TextStyle(
                                         color: Colors.white,
                                         fontSize: 33,
@@ -107,7 +108,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 
                                 const Spacer(),
                                 // Email label
-                                TextUtil(text: "Email", isBold: true, size: 20, color: Colors.white),
+                                TextUtil(text: AppLocalizations.of(context)!.login_screen_email_field, isBold: true, size: 20, color: Colors.white),
                 
                                 // Email input field
                                 Container(
@@ -128,7 +129,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     ),
                                     validator: (value) {
                                       if (value == null || value.isEmpty) {
-                                        return 'Please enter a valid email';
+                                        return AppLocalizations.of(context)!.app_empty_email;
                                       }
                                       return null;
                                     },
@@ -138,7 +139,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 const Spacer(),
                                 const Spacer(),
                                 // Password label
-                                TextUtil(text: "Password", isBold: true, size: 20, color: Colors.white),
+                                TextUtil(text: AppLocalizations.of(context)!.login_screen_password_field, isBold: true, size: 20, color: Colors.white),
                 
                                 // Password input field
                                 Container(
@@ -170,7 +171,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     obscureText: !_passwordVisible,
                                     validator: (value) {
                                       if (value == null || value.isEmpty) {
-                                        return 'Please enter your password';
+                                        return AppLocalizations.of(context)!.app_empty_password;
                                       }
                                       return null;
                                     },
@@ -187,7 +188,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      TextUtil(text: "Don't have an account?", isBold: true, color: Colors.white),
+                                      TextUtil(text: AppLocalizations.of(context)!.login_screen_no_account_label, isBold: true, color: Colors.white),
                 
                                       const SizedBox(height: 7),
                 
@@ -227,7 +228,7 @@ class RegisterButton extends StatelessWidget {
       onPressed: () {
         Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const RegisterScreen()));
       },
-      child: TextUtil(text: "Register", isBold: true)
+      child: TextUtil(text: AppLocalizations.of(context)!.login_screen_register_button, isBold: true)
     );
   }
 }

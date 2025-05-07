@@ -12,6 +12,7 @@ import 'package:bossloot_mobile/domain/models/products/mouse_product.dart';
 import 'package:bossloot_mobile/domain/models/products/psu_product.dart';
 import 'package:bossloot_mobile/domain/models/products/ram_product.dart';
 import 'package:bossloot_mobile/domain/models/products/storage_product.dart';
+import 'package:bossloot_mobile/providers/coin_exchange_provider.dart';
 import 'package:bossloot_mobile/providers/favorite_provider.dart';
 import 'package:bossloot_mobile/providers/product_provider.dart';
 import 'package:bossloot_mobile/providers/user_provider.dart';
@@ -31,6 +32,7 @@ import 'package:bossloot_mobile/screens/main_screen/product_details_screen/produ
 import 'package:bossloot_mobile/utils/dialog_util.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class GeneralProductDetails extends StatefulWidget {
   final dynamic product;
@@ -68,10 +70,13 @@ class _GeneralProductDetailsState extends State<GeneralProductDetails> {
 
   @override
   Widget build(BuildContext context) {
+    CoinExchangeProvider coinExchangeProvider = context.watch<CoinExchangeProvider>();
+
     String formatedDiscount = widget.product.discount % 1 == 0 
       ? widget.product.discount.toStringAsFixed(0) 
       : widget.product.discount.toString();
-    String productPrice = (widget.product.price - (widget.product.price * (widget.product.discount / 100))).toStringAsFixed(2);
+    String productPriceWithoutDiscount = getProductPriceWithoutDiscount(widget.product.price, coinExchangeProvider);
+    String productPriceWithDiscount = getProductPrice(widget.product.price, widget.product.discount, coinExchangeProvider);
 
     // Check if the product is in the favorites list
     final favoriteProvider = context.watch<FavoriteProvider>();
@@ -199,7 +204,7 @@ class _GeneralProductDetailsState extends State<GeneralProductDetails> {
                                   padding: const EdgeInsets.only(right: 10),
                                   alignment: Alignment.topRight,
                                   height: 15,
-                                  child: Text('${widget.product.price}\$', style: const TextStyle(color: Color.fromARGB(255, 181, 181, 181), fontSize: 14.0, fontWeight: FontWeight.bold, overflow: TextOverflow.ellipsis, decoration: TextDecoration.lineThrough)),
+                                  child: Text(productPriceWithoutDiscount, style: const TextStyle(color: Color.fromARGB(255, 181, 181, 181), fontSize: 14.0, fontWeight: FontWeight.bold, overflow: TextOverflow.ellipsis, decoration: TextDecoration.lineThrough)),
                                 ),
                                 Container(
                                   padding: const EdgeInsets.only(right: 15),
@@ -221,35 +226,24 @@ class _GeneralProductDetailsState extends State<GeneralProductDetails> {
                                         child: Text('-$formatedDiscount%', style: const TextStyle(color: Colors.white, fontSize: 10.0, fontWeight: FontWeight.bold, overflow: TextOverflow.ellipsis), textAlign: TextAlign.center),
                                       ),
                                       SizedBox(width: 5),
-                                      Text('$productPrice\$', style: const TextStyle(color: Color.fromARGB(255, 198, 79, 79), fontSize: 23.0, fontWeight: FontWeight.bold, overflow: TextOverflow.ellipsis))
+                                      Text('$productPriceWithDiscount\$', style: const TextStyle(color: Color.fromARGB(255, 198, 79, 79), fontSize: 23.0, fontWeight: FontWeight.bold, overflow: TextOverflow.ellipsis))
                                     ]
                                   ),
                                 ),
-                                SizedBox(height: 8,),
+                                const SizedBox(height: 8,),
                               ]
                             )
                           : Align(
                             alignment: Alignment.centerRight,
                             child: Padding(
                               padding: EdgeInsets.symmetric(horizontal: 5),
-                              child: Text('${widget.product.price}\$', style: const TextStyle(fontSize: 23.0, color: Color.fromARGB(255, 63, 146, 66), fontWeight: FontWeight.bold, overflow: TextOverflow.ellipsis), textAlign: TextAlign.center,)
+                              child: Text(productPriceWithoutDiscount, style: const TextStyle(fontSize: 23.0, color: Color.fromARGB(255, 63, 146, 66), fontWeight: FontWeight.bold, overflow: TextOverflow.ellipsis), textAlign: TextAlign.center,)
                             )
                           )
                         ),
-                  
-            
-                        // ---- Product Name
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            widget.product.name,
-                            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                        
-                        SizedBox(height: 5),
-                  
-            
+
+                        const SizedBox(height: 5),
+
                         // ---- Product valorations
                         GestureDetector(
                           onTap:() {
@@ -262,20 +256,51 @@ class _GeneralProductDetailsState extends State<GeneralProductDetails> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              Padding(
-                                padding: EdgeInsets.only(bottom: 2, right: 3),
-                                child: Icon(Icons.star_half, color: const Color.fromARGB(255, 221, 204, 50), size: 24)),
+                              ...buildStarRating(widget.product.avg_rating ?? 0),
+                              const SizedBox(width: 6),
                               Text(widget.product.valorations.length > 0 ? '${widget.product.avg_rating}' : '0', style: TextStyle(fontSize: 16, )),
-                              Text('  |  Based on ${widget.product.valorations.length} ratings', style: TextStyle(fontSize: 13,)),
+                              Text('  |  ${AppLocalizations.of(context)!.product_details_screen_valoration_part1} ${widget.product.valorations.length} ${AppLocalizations.of(context)!.product_details_screen_valoration_part2}', style: TextStyle(fontSize: 13,)),
+                            ],
+                          ),
+                        ),
+                  
+                        const SizedBox(height: 5),
+            
+                        // ---- Product Name
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            widget.product.name,
+                            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                          ),
+                        ),
+
+                        const SizedBox(height: 5),
+
+                        // ---- Product Model
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Row(
+                            children: [
+                              Text(
+                                '${AppLocalizations.of(context)!.product_details_screen_model_label}: ',
+                                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                              ),
+
+                              const SizedBox(width: 5),
+
+                              Text(
+                                widget.product.model,
+                                style: TextStyle(fontSize: 16, color: Colors.grey),
+                              ),
                             ],
                           ),
                         ),
                       ],
                     ),
                   ),
-                  
-                  SizedBox(height: 8),
-            
+
+                  const SizedBox(height: 8),
             
                   // ---- Product Description
                   Container(
@@ -290,7 +315,7 @@ class _GeneralProductDetailsState extends State<GeneralProductDetails> {
                       mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Description', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
+                        Text(AppLocalizations.of(context)!.product_details_screen_description_label, style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
                         SizedBox(height: 15),
                         Text(widget.product.description, style: TextStyle(fontSize: 16),),
                       ],
@@ -298,7 +323,7 @@ class _GeneralProductDetailsState extends State<GeneralProductDetails> {
                   ),
             
             
-                  SizedBox(height: 8),
+                  const SizedBox(height: 8),
             
             
                   // ---- Specifications
@@ -316,7 +341,7 @@ class _GeneralProductDetailsState extends State<GeneralProductDetails> {
               ),
             ),
 
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
 
             // ---- Similar Products
             Container(
@@ -347,7 +372,7 @@ class _GeneralProductDetailsState extends State<GeneralProductDetails> {
                     ),
                     width: double.infinity,
                     height: 45,
-                    child: FittedBox(child: Text('We though you may like...', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold))),
+                    child: FittedBox(child: Text(AppLocalizations.of(context)!.product_details_screen_similar_products_label, style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold))),
                   ),
                   SizedBox(
                     height: 290,
@@ -374,7 +399,7 @@ class _GeneralProductDetailsState extends State<GeneralProductDetails> {
             ),
           
           
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
 
             // ---- Valorations
             Container(
@@ -391,6 +416,26 @@ class _GeneralProductDetailsState extends State<GeneralProductDetails> {
         ),
       ),
     );
+  }
+
+  List<Widget> buildStarRating(double rating) {
+    List<Widget> stars = [];
+    int fullStars = rating.floor();
+    bool hasHalfStar = (rating - fullStars) >= 0.5;
+
+    for (int i = 0; i < fullStars; i++) {
+      stars.add(const Icon(Icons.star, color: Color.fromARGB(255, 248, 230, 67), size: 20));
+    }
+
+    if (hasHalfStar) {
+      stars.add(const Icon(Icons.star_half, color: Color.fromARGB(255, 248, 230, 67), size: 20));
+    }
+
+    while (stars.length < 5) {
+      stars.add(const Icon(Icons.star_border, color: Color.fromARGB(255, 248, 230, 67), size: 20));
+    }
+
+    return stars;
   }
 
   Widget _specificProductDetails(dynamic product) {
@@ -418,7 +463,20 @@ class _GeneralProductDetailsState extends State<GeneralProductDetails> {
       case MouseProduct:
         return MouseProductDetails(product: product as MouseProduct);
       default:
-        return const Text('Tipo de producto no soportado');
+        return const Text('Product type not supported');
     }
+  }
+
+  String getProductPrice(double price, double discount, CoinExchangeProvider coinExchangeProvider) {
+    double discountedPrice = (widget.product.price - (widget.product.price * (widget.product.discount / 100)));
+    double exchangedPrice = coinExchangeProvider.convertPrice(discountedPrice);
+    String formatedPrice = coinExchangeProvider.formatPrice(exchangedPrice);
+    return formatedPrice;
+  }
+
+  String getProductPriceWithoutDiscount(double price, CoinExchangeProvider coinExchangeProvider) {
+    double exchangedPrice = coinExchangeProvider.convertPrice(price);
+    String formatedPrice = coinExchangeProvider.formatPrice(exchangedPrice);
+    return formatedPrice;
   }
 }

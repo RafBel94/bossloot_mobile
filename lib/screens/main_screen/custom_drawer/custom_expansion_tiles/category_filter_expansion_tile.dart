@@ -2,6 +2,7 @@
 
 import 'package:bossloot_mobile/domain/models/category.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CategoryFilterExpansionTile extends StatefulWidget {
   List<Category> categories = [];
@@ -31,7 +32,7 @@ class _CategoryFilterExpansionTileState extends State<CategoryFilterExpansionTil
       children: [
         Icon(Icons.category_outlined),
         SizedBox(width: 10),
-        Text('Category'),
+        Text(AppLocalizations.of(context)!.app_category),
       ],
       ),
       children: widget.categories.map((category) {

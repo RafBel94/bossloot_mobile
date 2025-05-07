@@ -7,6 +7,7 @@ import 'package:bossloot_mobile/screens/main_screen/custom_drawer/custom_expansi
 import 'package:bossloot_mobile/screens/main_screen/custom_drawer/custom_expansion_tiles/price_filter_expansion_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CustomEndDrawer extends StatefulWidget {
   const CustomEndDrawer({super.key});
@@ -56,7 +57,7 @@ class _CustomEndDrawerState extends State<CustomEndDrawer> {
           // HEADER (LOGO, TITLE AND SEARCH BAR)
           SizedBox(
             height: 80,
-            child: const DrawerHeader(
+            child: DrawerHeader(
               decoration: BoxDecoration(
                 color: Colors.white,
                 border: Border(
@@ -75,7 +76,7 @@ class _CustomEndDrawerState extends State<CustomEndDrawer> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Icon(Icons.filter_alt, color: Colors.black, size: 30),
-                  Text('Filters', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 28),),
+                  Text(AppLocalizations.of(context)!.drawer_title, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 28),),
                   SizedBox(width: 10),
                 ],
               ),

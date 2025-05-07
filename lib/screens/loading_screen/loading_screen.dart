@@ -1,3 +1,5 @@
+import 'package:bossloot_mobile/providers/coin_exchange_provider.dart';
+import 'package:bossloot_mobile/providers/language_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_svg/svg.dart';
@@ -70,28 +72,24 @@ class _LoadingScreenState extends State<LoadingScreen>
     }
 
     Future<void> _startAnimationsAndLoadData() async {
-    // 1. Start rotation
     _rotationController.forward();
     
-    // 2. Load data while the animation is displayed
     final startTime = DateTime.now();
-    await _initializeAllProductsAndCategories();
 
-    // 3. Start heartbeat effect
     await _scaleController.forward();
     
-    // 4. Show title with fade-in effect
     await _fadeTitleController.forward();
     
-    // 5. Ensure minimum display time
     final elapsed = DateTime.now().difference(startTime);
     final minDisplayDuration = const Duration(seconds: 3);
     
     if (elapsed < minDisplayDuration) {
       await Future.delayed(minDisplayDuration - elapsed);
     }
+
+    await _initializeData();
     
-    // 6. Navigate to MainScreen
+    // Navigate to MainScreen
     if (mounted) {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (context) => const MainScreen())
@@ -99,10 +97,14 @@ class _LoadingScreenState extends State<LoadingScreen>
     }
   }
 
-  Future<void> _initializeAllProductsAndCategories() async {
+  Future<void> _initializeData() async {
+    final LanguageProvider languageProvider = context.read<LanguageProvider>();
+    final coinExchangeProvider = context.read<CoinExchangeProvider>();
     final categoryProvider = context.read<CategoryProvider>();
     final productProvider = context.read<ProductProvider>();
     
+    await languageProvider.initialize();
+    await coinExchangeProvider.initialize();
     await productProvider.fetchCatalogProducts();
     await productProvider.fetchFeaturedProducts();
     await categoryProvider.fetchCategories();

@@ -6,6 +6,7 @@ import 'package:bossloot_mobile/screens/main_screen/favorite_screen/favorite_pro
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class FavoriteScreen extends StatefulWidget {
   final User? user;
@@ -89,7 +90,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
               child: AppBar(
                 centerTitle: true,
                 title: Text(
-                  'FAVORITES',
+                  AppLocalizations.of(context)!.favorites_screen_title,
                   style: GoogleFonts.pressStart2p(
                     color: Colors.amber,
                     shadows: const [

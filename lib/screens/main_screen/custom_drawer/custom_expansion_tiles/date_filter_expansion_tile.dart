@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class DateFilterExpansionTile extends StatefulWidget {
   const DateFilterExpansionTile({super.key});
@@ -17,12 +18,12 @@ class _DateFilterExpansionTileState extends State<DateFilterExpansionTile> {
           color: const Color.fromARGB(255, 204, 204, 204)
         )
       ),
-      title: Row(children: [Icon(Icons.calendar_month), SizedBox(width: 10), Text('Date')],),
+      title: Row(children: [Icon(Icons.calendar_month), SizedBox(width: 10), Text(AppLocalizations.of(context)!.app_date)],),
         children: [
           ListTile(
             contentPadding: EdgeInsets.only(left: 40),
             tileColor: const Color.fromARGB(255, 242, 242, 242),
-            title: Row(children: [Icon(Icons.arrow_upward), SizedBox(width: 10), Text('Ascendent')],),
+            title: Row(children: [Icon(Icons.arrow_upward), SizedBox(width: 10), Text(AppLocalizations.of(context)!.app_ascending)],),
             onTap: () {
               // Handle sub-item 1 tap
             },
@@ -30,7 +31,7 @@ class _DateFilterExpansionTileState extends State<DateFilterExpansionTile> {
           ListTile(
             contentPadding: EdgeInsets.only(left: 40),
             tileColor: const Color.fromARGB(255, 242, 242, 242),
-            title: Row(children: [Icon(Icons.arrow_downward), SizedBox(width: 10), Text('Descendent')],),
+            title: Row(children: [Icon(Icons.arrow_downward), SizedBox(width: 10), Text(AppLocalizations.of(context)!.app_descending)],),
             onTap: () {
               // Handle sub-item 2 tap
             },
@@ -40,7 +41,7 @@ class _DateFilterExpansionTileState extends State<DateFilterExpansionTile> {
             tileColor: const Color.fromARGB(255, 242, 242, 242),
             title: Row(
               children: [
-                Text('From: '),
+                Text('${AppLocalizations.of(context)!.app_from}: '),
                 SizedBox(width: 10),
                 Expanded(
                 child: ElevatedButton(
@@ -50,7 +51,7 @@ class _DateFilterExpansionTileState extends State<DateFilterExpansionTile> {
                       borderRadius: BorderRadius.circular(10),
                     ),
                   ),
-                  child: Text('Choose', style: TextStyle(color: Colors.black),),
+                  child: Text(AppLocalizations.of(context)!.app_choose, style: TextStyle(color: Colors.black),),
                   onPressed: () {}                          )
                 ),
                 SizedBox(width: 30,)
@@ -62,7 +63,7 @@ class _DateFilterExpansionTileState extends State<DateFilterExpansionTile> {
             tileColor: const Color.fromARGB(255, 242, 242, 242),
             title: Row(
               children: [
-                Text('To: '),
+                Text('${AppLocalizations.of(context)!.app_to}: '),
                 SizedBox(width: 30),
                 Expanded(
                 child: ElevatedButton(
@@ -72,7 +73,7 @@ class _DateFilterExpansionTileState extends State<DateFilterExpansionTile> {
                       borderRadius: BorderRadius.circular(10),
                     ),
                   ),
-                  child: Text('Choose', style: TextStyle(color: Colors.black),),
+                  child: Text(AppLocalizations.of(context)!.app_choose, style: TextStyle(color: Colors.black),),
                   onPressed: () {}                          )
                 ),
                 SizedBox(width: 30,)

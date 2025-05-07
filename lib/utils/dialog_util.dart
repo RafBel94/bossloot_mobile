@@ -5,6 +5,7 @@ import 'package:bossloot_mobile/providers/user_provider.dart';
 import 'package:bossloot_mobile/screens/main_screen/main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class DialogUtil {
   static Future<dynamic> showLogoutDialog(BuildContext context, UserProvider userProvider) {
@@ -36,7 +37,7 @@ class DialogUtil {
 
               // Title
               Text(
-                "LOGOUT",
+                AppLocalizations.of(context)!.logout_dialog_title,
                 style: GoogleFonts.pressStart2p(
                   fontSize: 18,
                   color: Colors.amber,
@@ -54,9 +55,8 @@ class DialogUtil {
               
               // General Information
               _buildInfoSection(
-                title: "You're about to log out!",
-                content: "Do you really want to log out of your account?\n"
-                        "You will need to log in again to access your account.",
+                title: AppLocalizations.of(context)!.logout_dialog_subtitle,
+                content: AppLocalizations.of(context)!.logout_dialog_text,
                 color: Colors.pinkAccent,
               ),
               
@@ -85,7 +85,7 @@ class DialogUtil {
                       padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
                     ),
                     child: Text(
-                      "Yes",
+                      AppLocalizations.of(context)!.app_yes,
                       style: GoogleFonts.pressStart2p(
                         fontSize: 12,
                         letterSpacing: 1,
@@ -207,7 +207,7 @@ class DialogUtil {
                             Icon(Icons.pinch, color: Colors.white, size: 18),
                             SizedBox(width: 6),
                             Text(
-                              'Pinch to zoom',
+                              AppLocalizations.of(context)!.app_pinch_to_zoom,
                               style: TextStyle(color: Colors.white, fontSize: 12),
                             ),
                           ],
@@ -253,7 +253,7 @@ class DialogUtil {
 
               // Title
               Text(
-                "USER PROFILE",
+                AppLocalizations.of(context)!.profile_details_help_dialog_title,
                 style: GoogleFonts.pressStart2p(
                   fontSize: 18,
                   color: Colors.amber,
@@ -272,8 +272,8 @@ class DialogUtil {
               // General Information
               _buildInfoSection(
                 icon: Icons.person,
-                title: "YOUR PROFILE",
-                content: "Here you can edit your personal information and profile image",
+                title: AppLocalizations.of(context)!.profile_details_help_dialog_profile_label,
+                content: AppLocalizations.of(context)!.profile_details_help_dialog_profile_text,
                 color: Colors.pinkAccent,
               ),
               
@@ -282,10 +282,8 @@ class DialogUtil {
               // Level and experience points
               _buildInfoSection(
                 icon: Icons.star,
-                title: "LEVEL SYSTEM",
-                content: "• Your level unlocks special discounts\n"
-                        "• Earn XP by purchasing products\n"
-                        "• The max level is 3",
+                title: AppLocalizations.of(context)!.profile_details_help_dialog_level_label,
+                content: AppLocalizations.of(context)!.profile_details_help_dialog_level_text,
                 color: Colors.lightBlueAccent,
               ),
               
@@ -305,7 +303,7 @@ class DialogUtil {
                     padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
                   ),
                   child: Text(
-                    "GOT IT!",
+                    AppLocalizations.of(context)!.profile_details_help_dialog_button,
                     style: GoogleFonts.pressStart2p(
                       fontSize: 12,
                       letterSpacing: 1,
@@ -349,7 +347,7 @@ class DialogUtil {
 
               // Title
               Text(
-                "LOGIN REQUIRED",
+                AppLocalizations.of(context)!.login_required_dialog_title,
                 style: GoogleFonts.pressStart2p(
                   fontSize: 18,
                   color: Colors.amber,
@@ -367,8 +365,8 @@ class DialogUtil {
               
               // General Information
               _buildInfoSection(
-                title: "Looks like you are not logged in",
-                content: "Please log into your account to access this feature",
+                title: AppLocalizations.of(context)!.login_required_dialog_subtitle,
+                content: AppLocalizations.of(context)!.login_required_dialog_text,
                 color: Colors.pinkAccent,
               ),
               
@@ -388,7 +386,7 @@ class DialogUtil {
                     padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
                   ),
                   child: Text(
-                    "GOT IT!",
+                    AppLocalizations.of(context)!.login_required_dialog_button,
                     style: GoogleFonts.pressStart2p(
                       fontSize: 12,
                       letterSpacing: 1,
@@ -410,7 +408,7 @@ class DialogUtil {
     dynamic product, 
     bool isFavorite
   ) {
-    bool isProcessing = false; // Variable para controlar el estado del botón
+    bool isProcessing = false;
     
     return showDialog(
       context: context,
@@ -442,7 +440,7 @@ class DialogUtil {
                   // Title
                   FittedBox(
                     child: Text(
-                      isFavorite ? "REMOVE FAVORITE" : "ADD FAVORITE",
+                      isFavorite ? AppLocalizations.of(context)!.favorite_remove_dialog_title : AppLocalizations.of(context)!.favorite_add_dialog_title,
                       style: GoogleFonts.pressStart2p(
                         fontSize: 18,
                         color: Colors.amber,
@@ -463,7 +461,7 @@ class DialogUtil {
                   _buildInfoSection(
                     icon: isFavorite ? Icons.heart_broken : Icons.favorite,
                     color: Colors.red,
-                    title: isFavorite ? "REMOVE FROM FAVORITES?" : "ADD TO FAVORITES?",
+                    title: isFavorite ? AppLocalizations.of(context)!.favorite_remove_dialog_text : AppLocalizations.of(context)!.favorite_add_dialog_text,
                     content: '',
                   ),
                   
@@ -524,7 +522,7 @@ class DialogUtil {
                               ),
                             )
                           : Text(
-                              "YES",
+                              AppLocalizations.of(context)!.app_yes,
                               style: GoogleFonts.pressStart2p(
                                 fontSize: 12,
                                 letterSpacing: 1,
@@ -592,7 +590,7 @@ class DialogUtil {
             children: [
               FittedBox(
                 child: Text(
-                  isFavorite ? "FAVORITE REMOVED" : "FAVORITE ADDED",
+                  isFavorite ? AppLocalizations.of(context)!.favorite_removed_dialog_title : AppLocalizations.of(context)!.favorite_added_dialog_title,
                   style: GoogleFonts.pressStart2p(
                     fontSize: 18,
                     color: Colors.amber,
@@ -611,10 +609,10 @@ class DialogUtil {
               
               // General Information
               _buildInfoSection(
-                title: isFavorite ? "REMOVED FROM FAVORITES!" : "ADDED TO FAVORITES!",
+                title: isFavorite ? AppLocalizations.of(context)!.favorite_removed_dialog_label : AppLocalizations.of(context)!.favorite_added_dialog_label,
                 content: isFavorite 
                   ? ""
-                  : "This item has been added to your favorites list. You can find it in your profile.",
+                  : AppLocalizations.of(context)!.favorite_added_dialog_text,
                 color: Colors.pinkAccent,
               ),
               
@@ -634,7 +632,7 @@ class DialogUtil {
                     padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
                   ),
                   child: Text(
-                    "GOT IT!",
+                    AppLocalizations.of(context)!.favorite_added_dialog_button,
                     style: GoogleFonts.pressStart2p(
                       fontSize: 12,
                       letterSpacing: 1,

@@ -1,6 +1,7 @@
 import 'package:bossloot_mobile/domain/models/valoration.dart';
 import 'package:bossloot_mobile/utils/dialog_util.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ProductValorations extends StatelessWidget {
 
@@ -30,7 +31,7 @@ class ProductValorations extends StatelessWidget {
           ),
           width: double.infinity,
           height: 45,
-          child: FittedBox(child: Text('Other adventurers said...', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold))),
+          child: FittedBox(child: Text(AppLocalizations.of(context)!.product_details_screen_valoration_label, style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold))),
         ),
 
         const SizedBox(height: 10),
@@ -99,15 +100,18 @@ class ProductValorations extends StatelessWidget {
                                   Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
-                                      Text(
-                                        valorations[index].user.name.split(' ').take(2).join(' '),
-                                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                                        overflow: TextOverflow.ellipsis,
-                                        maxLines: 1,
+                                      FittedBox(
+                                        fit: BoxFit.scaleDown,
+                                        alignment: Alignment.centerLeft,
+                                        child: Text(
+                                          valorations[index].user.name.split(' ').take(2).join(' '),
+                                          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                                          maxLines: 1,
+                                        ),
                                       ),
                                       FittedBox(
                                         child: Text(
-                                          'Adventurer level: ${valorations[index].user.level}', 
+                                          '${AppLocalizations.of(context)!.app_adventurer_level}${valorations[index].user.level}', 
                                           style: TextStyle(fontSize: 14, color: Colors.grey),
                                         ),
                                       ),
@@ -134,7 +138,7 @@ class ProductValorations extends StatelessWidget {
                       const SizedBox(height: 10),
 
                       // Comment
-                      Text(valorations[index].comment ?? 'Nothing to say.', style: TextStyle(fontSize: 14)),
+                      Text(valorations[index].comment ?? '', style: TextStyle(fontSize: 14)),
 
                       const SizedBox(height: 5),
 
@@ -171,7 +175,7 @@ class ProductValorations extends StatelessWidget {
                             ),
                           ),
                         ),
-                        child: Text('Created: ${valorations[index].createdAt.day}/${valorations[index].createdAt.month}/${valorations[index].createdAt.year}',
+                        child: Text('${AppLocalizations.of(context)!.app_created} ${valorations[index].createdAt.day}/${valorations[index].createdAt.month}/${valorations[index].createdAt.year}',
                           style: TextStyle(fontSize: 12, color: Colors.grey),
                         ),
                       )
@@ -205,7 +209,7 @@ class ProductValorations extends StatelessWidget {
           width: double.infinity,
           height: MediaQuery.of(context).size.height * 0.66,
           child: SizedBox(
-            child: Text('Nobody has said anything yet...', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold) ),
+            child: Text(AppLocalizations.of(context)!.product_details_screen_no_valorations, style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold) ),
           ),
         ),
       ],

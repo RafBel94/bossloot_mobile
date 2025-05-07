@@ -1,6 +1,7 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CustomNavigationBar extends StatelessWidget {
   final int selectedIndex;
@@ -27,13 +28,13 @@ class CustomNavigationBar extends StatelessWidget {
             // Spotlight
             NavigationDestination(
               icon: Icon(Icons.star_border_outlined),
-              label: 'Spotlight'
+              label: AppLocalizations.of(context)!.navigation_bar_spotlight,
             ),
 
             // Catalog
             NavigationDestination(
               icon: Icon(Icons.shopping_bag_outlined),
-              label: 'Catalog'
+              label: AppLocalizations.of(context)!.navigation_bar_catalog,
             ),
 
             // Home
@@ -74,13 +75,13 @@ class CustomNavigationBar extends StatelessWidget {
             // Cart
             NavigationDestination(
               icon: Icon(Icons.shopping_cart_outlined),
-              label: 'Cart'
+              label: AppLocalizations.of(context)!.navigation_bar_cart,
             ),
 
             // Profile
             NavigationDestination(
               icon: Icon(Icons.person_outline),
-              label: 'Profile'
+              label: AppLocalizations.of(context)!.navigation_bar_profile,
             ),
           ],
         ));

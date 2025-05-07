@@ -1,6 +1,7 @@
 import 'package:bossloot_mobile/domain/models/products/ram_product.dart';
 import 'package:bossloot_mobile/utils/text_util.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class RamProductDetails extends StatelessWidget {
   final RamProduct product;
@@ -11,7 +12,7 @@ class RamProductDetails extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        TextUtil(text: 'Specifications', isBold: true, size: 22,),
+        TextUtil(text: AppLocalizations.of(context)!.product_details_screen_specifications_label, isBold: true, size: 22,),
 
         SizedBox(height: 20,),
 
@@ -24,7 +25,7 @@ class RamProductDetails extends StatelessWidget {
               children: [
                 Icon(Icons.category),
                 SizedBox(width: 5,),
-                TextUtil(text: 'Memory type: ', isBold: true, size: 16,),
+                TextUtil(text: '${AppLocalizations.of(context)!.product_spec_memory_type}: ', isBold: true, size: 16,),
                 TextUtil(text: product.memory_type, size: 16,),
               ],
             ),
@@ -34,7 +35,7 @@ class RamProductDetails extends StatelessWidget {
               children: [
                 Icon(Icons.memory),
                 SizedBox(width: 5,),
-                TextUtil(text: 'Memory: ', isBold: true, size: 16,),
+                TextUtil(text: '${AppLocalizations.of(context)!.product_spec_memory}: ', isBold: true, size: 16,),
                 TextUtil(text: '${product.memory} GB', size: 16,),
               ],
             ),
@@ -44,7 +45,7 @@ class RamProductDetails extends StatelessWidget {
               children: [
                 Icon(Icons.bolt),
                 SizedBox(width: 5,),
-                TextUtil(text: 'Speed: ', isBold: true, size: 16,),
+                TextUtil(text: '${AppLocalizations.of(context)!.product_spec_speed}: ', isBold: true, size: 16,),
                 TextUtil(text: '${product.speed} MHz', size: 16,),
               ],
             ),
@@ -54,7 +55,7 @@ class RamProductDetails extends StatelessWidget {
               children: [
                 Icon(Icons.cached),
                 SizedBox(width: 5,),
-                TextUtil(text: 'Latency: ', isBold: true, size: 16,),
+                TextUtil(text: '${AppLocalizations.of(context)!.product_spec_latency}: ', isBold: true, size: 16,),
                 TextUtil(text: 'CL${product.latency}', size: 16,),
               ],
             ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class DrawerClearButton extends StatelessWidget {
   const DrawerClearButton({super.key});
@@ -17,7 +18,7 @@ class DrawerClearButton extends StatelessWidget {
         backgroundColor: const Color.fromARGB(255, 215, 215, 215),
         padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 30),
       ),
-      child: const Text("Clear", style: TextStyle(fontSize: 16, color: Color.fromARGB(255, 48, 48, 48), fontWeight: FontWeight.bold)),
+      child: Text(AppLocalizations.of(context)!.app_clear, style: TextStyle(fontSize: 16, color: Color.fromARGB(255, 48, 48, 48), fontWeight: FontWeight.bold)),
     );
   }
 }
