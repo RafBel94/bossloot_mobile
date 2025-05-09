@@ -197,6 +197,11 @@
         "description": "Text for the settings button on the profile screen"
     },
 
+    "profile_screen_contact_button": "Contacto",
+    "@profile_screen_contact_button": {
+        "description": "Text for the contact button on the profile screen"
+    },
+
     "profile_screen_locked_feature": "¡Logeate para acceder a esta función!",
     "@profile_screen_locked_feature": {
         "description": "Text for the locked feature on the profile screen"

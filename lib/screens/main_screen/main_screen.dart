@@ -2,7 +2,7 @@
 
 import 'package:bossloot_mobile/screens/main_screen/cart_screen/cart_screen.dart';
 import 'package:bossloot_mobile/screens/main_screen/catalog_screen/catalog_screen.dart';
-import 'package:bossloot_mobile/screens/main_screen/custom_drawer/custom_end_drawer.dart';
+import 'package:bossloot_mobile/widgets/custom_drawer/custom_end_drawer.dart';
 import 'package:bossloot_mobile/screens/main_screen/home_screen/home_screen.dart';
 import 'package:bossloot_mobile/screens/main_screen/profile_screen/profile_screen.dart';
 import 'package:bossloot_mobile/screens/main_screen/spotlight_screen/spotlight_screen.dart';
@@ -58,6 +58,7 @@ class MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
+
     return PopScope(
       canPop: false,
       onPopInvokedWithResult: (didPop, result) {
@@ -75,7 +76,7 @@ class MainScreenState extends State<MainScreen> {
                   // PageView
                   Expanded(
                     child: Padding(
-                      padding: const EdgeInsets.only(top: 75),
+                      padding: EdgeInsets.only(top: 75),
                       child: Stack(
                         children: [
                           PageView(

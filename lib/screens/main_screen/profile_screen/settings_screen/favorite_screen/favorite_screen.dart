@@ -2,7 +2,7 @@ import 'package:bossloot_mobile/domain/models/catalog_product.dart';
 import 'package:bossloot_mobile/domain/models/user.dart';
 import 'package:bossloot_mobile/providers/favorite_provider.dart';
 import 'package:bossloot_mobile/providers/product_provider.dart';
-import 'package:bossloot_mobile/screens/main_screen/favorite_screen/favorite_product_card.dart';
+import 'package:bossloot_mobile/screens/main_screen/profile_screen/settings_screen/favorite_screen/favorite_product_card.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';

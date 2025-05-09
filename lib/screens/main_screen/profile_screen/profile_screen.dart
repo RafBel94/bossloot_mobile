@@ -3,10 +3,11 @@
 import 'package:bossloot_mobile/domain/models/user.dart';
 import 'package:bossloot_mobile/providers/user_provider.dart';
 import 'package:bossloot_mobile/screens/auth/login_screen.dart';
-import 'package:bossloot_mobile/screens/main_screen/favorite_screen/favorite_screen.dart';
+import 'package:bossloot_mobile/screens/main_screen/profile_screen/settings_screen/contact_screen/contact_screen.dart';
+import 'package:bossloot_mobile/screens/main_screen/profile_screen/settings_screen/favorite_screen/favorite_screen.dart';
 import 'package:bossloot_mobile/screens/main_screen/profile_screen/profile_button.dart';
 import 'package:bossloot_mobile/screens/main_screen/profile_screen/profile_details_screen/profile_details_screen.dart';
-import 'package:bossloot_mobile/screens/main_screen/settings_screen/settings_screen.dart';
+import 'package:bossloot_mobile/screens/main_screen/profile_screen/settings_screen/settings_screen.dart';
 import 'package:bossloot_mobile/utils/dialog_util.dart';
 import 'package:bossloot_mobile/utils/text_util.dart';
 import 'package:flutter/material.dart';
@@ -143,36 +144,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         const SizedBox(height: 10),
 
                         // Buttons
-                        Expanded(
-                          child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 10),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                                
-                              // Profile Button
-                              ProfileButton( text: AppLocalizations.of(context)!.profile_screen_profile_button, svgIconPath: 'assets/icons/profile-icon.svg', userProvider: userProvider , onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const ProfileDetailsScreen(),))),
-                            
-                              const SizedBox(height: 10),
-                            
-                              // Orders Button
-                              ProfileButton( text: AppLocalizations.of(context)!.profile_screen_orders_button, svgIconPath: 'assets/icons/orders-icon.svg', userProvider: userProvider , onPressed: () {}, ),
-                            
-                              const SizedBox(height: 10),
-                            
-                              // Favorites Button
-                              ProfileButton( text: AppLocalizations.of(context)!.profile_screen_favorites_button, svgIconPath: 'assets/icons/favorites-icon.svg', userProvider: userProvider , onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => FavoriteScreen(user: currentUser,),))),
-
-                              const SizedBox(height: 10),
-                              
-                              // Settings Button
-                              ProfileButton( text: AppLocalizations.of(context)!.profile_screen_settings_button, svgIconPath: 'assets/icons/settings-icon.svg', userProvider: userProvider , onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => SettingsScreen(user: currentUser,),))),
-
-                            ],
-                          ),
-                          ),
-                        )
+                        ProfileButtonsListView(userProvider: userProvider, currentUser: currentUser),
                         
                       ],
                     ),
@@ -227,6 +199,89 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class ProfileButtonsListView extends StatelessWidget {
+  const ProfileButtonsListView({
+    super.key,
+    required this.userProvider,
+    required this.currentUser,
+  });
+
+  final UserProvider userProvider;
+  final User? currentUser;
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 10),
+        child: ListView(
+          children: [
+            // Profile Button
+            ProfileButton(
+              text: AppLocalizations.of(context)!.profile_screen_profile_button, 
+              svgIconPath: 'assets/icons/profile-icon.svg', 
+              userProvider: userProvider, 
+              onPressed: () => Navigator.push(
+                context, 
+                MaterialPageRoute(builder: (context) => const ProfileDetailsScreen())
+              )
+            ),
+            
+            const SizedBox(height: 10),
+            
+            // Orders Button
+            ProfileButton(
+              text: AppLocalizations.of(context)!.profile_screen_orders_button, 
+              svgIconPath: 'assets/icons/orders-icon.svg', 
+              userProvider: userProvider, 
+              onPressed: () {},
+            ),
+            
+            const SizedBox(height: 10),
+            
+            // Favorites Button
+            ProfileButton(
+              text: AppLocalizations.of(context)!.profile_screen_favorites_button, 
+              svgIconPath: 'assets/icons/favorites-icon.svg', 
+              userProvider: userProvider, 
+              onPressed: () => Navigator.push(
+                context, 
+                MaterialPageRoute(builder: (context) => FavoriteScreen(user: currentUser))
+              )
+            ),
+            
+            const SizedBox(height: 10),
+            
+            // Settings Button
+            ProfileButton(
+              text: AppLocalizations.of(context)!.profile_screen_settings_button, 
+              svgIconPath: 'assets/icons/settings-icon.svg', 
+              userProvider: userProvider, 
+              onPressed: () => Navigator.push(
+                context, 
+                MaterialPageRoute(builder: (context) => SettingsScreen(user: currentUser))
+              )
+            ),
+            
+            const SizedBox(height: 10),
+            
+            // Contact Button (Nuevo)
+            ProfileButton(
+              text: 'Contacto', 
+              svgIconPath: 'assets/icons/contact-icon.svg', 
+              userProvider: userProvider, 
+              onPressed: () => Navigator.push(
+                context, 
+                MaterialPageRoute(builder: (context) => ContactScreen())
+              )
+            ),
+          ],
+        ),
       ),
     );
   }
