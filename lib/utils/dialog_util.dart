@@ -318,6 +318,102 @@ class DialogUtil {
     );
   }
 
+  static Future<dynamic> showContactFormGuideDialog(BuildContext context) {
+  return showDialog(
+    context: context,
+    builder: (context) => Dialog(
+      backgroundColor: Colors.transparent,
+      child: Container(
+        padding: EdgeInsets.all(20),
+        decoration: BoxDecoration(
+          color: Color(0xFF2A0E4D),
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(
+            color: Colors.purpleAccent,
+            width: 2,
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: const Color.fromRGBO(156, 39, 176, 0.5),
+              blurRadius: 10,
+              spreadRadius: 3,
+            ),
+          ],
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Title
+            Align(
+              alignment: Alignment.center,
+              child: Text(
+                AppLocalizations.of(context)!.contact_screen_help_dialog_title,
+                style: GoogleFonts.pressStart2p(
+                  fontSize: 18,
+                  color: Colors.amber,
+                  shadows: [
+                    Shadow(
+                      color: Colors.purple,
+                      offset: Offset(2, 2),
+                      blurRadius: 0,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            
+            SizedBox(height: 25),
+            
+            // Contact Form Information
+            _buildInfoSection(
+              icon: Icons.contact_mail,
+              title: AppLocalizations.of(context)!.contact_screen_help_dialog_form_label,
+              content: AppLocalizations.of(context)!.contact_screen_help_dialog_form_text,
+              color: Colors.pinkAccent,
+            ),
+            
+            SizedBox(height: 20),
+            
+            // Response Time
+            _buildInfoSection(
+              icon: Icons.timer,
+              title: AppLocalizations.of(context)!.contact_screen_help_dialog_response_label,
+              content: AppLocalizations.of(context)!.contact_screen_help_dialog_response_text,
+              color: Colors.greenAccent,
+            ),
+            
+            SizedBox(height: 20),
+            
+            // Button
+            Center(
+              child: ElevatedButton(
+                onPressed: () => Navigator.pop(context),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.purple,
+                  foregroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                    side: BorderSide(color: Colors.white, width: 2),
+                  ),
+                  padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                ),
+                child: Text(
+                  AppLocalizations.of(context)!.contact_screen_help_dialog_button,
+                  style: GoogleFonts.pressStart2p(
+                    fontSize: 12,
+                    letterSpacing: 1,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    ),
+  );
+}
+
   static Future<dynamic> showLoginRequiredDialog(BuildContext context) {
     return showDialog(
       context: context,

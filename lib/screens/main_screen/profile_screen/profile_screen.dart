@@ -220,6 +220,7 @@ class ProfileButtonsListView extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10),
         child: ListView(
+          padding: EdgeInsets.only(top: 5),
           children: [
             // Profile Button
             ProfileButton(
@@ -232,7 +233,7 @@ class ProfileButtonsListView extends StatelessWidget {
               )
             ),
             
-            const SizedBox(height: 10),
+            const SizedBox(height: 9),
             
             // Orders Button
             ProfileButton(
@@ -242,7 +243,7 @@ class ProfileButtonsListView extends StatelessWidget {
               onPressed: () {},
             ),
             
-            const SizedBox(height: 10),
+            const SizedBox(height: 9),
             
             // Favorites Button
             ProfileButton(
@@ -255,8 +256,21 @@ class ProfileButtonsListView extends StatelessWidget {
               )
             ),
             
-            const SizedBox(height: 10),
+            const SizedBox(height: 9),
             
+            // Contact Button
+            ProfileButton(
+              text: AppLocalizations.of(context)!.profile_screen_contact_button,
+              svgIconPath: 'assets/icons/contact-icon.svg', 
+              userProvider: userProvider, 
+              onPressed: () => Navigator.push(
+                context, 
+                MaterialPageRoute(builder: (context) => ContactScreen())
+              )
+            ),
+
+            const SizedBox(height: 9),
+
             // Settings Button
             ProfileButton(
               text: AppLocalizations.of(context)!.profile_screen_settings_button, 
@@ -268,18 +282,8 @@ class ProfileButtonsListView extends StatelessWidget {
               )
             ),
             
-            const SizedBox(height: 10),
+            const SizedBox(height: 9),
             
-            // Contact Button (Nuevo)
-            ProfileButton(
-              text: 'Contacto', 
-              svgIconPath: 'assets/icons/contact-icon.svg', 
-              userProvider: userProvider, 
-              onPressed: () => Navigator.push(
-                context, 
-                MaterialPageRoute(builder: (context) => ContactScreen())
-              )
-            ),
           ],
         ),
       ),
