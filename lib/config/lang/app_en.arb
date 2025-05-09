@@ -81,7 +81,7 @@
         "description": "Text for the pinch to zoom gesture"
     },
 
-    "app_searchbar_open": "Tap to open search bar",
+    "app_searchbar_open": "Tap or drag down to open search bar",
     "@app_searchbar_open": {
         "description": "Text for the search bar open button"
     },
