@@ -81,7 +81,7 @@
         "description": "Text for the pinch to zoom gesture"
     },
 
-    "app_searchbar_open": "Pulsa para abrir el buscador",
+    "app_searchbar_open": "Pulsa o desliza hacia abajo para abrir el buscador",
     "@app_searchbar_open": {
         "description": "Text for the search bar open button"
     },
