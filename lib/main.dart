@@ -1,12 +1,15 @@
 import 'package:bossloot_mobile/providers/category_provider.dart';
 import 'package:bossloot_mobile/providers/coin_exchange_provider.dart';
+import 'package:bossloot_mobile/providers/contact_provider.dart';
 import 'package:bossloot_mobile/providers/favorite_provider.dart';
 import 'package:bossloot_mobile/providers/language_provider.dart';
 import 'package:bossloot_mobile/providers/product_provider.dart';
+import 'package:bossloot_mobile/providers/size_provider.dart';
 import 'package:bossloot_mobile/providers/user_provider.dart';
 import 'package:bossloot_mobile/screens/loading_screen/loading_screen.dart';
 import 'package:bossloot_mobile/services/category_service.dart';
 import 'package:bossloot_mobile/services/coin_exchange_service.dart';
+import 'package:bossloot_mobile/services/contact_service.dart';
 import 'package:bossloot_mobile/services/favorite_service.dart';
 import 'package:bossloot_mobile/services/product_service.dart';
 import 'package:bossloot_mobile/services/token_service.dart';
@@ -58,6 +61,9 @@ class _MainAppState extends State<MainApp> {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
+          create: (_) => SizeProvider(),
+        ),
+        ChangeNotifierProvider(
           create: (_) => UserProvider(TokenService(), UserService()),
         ),
         ChangeNotifierProvider(
@@ -74,6 +80,9 @@ class _MainAppState extends State<MainApp> {
         ),
         ChangeNotifierProvider(
           create: (_) => LanguageProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => ContactProvider(contactMessageService: ContactMessageService()),
         ),
       ],
       child: Builder(

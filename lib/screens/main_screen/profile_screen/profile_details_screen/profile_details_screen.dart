@@ -111,7 +111,7 @@ class _ProfileDetailsScreenState extends State<ProfileDetailsScreen> {
 
         // MAIN CONTAINER (Background Image)
         child: _isLoading 
-        ? LoadingScreenPlain()
+        ? LoadingScreenPlain(redirect: true,)
         : Container(
           height: double.infinity,
           decoration: const BoxDecoration(

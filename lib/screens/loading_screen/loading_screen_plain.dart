@@ -2,7 +2,8 @@ import 'package:bossloot_mobile/screens/main_screen/main_screen.dart';
 import 'package:flutter/material.dart';
 
 class LoadingScreenPlain extends StatefulWidget {
-  const LoadingScreenPlain({super.key});
+  final bool redirect;
+  const LoadingScreenPlain({super.key, required this.redirect});
 
   @override
   State<LoadingScreenPlain> createState() => _LoadingScreenPlainState();
@@ -87,7 +88,7 @@ class _LoadingScreenPlainState extends State<LoadingScreenPlain>
     }
     
     // 6. Navigate to MainScreen
-    if (mounted) {
+    if (mounted && widget.redirect) {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (context) => const MainScreen(withPageIndex: 4,))
       );

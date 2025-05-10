@@ -1,18 +1,22 @@
 // ignore_for_file: must_be_immutable
 
+import 'package:bossloot_mobile/providers/size_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CustomNavigationBar extends StatelessWidget {
   final int selectedIndex;
   final ValueChanged<int> onTap;
-
+  
   const CustomNavigationBar({super.key, required this.selectedIndex, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
+
+  final SizeProvider sizeProvider = SizeProvider();
+
     return Container(
-        height: 70,
+        height: sizeProvider.bottomNavigationBarHeight,
         decoration: const BoxDecoration(
           border: Border(
             top: BorderSide(color: Color.fromARGB(255, 136, 41, 107), width: 3),

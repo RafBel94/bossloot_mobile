@@ -27,7 +27,7 @@ class ProfileButton extends StatelessWidget {
     
     return GestureDetector(
       onTap: () {
-        if (userLoggedIn || text == AppLocalizations.of(context)!.profile_screen_settings_button) {
+        if (userLoggedIn || text == AppLocalizations.of(context)!.profile_screen_settings_button || text == AppLocalizations.of(context)!.profile_screen_contact_button) {
           onPressed();
         } else {
           null;
@@ -36,7 +36,7 @@ class ProfileButton extends StatelessWidget {
       child: Container(
         alignment: Alignment.center,
         width: double.infinity,
-        height: 80,
+        height: 70,
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(5),
@@ -84,7 +84,7 @@ class ProfileButton extends StatelessWidget {
             ),
 
             // BLUR EFFECT
-            if (!userLoggedIn && text != AppLocalizations.of(context)!.profile_screen_settings_button)
+            if (!userLoggedIn && text != AppLocalizations.of(context)!.profile_screen_settings_button && text != AppLocalizations.of(context)!.profile_screen_contact_button)
               ClipRRect(
                 borderRadius: BorderRadius.circular(5),
                 child: BackdropFilter(

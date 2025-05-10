@@ -156,6 +156,11 @@
         "description": "Text for the adventurer level label"
     },
 
+    "app_unknown": "Unknown",
+    "@app_unknown": {
+        "description": "Text for the unknown label"
+    },
+
 
 
 
@@ -195,6 +200,11 @@
     "profile_screen_settings_button": "Settings",
     "@profile_screen_settings_button": {
         "description": "Text for the settings button on the profile screen"
+    },
+
+    "profile_screen_contact_button": "Contact us",
+    "@profile_screen_contact_button": {
+        "description": "Text for the contact button on the profile screen"
     },
 
     "profile_screen_locked_feature": "Log In to access this feature!",
@@ -327,6 +337,147 @@
     "settings_screen_save_button": "SAVE",
     "@settings_screen_save_button": {
         "description": "Text for the save button on the settings screen"
+    },
+
+
+
+
+    "contact_screen_header": "CONTACT FORM",
+    "@contact_screen_header": {
+        "description": "Header text for the contact screen"
+    },
+
+    "contact_screen_upload_image": "Attach image (optional)",
+    "@contact_screen_upload_image": {
+        "description": "Text for the upload image button on the contact screen"
+    },
+
+    "contact_screen_name_label": "Name",
+    "@contact_screen_name_label": {
+        "description": "Text for the name label on the contact screen"
+    },
+
+    "contact_screen_name_hint": "Enter your name",
+    "@contact_screen_name_hint": {
+        "description": "Hint text for the name field on the contact screen"
+    },
+
+    "contact_screen_email_label": "Email",
+    "@contact_screen_email_label": {
+        "description": "Text for the email label on the contact screen"
+    },
+
+    "contact_screen_email_hint": "Enter your email",
+    "@contact_screen_email_hint": {
+        "description": "Hint text for the email field on the contact screen"
+    },
+
+    "contact_screen_subject_label": "Subject",
+    "@contact_screen_subject_label": {
+        "description": "Text for the subject label on the contact screen"
+    },
+
+    "contact_screen_subject_hint": "Enter the subject",
+    "@contact_screen_subject_hint": {
+        "description": "Hint text for the subject field on the contact screen"
+    },
+
+    "contact_screen_empty_subject": "Please enter a subject",
+    "@contact_screen_empty_subject": {
+        "description": "Text for the empty subject error message on the contact screen"
+    },
+
+    "contact_screen_message_label": "Message",
+    "@contact_screen_message_label": {
+        "description": "Text for the message label on the contact screen"
+    },
+
+    "contact_screen_message_hint": "Enter your message",
+    "@contact_screen_message_hint": {
+        "description": "Hint text for the message field on the contact screen"
+    },
+
+    "contact_screen_empty_message": "Please enter a message",
+    "@contact_screen_empty_message": {
+        "description": "Text for the empty message error message on the contact screen"
+    },
+
+    "contact_screen_send_button": "Send Message",
+    "@contact_screen_send_button": {
+        "description": "Text for the send button on the contact screen"
+    },
+
+    "contact_screen_fail_dialog_title": "FAILED TO SEND",
+    "@contact_screen_fail_dialog_title": {
+        "description": "Title for the fail dialog on the contact screen"
+    },
+
+    "contact_screen_fail_dialog_subtitle": "SOMETHING WENT WRONG!",
+    "@contact_screen_fail_dialog_subtitle": {
+        "description": "Subtitle for the fail dialog on the contact screen"
+    },
+
+    "contact_screen_fail_dialog_text": "The message could not be sent. Please check your internet connection and try again.",
+    "@contact_screen_fail_dialog_text": {
+        "description": "Text for the fail dialog on the contact screen"
+    },
+
+    "contact_screen_fail_dialog_button": "OKAY!",
+    "@contact_screen_fail_dialog_button": {
+        "description": "Text for the button to close the fail dialog on the contact screen"
+    },
+
+    "contact_screen_success_dialog_title": "MESSAGE SENT",
+    "@contact_screen_success_dialog_title": {
+        "description": "Title for the success dialog on the contact screen"
+    },
+
+    "contact_screen_success_dialog_subtitle": "YOUR MESSAGE HAS BEEN SENT!",
+    "@contact_screen_success_dialog_subtitle": {
+        "description": "Subtitle for the success dialog on the contact screen"
+    },
+
+    "contact_screen_success_dialog_text": "We have received your message and will respond as soon as possible. Thank you for contacting us!",
+    "@contact_screen_success_dialog_text": {
+        "description": "Text for the success dialog on the contact screen"
+    },
+
+    "contact_screen_success_dialog_button": "NICE!",
+    "@contact_screen_success_dialog_button": {
+        "description": "Text for the button to close the success dialog on the contact screen"
+    },
+
+
+
+
+    "contact_screen_help_dialog_title": "CONTACT FORM HELP",
+    "@contact_screen_help_dialog_title": {
+        "description": "Title for the help dialog on the contact screen"
+    },
+
+    "contact_screen_help_dialog_form_label": "ABOUT THE FORM",
+    "@contact_screen_help_dialog_form_label": {
+        "description": "Text for the form label in the help dialog on the contact screen"
+    },
+
+    "contact_screen_help_dialog_form_text": "This is the contact form. You can use it to send us a message. Please fill in all the fields and attach an image if you need to and we will reply as fast as possible.",
+    "@contact_screen_help_dialog_form_text": {
+        "description": "Text for the form information in the help dialog on the contact screen"
+    },
+
+    "contact_screen_help_dialog_response_label": "RESPONSE TIME",
+    "@contact_screen_help_dialog_response_label": {
+        "description": "Text for the response time label in the help dialog on the contact screen"
+    },
+
+    "contact_screen_help_dialog_response_text": "We will respond to your message as soon as possible. Generally you will have our response in up to 48 hours.",
+    "@contact_screen_help_dialog_response_text": {
+        "description": "Text for the response time information in the help dialog on the contact screen"
+    },
+
+    "contact_screen_help_dialog_button": "GOT IT!",
+    "@contact_screen_help_dialog_button": {
+        "description": "Text for the button to close the help dialog on the contact screen"
     },
 
 

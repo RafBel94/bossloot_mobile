@@ -1,8 +1,8 @@
 import 'package:bossloot_mobile/domain/models/user.dart';
 import 'package:bossloot_mobile/providers/coin_exchange_provider.dart';
 import 'package:bossloot_mobile/providers/language_provider.dart';
-import 'package:bossloot_mobile/screens/main_screen/settings_screen/settings_custom_appbar.dart';
-import 'package:bossloot_mobile/screens/main_screen/settings_screen/settings_screen_dropdown.dart';
+import 'package:bossloot_mobile/screens/main_screen/profile_screen/settings_screen/settings_custom_appbar.dart';
+import 'package:bossloot_mobile/screens/main_screen/profile_screen/settings_screen/settings_screen_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
