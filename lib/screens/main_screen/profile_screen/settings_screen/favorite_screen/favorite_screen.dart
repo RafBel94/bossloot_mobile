@@ -3,6 +3,7 @@ import 'package:bossloot_mobile/domain/models/user.dart';
 import 'package:bossloot_mobile/providers/favorite_provider.dart';
 import 'package:bossloot_mobile/providers/product_provider.dart';
 import 'package:bossloot_mobile/screens/main_screen/profile_screen/settings_screen/favorite_screen/favorite_product_card.dart';
+import 'package:bossloot_mobile/utils/dialog_util.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -191,11 +192,19 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                               ),
                               child: FavoriteProductCard(
                                 product: favoriteProducts[index],
-                                onRemoveFavorite: () {
+                                onRemoveFavorite: () async {
+                                  bool? result = await DialogUtil.showDeleteFavoriteConfirmDialog(context);
+
+                                  if (result == null || !result) {
+                                    return;
+                                  }
+
                                   favoriteProvider.removeFavorite(
                                     widget.user!.id.toString(), 
                                     favoriteProducts[index].id.toString()
                                   );
+
+                                  DialogUtil.showFavoriteSuccessDialog(context, true);
                                 },
                               ),
                             ),

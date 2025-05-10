@@ -119,8 +119,8 @@ class _CustomHeaderSearchbarState extends State<CustomHeaderSearchbar>
               bottomRight: Radius.circular(10.0),
             ),
             child: Container(
-              height: _suggestedProducts.length * 50.0, // Height for each suggestion
-              width: size.width, // Width of the overlay
+              height: _suggestedProducts.length * 50.0,
+              width: size.width,
               decoration: BoxDecoration(
                 color: Colors.white,
                 border: Border.all(color: Colors.grey.shade300),
@@ -175,7 +175,6 @@ class _CustomHeaderSearchbarState extends State<CustomHeaderSearchbar>
           : _animationController.reverse();
     });
     
-    // Si se oculta la barra de búsqueda, eliminar el overlay
     if (!_isSearchExpanded) {
       _removeOverlay();
     }
@@ -185,14 +184,11 @@ class _CustomHeaderSearchbarState extends State<CustomHeaderSearchbar>
   Widget build(BuildContext context) {
     return GestureDetector(
       onVerticalDragEnd: (details) {
-        // Detectar la velocidad y dirección del gesto
         if (details.velocity.pixelsPerSecond.dy < -300) {
-          // Deslizamiento hacia arriba (ocultar)
           if (_isSearchExpanded) {
             _toggleSearchSection();
           }
         } else if (details.velocity.pixelsPerSecond.dy > 300) {
-          // Deslizamiento hacia abajo (mostrar)
           if (!_isSearchExpanded) {
             _toggleSearchSection();
           }
@@ -282,7 +278,7 @@ class _CustomHeaderSearchbarState extends State<CustomHeaderSearchbar>
                         padding: const EdgeInsets.only(right: 4),
                         child: Text(
                           AppLocalizations.of(context)!.app_searchbar_open,
-                          style: TextStyle(color: Colors.black, fontSize: 12)
+                          style: TextStyle(color: const Color.fromARGB(255, 68, 68, 68), fontSize: 12, fontWeight: FontWeight.w600),
                         ),
                       ),
                     Icon(

@@ -767,7 +767,7 @@ class DialogUtil {
                                   );
                                   
                                   Navigator.pop(context);
-                                  showSuccessDialog(context, isFavorite);
+                                  showFavoriteSuccessDialog(context, isFavorite);
                                 } catch (e) {
                                   setState(() => isProcessing = false);
                                 }
@@ -822,7 +822,116 @@ class DialogUtil {
     );
   }
 
-  static Future<dynamic> showSuccessDialog(BuildContext context, bool isFavorite) {
+  static Future<bool?> showDeleteFavoriteConfirmDialog(BuildContext context) {
+    return showDialog<bool>(
+      context: context,
+      builder: (context) => Dialog(
+        backgroundColor: Colors.transparent,
+        child: Container(
+          padding: EdgeInsets.all(20),
+          decoration: BoxDecoration(
+            color: Color(0xFF2A0E4D),
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(
+              color: Colors.orangeAccent,
+              width: 2,
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: const Color.fromRGBO(255, 152, 0, 0.5),
+                blurRadius: 10,
+                spreadRadius: 3,
+              ),
+            ],
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Title
+              Text(
+                AppLocalizations.of(context)!.favorite_remove_dialog_title,
+                style: GoogleFonts.pressStart2p(
+                  fontSize: 18,
+                  color: Colors.amber,
+                  shadows: [
+                    Shadow(
+                      color: Colors.deepOrange,
+                      offset: Offset(2, 2),
+                      blurRadius: 0,
+                    ),
+                  ],
+                ),
+              ),
+              
+              SizedBox(height: 25),
+              
+              // General Information
+              _buildInfoSection(
+                title: AppLocalizations.of(context)!.favorite_remove_dialog_text,
+                content: '',
+                color: Colors.orangeAccent,
+              ),
+              
+              SizedBox(height: 30),
+              
+              // Buttons Row
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  // Cancel Button
+                  ElevatedButton(
+                    onPressed: () => Navigator.pop(context, false),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.blueGrey,
+                      foregroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                        side: BorderSide(color: Colors.white, width: 2),
+                      ),
+                      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                    ),
+                    child: Text(
+                      'NO',
+                      style: GoogleFonts.pressStart2p(
+                        fontSize: 10,
+                        letterSpacing: 1,
+                      ),
+                    ),
+                  ),
+                  
+                  // Confirm Button
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.pop(context, true);
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.red,
+                      foregroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                        side: BorderSide(color: Colors.white, width: 2),
+                      ),
+                      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                    ),
+                    child: Text(
+                      AppLocalizations.of(context)!.app_yes,
+                      style: GoogleFonts.pressStart2p(
+                        fontSize: 10,
+                        letterSpacing: 1,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  static Future<dynamic> showFavoriteSuccessDialog(BuildContext context, bool isFavorite) {
     return showDialog(
       context: context,
       builder: (context) => Dialog(
