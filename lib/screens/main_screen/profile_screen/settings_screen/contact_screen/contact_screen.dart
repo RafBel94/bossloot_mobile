@@ -141,7 +141,7 @@ class _ContactScreenState extends State<ContactScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          SizedBox(height: 40),
+                          SizedBox(height: 32),
                           
                           // Header
                           Text(
@@ -325,23 +325,29 @@ class _ContactScreenState extends State<ContactScreen> {
 
               // Help Icon
               Positioned(
-                top: 10,
-                right: 10,
+                top: 4,
+                right: 0,
+                left: 0,
                 child: GestureDetector(
                   onTap: () {
                     DialogUtil.showContactFormGuideDialog(context);
                   },
-                  child: Container(
-                    padding: EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5),
-                      color: const Color.fromARGB(84, 196, 196, 196),
-                      border: Border.all(color: const Color.fromARGB(185, 133, 133, 133), width: 2),
-                    ),
-                    child: Icon(
-                      Icons.question_mark,
-                      color: const Color.fromARGB(255, 93, 93, 93),
-                      size: 20,
+                  child: Center(
+                    child: Container(
+                      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(8),
+                          bottomRight: Radius.circular(8),
+                        ),
+                        color: const Color.fromARGB(84, 196, 196, 196),
+                        border: Border.all(color: const Color.fromARGB(185, 133, 133, 133), width: 2),
+                      ),
+                      child: Icon(
+                        Icons.question_mark,
+                        color: const Color.fromARGB(255, 144, 10, 178),
+                        size: 18,
+                      ),
                     ),
                   ),
                 ),
