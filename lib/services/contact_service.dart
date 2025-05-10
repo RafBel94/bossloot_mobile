@@ -11,8 +11,8 @@ class ContactMessageService {
   ContactMessageService();
 
   // Send contact message endpoint
-  Future<ApiResponse> sendContactMessage(String name, String email, String subject, String message, File? attachment) async {
-    final endpoint = '$baseUrl/contact/send';
+  Future<ApiResponse> sendContactMessage(String name, String email, String subject, String message, File? image) async {
+    final endpoint = '$baseUrl/contact';
 
     var request = http.MultipartRequest('POST', Uri.parse(endpoint));
 
@@ -20,11 +20,11 @@ class ContactMessageService {
     request.fields.addAll({'name': name, 'email': email, 'subject': subject, 'message': message});
 
     // Add file to the request if it exists
-    if (attachment != null) {
-      final extension = attachment.path.split('.').last.toLowerCase();
+    if (image != null) {
+      final extension = image.path.split('.').last.toLowerCase();
       final timestamp = DateTime.now().millisecondsSinceEpoch;
 
-      request.files.add(await http.MultipartFile.fromPath('attachment', attachment.path, filename: 'attachment_$timestamp.$extension'));
+      request.files.add(await http.MultipartFile.fromPath('image', image.path, filename: 'attachment_$timestamp.$extension'));
     }
 
     // Add headers to the request

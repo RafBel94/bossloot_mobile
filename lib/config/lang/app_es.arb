@@ -406,6 +406,46 @@
         "description": "Text for the send button on the contact screen"
     },
 
+    "contact_screen_fail_dialog_title": "FALLO AL ENVIAR",
+    "@contact_screen_fail_dialog_title": {
+        "description": "Title for the fail dialog on the contact screen"
+    },
+
+    "contact_screen_fail_dialog_subtitle": "¡ALGO SALIO MAL!",
+    "@contact_screen_fail_dialog_subtitle": {
+        "description": "Subtitle for the fail dialog on the contact screen"
+    },
+
+    "contact_screen_fail_dialog_text": "Parece que hubo un error al enviar tu mensaje. Por favor, revisa tu conexión a internet y vuelve a intentarlo.",
+    "@contact_screen_fail_dialog_text": {
+        "description": "Text for the fail dialog on the contact screen"
+    },
+
+    "contact_screen_fail_dialog_button": "¡ENTENDIDO!",
+    "@contact_screen_fail_dialog_button": {
+        "description": "Text for the button to close the fail dialog on the contact screen"
+    },
+
+    "contact_screen_success_dialog_title": "MENSAJE ENVIADO",
+    "@contact_screen_success_dialog_title": {
+        "description": "Title for the success dialog on the contact screen"
+    },
+
+    "contact_screen_success_dialog_subtitle": "¡TU MENSAJE SE HA ENVIADO!",
+    "@contact_screen_success_dialog_subtitle": {
+        "description": "Subtitle for the success dialog on the contact screen"
+    },
+
+    "contact_screen_success_dialog_text": "Hemos recibido su mensaje y le responderemos lo antes posible. ¡Gracias por contactar con nosotros!",
+    "@contact_screen_success_dialog_text": {
+        "description": "Text for the success dialog on the contact screen"
+    },
+
+    "contact_screen_success_dialog_button": "¡GENIAL!",
+    "@contact_screen_success_dialog_button": {
+        "description": "Text for the button to close the success dialog on the contact screen"
+    },
+
 
 
 

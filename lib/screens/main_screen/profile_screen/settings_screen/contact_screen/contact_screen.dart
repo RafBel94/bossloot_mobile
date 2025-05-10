@@ -72,25 +72,9 @@ class _ContactScreenState extends State<ContactScreen> {
       });
       
       if (!success) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(contactProvider.errorMessage ?? 'Error al enviar el formulario')),
-        );
+        DialogUtil.showContactErrorDialog(context);
       } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('¡Mensaje enviado correctamente!')),
-        );
-
-        // Clear form
-        _nameController.clear();
-        _emailController.clear();
-        _subjectController.clear();
-        _messageController.clear();
-        setState(() {
-          _selectedImage = null;
-        });
-        
-        // Optional: Navigate back or to a confirmation screen
-        Navigator.pop(context);
+        DialogUtil.showContactSuccessDialog(context);
       }
     }
   }
@@ -110,7 +94,7 @@ class _ContactScreenState extends State<ContactScreen> {
       body: SafeArea(
         // MAIN CONTAINER (Background Image)
         child: _isLoading 
-        ? LoadingScreenPlain()
+        ? LoadingScreenPlain(redirect: false,)
         : Container(
           height: double.infinity,
           decoration: const BoxDecoration(
@@ -253,6 +237,7 @@ class _ContactScreenState extends State<ContactScreen> {
                           TextFormField(
                             onTapUpOutside: (event) => FocusManager.instance.primaryFocus?.unfocus(),
                             controller: _messageController,
+                            maxLength: 255,
                             decoration: InputDecoration(
                               labelText: AppLocalizations.of(context)!.contact_screen_message_label,
                               hintText: AppLocalizations.of(context)!.contact_screen_message_hint,
