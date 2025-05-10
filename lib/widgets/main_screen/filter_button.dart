@@ -20,16 +20,16 @@ class _FilterButtonState extends State<FilterButton> {
           },
           style: ElevatedButton.styleFrom(
           shape: RoundedRectangleBorder(
-            side: const BorderSide(color: Colors.white, width: 2),
+            side: const BorderSide(color: Color.fromARGB(255, 186, 186, 186), width: 2),
             borderRadius: const BorderRadius.only(
             topLeft: Radius.circular(10),
             bottomLeft: Radius.circular(10),
             )
           ),
-          backgroundColor: Color.fromARGB(255, 238, 211, 248),
+          backgroundColor: Color.fromARGB(255, 255, 255, 255),
           padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 25),
           ),
-        child: Icon(Icons.filter_alt, color: Colors.black, size: 22,)
+        child: Icon(Icons.filter_alt, color: Colors.black, size: 24,)
       ),
     );
   }

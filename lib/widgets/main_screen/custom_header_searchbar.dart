@@ -184,11 +184,11 @@ class _CustomHeaderSearchbarState extends State<CustomHeaderSearchbar>
   Widget build(BuildContext context) {
     return GestureDetector(
       onVerticalDragEnd: (details) {
-        if (details.velocity.pixelsPerSecond.dy < -300) {
+        if (details.velocity.pixelsPerSecond.dy < -100) {
           if (_isSearchExpanded) {
             _toggleSearchSection();
           }
-        } else if (details.velocity.pixelsPerSecond.dy > 300) {
+        } else if (details.velocity.pixelsPerSecond.dy > 100) {
           if (!_isSearchExpanded) {
             _toggleSearchSection();
           }
