@@ -41,7 +41,7 @@ class FieldValidator {
   String? validateRepeatPassword(String password) {
     if (value == null || value!.trim().isEmpty) {
       return AppLocalizations.of(context)!.app_repeat_password_empty;
-    } else if (value != password) {
+    } else if (value != password.trim()) {
       return AppLocalizations.of(context)!.app_passwords_do_not_match;
     }
     return null;

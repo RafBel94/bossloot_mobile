@@ -275,7 +275,7 @@ class RegisterButton extends StatelessWidget {
           ),
           onPressed: () {
             if (_formKey.currentState!.validate()) {
-              registerAction(context, nameController.text, emailController.text, passwordController.text, repeatPasswordController.text);
+              registerAction(context, nameController.text.trim(), emailController.text.trim(), passwordController.text.trim(), repeatPasswordController.text.trim());
             }
           },
           child: Text(

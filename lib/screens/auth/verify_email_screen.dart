@@ -34,7 +34,7 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
         alignment: Alignment.center,
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/images/retrowave-bg-1.jpg'),
+            image: AssetImage('assets/images/background-image-workshop.png'),
             fit: BoxFit.fill,
           ),
         ),
@@ -47,7 +47,7 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
 
           // Main content container
           child: Container(
-            height: 500,
+            height: MediaQuery.of(context).size.height * 0.7,
             width: double.infinity,
             margin: const EdgeInsets.symmetric(horizontal: 30.0),
             decoration: BoxDecoration(
@@ -67,6 +67,7 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
                   padding: const EdgeInsets.all(25.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
                     children: [
                       SizedBox(height: 40),
                   
@@ -74,18 +75,23 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
                       Container(
                         margin: const EdgeInsets.only(bottom: 10),
                         child: Center(
-                          child: Text(
-                              AppLocalizations.of(context)!.verify_email_screen_title,
-                              textAlign: TextAlign.center,
-                              maxLines: 3,
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 30,
-                              fontWeight: FontWeight.bold,
+                          child: FittedBox(
+                            fit: BoxFit.scaleDown,
+                            child: Text(
+                                AppLocalizations.of(context)!.verify_email_screen_title,
+                                textAlign: TextAlign.center,
+                                maxLines: 3,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 30,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ),
                         ),
                       ),
+
+                      const SizedBox(height: 10),
                   
                       // Info title 2
                       Container(
@@ -94,17 +100,17 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
                           child: Text(
                               AppLocalizations.of(context)!.verify_email_screen_text,
                               textAlign: TextAlign.center,
-                              maxLines: 3,
+                              maxLines: 6,
                             style: TextStyle(
                               color: Colors.white,
-                              fontSize: 20,
+                              fontSize: 18,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
                         ),
                       ),
                   
-                      const Spacer(),
+                      const SizedBox(height: 20),
                       // Resend label
                       Container(
                         margin: const EdgeInsets.only(bottom: 20),
@@ -115,7 +121,7 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
                               maxLines: 3,
                             style: TextStyle(
                               color: Colors.white,
-                              fontSize: 20,
+                              fontSize: 18,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
