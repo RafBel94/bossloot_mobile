@@ -1,3 +1,4 @@
+import 'package:bossloot_mobile/providers/cart/cart_provider.dart';
 import 'package:bossloot_mobile/providers/product_provider.dart';
 import 'package:bossloot_mobile/providers/user_provider.dart';
 import 'package:bossloot_mobile/screens/loading_screen/data_loading_screen.dart';
@@ -45,6 +46,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   Widget build(BuildContext context) {
 
     UserProvider userProvider = context.read<UserProvider>();
+    CartProvider cartProvider = context.read<CartProvider>();
 
     return _isLoading
     ? DataLoadingScreen()
@@ -150,6 +152,8 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                         DialogUtil.showLoginRequiredDialog(context);
                         return;
                       }
+
+                      cartProvider.addToCart(widget.productId, 1);
                     },
                     child: Text(AppLocalizations.of(context)!.product_details_screen_add_to_cart_button, style: TextStyle(color: Colors.white)),
                   ),

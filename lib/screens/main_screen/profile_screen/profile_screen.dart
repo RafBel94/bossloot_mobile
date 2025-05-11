@@ -3,6 +3,7 @@
 import 'package:bossloot_mobile/domain/models/user.dart';
 import 'package:bossloot_mobile/providers/user_provider.dart';
 import 'package:bossloot_mobile/screens/auth/login_screen.dart';
+import 'package:bossloot_mobile/screens/main_screen/orders_screen/orders_screen.dart';
 import 'package:bossloot_mobile/screens/main_screen/profile_screen/settings_screen/contact_screen/contact_screen.dart';
 import 'package:bossloot_mobile/screens/main_screen/profile_screen/settings_screen/favorite_screen/favorite_screen.dart';
 import 'package:bossloot_mobile/screens/main_screen/profile_screen/profile_button.dart';
@@ -240,7 +241,12 @@ class ProfileButtonsListView extends StatelessWidget {
               text: AppLocalizations.of(context)!.profile_screen_orders_button, 
               svgIconPath: 'assets/icons/orders-icon.svg', 
               userProvider: userProvider, 
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context, 
+                  MaterialPageRoute(builder: (context) => const OrdersScreen())
+                );
+              },
             ),
             
             const SizedBox(height: 9),

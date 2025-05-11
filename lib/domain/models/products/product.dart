@@ -37,5 +37,44 @@ class Product {
     required this.avg_rating,
   });
   
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'name': name,
+      'description': description,
+      'category': category,
+      'brand': brand,
+      'model': model,
+      'price': price,
+      'discount': discount,
+      'quantity': quantity,
+      'on_offer': on_offer,
+      'featured': featured,
+      'image': image,
+      'points': points,
+      'valorations': valorations.map((x) => x.toJson()).toList(),
+      'avg_rating': avg_rating
+    };
+  }
+
+  factory Product.fromJson(Map<String, dynamic> map) {
+    return Product(
+      id: map['id']?.toInt() ?? 0,
+      name: map['name'] ?? '',
+      description: map['description'] ?? '',
+      category: map['category'] ?? '',
+      brand: map['brand'] ?? '',
+      model: map['model'] ?? '',
+      price: map['price']?.toDouble() ?? 0.0,
+      discount: map['discount']?.toDouble() ?? 0.0,
+      quantity: map['quantity']?.toInt() ?? 0,
+      on_offer: map['on_offer'] ?? false,
+      featured: map['featured'] ?? false,
+      image: map['image'] ?? '',
+      points: map['points']?.toInt() ?? 0,
+      valorations: List<Valoration>.from(map['valorations']?.map((x) => Valoration.fromJson(x))),
+      avg_rating: map['avg_rating']?.toDouble() ?? 0.0,
+    );
+  }
 
 }
