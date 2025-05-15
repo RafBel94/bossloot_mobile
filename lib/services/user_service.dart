@@ -12,7 +12,7 @@ class UserService {
 
   // Login endpoint
   Future<ApiResponse> login(String email, String password) async {
-    final endpoint = '$baseUrl/login';
+    final endpoint = '$baseUrl/loginUser';
     final response = await http.post(
       Uri.parse(endpoint),
       headers: {

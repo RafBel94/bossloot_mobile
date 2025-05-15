@@ -1,10 +1,16 @@
 // lib/screens/cart_screen.dart
 // ignore_for_file: library_private_types_in_public_api
 
+import 'package:bossloot_mobile/domain/models/user.dart';
 import 'package:bossloot_mobile/providers/cart/cart_provider.dart';
+import 'package:bossloot_mobile/providers/coin_exchange_provider.dart';
+import 'package:bossloot_mobile/providers/user_provider.dart';
 import 'package:bossloot_mobile/screens/main_screen/cart_screen/cart_item_card.dart';
+import 'package:bossloot_mobile/screens/main_screen/cart_screen/login_container.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CartScreen extends StatefulWidget {
   const CartScreen({super.key});
@@ -14,12 +20,19 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
+  late UserProvider _userProvider;
   bool _isLoading = false;
 
   @override
   void initState() {
     super.initState();
-    _loadCart();
+    _userProvider = context.read<UserProvider>();
+
+    if(_userProvider.currentUser != null) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _loadCart();
+      });
+    }
   }
 
   Future<void> _loadCart() async {
@@ -38,17 +51,22 @@ class _CartScreenState extends State<CartScreen> {
 
   @override
   Widget build(BuildContext context) {
+    UserProvider userProvider = context.read<UserProvider>();
+    User? user = userProvider.currentUser;
+    
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 248, 248, 248),
       body: _isLoading
           ? Center(child: CircularProgressIndicator())
-          : _buildCartContent(),
-      bottomNavigationBar: _buildBottomBar(),
+          : user == null 
+            ? LoginContainer(context: context,)
+            : _buildCartContent(),
+      bottomNavigationBar: user == null ? null : _buildBottomBar(),
     );
   }
 
   Widget _buildCartContent() {
-    final cartProvider = Provider.of<CartProvider>(context);
+    final cartProvider = Provider.of<CartProvider>(context, listen: true);
     
     if (cartProvider.error != null) {
       return Center(
@@ -59,6 +77,7 @@ class _CartScreenState extends State<CartScreen> {
       );
     }
     
+    // If the cart is null or empty, show an empty cart message
     if (cartProvider.cart == null || (cartProvider.itemCount == 0 && cartProvider.total <= 0)) {
       return Center(
         child: Column(
@@ -95,6 +114,7 @@ class _CartScreenState extends State<CartScreen> {
       );
     }
     
+    // If the cart is not empty, show the cart items
     return RefreshIndicator(
       onRefresh: _loadCart,
       child: ListView.builder(
@@ -132,22 +152,27 @@ class _CartScreenState extends State<CartScreen> {
 
   Widget _buildBottomBar() {
     final cartProvider = Provider.of<CartProvider>(context);
+    final coinExchangeProvider = Provider.of<CoinExchangeProvider>(context);
 
-    double total;
+    double totalWithoutDiscount;
     bool hasDiscount = false;
     
     if (cartProvider.cart == null || cartProvider.itemCount == 0) {
       return SizedBox.shrink();
     } else {
-      total = cartProvider.cart!.items.fold(0.0, (sum, item){
-        return sum + (item.product?.price ?? 0) * item.quantity;
+      totalWithoutDiscount = cartProvider.cart!.items.fold(0.0, (sum, item){
+        return sum + (coinExchangeProvider.convertPrice(item.product?.price ?? 0)) * item.quantity;
       });
+
+      // Check if any item in the cart has a discount
       hasDiscount = cartProvider.cart?.items
         .any((item) {
           final discount = item.product?.discount;
           return discount != null && discount > 0;
         }) ?? false;
-      }
+    }
+
+
     
     
     return Container(
@@ -183,7 +208,7 @@ class _CartScreenState extends State<CartScreen> {
                   children: [
                     if (hasDiscount)
                     Text(
-                      '€${total.toStringAsFixed(2)}',
+                      coinExchangeProvider.formatPrice(totalWithoutDiscount),
                       style: TextStyle(
                         fontSize: 16,
                         color: Colors.grey,
@@ -194,7 +219,7 @@ class _CartScreenState extends State<CartScreen> {
                     SizedBox(width: 8),
 
                     Text(
-                      '€${cartProvider.total.toStringAsFixed(2)}',
+                      coinExchangeProvider.formatPrice(coinExchangeProvider.convertPrice(cartProvider.total)),
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
@@ -213,13 +238,18 @@ class _CartScreenState extends State<CartScreen> {
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   padding: EdgeInsets.symmetric(vertical: 16),
+                  backgroundColor: const Color.fromARGB(255, 255, 231, 249),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(5),
+                    side: BorderSide(
+                      color: const Color.fromARGB(152, 126, 16, 189),
+                      width: 2,
+                    ),
                   ),
                 ),
                 child: Text(
-                  'PROCEED TO CHECKOUT',
-                  style: TextStyle(fontSize: 16),
+                  AppLocalizations.of(context)!.cart_screen_checkout_button,
+                  style: GoogleFonts.orbitron(fontSize: 16, fontWeight: FontWeight.bold, color: Theme.of(context).primaryColor),
                 ),
                 onPressed: () {
                   Navigator.of(context).pushNamed('/checkout');

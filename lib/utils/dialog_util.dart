@@ -1,14 +1,17 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'package:bossloot_mobile/providers/cart/cart_provider.dart';
 import 'package:bossloot_mobile/providers/favorite_provider.dart';
 import 'package:bossloot_mobile/providers/user_provider.dart';
 import 'package:bossloot_mobile/screens/main_screen/main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
 
 class DialogUtil {
   static Future<dynamic> showLogoutDialog(BuildContext context, UserProvider userProvider) {
+    CartProvider cartProvider = context.read<CartProvider>();
     return showDialog(
       context: context,
       builder: (context) => Dialog(
@@ -70,6 +73,7 @@ class DialogUtil {
                   ElevatedButton(
                     onPressed: () {
                       userProvider.logoutUser();
+                      cartProvider.emptyCartVariable();
                       Navigator.pop(context);
                       Navigator.pushReplacement(context, MaterialPageRoute(
                         builder: (context) => MainScreen(),

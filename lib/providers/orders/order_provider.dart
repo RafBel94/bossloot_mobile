@@ -23,7 +23,10 @@ class OrderProvider extends ChangeNotifier {
       final response = await _orderService.getOrders();
       
       if (response.success) {
-        _orders = (response.data as List).map((data) => Order.fromJson(data)).toList();
+        _orders = (response.data as List)
+        .map((data) => Order.fromJson(data))
+        .where((order) => order.status != "pending_payment")
+        .toList();
       } else {
         _error = response.message;
       }

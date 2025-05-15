@@ -1,9 +1,12 @@
 // lib/services/order_service.dart
+// ignore_for_file: avoid_print
+
 import 'dart:convert';
 import 'package:bossloot_mobile/domain/models/checkout_response.dart';
 import 'package:http/http.dart' as http;
 import 'package:bossloot_mobile/domain/models/api_response.dart';
 import 'package:bossloot_mobile/services/token_service.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class OrderService {
   // final String baseUrl = 'https://bossloot-kbsiw.ondigitalocean.app/api';
@@ -63,6 +66,8 @@ class OrderService {
   // Method to create an order from the cart (checkout)
   Future<CheckoutResponse> checkout() async {
     try {
+      final prefs = await SharedPreferences.getInstance();
+      final currency = prefs.getString('selectedCurrency') ?? 'EUR';
       final token = await tokenService.getToken();
       final endpoint = '$baseUrl/checkout';
 
@@ -72,6 +77,9 @@ class OrderService {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer $token',
         },
+        body: json.encode({
+        'currency': currency,
+      }),
       );
 
       final responseBody = json.decode(response.body);

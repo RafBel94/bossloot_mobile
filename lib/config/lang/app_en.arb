@@ -618,6 +618,14 @@
     },
 
 
+    
+
+    "cart_screen_checkout_button": "PROCEED TO CHECKOUT",
+    "@cart_screen_checkout_button": {
+        "description": "Text for the checkout button on the cart screen"
+    },
+
+
 
 
     "favorite_add_dialog_title": "ADD FAVORITE",

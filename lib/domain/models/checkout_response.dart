@@ -1,4 +1,6 @@
 
+// ignore_for_file: avoid_print
+
 import 'package:bossloot_mobile/domain/models/orders/order.dart';
 
 class CheckoutResponse {

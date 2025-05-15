@@ -140,41 +140,23 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               ),
             ),
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Expanded(
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.purple[800],
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
-                    ),
-                    onPressed: () {
-                      if (userProvider.currentUser == null) {
-                        DialogUtil.showLoginRequiredDialog(context);
-                        return;
-                      }
-
-                      cartProvider.addToCart(widget.productId, 1);
-                    },
-                    child: Text(AppLocalizations.of(context)!.product_details_screen_add_to_cart_button, style: TextStyle(color: Colors.white)),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    fixedSize: Size(150, 50),
+                    backgroundColor: Colors.purple[800],
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
                   ),
-                ),
-      
-                SizedBox(width: 16),
-      
-                Expanded(
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color.fromARGB(255, 131, 85, 255),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
-                    ),
-                    onPressed: () {
-                      if (userProvider.currentUser == null) {
-                        DialogUtil.showLoginRequiredDialog(context);
-                        return;
-                      }
-                    },
-                    child: Text(AppLocalizations.of(context)!.product_details_screen_buy_now_button, style: TextStyle(color: Colors.white)),
-                  ),
+                  onPressed: () {
+                    if (userProvider.currentUser == null) {
+                      DialogUtil.showLoginRequiredDialog(context);
+                      return;
+                    }
+                
+                    cartProvider.addToCart(widget.productId, 1);
+                  },
+                  child: Text(AppLocalizations.of(context)!.product_details_screen_add_to_cart_button, style: TextStyle(color: Colors.white)),
                 ),
               ],
             ),

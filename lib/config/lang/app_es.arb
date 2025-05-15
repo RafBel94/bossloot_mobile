@@ -617,6 +617,14 @@
     },
 
 
+    
+
+    "cart_screen_checkout_button": "PROCEDER AL PAGO",
+    "@cart_screen_checkout_button": {
+        "description": "Text for the checkout button on the cart screen"
+    },
+
+
 
 
     "favorite_add_dialog_title": "AÑADIR A FAVORITOS",

@@ -105,4 +105,10 @@ class CartProvider extends ChangeNotifier {
       notifyListeners();
     }
   }
+
+  // Method to empty the cart variable, but not the cart in the backend
+  void emptyCartVariable() {
+    _cart = null;
+    notifyListeners();
+  }
 }

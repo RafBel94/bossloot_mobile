@@ -1,9 +1,11 @@
 // lib/screens/checkout_screen.dart
-// ignore_for_file: use_build_context_synchronously
+// ignore_for_file: use_build_context_synchronously, library_private_types_in_public_api
 
 import 'package:bossloot_mobile/providers/cart/cart_provider.dart';
+import 'package:bossloot_mobile/providers/coin_exchange_provider.dart';
 import 'package:bossloot_mobile/providers/orders/order_provider.dart';
 import 'package:bossloot_mobile/screens/main_screen/paypal_screen/paypal_payment_screen.dart';
+import 'package:bossloot_mobile/widgets/shared/custom_elevated_button.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -20,6 +22,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
   @override
   Widget build(BuildContext context) {
     final cartProvider = Provider.of<CartProvider>(context);
+    final CoinExchangeProvider coinExchangeProvider =Provider.of<CoinExchangeProvider>(context);
     final orderProvider = Provider.of<OrderProvider>(context);
 
     return Scaffold(
@@ -45,7 +48,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                 
                 // Order items
                 if (cartProvider.cart != null)
-                  ..._buildOrderItems(cartProvider),
+                  ..._buildOrderItems(cartProvider, coinExchangeProvider),
                 
                 SizedBox(height: 24),
                 
@@ -109,7 +112,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
     );
   }
 
-  List<Widget> _buildOrderItems(CartProvider cartProvider) {
+  List<Widget> _buildOrderItems(CartProvider cartProvider, CoinExchangeProvider coinExchangeProvider) {
     final cart = cartProvider.cart!;
     
     return [
@@ -158,7 +161,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                       ),
                       SizedBox(width: 12),
                       Text(
-                        '€${item.totalPrice.toStringAsFixed(2)}',
+                        coinExchangeProvider.formatPrice(coinExchangeProvider.convertPrice(item.totalPrice)),
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                     ],
@@ -186,7 +189,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                     ),
                   ),
                   Text(
-                    '€${cart.totalAmount.toStringAsFixed(2)}',
+                    coinExchangeProvider.formatPrice(coinExchangeProvider.convertPrice(cart.totalAmount)),
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
@@ -268,10 +271,9 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
   }
 
   Widget _buildBottomBar(BuildContext context) {
-    final cartProvider = Provider.of<CartProvider>(context);
     
     return Container(
-      padding: EdgeInsets.all(16),
+      padding: EdgeInsets.symmetric(vertical: 16, horizontal: 35),
       decoration: BoxDecoration(
         color: Colors.white,
         boxShadow: [
@@ -286,16 +288,14 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
       child: SafeArea(
         child: SizedBox(
           width: double.infinity,
-          child: ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              padding: EdgeInsets.symmetric(vertical: 16),
-            ),
-            onPressed: _isProcessing ? null : () => _proceedToPayment(context),
-            child: Text(
-              'PAY WITH PAYPAL',
-              style: TextStyle(fontSize: 16),
-            ),
-          ),
+          height: 50,
+          child: CustomElevatedButton(
+            text: 'PROCEED TO PAYMENT',
+            fontSize: 18,
+            onPressed: _isProcessing
+                ? null
+                : () => _proceedToPayment(context),
+          )
         ),
       ),
     );

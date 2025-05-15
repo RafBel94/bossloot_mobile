@@ -1,6 +1,8 @@
 // lib/widgets/cart_item_card.dart
 import 'package:bossloot_mobile/domain/models/cart/cart_item.dart';
+import 'package:bossloot_mobile/providers/coin_exchange_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class CartItemCard extends StatelessWidget {
   final CartItem item;
@@ -15,22 +17,24 @@ class CartItemCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool isDiscounted = item.product?.discount != null && item.product!.discount! > 0;
-    
-    String formatedDiscount = isDiscounted ? item.product!.discount! % 1 == 0 
-      ? item.product!.discount!.toStringAsFixed(0) 
-      : item.product!.discount!.toString()
-      : '0.0';
+    CoinExchangeProvider coinExchangeProvider = context.read<CoinExchangeProvider>();
 
     return Card(
+      color: const Color.fromARGB(255, 255, 255, 255),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(5),
+        side: BorderSide(
+          color: const Color.fromARGB(26, 202, 13, 219),
+          width: 1,
+        ),
       ),
+      shadowColor: const Color.fromARGB(189, 188, 13, 204),
+      elevation: 3,
       margin: EdgeInsets.only(bottom: 10),
       child: Padding(
         padding: EdgeInsets.all(8),
         child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             // Product image
             if (item.product?.image != null)
@@ -75,51 +79,35 @@ class CartItemCard extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 4),
-
+    
                   // Price and discount
                   Row(
                     children: [
                       if (item.product?.discount != null && item.product!.discount! > 0)
                       Text(
-                        '€${item.product!.price.toStringAsFixed(2)}',
+                        coinExchangeProvider.formatPrice(coinExchangeProvider.convertPrice(item.product!.price)),
                         style: TextStyle(
-                          fontSize: 15,
+                          fontSize: 14,
                           color: Colors.grey,
                           decoration: TextDecoration.lineThrough,
                         ),
                       ),
-
+    
                       const SizedBox(width: 8),
-
+    
                       Text(
-                        '€${item.unitPrice.toStringAsFixed(2)}',
+                        coinExchangeProvider.formatPrice(coinExchangeProvider.convertPrice(item.unitPrice)),
                         style: TextStyle(
-                          fontSize: 15,
+                          fontSize: 14,
                           color: Theme.of(context).primaryColor,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      
-                      if (item.product?.discount != null && item.product!.discount! > 0)
-                        Padding(
-                          padding: const EdgeInsets.only(left: 8.0),
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 2.0),
-                            alignment: Alignment.center,
-                            height: 20,
-                            width: 52,
-                            decoration: BoxDecoration(
-                              color: const Color.fromARGB(255, 168, 43, 43),
-                              borderRadius: BorderRadius.circular(5)
-                            ),
-                            child: Text('-$formatedDiscount%', style: const TextStyle(color: Colors.white, fontSize: 11.0, fontWeight: FontWeight.bold, overflow: TextOverflow.ellipsis), textAlign: TextAlign.center),
-                          ),
-                        ),
                     ],
                   ),
-
+    
                   SizedBox(height: 8),
-
+    
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -132,7 +120,7 @@ class CartItemCard extends StatelessWidget {
                                 ? () => onQuantityChanged(item.quantity - 1)
                                 : null,
                           ),
-
+    
                           Container(
                             margin: EdgeInsets.symmetric(horizontal: 8),
                             padding: EdgeInsets.symmetric(
@@ -146,7 +134,7 @@ class CartItemCard extends StatelessWidget {
                               style: TextStyle(fontWeight: FontWeight.bold),
                             ),
                           ),
-
+    
                           _buildQuantityButton(
                             icon: Icons.add,
                             onPressed: () =>
@@ -154,7 +142,7 @@ class CartItemCard extends StatelessWidget {
                           ),
                         ],
                       ),
-
+    
                       // Remove button
                       IconButton(
                         icon: Icon(Icons.delete_outline),

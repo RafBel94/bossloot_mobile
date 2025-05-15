@@ -139,9 +139,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           }
                         },
                       ),
-                      
-                      // SAVE BUTTON
-                      // SettingsSaveButton(selectedLanguage: selectedLanguage, selectedCurrency: selectedCurrency),
                     ],
                   )
               ),

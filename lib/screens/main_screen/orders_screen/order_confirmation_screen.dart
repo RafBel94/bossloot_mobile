@@ -1,9 +1,17 @@
 // lib/screens/order_confirmation_screen.dart
+// ignore_for_file: library_private_types_in_public_api, use_build_context_synchronously, avoid_print
+
+import 'package:bossloot_mobile/providers/coin_exchange_provider.dart';
 import 'package:bossloot_mobile/providers/orders/order_provider.dart';
+import 'package:bossloot_mobile/screens/main_screen/main_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class OrderConfirmationScreen extends StatefulWidget {
+  const OrderConfirmationScreen({super.key});
+
   @override
   _OrderConfirmationScreenState createState() => _OrderConfirmationScreenState();
 }
@@ -15,7 +23,6 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
   void initState() {
     super.initState();
     
-    // Usar microtask para acceder a context después de que el widget esté montado
     Future.microtask(() {
       final orderId = ModalRoute.of(context)!.settings.arguments as int;
       _loadOrder(orderId);
@@ -23,7 +30,7 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
   }
 
   Future<void> _loadOrder(int orderId) async {
-    if (!mounted) return; // Verificación de seguridad
+    if (!mounted) return;
     
     setState(() {
       _isLoading = true;
@@ -34,7 +41,7 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
     } catch (e) {
       print('ERROR in OrderConfirmationScreen._loadOrder: $e');
     } finally {
-      if (mounted) { // Verificación de seguridad
+      if (mounted) {
         setState(() {
           _isLoading = false;
         });
@@ -46,49 +53,607 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
   Widget build(BuildContext context) {
     final orderProvider = Provider.of<OrderProvider>(context);
     final order = orderProvider.currentOrder;
+    final theme = Theme.of(context);
     
     return Scaffold(
+      backgroundColor: const Color(0xFFF9F9F9),
       appBar: AppBar(
-        title: Text('Order Confirmation'),
+        elevation: 0,
+        backgroundColor: theme.primaryColor,
+        title: Text(
+          'Order Details',
+          style: GoogleFonts.poppins(
+            fontWeight: FontWeight.w600,
+            color: Colors.white,
+          ),
+        ),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
       ),
       body: _isLoading
-          ? Center(child: CircularProgressIndicator())
+          ? _buildLoadingState(theme)
           : _buildConfirmationContent(context, orderProvider, order),
     );
   }
 
-  Widget _buildConfirmationContent(
-    BuildContext context,
-    OrderProvider orderProvider,
-    order,
-  ) {
+  Widget _buildLoadingState(ThemeData theme) {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          SizedBox(
+            width: 60,
+            height: 60,
+            child: CircularProgressIndicator(
+              valueColor: AlwaysStoppedAnimation<Color>(theme.primaryColor),
+              strokeWidth: 3,
+            ),
+          ),
+          const SizedBox(height: 20),
+          Text(
+            'Loading order details...',
+            style: GoogleFonts.poppins(
+              fontSize: 16,
+              color: Colors.grey[600],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildConfirmationContent(BuildContext context, OrderProvider orderProvider, order) {
+    final theme = Theme.of(context);
+    final coinExchangeProvider = context.read<CoinExchangeProvider>();
+    
     if (orderProvider.error != null) {
+      return _buildErrorState(context, orderProvider.error!, theme);
+    }
+
+    if (order == null) {
       return Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(
-              Icons.error_outline,
-              color: Colors.red,
-              size: 64,
+              Icons.search_off,
+              size: 80,
+              color: Colors.grey[400],
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 20),
             Text(
-              'Error Loading Order',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
+              'Order Not Found',
+              style: GoogleFonts.poppins(
+                fontSize: 22,
+                fontWeight: FontWeight.w600,
               ),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 12),
             Text(
-              orderProvider.error!,
-              textAlign: TextAlign.center,
-              style: TextStyle(color: Colors.red),
+              'We couldn\'t find the order you\'re looking for',
+              style: GoogleFonts.poppins(
+                color: Colors.grey[600],
+                fontSize: 15,
+              ),
             ),
-            SizedBox(height: 24),
-            ElevatedButton(
-              child: Text('Go to Home'),
+            const SizedBox(height: 32),
+            ElevatedButton.icon(
+              icon: const Icon(Icons.list_alt),
+              label: const Text('View All Orders'),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: theme.primaryColor,
+                foregroundColor: Colors.white,
+                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                textStyle: GoogleFonts.poppins(
+                  fontWeight: FontWeight.w500,
+                  fontSize: 16,
+                ),
+              ),
+              onPressed: () {
+                Navigator.pushNamed(context, '/orders');
+              },
+            ),
+          ],
+        ),
+      );
+    }
+
+    // Determinar el color de estado según el status
+    final statusConfig = _getStatusConfig(order.status);
+
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          // Header with status bar
+          Container(
+            width: double.infinity,
+            decoration: BoxDecoration(
+              color: theme.primaryColor,
+            ),
+            child: Column(
+              children: [
+                // Order Status Indicator
+                Container(
+                  padding: const EdgeInsets.symmetric(vertical: 20),
+                  child: Column(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(16),
+                        decoration: BoxDecoration(
+                          color: const Color.fromRGBO(255, 255, 255, 0.2),
+                          shape: BoxShape.circle,
+                        ),
+                        child: Icon(
+                          statusConfig['icon'],
+                          color: Colors.white,
+                          size: 40,
+                        ),
+                      ),
+                      const SizedBox(height: 12),
+                      Text(
+                        statusConfig['label'],
+                        style: GoogleFonts.poppins(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        'Order #${order.id}',
+                        style: GoogleFonts.poppins(
+                          color: const Color.fromRGBO(255, 255, 255, 0.2),
+                          fontSize: 16,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+          
+          // Order Content
+          Padding(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Order Details Card
+                _buildCardSection(
+                  title: 'Order Information',
+                  icon: Icons.info_outline,
+                  iconColor: theme.primaryColor,
+                  child: Column(
+                    children: [
+                      _buildOrderDetail(
+                        icon: Icons.calendar_today,
+                        iconColor: Colors.blue[700]!,
+                        label: 'Date',
+                        value: _formatDate(order.createdAt),
+                      ),
+                      _buildOrderDetail(
+                        icon: Icons.credit_card,
+                        iconColor: Colors.amber[700]!,
+                        label: 'Payment Method',
+                        value: order.paymentMethod ?? 'PayPal',
+                      ),
+                      _buildOrderDetail(
+                        icon: Icons.info_outline,
+                        iconColor: statusConfig['color'],
+                        label: 'Status',
+                        value: statusConfig['label'],
+                        valueColor: statusConfig['color'],
+                      ),
+                    ],
+                  ),
+                ),
+                
+                const SizedBox(height: 20),
+                
+                // Items Card
+                _buildCardSection(
+                  title: 'Items (${order.items.length})',
+                  icon: Icons.shopping_bag_outlined,
+                  iconColor: Colors.teal[700]!,
+                  child: Column(
+                    children: [
+                      const SizedBox(height: 8),
+                      ...order.items.map((item) => _buildItemCard(item, coinExchangeProvider, theme)),
+                    ],
+                  ),
+                ),
+                
+                const SizedBox(height: 20),
+                
+                // Payment Summary
+                _buildCardSection(
+                  title: 'Payment Summary',
+                  icon: Icons.receipt_long,
+                  iconColor: Colors.green[700]!,
+                  child: Column(
+                    children: [
+                      _buildPaymentDetail(
+                        label: 'Subtotal',
+                        value: coinExchangeProvider.formatPrice(
+                          coinExchangeProvider.convertPrice(order.totalAmount)
+                        ),
+                      ),
+                      _buildPaymentDetail(
+                        label: 'Shipping',
+                        value: 'Free',
+                      ),
+                      const Divider(height: 24),
+                      _buildPaymentDetail(
+                        label: 'Total',
+                        value: coinExchangeProvider.formatPrice(
+                          coinExchangeProvider.convertPrice(order.totalAmount)
+                        ),
+                        isTotal: true,
+                      ),
+                    ],
+                  ),
+                ),
+                
+                const SizedBox(height: 32),
+                
+                // Action Buttons
+                Row(
+                  children: [
+                    Expanded(
+                      child: OutlinedButton.icon(
+                        icon: const Icon(Icons.list_alt),
+                        label: Text(
+                          'ALL ORDERS',
+                          style: GoogleFonts.poppins(fontWeight: FontWeight.w600),
+                        ),
+                        style: OutlinedButton.styleFrom(
+                          padding: const EdgeInsets.symmetric(vertical: 16),
+                          side: BorderSide(color: theme.primaryColor),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                        ),
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/orders');
+                        },
+                      ),
+                    ),
+                    const SizedBox(width: 16),
+                    Expanded(
+                      child: ElevatedButton.icon(
+                        icon: const Icon(Icons.shopping_cart),
+                        label: Text(
+                          'SHOP MORE',
+                          style: GoogleFonts.poppins(fontWeight: FontWeight.w600),
+                        ),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: theme.primaryColor,
+                          foregroundColor: Colors.white,
+                          padding: const EdgeInsets.symmetric(vertical: 16),
+                          elevation: 2,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                        ),
+                        onPressed: () {
+                          Navigator.pushReplacement(
+                            context, 
+                            MaterialPageRoute(
+                              builder: (context) => MainScreen(withPageIndex: 1),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+                
+                const SizedBox(height: 32),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildCardSection({
+    required String title,
+    required IconData icon,
+    required Color iconColor,
+    required Widget child,
+  }) {
+    return Container(
+      width: double.infinity,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12),
+        boxShadow: [
+          BoxShadow(
+            color: const Color.fromRGBO(0, 0, 0, 0.05),
+            blurRadius: 10,
+            spreadRadius: 0,
+            offset: const Offset(0, 3),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Card Header
+          Padding(
+            padding: const EdgeInsets.all(16),
+            child: Row(
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    color: iconColor.withAlpha((0.1 * 255).toInt()),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Icon(
+                    icon,
+                    color: iconColor,
+                    size: 20,
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Text(
+                  title,
+                  style: GoogleFonts.poppins(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          
+          // Divider
+          Divider(height: 1, thickness: 1, color: Colors.grey[100]),
+          
+          // Card Content
+          Padding(
+            padding: const EdgeInsets.all(16),
+            child: child,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildOrderDetail({
+    required IconData icon,
+    required Color iconColor,
+    required String label,
+    required String value,
+    Color? valueColor,
+  }) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 16),
+      child: Row(
+        children: [
+          Container(
+            padding: const EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              color: iconColor.withAlpha((0.1 * 255).toInt()),
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Icon(
+              icon,
+              color: iconColor,
+              size: 18,
+            ),
+          ),
+          const SizedBox(width: 16),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  label,
+                  style: GoogleFonts.poppins(
+                    color: Colors.grey[600],
+                    fontSize: 13,
+                  ),
+                ),
+                Text(
+                  value,
+                  style: GoogleFonts.poppins(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 15,
+                    color: valueColor,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildItemCard(
+    dynamic item, 
+    CoinExchangeProvider coinExchangeProvider,
+    ThemeData theme,
+  ) {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 12),
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: Colors.grey[50],
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            width: 60,
+            height: 60,
+            decoration: BoxDecoration(
+              color: Colors.grey[200],
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Center(
+              child: Icon(
+                Icons.shopping_bag,
+                color: theme.primaryColor.withAlpha((0.7 * 255).toInt()),
+                size: 30,
+              ),
+            ),
+          ),
+          const SizedBox(width: 12),
+          
+          // Product info
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  item.productName,
+                  style: GoogleFonts.poppins(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 14,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Row(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                      decoration: BoxDecoration(
+                        color: theme.primaryColor.withAlpha((0.1 * 255).toInt()),
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                      child: Text(
+                        'Qty: ${item.quantity}',
+                        style: GoogleFonts.poppins(
+                          color: theme.primaryColor,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    Text(
+                      coinExchangeProvider.formatPrice(
+                        coinExchangeProvider.convertPrice(item.unitPrice)
+                      ),
+                      style: GoogleFonts.poppins(
+                        color: Colors.grey[700],
+                        fontSize: 13,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          
+          // Item total price
+          Text(
+            coinExchangeProvider.formatPrice(
+              coinExchangeProvider.convertPrice(item.unitPrice * item.quantity)
+            ),
+            style: GoogleFonts.poppins(
+              fontWeight: FontWeight.w600,
+              fontSize: 15,
+              color: theme.primaryColor,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildPaymentDetail({
+    required String label,
+    required String value,
+    bool isTotal = false,
+  }) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            label,
+            style: GoogleFonts.poppins(
+              fontSize: isTotal ? 16 : 14,
+              fontWeight: isTotal ? FontWeight.w600 : FontWeight.w400,
+              color: isTotal ? Colors.black : Colors.grey[700],
+            ),
+          ),
+          Text(
+            value,
+            style: GoogleFonts.poppins(
+              fontSize: isTotal ? 18 : 14,
+              fontWeight: isTotal ? FontWeight.w700 : FontWeight.w500,
+              color: isTotal ? Colors.green[700] : Colors.black,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildErrorState(BuildContext context, String errorMessage, ThemeData theme) {
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.all(24.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              padding: const EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                color: Colors.red[50],
+                shape: BoxShape.circle,
+              ),
+              child: Icon(
+                Icons.error_outline,
+                color: Colors.red[700],
+                size: 64,
+              ),
+            ),
+            const SizedBox(height: 24),
+            Text(
+              'Error Loading Order',
+              style: GoogleFonts.poppins(
+                fontSize: 22,
+                fontWeight: FontWeight.w600,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 12),
+            Text(
+              errorMessage,
+              textAlign: TextAlign.center,
+              style: GoogleFonts.poppins(
+                color: Colors.red[700],
+                fontSize: 14,
+              ),
+            ),
+            const SizedBox(height: 32),
+            ElevatedButton.icon(
+              icon: const Icon(Icons.home),
+              label: const Text('Go to Home'),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: theme.primaryColor,
+                foregroundColor: Colors.white,
+                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                textStyle: GoogleFonts.poppins(
+                  fontWeight: FontWeight.w500,
+                  fontSize: 16,
+                ),
+                elevation: 3,
+              ),
               onPressed: () {
                 Navigator.of(context).pushNamedAndRemoveUntil(
                   '/',
@@ -98,258 +663,59 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
             ),
           ],
         ),
-      );
-    }
-
-    if (order == null) {
-      return Center(
-        child: Text('Order not found'),
-      );
-    }
-
-    return SingleChildScrollView(
-      padding: EdgeInsets.all(16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          // Success icon
-          Container(
-            width: 100,
-            height: 100,
-            decoration: BoxDecoration(
-              color: Colors.green[50],
-              shape: BoxShape.circle,
-            ),
-            child: Icon(
-              Icons.check_circle,
-              color: Colors.green,
-              size: 64,
-            ),
-          ),
-          SizedBox(height: 24),
-          
-          // Success message
-          Text(
-            'Order Confirmed!',
-            style: TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          SizedBox(height: 8),
-          Text(
-            'Your order has been placed successfully',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 16,
-              color: Colors.grey[600],
-            ),
-          ),
-          SizedBox(height: 32),
-          
-          // Order details
-          Container(
-            width: double.infinity,
-            padding: EdgeInsets.all(16),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(8),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.2),
-                  spreadRadius: 1,
-                  blurRadius: 5,
-                  offset: Offset(0, 2),
-                ),
-              ],
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Order Summary',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                SizedBox(height: 16),
-                
-                // Order ID
-                _buildOrderDetail(
-                  label: 'Order ID',
-                  value: '#${order.id}',
-                ),
-                
-                // Order Date
-                _buildOrderDetail(
-                  label: 'Date',
-                  value: _formatDate(order.createdAt),
-                ),
-                
-                // Order Status
-                _buildOrderDetail(
-                  label: 'Status',
-                  value: _formatStatus(order.status),
-                  valueColor: Colors.green,
-                ),
-                
-                // Payment Method
-                _buildOrderDetail(
-                  label: 'Payment Method',
-                  value: order.paymentMethod ?? 'PayPal',
-                ),
-                
-                Divider(height: 32),
-                
-                // Order Items
-                Text(
-                  'Items',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                SizedBox(height: 12),
-                
-                ...order.items.map((item) => Padding(
-                  padding: EdgeInsets.only(bottom: 8),
-                  child: Row(
-                    children: [
-                      Text(
-                        '${item.quantity}x',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.grey[600],
-                        ),
-                      ),
-                      SizedBox(width: 12),
-                      Expanded(
-                        child: Text(
-                          item.productName,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ),
-                      SizedBox(width: 12),
-                      Text(
-                        '€${item.totalPrice.toStringAsFixed(2)}',
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                    ],
-                  ),
-                )),
-                
-                Divider(height: 32),
-                
-                // Total
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Total',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Text(
-                      '€${order.totalAmount.toStringAsFixed(2)}',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: Theme.of(context).primaryColor,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-          SizedBox(height: 32),
-          
-          // Buttons
-          Row(
-            children: [
-              Expanded(
-                child: OutlinedButton(
-                  style: OutlinedButton.styleFrom(
-                    padding: EdgeInsets.symmetric(vertical: 16),
-                  ),
-                  child: Text('VIEW ALL ORDERS'),
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/orders');
-                  },
-                ),
-              ),
-              SizedBox(width: 16),
-              Expanded(
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.symmetric(vertical: 16),
-                  ),
-                  child: Text('CONTINUE SHOPPING'),
-                  onPressed: () {
-                    Navigator.pushNamedAndRemoveUntil(
-                      context,
-                      '/',
-                      (Route<dynamic> route) => false,
-                    );
-                  },
-                ),
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildOrderDetail({
-    required String label,
-    required String value,
-    Color? valueColor,
-  }) {
-    return Padding(
-      padding: EdgeInsets.only(bottom: 12),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Expanded(
-            flex: 2,
-            child: Text(
-              label,
-              style: TextStyle(
-                color: Colors.grey[600],
-              ),
-            ),
-          ),
-          Expanded(
-            flex: 3,
-            child: Text(
-              value,
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: valueColor,
-              ),
-            ),
-          ),
-        ],
       ),
     );
   }
 
   String _formatDate(DateTime date) {
-    return '${date.day.toString().padLeft(2, '0')}/${date.month.toString().padLeft(2, '0')}/${date.year} ${date.hour.toString().padLeft(2, '0')}:${date.minute.toString().padLeft(2, '0')}';
+    return DateFormat('dd MMM yyyy, HH:mm').format(date);
   }
 
-  String _formatStatus(String status) {
-    if (status == 'paid') {
-      return 'Paid';
-    } else if (status == 'pending_payment') {
-      return 'Pending Payment';
-    } else {
-      return status.split('_').map((word) => word[0].toUpperCase() + word.substring(1)).join(' ');
+  Map<String, dynamic> _getStatusConfig(String status) {
+    switch (status) {
+      case 'paid':
+        return {
+          'color': Colors.green[700]!,
+          'label': 'Paid',
+          'icon': Icons.check_circle,
+        };
+      case 'pending_payment':
+        return {
+          'color': Colors.orange[700]!,
+          'label': 'Pending Payment',
+          'icon': Icons.access_time,
+        };
+      case 'cancelled':
+        return {
+          'color': Colors.red[700]!,
+          'label': 'Cancelled',
+          'icon': Icons.cancel,
+        };
+      case 'processing':
+        return {
+          'color': Colors.blue[700]!,
+          'label': 'Processing',
+          'icon': Icons.sync,
+        };
+      case 'shipped':
+        return {
+          'color': Colors.indigo[700]!,
+          'label': 'Shipped',
+          'icon': Icons.local_shipping,
+        };
+      case 'delivered':
+        return {
+          'color': Colors.teal[700]!,
+          'label': 'Delivered',
+          'icon': Icons.check_circle,
+        };
+      default:
+        return {
+          'color': Colors.grey[700]!,
+          'label': status.split('_').map((word) => word[0].toUpperCase() + word.substring(1)).join(' '),
+          'icon': Icons.help_outline,
+        };
     }
   }
 }
+

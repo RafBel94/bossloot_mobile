@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:bossloot_mobile/domain/models/api_response.dart';
 import 'package:bossloot_mobile/services/token_service.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class CartService {
   // final String baseUrl = 'https://bossloot-kbsiw.ondigitalocean.app/api';
@@ -38,7 +39,9 @@ class CartService {
   // Method to add an item to the cart
   Future<ApiResponse> addItemToCart(int productId, int quantity) async {
     try {
+      final prefs = await SharedPreferences.getInstance();
       final token = await tokenService.getToken();
+      final currency = prefs.getString('selectedCurrency') ?? 'EUR';
       final endpoint = '$baseUrl/cart/items';
 
       final response = await http.post(
@@ -50,6 +53,7 @@ class CartService {
         body: json.encode({
           'product_id': productId,
           'quantity': quantity,
+          'currency': currency,
         }),
       );
 
