@@ -161,6 +161,16 @@
         "description": "Text for the unknown label"
     },
 
+    "app_unexpected_error": "Ups! Algo salio mal.\nPor favor intentalo de nuevo más tarde.",
+    "@app_unexpected_error": {
+        "description": "Text for the unexpected error message"
+    },
+
+    "app_try_again": "Reintentar",
+    "@app_try_again": {
+        "description": "Text for the try again button"
+    },
+
 
 
 
@@ -617,11 +627,207 @@
     },
 
 
-    
 
-    "cart_screen_checkout_button": "PROCEDER AL PAGO",
+    "cart_screen_checkout_button": "IR AL PAGO",
     "@cart_screen_checkout_button": {
         "description": "Text for the checkout button on the cart screen"
+    },
+
+    "cart_screen_empty_cart_label": "Tu carrito está vacío",
+    "@cart_screen_empty_cart_label": {
+        "description": "Text for the empty cart label on the cart screen"
+    },
+
+    "cart_screen_empty_cart_text": "No tienes nada en tu carrito.\n¡Ve a la tienda y empieza a comprar!",
+    "@cart_screen_empty_cart_text": {
+        "description": "Text for the empty cart message on the cart screen"
+    },
+
+    "cart_screen_empty_cart_button": "Buscar productos",
+    "@cart_screen_empty_cart_button": {
+        "description": "Text for the empty cart button on the cart screen"
+    },
+
+
+
+
+    "checkout_screen_title": "Pago",
+    "@checkout_screen_title": {
+        "description": "Title for the checkout screen"
+    },
+
+    "checkout_screen_order_summary_label": "Resumen del pedido",
+    "@checkout_screen_order_summary_label": {
+        "description": "Text for the order summary label on the checkout screen"
+    },
+
+    "checkout_screen_payment_method_label": "Método de pago",
+    "@checkout_screen_payment_method_label": {
+        "description": "Text for the payment method label on the checkout screen"
+    },
+
+    "checkout_screen_button": "PAGAR",
+    "@checkout_screen_button": {
+        "description": "Text for the proceed to payment button on the checkout screen"
+    },
+
+    "checkout_screen_payment_incomplete": "El pago no se ha completado",
+    "@checkout_screen_payment_incomplete": {
+        "description": "Text for the payment incomplete message on the checkout screen"
+    },
+
+
+
+
+    "orders_screen_title": "Pedidos",
+    "@orders_screen_title": {
+        "description": "Title for the orders screen"
+    },
+
+    "orders_screen_loading_text": "Cargando tus pedidos...",
+    "@orders_screen_loading_text": {
+        "description": "Text for the loading message on the orders screen"
+    },
+
+    "orders_screen_empty_orders_label": "No tienes pedidos",
+    "@orders_screen_empty_orders_label": {
+        "description": "Text for the empty orders label on the orders screen"
+    },
+
+    "orders_screen_empty_orders_text": "Tu aventura comienza aquí.\n¡Agrega productos a tu carrito y haz tu primer pedido!",
+    "@orders_screen_empty_orders_text": {
+        "description": "Text for the empty orders message on the orders screen"
+    },
+
+    "orders_screen_empty_orders_button": "Al Catálogo",
+    "@orders_screen_empty_orders_button": {
+        "description": "Text for the empty orders button on the orders screen"
+    },
+
+
+
+
+    "orders_card_reference_id": "Pedido Ref.",
+    "@orders_card_reference_id": {
+        "description": "Text for the order reference ID label on the orders screen"
+    },
+
+    "orders_card_paid_status": "Pagado",
+    "@orders_card_paid_status": {
+        "description": "Text for the paid status label on the orders screen"
+    },
+
+    "orders_card_date_label": "Fecha",
+    "@orders_card_date_label": {
+        "description": "Text for the date label on the orders screen"
+    },
+
+    "orders_card_total_label": "Total",
+    "@orders_card_total_label": {
+        "description": "Text for the total label on the orders screen"
+    },
+
+    "orders_card_items_label": "Productos",
+    "@orders_card_items_label": {
+        "description": "Text for the items label on the orders screen"
+    },
+
+    "orders_card_button": "Ver detalles",
+    "@orders_card_button": {
+        "description": "Text for the view details button on the orders screen"
+    },
+
+
+
+
+    "orders_details_screen_title": "Detalles del pedido",
+    "@orders_details_screen_title": {
+        "description": "Title for the order details screen"
+    },
+
+    "orders_details_loading_text": "Cargando detalles del pedido...",
+    "@orders_details_loading_text": {
+        "description": "Text for the loading message on the order details screen"
+    },
+
+    "orders_details_not_found_label": "Pedido no encontrado",
+    "@orders_details_not_found_label": {
+        "description": "Text for the order not found label on the order details screen"
+    },
+
+    "orders_details_not_found_text": "No pudimos encontrar el pedido. Por favor revisa tu historial de pedidos o contacta con soporte para recibir ayuda.",
+    "@orders_details_not_found_text": {
+        "description": "Text for the order not found message on the order details screen"
+    },
+
+    "orders_details_view_all_orders_button": "Ver Todas",
+    "@orders_details_view_all_orders_button": {
+        "description": "Text for the view all orders button on the order details screen"
+    },
+
+    "orders_details_paid_status": "Pagado",
+    "@orders_details_paid_status": {
+        "description": "Text for the paid status label on the order details screen"
+    },
+
+    "orders_details_information_label": "Información del pedido",
+    "@orders_details_information_label": {
+        "description": "Text for the order information label on the order details screen"
+    },
+
+    "orders_details_items_label": "Productos",
+    "@orders_details_items_label": {
+        "description": "Text for the items label on the order details screen"
+    },
+
+    "orders_details_payment_summary_label": "Resumen del pago",
+    "@orders_details_payment_summary_label": {
+        "description": "Text for the payment summary label on the order details screen"
+    },
+
+    "orders_details_date_label": "Fecha",
+    "@orders_details_date_label": {
+        "description": "Text for the date label on the order details screen"
+    },
+
+    "orders_details_payment_method_label": "Método de pago",
+    "@orders_details_payment_method_label": {
+        "description": "Text for the payment method label on the order details screen"
+    },
+
+    "orders_details_status_label": "Estado",
+    "@orders_details_status_label": {
+        "description": "Text for the status label on the order details screen"
+    },
+
+    "orders_details_quantity_label": "Uds: ",
+    "@orders_details_quantity_label": {
+        "description": "Text for the quantity label on the order details screen"
+    },
+
+    "orders_details_subtotal_label": "Subtotal",
+    "@orders_details_subtotal_label": {
+        "description": "Text for the subtotal label on the order details screen"
+    },
+
+    "orders_details_shipping_label": "Envío",
+    "@orders_details_shipping_label": {
+        "description": "Text for the shipping label on the order details screen"
+    },
+
+    "orders_details_free": "Gratis",
+    "@orders_details_free": {
+        "description": "Text for the free shipping label on the order details screen"
+    },
+
+    "orders_details_all_orders_button": "PEDIDOS",
+    "@orders_details_all_orders_button": {
+        "description": "Text for the all orders button on the order details screen"
+    },
+
+    "orders_details_shop_button": "CATALOGO",
+    "@orders_details_shop_button": {
+        "description": "Text for the shop button on the order details screen"
     },
 
 

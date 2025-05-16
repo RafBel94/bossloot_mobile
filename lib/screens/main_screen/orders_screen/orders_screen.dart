@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class OrdersScreen extends StatefulWidget {
   const OrdersScreen({super.key});
@@ -19,7 +20,6 @@ class OrdersScreen extends StatefulWidget {
 
 class _OrdersScreenState extends State<OrdersScreen> {
   bool _isLoading = true;
-  // Eliminamos el controlador de animación y el mixin
   
   @override
   void initState() {
@@ -59,7 +59,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
         elevation: 0,
         backgroundColor: theme.primaryColor,
         title: Text(
-          'My Orders',
+          AppLocalizations.of(context)!.orders_screen_title,
           style: GoogleFonts.poppins(
             fontWeight: FontWeight.w600,
             color: Colors.white,
@@ -101,7 +101,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
           ),
           const SizedBox(height: 20),
           Text(
-            'Loading your orders...',
+            AppLocalizations.of(context)!.orders_screen_loading_text,
             style: GoogleFonts.poppins(
               fontSize: 16,
               color: Colors.grey[600],
@@ -166,7 +166,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
             ),
             const SizedBox(height: 24),
             Text(
-              'Oops! Something went wrong',
+              AppLocalizations.of(context)!.app_unexpected_error,
               style: GoogleFonts.poppins(
                 fontSize: 22,
                 fontWeight: FontWeight.w600,
@@ -185,7 +185,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
             const SizedBox(height: 32),
             ElevatedButton.icon(
               icon: const Icon(Icons.refresh),
-              label: const Text('Try Again'),
+              label: Text(AppLocalizations.of(context)!.app_try_again),
               style: ElevatedButton.styleFrom(
                 backgroundColor: theme.primaryColor,
                 foregroundColor: Colors.white,
@@ -224,7 +224,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
             ),
             const SizedBox(height: 24),
             Text(
-              'No Orders Yet',
+              AppLocalizations.of(context)!.orders_screen_empty_orders_label,
               style: GoogleFonts.poppins(
                 fontSize: 22,
                 fontWeight: FontWeight.w600,
@@ -233,7 +233,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
             ),
             const SizedBox(height: 12),
             Text(
-              'Your shopping journey begins here.\nAdd products to your cart and place your first order!',
+              AppLocalizations.of(context)!.orders_screen_empty_orders_text,
               textAlign: TextAlign.center,
               style: GoogleFonts.poppins(
                 color: Colors.grey[600],
@@ -243,7 +243,9 @@ class _OrdersScreenState extends State<OrdersScreen> {
             const SizedBox(height: 32),
             ElevatedButton.icon(
               icon: const Icon(Icons.shopping_cart_outlined),
-              label: const Text('Start Shopping'),
+              label: Text(
+                AppLocalizations.of(context)!.orders_screen_empty_orders_button,
+              ),
               style: ElevatedButton.styleFrom(
                 backgroundColor: theme.primaryColor,
                 foregroundColor: Colors.white,
@@ -333,7 +335,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
                           ),
                           const SizedBox(width: 8),
                           Text(
-                            'Order #${order.id}',
+                            '${AppLocalizations.of(context)!.orders_card_reference_id} #${order.id}',
                             style: GoogleFonts.poppins(
                               fontWeight: FontWeight.w600,
                               fontSize: 16,
@@ -386,19 +388,19 @@ class _OrdersScreenState extends State<OrdersScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       _buildInfoColumn(
-                        'Date',
+                        AppLocalizations.of(context)!.orders_card_date_label,
                         _formatDate(order.createdAt),
                         Icons.calendar_today,
                         theme.primaryColor.withAlpha((0.7 * 255).toInt()),
                       ),
                       _buildInfoColumn(
-                        'Items',
+                        AppLocalizations.of(context)!.orders_card_items_label,
                         order.items.length.toString(),
                         Icons.shopping_basket_outlined,
                         Colors.amber[700]!,
                       ),
                       _buildInfoColumn(
-                        'Total',
+                        AppLocalizations.of(context)!.orders_card_total_label,
                         coinExchangeProvider.formatPrice(
                           coinExchangeProvider.convertPrice(order.totalAmount)
                         ),
@@ -435,7 +437,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
                           arguments: order.id,
                         );
                       },
-                      child: const Text('View Details'),
+                      child: Text(AppLocalizations.of(context)!.orders_card_button),
                     ),
                   ),
                 ],
@@ -488,7 +490,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
       case 'paid':
         return {
           'color': Colors.green[700]!,
-          'label': 'Paid',
+          'label': AppLocalizations.of(context)!.orders_card_paid_status,
           'icon': Icons.check_circle,
         };
       case 'pending_payment':

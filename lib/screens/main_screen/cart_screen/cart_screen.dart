@@ -6,11 +6,12 @@ import 'package:bossloot_mobile/providers/cart/cart_provider.dart';
 import 'package:bossloot_mobile/providers/coin_exchange_provider.dart';
 import 'package:bossloot_mobile/providers/user_provider.dart';
 import 'package:bossloot_mobile/screens/main_screen/cart_screen/cart_item_card.dart';
+import 'package:bossloot_mobile/screens/main_screen/cart_screen/empty_cart_container.dart';
 import 'package:bossloot_mobile/screens/main_screen/cart_screen/login_container.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CartScreen extends StatefulWidget {
   const CartScreen({super.key});
@@ -55,12 +56,19 @@ class _CartScreenState extends State<CartScreen> {
     User? user = userProvider.currentUser;
     
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 248, 248, 248),
-      body: _isLoading
-          ? Center(child: CircularProgressIndicator())
-          : user == null 
-            ? LoginContainer(context: context,)
-            : _buildCartContent(),
+      body: Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/images/background-image-goblin-shop-1.png'),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: _isLoading
+            ? Center(child: CircularProgressIndicator())
+            : user == null 
+              ? LoginContainer(context: context,)
+              : _buildCartContent(),
+      ),
       bottomNavigationBar: user == null ? null : _buildBottomBar(),
     );
   }
@@ -79,39 +87,7 @@ class _CartScreenState extends State<CartScreen> {
     
     // If the cart is null or empty, show an empty cart message
     if (cartProvider.cart == null || (cartProvider.itemCount == 0 && cartProvider.total <= 0)) {
-      return Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(
-              Icons.shopping_cart_outlined,
-              size: 80,
-              color: Colors.grey,
-            ),
-            SizedBox(height: 16),
-            Text(
-              'Your cart is empty',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            SizedBox(height: 8),
-            Text(
-              'Add some products to your cart and they will appear here',
-              textAlign: TextAlign.center,
-              style: TextStyle(color: Colors.grey[600]),
-            ),
-            SizedBox(height: 24),
-            ElevatedButton(
-              child: Text('Browse Products'),
-              onPressed: () {
-                Navigator.of(context).pushNamed('/products');
-              },
-            ),
-          ],
-        ),
-      );
+      return EmptyCartContainer(context: context);
     }
     
     // If the cart is not empty, show the cart items

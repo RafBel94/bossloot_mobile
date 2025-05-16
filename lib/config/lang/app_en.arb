@@ -161,6 +161,16 @@
         "description": "Text for the unknown label"
     },
 
+    "app_unexpected_error": "Oops! Something went wrong.\nPlease try again later.",
+    "@app_unexpected_error": {
+        "description": "Text for the unexpected error message"
+    },
+
+    "app_try_again": "Try again",
+    "@app_try_again": {
+        "description": "Text for the try again button"
+    },
+
 
 
 
@@ -623,6 +633,203 @@
     "cart_screen_checkout_button": "PROCEED TO CHECKOUT",
     "@cart_screen_checkout_button": {
         "description": "Text for the checkout button on the cart screen"
+    },
+
+    "cart_screen_empty_cart_label": "Your cart is empty",
+    "@cart_screen_empty_cart_label": {
+        "description": "Text for the empty cart label on the cart screen"
+    },
+
+    "cart_screen_empty_cart_text": "Looks like you haven't added anything to your cart yet.\nYou can start adding products from the catalog.",
+    "@cart_screen_empty_cart_text": {
+        "description": "Text for the empty cart message on the cart screen"
+    },
+
+    "cart_screen_empty_cart_button": "Browse Products",
+    "@cart_screen_empty_cart_button": {
+        "description": "Text for the empty cart button on the cart screen"
+    },
+
+
+
+
+    "checkout_screen_title": "CHECKOUT",
+    "@checkout_screen_title": {
+        "description": "Title for the checkout screen"
+    },
+
+    "checkout_screen_order_summary_label": "Order Summary",
+    "@checkout_screen_order_summary_label": {
+        "description": "Text for the order summary label on the checkout screen"
+    },
+
+    "checkout_screen_payment_method_label": "Payment Method",
+    "@checkout_screen_payment_method_label": {
+        "description": "Text for the payment method label on the checkout screen"
+    },
+
+    "checkout_screen_button": "PROCEED TO PAYMENT",
+    "@checkout_screen_button": {
+        "description": "Text for the proceed to payment button on the checkout screen"
+    },
+
+    "checkout_screen_payment_incomplete": "Payment was not completed",
+    "@checkout_screen_payment_incomplete": {
+        "description": "Text for the payment incomplete message on the checkout screen"
+    },
+
+
+
+
+    "orders_screen_title": "Orders",
+    "@orders_screen_title": {
+        "description": "Title for the orders screen"
+    },
+
+    "orders_screen_loading_text": "Loading your orders...",
+    "@orders_screen_loading_text": {
+        "description": "Text for the loading message on the orders screen"
+    },
+
+    "orders_screen_empty_orders_label": "No orders yet",
+    "@orders_screen_empty_orders_label": {
+        "description": "Text for the empty orders label on the orders screen"
+    },
+
+    "orders_screen_empty_orders_text": "Your shopping journey begins here.\nAdd products to your cart and place your first order!",
+    "@orders_screen_empty_orders_text": {
+        "description": "Text for the empty orders message on the orders screen"
+    },
+
+    "orders_screen_empty_orders_button": "Browse Products",
+    "@orders_screen_empty_orders_button": {
+        "description": "Text for the empty orders button on the orders screen"
+    },
+
+
+
+
+    "orders_card_reference_id": "Order Ref.",
+    "@orders_card_reference_id": {
+        "description": "Text for the order reference ID label on the orders screen"
+    },
+
+    "orders_card_paid_status": "Paid",
+    "@orders_card_paid_status": {
+        "description": "Text for the paid status label on the orders screen"
+    },
+
+    "orders_card_date_label": "Date",
+    "@orders_card_date_label": {
+        "description": "Text for the date label on the orders screen"
+    },
+
+    "orders_card_total_label": "Total",
+    "@orders_card_total_label": {
+        "description": "Text for the total label on the orders screen"
+    },
+
+    "orders_card_items_label": "Items",
+    "@orders_card_items_label": {
+        "description": "Text for the items label on the orders screen"
+    },
+
+    "orders_card_button": "View Details",
+    "@orders_card_button": {
+        "description": "Text for the view details button on the orders screen"
+    },
+
+
+
+
+    "orders_details_screen_title": "Order Details",
+    "@orders_details_screen_title": {
+        "description": "Title for the order details screen"
+    },
+
+    "orders_details_loading_text": "Loading order details...",
+    "@orders_details_loading_text": {
+        "description": "Text for the loading message on the order details screen"
+    },
+
+    "orders_details_not_found_label": "Order not found",
+    "@orders_details_not_found_label": {
+        "description": "Text for the order not found label on the order details screen"
+    },
+
+    "orders_details_view_all_orders_button": "View All",
+    "@orders_details_view_all_orders_button": {
+        "description": "Text for the view all orders button on the order details screen"
+    },
+
+    "orders_details_not_found_text": "We could not find the order you are looking for. Please check your order history or contact support for assistance.",
+    "@orders_details_not_found_text": {
+        "description": "Text for the order not found message on the order details screen"
+    },
+
+    "orders_details_paid_status": "Paid",
+    "@orders_details_paid_status": {
+        "description": "Text for the paid status label on the order details screen"
+    },
+
+    "orders_details_information_label": "Order Information",
+    "@orders_details_information_label": {
+        "description": "Text for the order information label on the order details screen"
+    },
+
+    "orders_details_items_label": "Items",
+    "@orders_details_items_label": {
+        "description": "Text for the items label on the order details screen"
+    },
+
+    "orders_details_payment_summary_label": "Payment Summary",
+    "@orders_details_payment_summary_label": {
+        "description": "Text for the payment summary label on the order details screen"
+    },
+
+    "orders_details_date_label": "Date",
+    "@orders_details_date_label": {
+        "description": "Text for the date label on the order details screen"
+    },
+
+    "orders_details_payment_method_label": "Payment Method",
+    "@orders_details_payment_method_label": {
+        "description": "Text for the payment method label on the order details screen"
+    },
+
+    "orders_details_status_label": "Status",
+    "@orders_details_status_label": {
+        "description": "Text for the status label on the order details screen"
+    },
+
+    "orders_details_quantity_label": "Qty: ",
+    "@orders_details_quantity_label": {
+        "description": "Text for the quantity label on the order details screen"
+    },
+
+    "orders_details_subtotal_label": "Subtotal",
+    "@orders_details_subtotal_label": {
+        "description": "Text for the subtotal label on the order details screen"
+    },
+
+    "orders_details_shipping_label": "Shipping",
+    "@orders_details_shipping_label": {
+        "description": "Text for the shipping label on the order details screen"
+    },
+
+    "orders_details_free": "Free",
+    "@orders_details_free": {
+        "description": "Text for the free shipping label on the order details screen"
+    },
+
+    "orders_details_all_orders_button": "All Orders",
+    "@orders_details_all_orders_button": {
+        "description": "Text for the all orders button on the order details screen"
+    },
+
+    "orders_details_shop_button": "SHOP MORE",
+    "@orders_details_shop_button": {
+        "description": "Text for the shop button on the order details screen"
     },
 
 

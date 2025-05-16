@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class OrderConfirmationScreen extends StatefulWidget {
   const OrderConfirmationScreen({super.key});
@@ -61,7 +62,7 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
         elevation: 0,
         backgroundColor: theme.primaryColor,
         title: Text(
-          'Order Details',
+          AppLocalizations.of(context)!.orders_details_screen_title,
           style: GoogleFonts.poppins(
             fontWeight: FontWeight.w600,
             color: Colors.white,
@@ -95,7 +96,7 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
           ),
           const SizedBox(height: 20),
           Text(
-            'Loading order details...',
+            AppLocalizations.of(context)!.orders_details_loading_text,
             style: GoogleFonts.poppins(
               fontSize: 16,
               color: Colors.grey[600],
@@ -126,7 +127,7 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
             ),
             const SizedBox(height: 20),
             Text(
-              'Order Not Found',
+              AppLocalizations.of(context)!.orders_details_not_found_label,
               style: GoogleFonts.poppins(
                 fontSize: 22,
                 fontWeight: FontWeight.w600,
@@ -134,7 +135,7 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
             ),
             const SizedBox(height: 12),
             Text(
-              'We couldn\'t find the order you\'re looking for',
+              AppLocalizations.of(context)!.orders_details_not_found_text,
               style: GoogleFonts.poppins(
                 color: Colors.grey[600],
                 fontSize: 15,
@@ -143,7 +144,7 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
             const SizedBox(height: 32),
             ElevatedButton.icon(
               icon: const Icon(Icons.list_alt),
-              label: const Text('View All Orders'),
+              label: Text(AppLocalizations.of(context)!.orders_details_view_all_orders_button),
               style: ElevatedButton.styleFrom(
                 backgroundColor: theme.primaryColor,
                 foregroundColor: Colors.white,
@@ -204,7 +205,7 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
                       ),
                       const SizedBox(height: 4),
                       Text(
-                        'Order #${order.id}',
+                        '${AppLocalizations.of(context)!.orders_card_reference_id} #${order.id}',
                         style: GoogleFonts.poppins(
                           color: const Color.fromRGBO(255, 255, 255, 0.2),
                           fontSize: 16,
@@ -233,19 +234,19 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
                       _buildOrderDetail(
                         icon: Icons.calendar_today,
                         iconColor: Colors.blue[700]!,
-                        label: 'Date',
+                        label: AppLocalizations.of(context)!.orders_details_date_label,
                         value: _formatDate(order.createdAt),
                       ),
                       _buildOrderDetail(
                         icon: Icons.credit_card,
                         iconColor: Colors.amber[700]!,
-                        label: 'Payment Method',
+                        label: AppLocalizations.of(context)!.orders_details_payment_method_label,
                         value: order.paymentMethod ?? 'PayPal',
                       ),
                       _buildOrderDetail(
                         icon: Icons.info_outline,
                         iconColor: statusConfig['color'],
-                        label: 'Status',
+                        label: AppLocalizations.of(context)!.orders_details_status_label,
                         value: statusConfig['label'],
                         valueColor: statusConfig['color'],
                       ),
@@ -257,7 +258,7 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
                 
                 // Items Card
                 _buildCardSection(
-                  title: 'Items (${order.items.length})',
+                  title: '${AppLocalizations.of(context)!.orders_details_items_label} (${order.items.length})',
                   icon: Icons.shopping_bag_outlined,
                   iconColor: Colors.teal[700]!,
                   child: Column(
@@ -272,20 +273,20 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
                 
                 // Payment Summary
                 _buildCardSection(
-                  title: 'Payment Summary',
+                  title: AppLocalizations.of(context)!.orders_details_payment_summary_label,
                   icon: Icons.receipt_long,
                   iconColor: Colors.green[700]!,
                   child: Column(
                     children: [
                       _buildPaymentDetail(
-                        label: 'Subtotal',
+                        label: AppLocalizations.of(context)!.orders_details_subtotal_label,
                         value: coinExchangeProvider.formatPrice(
                           coinExchangeProvider.convertPrice(order.totalAmount)
                         ),
                       ),
                       _buildPaymentDetail(
-                        label: 'Shipping',
-                        value: 'Free',
+                        label: AppLocalizations.of(context)!.orders_details_shipping_label,
+                        value: AppLocalizations.of(context)!.orders_details_free,
                       ),
                       const Divider(height: 24),
                       _buildPaymentDetail(
@@ -308,7 +309,7 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
                       child: OutlinedButton.icon(
                         icon: const Icon(Icons.list_alt),
                         label: Text(
-                          'ALL ORDERS',
+                          AppLocalizations.of(context)!.orders_details_view_all_orders_button,
                           style: GoogleFonts.poppins(fontWeight: FontWeight.w600),
                         ),
                         style: OutlinedButton.styleFrom(
@@ -328,7 +329,7 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
                       child: ElevatedButton.icon(
                         icon: const Icon(Icons.shopping_cart),
                         label: Text(
-                          'SHOP MORE',
+                          AppLocalizations.of(context)!.orders_details_shop_button,
                           style: GoogleFonts.poppins(fontWeight: FontWeight.w600),
                         ),
                         style: ElevatedButton.styleFrom(
@@ -532,7 +533,7 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
                         borderRadius: BorderRadius.circular(4),
                       ),
                       child: Text(
-                        'Qty: ${item.quantity}',
+                        '${AppLocalizations.of(context)!.orders_details_quantity_label}${item.quantity}',
                         style: GoogleFonts.poppins(
                           color: theme.primaryColor,
                           fontSize: 12,
@@ -541,13 +542,15 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
                       ),
                     ),
                     const SizedBox(width: 8),
-                    Text(
-                      coinExchangeProvider.formatPrice(
-                        coinExchangeProvider.convertPrice(item.unitPrice)
-                      ),
-                      style: GoogleFonts.poppins(
-                        color: Colors.grey[700],
-                        fontSize: 13,
+                    Flexible(
+                      child: Text(
+                        coinExchangeProvider.formatPrice(
+                          coinExchangeProvider.convertPrice(item.unitPrice)
+                        ),
+                        style: GoogleFonts.poppins(
+                          color: Colors.grey[700],
+                          fontSize: 13,
+                        ),
                       ),
                     ),
                   ],
@@ -563,7 +566,7 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
             ),
             style: GoogleFonts.poppins(
               fontWeight: FontWeight.w600,
-              fontSize: 15,
+              fontSize: 13,
               color: theme.primaryColor,
             ),
           ),
@@ -676,7 +679,7 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
       case 'paid':
         return {
           'color': Colors.green[700]!,
-          'label': 'Paid',
+          'label': AppLocalizations.of(context)!.orders_details_paid_status,
           'icon': Icons.check_circle,
         };
       case 'pending_payment':

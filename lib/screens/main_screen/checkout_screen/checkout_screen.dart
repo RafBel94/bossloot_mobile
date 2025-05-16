@@ -8,6 +8,7 @@ import 'package:bossloot_mobile/screens/main_screen/paypal_screen/paypal_payment
 import 'package:bossloot_mobile/widgets/shared/custom_elevated_button.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CheckoutScreen extends StatefulWidget {
   const CheckoutScreen({super.key});
@@ -27,7 +28,13 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Checkout'),
+        title: Text(
+          AppLocalizations.of(context)!.checkout_screen_title,
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
       ),
       body: Stack(
         children: [
@@ -38,7 +45,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Order Summary',
+                  AppLocalizations.of(context)!.checkout_screen_order_summary_label,
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
@@ -54,7 +61,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                 
                 // Payment methods
                 Text(
-                  'Payment Method',
+                  AppLocalizations.of(context)!.checkout_screen_payment_method_label,
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
@@ -290,7 +297,8 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
           width: double.infinity,
           height: 50,
           child: CustomElevatedButton(
-            text: 'PROCEED TO PAYMENT',
+            text: 
+              AppLocalizations.of(context)!.checkout_screen_button,
             fontSize: 18,
             onPressed: _isProcessing
                 ? null
@@ -309,11 +317,9 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
     try {
       final orderProvider = Provider.of<OrderProvider>(context, listen: false);
       
-      // 1. Create the order from the cart
       final order = await orderProvider.checkout();
       
       if (order != null) {
-        // 2. Navigate to PayPal payment screen
         final result = await Navigator.push(
           context,
           MaterialPageRoute(
@@ -321,19 +327,18 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
           ),
         );
         
-        // 3. Handle the payment result
         if (result == true) {
-          // Payment successful, navigate to confirmation screen
           Navigator.pushReplacementNamed(
             context, 
             '/order-confirmation',
             arguments: order.id,
           );
         } else {
-          // Payment failed or cancelled
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text('Payment was not completed'),
+              content: Text(
+                AppLocalizations.of(context)!.checkout_screen_payment_incomplete,
+              ),
               backgroundColor: Colors.red,
             ),
           );
