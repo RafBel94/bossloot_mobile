@@ -648,6 +648,11 @@
         "description": "Text for the empty cart button on the cart screen"
     },
 
+    "cart_screen_special_discount_label": "Descuento especial:",
+    "@cart_screen_special_discount_label": {
+        "description": "Text for the special discount label on the cart screen"
+    },
+
 
 
 
@@ -659,6 +664,16 @@
     "checkout_screen_order_summary_label": "Resumen del pedido",
     "@checkout_screen_order_summary_label": {
         "description": "Text for the order summary label on the checkout screen"
+    },
+
+    "checkout_screen_discounts_label": "Descuentos",
+    "@checkout_screen_discounts_label": {
+        "description": "Text for the discounts label on the checkout screen"
+    },
+
+    "checkout_screen_level_discount_label": "Descuento por nivel",
+    "@checkout_screen_level_discount_label": {
+        "description": "Text for the level discount label on the checkout screen"
     },
 
     "checkout_screen_payment_method_label": "Método de pago",

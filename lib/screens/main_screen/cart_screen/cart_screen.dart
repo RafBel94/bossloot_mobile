@@ -8,6 +8,7 @@ import 'package:bossloot_mobile/providers/user_provider.dart';
 import 'package:bossloot_mobile/screens/main_screen/cart_screen/cart_item_card.dart';
 import 'package:bossloot_mobile/screens/main_screen/cart_screen/empty_cart_container.dart';
 import 'package:bossloot_mobile/screens/main_screen/cart_screen/login_container.dart';
+import 'package:bossloot_mobile/widgets/shared/custom_elevated_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -129,6 +130,7 @@ class _CartScreenState extends State<CartScreen> {
   Widget _buildBottomBar() {
     final cartProvider = Provider.of<CartProvider>(context);
     final coinExchangeProvider = Provider.of<CoinExchangeProvider>(context);
+    final userProvider = Provider.of<UserProvider>(context);
 
     double totalWithoutDiscount;
     bool hasDiscount = false;
@@ -167,7 +169,53 @@ class _CartScreenState extends State<CartScreen> {
       child: SafeArea(
         child: Column(
           mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+
+            // Special discount
+            if (userProvider.currentUser?.level != 1)
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  AppLocalizations.of(context)!.cart_screen_special_discount_label,
+                  style: GoogleFonts.montserrat(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                    color: const Color.fromARGB(255, 134, 134, 134),
+                  ),
+                ),
+
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  decoration: BoxDecoration(
+                    color: const Color.fromARGB(255, 105, 26, 158),
+                    borderRadius: BorderRadius.circular(5),
+                    border: Border.all(
+                      color: const Color.fromARGB(255, 81, 20, 122),
+                      width: 1,
+                    ),
+                  ),
+                  child: Text(
+                    _getUserDiscount(userProvider.currentUser),
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+
+            if (userProvider.currentUser?.level != 1)
+            Divider(
+              color: Colors.grey,
+              thickness: 1,
+              height: 20,
+            ),
+
+            // Total and price
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -182,11 +230,11 @@ class _CartScreenState extends State<CartScreen> {
                 // Display the total price with discount if applicable
                 Row(
                   children: [
-                    if (hasDiscount)
+                    if (hasDiscount || userProvider.currentUser?.level != 1)
                     Text(
                       coinExchangeProvider.formatPrice(totalWithoutDiscount),
                       style: TextStyle(
-                        fontSize: 16,
+                        fontSize: 18,
                         color: Colors.grey,
                         decoration: TextDecoration.lineThrough,
                       ),
@@ -211,30 +259,32 @@ class _CartScreenState extends State<CartScreen> {
 
             SizedBox(
               width: double.infinity,
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  padding: EdgeInsets.symmetric(vertical: 16),
-                  backgroundColor: const Color.fromARGB(255, 255, 231, 249),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(5),
-                    side: BorderSide(
-                      color: const Color.fromARGB(152, 126, 16, 189),
-                      width: 2,
-                    ),
-                  ),
-                ),
-                child: Text(
-                  AppLocalizations.of(context)!.cart_screen_checkout_button,
-                  style: GoogleFonts.orbitron(fontSize: 16, fontWeight: FontWeight.bold, color: Theme.of(context).primaryColor),
-                ),
+              child: CustomElevatedButton(
+                text: AppLocalizations.of(context)!.cart_screen_checkout_button,
+                fontSize: 20,
                 onPressed: () {
-                  Navigator.of(context).pushNamed('/checkout');
+                  Navigator.pushNamed(context, '/checkout');
                 },
-              ),
+              )
             ),
           ],
         ),
       ),
     );
+  }
+
+  String _getUserDiscount(User? user) {
+    switch (user!.level) {
+      case 1:
+        return 'Level 1:  0%';
+      case 2:
+        return 'Level 2:  - 5%';
+      case 3:
+        return 'Level 3:  - 10%';
+      case 4:
+        return 'Level 4:  - 15%';
+      default:
+        return 'Level 1:  0%';
+    }
   }
 }

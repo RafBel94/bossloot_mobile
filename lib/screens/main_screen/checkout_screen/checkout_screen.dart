@@ -1,12 +1,15 @@
 // lib/screens/checkout_screen.dart
 // ignore_for_file: use_build_context_synchronously, library_private_types_in_public_api
 
+import 'package:bossloot_mobile/domain/models/user.dart';
 import 'package:bossloot_mobile/providers/cart/cart_provider.dart';
 import 'package:bossloot_mobile/providers/coin_exchange_provider.dart';
 import 'package:bossloot_mobile/providers/orders/order_provider.dart';
+import 'package:bossloot_mobile/providers/user_provider.dart';
 import 'package:bossloot_mobile/screens/main_screen/paypal_screen/paypal_payment_screen.dart';
 import 'package:bossloot_mobile/widgets/shared/custom_elevated_button.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -25,6 +28,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
     final cartProvider = Provider.of<CartProvider>(context);
     final CoinExchangeProvider coinExchangeProvider =Provider.of<CoinExchangeProvider>(context);
     final orderProvider = Provider.of<OrderProvider>(context);
+    final userProvider = Provider.of<UserProvider>(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -59,15 +63,31 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                 
                 SizedBox(height: 24),
                 
-                // Payment methods
-                Text(
-                  AppLocalizations.of(context)!.checkout_screen_payment_method_label,
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                SizedBox(height: 16),
+                // Discounts
+                if (userProvider.currentUser!.level != 1)
+                  ...[
+                    Text(
+                      AppLocalizations.of(context)!.checkout_screen_discounts_label,
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    SizedBox(height: 16),
+                    
+                    _buildDiscountSection(userProvider),
+                    SizedBox(height: 24),
+                    
+                    // Payment methods
+                    Text(
+                      AppLocalizations.of(context)!.checkout_screen_payment_method_label,
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    SizedBox(height: 16),
+                  ],
                 
                 _buildPaymentMethodOption(
                   icon: Icons.paypal,
@@ -75,7 +95,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                   subtitle: 'Pay securely with PayPal',
                   isSelected: true,
                 ),
-                
+
                 SizedBox(height: 24),
                 
                 // Error message
@@ -277,6 +297,58 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
     );
   }
 
+  Widget _buildDiscountSection(UserProvider userProvider) {
+    
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(8),
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            color: const Color.fromRGBO(158, 158, 158, 0.2),
+            spreadRadius: 1,
+            blurRadius: 5,
+            offset: Offset(0, 2),
+          ),
+        ],
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            AppLocalizations.of(context)!.checkout_screen_level_discount_label,
+            style: TextStyle(
+              fontSize: 15,
+              fontWeight: FontWeight.w500,
+              color: Colors.black,
+            ),
+          ),
+
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+            decoration: BoxDecoration(
+              color: const Color.fromARGB(255, 105, 26, 158),
+              borderRadius: BorderRadius.circular(5),
+              border: Border.all(
+                color: const Color.fromARGB(255, 81, 20, 122),
+                width: 1,
+              ),
+            ),
+            child: Text(
+              _getUserDiscount(userProvider.currentUser),
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 14,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   Widget _buildBottomBar(BuildContext context) {
     
     return Container(
@@ -355,6 +427,21 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
       setState(() {
         _isProcessing = false;
       });
+    }
+  }
+
+  String _getUserDiscount(User? user) {
+    switch (user!.level) {
+      case 1:
+        return 'Level 1:  0%';
+      case 2:
+        return 'Level 2:  - 5%';
+      case 3:
+        return 'Level 3:  - 10%';
+      case 4:
+        return 'Level 4:  - 15%';
+      default:
+        return 'Level 1:  0%';
     }
   }
 }
