@@ -1,10 +1,14 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:bossloot_mobile/domain/models/catalog_product.dart';
 import 'package:bossloot_mobile/domain/models/user.dart';
 import 'package:bossloot_mobile/providers/favorite_provider.dart';
 import 'package:bossloot_mobile/providers/product_provider.dart';
+import 'package:bossloot_mobile/screens/main_screen/profile_screen/settings_screen/favorite_screen/empty_favorites_container.dart';
 import 'package:bossloot_mobile/screens/main_screen/profile_screen/settings_screen/favorite_screen/favorite_product_card.dart';
 import 'package:bossloot_mobile/utils/dialog_util.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -154,19 +158,15 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                 margin: const EdgeInsets.all(4),
                 padding: const EdgeInsets.symmetric(horizontal: 5.0),
                 decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 244, 244, 244),
+                  color: const Color.fromARGB(168, 244, 244, 244),
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: _isLoading 
                   ? const Center(child: CircularProgressIndicator())
                   : favoriteProducts.isEmpty
                     ? Center(
-                        child: Text(
-                          'No favorites found',
-                          style: GoogleFonts.pressStart2p(
-                            fontSize: 14,
-                            color: Colors.black54,
-                          ),
+                        child: EmptyFavoritesContainer(
+                          context: context,
                         ),
                       )
                     : ListView.builder(

@@ -1,14 +1,18 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'package:bossloot_mobile/domain/models/cart/cart_item.dart';
+import 'package:bossloot_mobile/providers/cart/cart_provider.dart';
 import 'package:bossloot_mobile/providers/favorite_provider.dart';
 import 'package:bossloot_mobile/providers/user_provider.dart';
 import 'package:bossloot_mobile/screens/main_screen/main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
 
 class DialogUtil {
   static Future<dynamic> showLogoutDialog(BuildContext context, UserProvider userProvider) {
+    CartProvider cartProvider = context.read<CartProvider>();
     return showDialog(
       context: context,
       builder: (context) => Dialog(
@@ -70,6 +74,7 @@ class DialogUtil {
                   ElevatedButton(
                     onPressed: () {
                       userProvider.logoutUser();
+                      cartProvider.emptyCartVariable();
                       Navigator.pop(context);
                       Navigator.pushReplacement(context, MaterialPageRoute(
                         builder: (context) => MainScreen(),
@@ -307,7 +312,7 @@ class DialogUtil {
     );
   }
 
-  static Future<dynamic> showUserProfileGuideDialog(BuildContext context) {
+  static Future<dynamic> showValidationErrorDialog(BuildContext context, String? errorMessage) {
     return showDialog(
       context: context,
       builder: (context) => Dialog(
@@ -336,9 +341,9 @@ class DialogUtil {
 
               // Title
               Text(
-                AppLocalizations.of(context)!.profile_details_help_dialog_title,
+                AppLocalizations.of(context)!.register_dialog_error_title,
                 style: GoogleFonts.pressStart2p(
-                  fontSize: 18,
+                  fontSize: 16,
                   color: Colors.amber,
                   shadows: [
                     Shadow(
@@ -349,29 +354,18 @@ class DialogUtil {
                   ],
                 ),
               ),
-              
+
               SizedBox(height: 25),
-              
+
               // General Information
               _buildInfoSection(
-                icon: Icons.person,
-                title: AppLocalizations.of(context)!.profile_details_help_dialog_profile_label,
-                content: AppLocalizations.of(context)!.profile_details_help_dialog_profile_text,
+                title: AppLocalizations.of(context)!.register_dialog_error_subtitle,
+                content: errorMessage ?? AppLocalizations.of(context)!.register_dialog_used_email_text,
                 color: Colors.pinkAccent,
               ),
-              
+
               SizedBox(height: 20),
-              
-              // Level and experience points
-              _buildInfoSection(
-                icon: Icons.star,
-                title: AppLocalizations.of(context)!.profile_details_help_dialog_level_label,
-                content: AppLocalizations.of(context)!.profile_details_help_dialog_level_text,
-                color: Colors.lightBlueAccent,
-              ),
-              
-              SizedBox(height: 20),
-              
+
               // Button
               Center(
                 child: ElevatedButton(
@@ -386,7 +380,7 @@ class DialogUtil {
                     padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
                   ),
                   child: Text(
-                    AppLocalizations.of(context)!.profile_details_help_dialog_button,
+                    AppLocalizations.of(context)!.login_required_dialog_button,
                     style: GoogleFonts.pressStart2p(
                       fontSize: 12,
                       letterSpacing: 1,
@@ -395,6 +389,200 @@ class DialogUtil {
                 ),
               ),
             ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  static Future<dynamic> showRegistrationSuccessDialog(BuildContext context) {
+    return showDialog(
+      context: context,
+      builder: (context) => Dialog(
+        backgroundColor: Colors.transparent,
+        child: Container(
+          padding: EdgeInsets.all(20),
+          decoration: BoxDecoration(
+            color: Color(0xFF2A0E4D),
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(
+              color: Colors.purpleAccent,
+              width: 2,
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: const Color.fromRGBO(156, 39, 176, 0.5),
+                blurRadius: 10,
+                spreadRadius: 3,
+              ),
+            ],
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+
+              // Title
+              Text(
+                AppLocalizations.of(context)!.register_dialog_success_title,
+                style: GoogleFonts.pressStart2p(
+                  fontSize: 16,
+                  color: Colors.amber,
+                  shadows: [
+                    Shadow(
+                      color: Colors.purple,
+                      offset: Offset(2, 2),
+                      blurRadius: 0,
+                    ),
+                  ],
+                ),
+              ),
+
+              SizedBox(height: 25),
+
+              // General Information
+              _buildInfoSection(
+                title: AppLocalizations.of(context)!.register_dialog_success_subtitle,
+                content: AppLocalizations.of(context)!.register_dialog_success_text,
+                color: Colors.pinkAccent,
+              ),
+
+              SizedBox(height: 20),
+
+              // Button
+              Center(
+                child: ElevatedButton(
+                  onPressed: () => Navigator.pop(context),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.purple,
+                    foregroundColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      side: BorderSide(color: Colors.white, width: 2),
+                    ),
+                    padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                  ),
+                  child: Text(
+                    AppLocalizations.of(context)!.login_required_dialog_button,
+                    style: GoogleFonts.pressStart2p(
+                      fontSize: 12,
+                      letterSpacing: 1,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  static Future<dynamic> showUserProfileGuideDialog(BuildContext context) {
+    return showDialog(
+      context: context,
+      builder: (context) => Dialog(
+        backgroundColor: Colors.transparent,
+        child: Container(
+          padding: EdgeInsets.all(20),
+          decoration: BoxDecoration(
+            color: Color(0xFF2A0E4D),
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(
+              color: Colors.purpleAccent,
+              width: 2,
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: const Color.fromRGBO(156, 39, 176, 0.5),
+                blurRadius: 10,
+                spreadRadius: 3,
+              ),
+            ],
+          ),
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+            
+                // Title
+                Text(
+                  AppLocalizations.of(context)!.profile_details_help_dialog_title,
+                  style: GoogleFonts.pressStart2p(
+                    fontSize: 18,
+                    color: Colors.amber,
+                    shadows: [
+                      Shadow(
+                        color: Colors.purple,
+                        offset: Offset(2, 2),
+                        blurRadius: 0,
+                      ),
+                    ],
+                  ),
+                ),
+                
+                SizedBox(height: 25),
+                
+                // General Information
+                _buildInfoSection(
+                  icon: Icons.person,
+                  title: AppLocalizations.of(context)!.profile_details_help_dialog_profile_label,
+                  content: AppLocalizations.of(context)!.profile_details_help_dialog_profile_text,
+                  color: Colors.pinkAccent,
+                ),
+                
+                SizedBox(height: 20),
+                
+                // Level and experience points
+                _buildInfoSection(
+                  icon: Icons.star,
+                  title: AppLocalizations.of(context)!.profile_details_help_dialog_level_label,
+                  content: AppLocalizations.of(context)!.profile_details_help_dialog_level_text,
+                  color: Colors.lightBlueAccent,
+                ),
+
+                SizedBox(height: 20),
+
+                // Levels
+                _buildInfoSection(
+                  icon: Icons.attach_money_rounded,
+                  title: '${AppLocalizations.of(context)!.app_discount}s:',
+                  content: null,
+                  color: Colors.green,
+                ),
+
+                FittedBox(fit: BoxFit.scaleDown, child: Text('${AppLocalizations.of(context)!.app_level} 1 - 0% ${AppLocalizations.of(context)!.app_discount}', style: TextStyle(color: Colors.white70, fontSize: 15))),
+                FittedBox(fit: BoxFit.scaleDown, child: Text('${AppLocalizations.of(context)!.app_level} 2 (300 ${AppLocalizations.of(context)!.app_points}) - 5% ${AppLocalizations.of(context)!.app_discount}', style: TextStyle(color: Colors.white70, fontSize: 15))),
+                FittedBox(fit: BoxFit.scaleDown, child: Text('${AppLocalizations.of(context)!.app_level} 3 (500 ${AppLocalizations.of(context)!.app_points}) - 10% ${AppLocalizations.of(context)!.app_discount}', style: TextStyle(color: Colors.white70, fontSize: 15))),
+                FittedBox(fit: BoxFit.scaleDown, child: Text('${AppLocalizations.of(context)!.app_level} 4 (800 ${AppLocalizations.of(context)!.app_points}) - 15% ${AppLocalizations.of(context)!.app_discount}', style: TextStyle(color: Colors.white70, fontSize: 15))),
+                
+                SizedBox(height: 20),
+                
+                // Button
+                Center(
+                  child: ElevatedButton(
+                    onPressed: () => Navigator.pop(context),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.purple,
+                      foregroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                        side: BorderSide(color: Colors.white, width: 2),
+                      ),
+                      padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                    ),
+                    child: Text(
+                      AppLocalizations.of(context)!.profile_details_help_dialog_button,
+                      style: GoogleFonts.pressStart2p(
+                        fontSize: 12,
+                        letterSpacing: 1,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -822,6 +1010,477 @@ class DialogUtil {
     );
   }
 
+  static Future<dynamic> showAddToCartDialog(
+    BuildContext context, 
+    CartProvider cartProvider, 
+    int productId,
+  ) {
+    bool isProcessing = false;
+    bool isInCart = cartProvider.isProductInCart(productId);
+    
+    return showDialog(
+      context: context,
+      builder: (context) => StatefulBuilder(
+        builder: (context, setState) {
+          return Dialog(
+            backgroundColor: Colors.transparent,
+            child: Container(
+              padding: EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                color: Color(0xFF2A0E4D),
+                borderRadius: BorderRadius.circular(10),
+                border: Border.all(
+                  color: Colors.purpleAccent,
+                  width: 2,
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: const Color.fromRGBO(156, 39, 176, 0.5),
+                    blurRadius: 10,
+                    spreadRadius: 3,
+                  ),
+                ],
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+
+                  // Title
+                  FittedBox(
+                    child: Text(
+                      AppLocalizations.of(context)!.cart_dialog_add_title,
+                      style: GoogleFonts.pressStart2p(
+                        fontSize: 18,
+                        color: Colors.amber,
+                        shadows: [
+                          Shadow(
+                            color: Colors.purple,
+                            offset: Offset(2, 2),
+                            blurRadius: 0,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  
+                  SizedBox(height: 25),
+                  
+                  // General Information
+                  _buildInfoSection(
+                    color: Colors.red,
+                    title: isInCart 
+                      ? AppLocalizations.of(context)!.cart_dialog_already_in_cart_subtitle 
+                      : AppLocalizations.of(context)!.cart_dialog_add_subtitle,
+                    content: isInCart 
+                      ? AppLocalizations.of(context)!.cart_dialog_already_in_cart_text 
+                      : AppLocalizations.of(context)!.cart_dialog_add_text,
+                  ),
+                  
+                  SizedBox(height: 20),
+                  
+                  // Buttons
+                  Row(
+                    mainAxisAlignment: isProcessing ? MainAxisAlignment.center : MainAxisAlignment.spaceEvenly,
+                    children: [
+                      // Yes Button
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.purple,
+                          foregroundColor: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                            side: isProcessing 
+                            ? BorderSide.none 
+                            : BorderSide(color: Colors.white, width: 2),
+                          ),
+                          padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                        ),
+                        onPressed: isProcessing 
+                            ? null 
+                            : () async {
+                                setState(() => isProcessing = true);
+                                
+                                try {
+                                  if (isInCart) {
+                                    // If the product is already in the cart, update the quantity
+                                    final cartItem = cartProvider.getCartItemByProductId(productId);
+                                    await cartProvider.updateItemQuantity(cartItem!.id, cartItem.quantity + 1);
+                                  } else {
+                                    // If the product is not in the cart, add it
+                                    await cartProvider.addToCart(productId, 1);
+                                  }
+                                  
+                                  Navigator.pop(context);
+                                  
+                                  showAddToCartSuccessDialog(context, isInCart);
+                                } catch (e) {
+                                  setState(() => isProcessing = false);
+                                }
+                              },
+                        child: isProcessing
+                          ? SizedBox(
+                              width: 40,
+                              height: 40,
+                              child: CircularProgressIndicator(
+                                strokeWidth: 2,
+                                color: Colors.white,
+                              ),
+                            )
+                          : Text(
+                              AppLocalizations.of(context)!.app_yes,
+                              style: GoogleFonts.pressStart2p(
+                                fontSize: 12,
+                                letterSpacing: 1,
+                              ),
+                            ),
+                      ),
+
+                      // No Button
+                      if (!isProcessing)
+                      ElevatedButton(
+                        onPressed: () => Navigator.pop(context),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.purple,
+                          foregroundColor: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                            side: BorderSide(color: Colors.white, width: 2),
+                          ),
+                          padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                        ),
+                        child: Text(
+                          "NO",
+                          style: GoogleFonts.pressStart2p(
+                            fontSize: 12,
+                            letterSpacing: 1,
+                          ),
+                        ),
+                      ),
+                    ],
+                  )
+                ],
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
+
+  static Future<dynamic> showAddToCartSuccessDialog(BuildContext context, bool isInCart) {
+    return showDialog(
+      context: context,
+      builder: (context) => Dialog(
+        backgroundColor: Colors.transparent,
+        child: Container(
+          padding: EdgeInsets.all(20),
+          decoration: BoxDecoration(
+            color: Color(0xFF2A0E4D),
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(
+              color: Colors.purpleAccent,
+              width: 2,
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: const Color.fromRGBO(156, 39, 176, 0.5),
+                blurRadius: 10,
+                spreadRadius: 3,
+              ),
+            ],
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              FittedBox(
+                child: Text(
+                  AppLocalizations.of(context)!.cart_dialog_added_title,
+                  style: GoogleFonts.pressStart2p(
+                    fontSize: 18,
+                    color: Colors.amber,
+                    shadows: [
+                      Shadow(
+                        color: Colors.purple,
+                        offset: Offset(2, 2),
+                        blurRadius: 0,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              
+              SizedBox(height: 25),
+              
+              // General Information
+              _buildInfoSection(
+                title: AppLocalizations.of(context)!.cart_dialog_added_subtitle,
+                content: AppLocalizations.of(context)!.cart_dialog_added_text,
+                color: Colors.pinkAccent,
+              ),
+              
+              SizedBox(height: 20),
+              
+              // Button
+              Center(
+                child: ElevatedButton(
+                  onPressed: () => Navigator.pop(context),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.purple,
+                    foregroundColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      side: BorderSide(color: Colors.white, width: 2),
+                    ),
+                    padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                  ),
+                  child: Text(
+                    AppLocalizations.of(context)!.favorite_added_dialog_button,
+                    style: GoogleFonts.pressStart2p(
+                      fontSize: 12,
+                      letterSpacing: 1,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      )
+    );
+  }
+
+  static Future<dynamic> showRemoveFromCartDialog(
+    BuildContext context, 
+    CartProvider cartProvider, 
+    CartItem cartItem,
+  ) {
+    bool isProcessing = false;
+    
+    return showDialog(
+      context: context,
+      builder: (context) => StatefulBuilder(
+        builder: (context, setState) {
+          return Dialog(
+            backgroundColor: Colors.transparent,
+            child: Container(
+              padding: EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                color: Color(0xFF2A0E4D),
+                borderRadius: BorderRadius.circular(10),
+                border: Border.all(
+                  color: Colors.purpleAccent,
+                  width: 2,
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: const Color.fromRGBO(156, 39, 176, 0.5),
+                    blurRadius: 10,
+                    spreadRadius: 3,
+                  ),
+                ],
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+
+                  // Title
+                  FittedBox(
+                    child: Text(
+                      AppLocalizations.of(context)!.cart_dialog_remove_title,
+                      style: GoogleFonts.pressStart2p(
+                        fontSize: 18,
+                        color: Colors.amber,
+                        shadows: [
+                          Shadow(
+                            color: Colors.purple,
+                            offset: Offset(2, 2),
+                            blurRadius: 0,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  
+                  SizedBox(height: 25),
+                  
+                  // General Information
+                  _buildInfoSection(
+                    color: Colors.red,
+                    title: AppLocalizations.of(context)!.cart_dialog_remove_subtitle,
+                    content: AppLocalizations.of(context)!.cart_dialog_remove_text,
+                  ),
+                  
+                  SizedBox(height: 20),
+                  
+                  // Buttons
+                  Row(
+                    mainAxisAlignment: isProcessing ? MainAxisAlignment.center : MainAxisAlignment.spaceEvenly,
+                    children: [
+                      // Yes Button
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.purple,
+                          foregroundColor: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                            side: isProcessing 
+                            ? BorderSide.none 
+                            : BorderSide(color: Colors.white, width: 2),
+                          ),
+                          padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                        ),
+                        onPressed: isProcessing 
+                            ? null 
+                            : () async {
+                                setState(() => isProcessing = true);
+                                
+                                try {
+                                  // Remove the product from the cart
+                                  await cartProvider.removeItem(cartItem.id);
+                                  
+                                  Navigator.pop(context);
+                                  
+                                  showRemoveFromCartSuccessDialog(context);
+                                } catch (e) {
+                                  setState(() => isProcessing = false);
+                                }
+                              },
+                        child: isProcessing
+                          ? SizedBox(
+                              width: 40,
+                              height: 40,
+                              child: CircularProgressIndicator(
+                                strokeWidth: 2,
+                                color: Colors.white,
+                              ),
+                            )
+                          : Text(
+                              AppLocalizations.of(context)!.app_yes,
+                              style: GoogleFonts.pressStart2p(
+                                fontSize: 12,
+                                letterSpacing: 1,
+                              ),
+                            ),
+                      ),
+
+                      // No Button
+                      if (!isProcessing)
+                      ElevatedButton(
+                        onPressed: () => Navigator.pop(context),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.purple,
+                          foregroundColor: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                            side: BorderSide(color: Colors.white, width: 2),
+                          ),
+                          padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                        ),
+                        child: Text(
+                          "NO",
+                          style: GoogleFonts.pressStart2p(
+                            fontSize: 12,
+                            letterSpacing: 1,
+                          ),
+                        ),
+                      ),
+                    ],
+                  )
+                ],
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
+
+  static Future<dynamic> showRemoveFromCartSuccessDialog(BuildContext context) {
+    return showDialog(
+      context: context,
+      builder: (context) => Dialog(
+        backgroundColor: Colors.transparent,
+        child: Container(
+          padding: EdgeInsets.all(20),
+          decoration: BoxDecoration(
+            color: Color(0xFF2A0E4D),
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(
+              color: Colors.purpleAccent,
+              width: 2,
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: const Color.fromRGBO(156, 39, 176, 0.5),
+                blurRadius: 10,
+                spreadRadius: 3,
+              ),
+            ],
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              FittedBox(
+                child: Text(
+                  AppLocalizations.of(context)!.cart_dialog_removed_title,
+                  style: GoogleFonts.pressStart2p(
+                    fontSize: 18,
+                    color: Colors.amber,
+                    shadows: [
+                      Shadow(
+                        color: Colors.purple,
+                        offset: Offset(2, 2),
+                        blurRadius: 0,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              
+              SizedBox(height: 25),
+              
+              // General Information
+              _buildInfoSection(
+                title: AppLocalizations.of(context)!.cart_dialog_removed_subtitle,
+                content: AppLocalizations.of(context)!.cart_dialog_removed_text,
+                color: Colors.pinkAccent,
+              ),
+              
+              SizedBox(height: 20),
+              
+              // Button
+              Center(
+                child: ElevatedButton(
+                  onPressed: () => Navigator.pop(context),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.purple,
+                    foregroundColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      side: BorderSide(color: Colors.white, width: 2),
+                    ),
+                    padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                  ),
+                  child: Text(
+                    AppLocalizations.of(context)!.favorite_added_dialog_button,
+                    style: GoogleFonts.pressStart2p(
+                      fontSize: 12,
+                      letterSpacing: 1,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      )
+    );
+  }
+
   static Future<bool?> showDeleteFavoriteConfirmDialog(BuildContext context) {
     return showDialog<bool>(
       context: context,
@@ -1018,10 +1677,10 @@ class DialogUtil {
 }
 
 // Info Section Widget for the dialogs
-Widget _buildInfoSection({
+Widget _buildInfoSection({ 
   IconData? icon,
   required String title,
-  required String content,
+  required String? content,
   required Color color,
 }) {
   return Column(
@@ -1053,7 +1712,7 @@ Widget _buildInfoSection({
           child: Text(
             title,
             style: GoogleFonts.pressStart2p(
-              fontSize: 12,
+              fontSize: 13,
               color: color,
             ),
                 ),
@@ -1061,6 +1720,7 @@ Widget _buildInfoSection({
       
       SizedBox(height: 6),
 
+      if (content != null)
       Text(
         content,
         style: TextStyle(

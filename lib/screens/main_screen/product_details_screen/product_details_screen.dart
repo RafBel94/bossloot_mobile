@@ -1,3 +1,4 @@
+import 'package:bossloot_mobile/providers/cart/cart_provider.dart';
 import 'package:bossloot_mobile/providers/product_provider.dart';
 import 'package:bossloot_mobile/providers/user_provider.dart';
 import 'package:bossloot_mobile/screens/loading_screen/data_loading_screen.dart';
@@ -45,6 +46,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   Widget build(BuildContext context) {
 
     UserProvider userProvider = context.read<UserProvider>();
+    CartProvider cartProvider = context.read<CartProvider>();
 
     return _isLoading
     ? DataLoadingScreen()
@@ -138,39 +140,22 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               ),
             ),
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Expanded(
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.purple[800],
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
-                    ),
-                    onPressed: () {
-                      if (userProvider.currentUser == null) {
-                        DialogUtil.showLoginRequiredDialog(context);
-                        return;
-                      }
-                    },
-                    child: Text(AppLocalizations.of(context)!.product_details_screen_add_to_cart_button, style: TextStyle(color: Colors.white)),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.purple[800],
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
                   ),
-                ),
-      
-                SizedBox(width: 16),
-      
-                Expanded(
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color.fromARGB(255, 131, 85, 255),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
-                    ),
-                    onPressed: () {
-                      if (userProvider.currentUser == null) {
-                        DialogUtil.showLoginRequiredDialog(context);
-                        return;
-                      }
-                    },
-                    child: Text(AppLocalizations.of(context)!.product_details_screen_buy_now_button, style: TextStyle(color: Colors.white)),
-                  ),
+                  onPressed: () {
+                    if (userProvider.currentUser == null) {
+                      DialogUtil.showLoginRequiredDialog(context);
+                      return;
+                    } else {
+                      DialogUtil.showAddToCartDialog(context, cartProvider, widget.productId);
+                    }
+                  },
+                  child: Text(AppLocalizations.of(context)!.product_details_screen_add_to_cart_button, style: TextStyle(color: Colors.white)),
                 ),
               ],
             ),

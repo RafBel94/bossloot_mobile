@@ -211,15 +211,15 @@ class _ProfileDetailsScreenState extends State<ProfileDetailsScreen> {
                                   bottom: 0,
                                   right: 0,
                                   child: Container(
-                                    padding: const EdgeInsets.all(4),
+                                    padding: const EdgeInsets.all(8),
                                     decoration: const BoxDecoration(
                                       color: Colors.purple,
                                       shape: BoxShape.circle,
                                     ),
                                     child: const Icon(
-                                      Icons.camera_alt,
+                                      Icons.add_photo_alternate_outlined,
                                       color: Colors.white,
-                                      size: 30,
+                                      size: 25,
                                     ),
                                   ),
                                 ),

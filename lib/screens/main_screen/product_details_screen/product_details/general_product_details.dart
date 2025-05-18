@@ -226,7 +226,7 @@ class _GeneralProductDetailsState extends State<GeneralProductDetails> {
                                         child: Text('-$formatedDiscount%', style: const TextStyle(color: Colors.white, fontSize: 10.0, fontWeight: FontWeight.bold, overflow: TextOverflow.ellipsis), textAlign: TextAlign.center),
                                       ),
                                       SizedBox(width: 5),
-                                      Text('$productPriceWithDiscount\$', style: const TextStyle(color: Color.fromARGB(255, 198, 79, 79), fontSize: 23.0, fontWeight: FontWeight.bold, overflow: TextOverflow.ellipsis))
+                                      Text(productPriceWithDiscount, style: const TextStyle(color: Color.fromARGB(255, 198, 79, 79), fontSize: 23.0, fontWeight: FontWeight.bold, overflow: TextOverflow.ellipsis))
                                     ]
                                   ),
                                 ),
@@ -258,7 +258,7 @@ class _GeneralProductDetailsState extends State<GeneralProductDetails> {
                             children: [
                               ...buildStarRating(widget.product.avg_rating ?? 0),
                               const SizedBox(width: 6),
-                              Text(widget.product.valorations.length > 0 ? '${widget.product.avg_rating}' : '0', style: TextStyle(fontSize: 16, )),
+                                Text(widget.product.valorations.length > 0 ? '${(widget.product.avg_rating).toStringAsFixed(1)}' : '0.0', style: TextStyle(fontSize: 16, )),
                               Text('  |  ${AppLocalizations.of(context)!.product_details_screen_valoration_part1} ${widget.product.valorations.length} ${AppLocalizations.of(context)!.product_details_screen_valoration_part2}', style: TextStyle(fontSize: 13,)),
                             ],
                           ),

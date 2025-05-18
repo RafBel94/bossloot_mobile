@@ -76,6 +76,11 @@
         "description": "Text for maximum"
     },
 
+    "app_loading": "Loading...",
+    "@app_loading": {
+        "description": "Text for loading"
+    },
+
     "app_pinch_to_zoom": "Pinch to zoom",
     "@app_pinch_to_zoom": {
         "description": "Text for the pinch to zoom gesture"
@@ -146,9 +151,24 @@
         "description": "Error message for mismatched passwords"
     },
 
+    "app_level": "Level",
+    "@app_level": {
+        "description": "Text for the level label"
+    },
+
     "app_adventurer_level": "Adventurer level ",
     "@app_adventurer_level": {
         "description": "Text for the adventurer level label"
+    },
+
+    "app_points": "Points",
+    "@app_points": {
+        "description": "Text for the points label"
+    },
+
+    "app_discount": "Discount",
+    "@app_discount": {
+        "description": "Text for the discount label"
     },
 
     "app_created": "Created:",
@@ -159,6 +179,16 @@
     "app_unknown": "Unknown",
     "@app_unknown": {
         "description": "Text for the unknown label"
+    },
+
+    "app_unexpected_error": "Oops! Something went wrong.\nPlease try again later.",
+    "@app_unexpected_error": {
+        "description": "Text for the unexpected error message"
+    },
+
+    "app_try_again": "Try again",
+    "@app_try_again": {
+        "description": "Text for the try again button"
     },
 
 
@@ -278,7 +308,7 @@
 
 
 
-    "profile_details_help_dialog_title": "USER PROFILE",
+    "profile_details_help_dialog_title": "HELP",
     "@profile_details_help_dialog_title": {
         "description": "Title for the help dialog on the profile details screen"
     },
@@ -298,7 +328,7 @@
         "description": "Text for the level system label in the help dialog on the profile details screen"
     },
 
-    "profile_details_help_dialog_level_text": "The level system is a way to reward you for your activity in the app. You can earn experience points by making purchases and as you gain experience, you will level up and unlock special discounts!",
+    "profile_details_help_dialog_level_text": "The level system is a way to reward you for your activity in the app.\nYou can earn experience points by making purchases and as you gain experience, you will level up and unlock special discounts!",
     "@profile_details_help_dialog_level_text": {
         "description": "Text for the level system information in the help dialog on the profile details screen"
     },
@@ -314,6 +344,16 @@
     "favorites_screen_title": "FAVORITES",
     "@favorites_screen_title": {
         "description": "Title for the favorites screen"
+    },
+
+    "favorites_screen_empty_label": "THIS IS EMPTY!",
+    "@favorites_screen_empty_label": {
+        "description": "Text for the empty favorites label on the favorites screen"
+    },
+
+    "favorites_screen_empty_text": "Looks like you haven't added anything to your favorites yet.\n\nYou can start adding products from the catalog.",
+    "@favorites_screen_empty_text": {
+        "description": "Text for the empty favorites message on the favorites screen"
     },
 
 
@@ -534,6 +574,39 @@
 
 
 
+    "register_dialog_error_title": "REGISTRATION ERROR",
+    "@register_dialog_error_title": {
+        "description": "Title for the registration error dialog"
+    },
+
+    "register_dialog_error_subtitle": "SOMETHING WENT WRONG!",
+    "@register_dialog_error_subtitle": {
+        "description": "Subtitle for the registration error dialog"
+    },
+
+    "register_dialog_used_email_text": "The email address you entered is already in use. Please try again with a different email address.",
+    "@register_dialog_used_email_text": {
+        "description": "Text for the email already in use error message"
+    },
+
+    "register_dialog_success_title": "REGISTRATION SUCCESSFUL",
+    "@register_dialog_success_title": {
+        "description": "Title for the registration success dialog"
+    },
+
+    "register_dialog_success_subtitle": "VALIDATE YOUR ACCOUNT!",
+    "@register_dialog_success_subtitle": {
+        "description": "Subtitle for the registration success dialog"
+    },
+
+    "register_dialog_success_text": "Your account has been successfully created. Please check your email inbox and click the link in the email to verify your account.",
+    "@register_dialog_success_text": {
+        "description": "Text for the registration success message"
+    },
+
+
+
+
     "verify_email_screen_title": "Verify your email",
     "@verify_email_screen_title": {
         "description": "Title for the email verification screen"
@@ -615,6 +688,309 @@
     "product_details_screen_buy_now_button": "Buy Now",
     "@product_details_screen_buy_now_button": {
         "description": "Text for the buy now button on the product details screen"
+    },
+
+
+    
+
+    "cart_screen_checkout_button": "PROCEED TO CHECKOUT",
+    "@cart_screen_checkout_button": {
+        "description": "Text for the checkout button on the cart screen"
+    },
+
+    "cart_screen_empty_cart_label": "Your cart is empty",
+    "@cart_screen_empty_cart_label": {
+        "description": "Text for the empty cart label on the cart screen"
+    },
+
+    "cart_screen_empty_cart_text": "Looks like you haven't added anything to your cart yet.\nYou can start adding products from the catalog.",
+    "@cart_screen_empty_cart_text": {
+        "description": "Text for the empty cart message on the cart screen"
+    },
+
+    "cart_screen_empty_cart_button": "Browse Products",
+    "@cart_screen_empty_cart_button": {
+        "description": "Text for the empty cart button on the cart screen"
+    },
+
+    "cart_screen_special_discount_label": "Special Discount:",
+    "@cart_screen_special_discount_label": {
+        "description": "Text for the special discount label on the cart screen"
+    },
+
+
+
+
+    "cart_dialog_add_title": "ADD TO CART",
+    "@cart_dialog_add_title": {
+        "description": "Title for the add to cart dialog"
+    },
+
+    "cart_dialog_add_subtitle": "ADD PRODUCT TO CART?",
+    "@cart_dialog_add_subtitle": {
+        "description": "Subtitle for the add to cart confirmation dialog"
+    },
+
+    "cart_dialog_already_in_cart_subtitle": "ITEM ALREADY IN YOUR CART!",
+    "@cart_dialog_already_in_cart_subtitle": {
+        "description": "Title for the already in cart dialog"
+    },
+
+    "cart_dialog_add_text": "This product will be added to your cart. You can view it in the cart section or continue shopping.",
+    "@cart_dialog_add_text": {
+        "description": "Text for the add to cart confirmation dialog"
+    },
+
+    "cart_dialog_already_in_cart_text": "Looks like you already have this product in your cart! Do you want to add another unit of this product?",
+    "@cart_dialog_already_in_cart_text": {
+        "description": "Text for the already in cart dialog"
+    },
+
+    "cart_dialog_added_title": "PRODUCT ADDED",
+    "@cart_dialog_added_title": {
+        "description": "Title for the product added confirmation dialog"
+    },
+
+    "cart_dialog_added_subtitle": "PRODUCT ADDED TO YOUR CART",
+    "@cart_dialog_added_subtitle": {
+        "description": "Subtitle for the product added confirmation dialog"
+    },
+
+    "cart_dialog_added_text": "The product has been successfully added to your cart. You can view your cart to proceed with the checkout if you are done!.",
+    "@cart_dialog_added_text": {
+        "description": "Text for the product added confirmation dialog"
+    },
+
+    "cart_dialog_remove_title": "REMOVE FROM CART",
+    "@cart_dialog_remove_title": {
+        "description": "Title for the remove from cart dialog"
+    },
+
+    "cart_dialog_remove_subtitle": "REMOVE PRODUCT FROM CART?",
+    "@cart_dialog_remove_subtitle": {
+        "description": "Subtitle for the remove from cart confirmation dialog"
+    },
+
+    "cart_dialog_remove_text": "You are about to remove this item from your cart. Do you want to proceed?",
+    "@cart_dialog_remove_text": {
+        "description": "Text for the remove from cart confirmation dialog"
+    },
+
+    "cart_dialog_removed_title": "PRODUCT REMOVED",
+    "@cart_dialog_removed_title": {
+        "description": "Title for the product removed confirmation dialog"
+    },
+
+    "cart_dialog_removed_subtitle": "PRODUCT REMOVED FROM YOUR CART",
+    "@cart_dialog_removed_subtitle": {
+        "description": "Subtitle for the product removed confirmation dialog"
+    },
+
+    "cart_dialog_removed_text": "The product has been successfully removed from your cart. You can view your cart to proceed with the checkout if you are done!.",
+    "@cart_dialog_removed_text": {
+        "description": "Text for the product removed confirmation dialog"
+    },
+
+
+
+
+    "checkout_screen_title": "CHECKOUT",
+    "@checkout_screen_title": {
+        "description": "Title for the checkout screen"
+    },
+
+    "checkout_screen_order_summary_label": "Order Summary",
+    "@checkout_screen_order_summary_label": {
+        "description": "Text for the order summary label on the checkout screen"
+    },
+
+    "checkout_screen_discounts_label": "Discounts",
+    "@checkout_screen_discounts_label": {
+        "description": "Text for the discounts label on the checkout screen"
+    },
+
+    "checkout_screen_level_discount_label": "Level Discount",
+    "@checkout_screen_level_discount_label": {
+        "description": "Text for the level discount label on the checkout screen"
+    },
+
+    "checkout_screen_rewards_label": "Rewards",
+    "@checkout_screen_rewards_label": {
+        "description": "Text for the rewards label on the checkout screen"
+    },
+    
+    "checkout_screen_points_label": "Points",
+    "@checkout_screen_points_label": {
+        "description": "Text for the points label on the checkout screen"
+    },
+
+    "checkout_screen_payment_method_label": "Payment Method",
+    "@checkout_screen_payment_method_label": {
+        "description": "Text for the payment method label on the checkout screen"
+    },
+
+    "checkout_screen_button": "PROCEED TO PAYMENT",
+    "@checkout_screen_button": {
+        "description": "Text for the proceed to payment button on the checkout screen"
+    },
+
+    "checkout_screen_payment_incomplete": "Payment was not completed",
+    "@checkout_screen_payment_incomplete": {
+        "description": "Text for the payment incomplete message on the checkout screen"
+    },
+
+
+
+
+    "orders_screen_title": "Orders",
+    "@orders_screen_title": {
+        "description": "Title for the orders screen"
+    },
+
+    "orders_screen_loading_text": "Loading your orders...",
+    "@orders_screen_loading_text": {
+        "description": "Text for the loading message on the orders screen"
+    },
+
+    "orders_screen_empty_orders_label": "No orders yet",
+    "@orders_screen_empty_orders_label": {
+        "description": "Text for the empty orders label on the orders screen"
+    },
+
+    "orders_screen_empty_orders_text": "Your shopping journey begins here.\nAdd products to your cart and place your first order!",
+    "@orders_screen_empty_orders_text": {
+        "description": "Text for the empty orders message on the orders screen"
+    },
+
+    "orders_screen_empty_orders_button": "Browse Products",
+    "@orders_screen_empty_orders_button": {
+        "description": "Text for the empty orders button on the orders screen"
+    },
+
+
+
+
+    "orders_card_reference_id": "Order Ref.",
+    "@orders_card_reference_id": {
+        "description": "Text for the order reference ID label on the orders screen"
+    },
+
+    "orders_card_paid_status": "Paid",
+    "@orders_card_paid_status": {
+        "description": "Text for the paid status label on the orders screen"
+    },
+
+    "orders_card_date_label": "Date",
+    "@orders_card_date_label": {
+        "description": "Text for the date label on the orders screen"
+    },
+
+    "orders_card_total_label": "Total",
+    "@orders_card_total_label": {
+        "description": "Text for the total label on the orders screen"
+    },
+
+    "orders_card_items_label": "Items",
+    "@orders_card_items_label": {
+        "description": "Text for the items label on the orders screen"
+    },
+
+    "orders_card_button": "View Details",
+    "@orders_card_button": {
+        "description": "Text for the view details button on the orders screen"
+    },
+
+
+
+
+    "orders_details_screen_title": "Order Details",
+    "@orders_details_screen_title": {
+        "description": "Title for the order details screen"
+    },
+
+    "orders_details_loading_text": "Loading order details...",
+    "@orders_details_loading_text": {
+        "description": "Text for the loading message on the order details screen"
+    },
+
+    "orders_details_not_found_label": "Order not found",
+    "@orders_details_not_found_label": {
+        "description": "Text for the order not found label on the order details screen"
+    },
+
+    "orders_details_view_all_orders_button": "View All",
+    "@orders_details_view_all_orders_button": {
+        "description": "Text for the view all orders button on the order details screen"
+    },
+
+    "orders_details_not_found_text": "We could not find the order you are looking for. Please check your order history or contact support for assistance.",
+    "@orders_details_not_found_text": {
+        "description": "Text for the order not found message on the order details screen"
+    },
+
+    "orders_details_paid_status": "Paid",
+    "@orders_details_paid_status": {
+        "description": "Text for the paid status label on the order details screen"
+    },
+
+    "orders_details_information_label": "Order Information",
+    "@orders_details_information_label": {
+        "description": "Text for the order information label on the order details screen"
+    },
+
+    "orders_details_items_label": "Items",
+    "@orders_details_items_label": {
+        "description": "Text for the items label on the order details screen"
+    },
+
+    "orders_details_payment_summary_label": "Payment Summary",
+    "@orders_details_payment_summary_label": {
+        "description": "Text for the payment summary label on the order details screen"
+    },
+
+    "orders_details_date_label": "Date",
+    "@orders_details_date_label": {
+        "description": "Text for the date label on the order details screen"
+    },
+
+    "orders_details_payment_method_label": "Payment Method",
+    "@orders_details_payment_method_label": {
+        "description": "Text for the payment method label on the order details screen"
+    },
+
+    "orders_details_status_label": "Status",
+    "@orders_details_status_label": {
+        "description": "Text for the status label on the order details screen"
+    },
+
+    "orders_details_quantity_label": "Qty: ",
+    "@orders_details_quantity_label": {
+        "description": "Text for the quantity label on the order details screen"
+    },
+
+    "orders_details_subtotal_label": "Subtotal",
+    "@orders_details_subtotal_label": {
+        "description": "Text for the subtotal label on the order details screen"
+    },
+
+    "orders_details_shipping_label": "Shipping",
+    "@orders_details_shipping_label": {
+        "description": "Text for the shipping label on the order details screen"
+    },
+
+    "orders_details_free": "Free",
+    "@orders_details_free": {
+        "description": "Text for the free shipping label on the order details screen"
+    },
+
+    "orders_details_all_orders_button": "All Orders",
+    "@orders_details_all_orders_button": {
+        "description": "Text for the all orders button on the order details screen"
+    },
+
+    "orders_details_shop_button": "SHOP MORE",
+    "@orders_details_shop_button": {
+        "description": "Text for the shop button on the order details screen"
     },
 
 
@@ -727,7 +1103,7 @@
         "description": "Title for the login required dialog"
     },
 
-    "login_required_dialog_subtitle": "Looks like you're not logged in!",
+    "login_required_dialog_subtitle": "YOU ARE NOT LOGGED IN!",
     "@login_required_dialog_subtitle": {
         "description": "Subtitle for the login required dialog"
     },
