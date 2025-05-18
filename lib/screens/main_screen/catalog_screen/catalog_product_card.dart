@@ -189,9 +189,9 @@ class CatalogProductCard extends StatelessWidget {
                     onPressed: () {
                       if (userProvider.currentUser == null) {
                         DialogUtil.showLoginRequiredDialog(context);
+                      } else {
+                        DialogUtil.showAddToCartDialog(context, cartProvider, product.id);
                       }
-
-                      cartProvider.addToCart(product.id, 1);
                     },
                   ),
                 ),

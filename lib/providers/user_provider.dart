@@ -11,6 +11,7 @@ class UserProvider extends ChangeNotifier {
 
   User? currentUser;
   String? errorMessage;
+  String? validationError;
   String? temporalUserEmail;
 
   UserProvider(this.tokenService, this.userService);
@@ -40,9 +41,23 @@ class UserProvider extends ChangeNotifier {
       ApiResponse registerResponse = await userService.register(name, email, password, repeatPassword);
       
       if (registerResponse.success) {
+        validationError = null;
         errorMessage = null;
       } else {
-        errorMessage = registerResponse.data['error'] ?? 'Registration Failed';
+        if (registerResponse.message == "Validation Error." && registerResponse.data != null) {
+          if (registerResponse.data['email'] != null && registerResponse.data['email'].isNotEmpty) {
+            validationError = registerResponse.data['email'][0];
+          } else if (registerResponse.data['name'] != null && registerResponse.data['name'].isNotEmpty) {
+            validationError = registerResponse.data['name'][0];
+          } else if (registerResponse.data['password'] != null && registerResponse.data['password'].isNotEmpty) {
+            validationError = registerResponse.data['password'][0];
+          } else {
+            validationError = 'Validation error: Please check your input';
+          }
+        } else {
+          validationError = null;
+          errorMessage = registerResponse.message;
+        }
       }
     } catch (error) {
       errorMessage = 'Error: ${error.toString()}';

@@ -4,6 +4,7 @@
 import 'package:bossloot_mobile/providers/coin_exchange_provider.dart';
 import 'package:bossloot_mobile/providers/orders/order_provider.dart';
 import 'package:bossloot_mobile/screens/main_screen/main_screen.dart';
+import 'package:bossloot_mobile/screens/main_screen/orders_screen/orders_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
@@ -56,28 +57,45 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
     final order = orderProvider.currentOrder;
     final theme = Theme.of(context);
     
-    return Scaffold(
-      backgroundColor: const Color(0xFFF9F9F9),
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: theme.primaryColor,
-        title: Text(
-          AppLocalizations.of(context)!.orders_details_screen_title,
-          style: GoogleFonts.poppins(
-            fontWeight: FontWeight.w600,
-            color: Colors.white,
+    return PopScope(
+      canPop: false,
+      onPopInvokedWithResult: (didPop, result) {
+        if (didPop) {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => OrdersScreen(),
+            ),
+          );
+        }
+      },
+      child: Scaffold(
+        backgroundColor: const Color(0xFFF9F9F9),
+        appBar: AppBar(
+          elevation: 0,
+          backgroundColor: theme.primaryColor,
+          title: Text(
+            AppLocalizations.of(context)!.orders_details_screen_title,
+            style: GoogleFonts.poppins(
+              fontWeight: FontWeight.w600,
+              color: Colors.white,
+            ),
+          ),
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back, color: Colors.white),
+            onPressed: () {
+              Navigator.pushReplacement(context, 
+                MaterialPageRoute(
+                  builder: (context) => OrdersScreen(),
+                ),
+              );
+            },
           ),
         ),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.white),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
+        body: _isLoading
+            ? _buildLoadingState(theme)
+            : _buildConfirmationContent(context, orderProvider, order),
       ),
-      body: _isLoading
-          ? _buildLoadingState(theme)
-          : _buildConfirmationContent(context, orderProvider, order),
     );
   }
 
@@ -226,7 +244,7 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
               children: [
                 // Order Details Card
                 _buildCardSection(
-                  title: 'Order Information',
+                  title: AppLocalizations.of(context)!.orders_details_information_label,
                   icon: Icons.info_outline,
                   iconColor: theme.primaryColor,
                   child: Column(

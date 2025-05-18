@@ -144,7 +144,6 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               children: [
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    fixedSize: Size(150, 50),
                     backgroundColor: Colors.purple[800],
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
                   ),
@@ -152,9 +151,9 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     if (userProvider.currentUser == null) {
                       DialogUtil.showLoginRequiredDialog(context);
                       return;
+                    } else {
+                      DialogUtil.showAddToCartDialog(context, cartProvider, widget.productId);
                     }
-                
-                    cartProvider.addToCart(widget.productId, 1);
                   },
                   child: Text(AppLocalizations.of(context)!.product_details_screen_add_to_cart_button, style: TextStyle(color: Colors.white)),
                 ),

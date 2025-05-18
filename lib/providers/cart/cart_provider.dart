@@ -1,5 +1,6 @@
 // lib/providers/cart_provider.dart
 import 'package:bossloot_mobile/domain/models/cart/cart.dart';
+import 'package:bossloot_mobile/domain/models/cart/cart_item.dart';
 import 'package:bossloot_mobile/services/cart/cart_service.dart';
 import 'package:flutter/foundation.dart';
 
@@ -104,6 +105,25 @@ class CartProvider extends ChangeNotifier {
       _error = e.toString();
       notifyListeners();
     }
+  }
+
+  // Method to check if a product is in the cart
+  bool isProductInCart(int productId) {
+    if (_cart == null) return false;
+    return _cart!.items.any((item) => item.productId == productId);
+  }
+
+  // Method to get the quantity of a product in the cart
+  int getProductQuantity(int productId) {
+    if (_cart == null) return 0;
+    final item = _cart!.items.firstWhere((item) => item.productId == productId);
+    return item.quantity;
+  }
+
+  // Method to get a specific cart item
+  CartItem? getCartItemByProductId(int productId) {
+    if (_cart == null) return null;
+    return _cart!.items.firstWhere((item) => item.productId == productId);
   }
 
   // Method to empty the cart variable, but not the cart in the backend

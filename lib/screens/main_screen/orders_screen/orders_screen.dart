@@ -53,36 +53,46 @@ class _OrdersScreenState extends State<OrdersScreen> {
     final orders = orderProvider.orders;
     final theme = Theme.of(context);
 
-    return Scaffold(
-      backgroundColor: const Color(0xFFF9F9F9),
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: theme.primaryColor,
-        title: Text(
-          AppLocalizations.of(context)!.orders_screen_title,
-          style: GoogleFonts.poppins(
-            fontWeight: FontWeight.w600,
-            color: Colors.white,
+    return PopScope(
+      canPop: false,
+      onPopInvokedWithResult: (didPop, result) {
+        if (didPop) {
+          Navigator.pushReplacement(context, MaterialPageRoute(
+            builder: (context) => MainScreen(withPageIndex: 4),
+          ));
+        }
+      },
+      child: Scaffold(
+        backgroundColor: const Color(0xFFF9F9F9),
+        appBar: AppBar(
+          elevation: 0,
+          backgroundColor: theme.primaryColor,
+          title: Text(
+            AppLocalizations.of(context)!.orders_screen_title,
+            style: GoogleFonts.poppins(
+              fontWeight: FontWeight.w600,
+              color: Colors.white,
+            ),
           ),
-        ),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.white),
-          onPressed: () {
-            Navigator.pushReplacement(context, MaterialPageRoute(
-              builder: (context) => MainScreen(withPageIndex: 4),
-            ));
-          },
-        ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.refresh, color: Colors.white),
-            onPressed: _loadOrders,
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back, color: Colors.white),
+            onPressed: () {
+              Navigator.pushReplacement(context, MaterialPageRoute(
+                builder: (context) => MainScreen(withPageIndex: 4),
+              ));
+            },
           ),
-        ],
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.refresh, color: Colors.white),
+              onPressed: _loadOrders,
+            ),
+          ],
+        ),
+        body: _isLoading 
+            ? _buildLoadingState(theme)
+            : _buildContent(context, orderProvider, orders, theme),
       ),
-      body: _isLoading 
-          ? _buildLoadingState(theme)
-          : _buildContent(context, orderProvider, orders, theme),
     );
   }
 

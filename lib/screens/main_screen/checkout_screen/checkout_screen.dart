@@ -77,17 +77,30 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                     
                     _buildDiscountSection(userProvider),
                     SizedBox(height: 24),
-                    
-                    // Payment methods
-                    Text(
-                      AppLocalizations.of(context)!.checkout_screen_payment_method_label,
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    SizedBox(height: 16),
                   ],
+
+                // Points
+                Text(
+                  AppLocalizations.of(context)!.checkout_screen_rewards_label,
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SizedBox(height: 16),
+                
+                _buildRewardsSection(cartProvider),
+                SizedBox(height: 24),
+
+                // Payment methods
+                Text(
+                  AppLocalizations.of(context)!.checkout_screen_payment_method_label,
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SizedBox(height: 16),
                 
                 _buildPaymentMethodOption(
                   icon: Icons.paypal,
@@ -337,6 +350,58 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
             ),
             child: Text(
               _getUserDiscount(userProvider.currentUser),
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 14,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildRewardsSection(CartProvider cartProvider) {
+    
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(8),
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            color: const Color.fromRGBO(158, 158, 158, 0.2),
+            spreadRadius: 1,
+            blurRadius: 5,
+            offset: Offset(0, 2),
+          ),
+        ],
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            AppLocalizations.of(context)!.checkout_screen_points_label,
+            style: TextStyle(
+              fontSize: 15,
+              fontWeight: FontWeight.w500,
+              color: Colors.black,
+            ),
+          ),
+
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+            decoration: BoxDecoration(
+              color: const Color.fromARGB(255, 105, 26, 158),
+              borderRadius: BorderRadius.circular(5),
+              border: Border.all(
+                color: const Color.fromARGB(255, 81, 20, 122),
+                width: 1,
+              ),
+            ),
+            child: Text(
+              '+ ${(cartProvider.cart!.totalAmount * 0.25).round()} ${AppLocalizations.of(context)!.checkout_screen_points_label}',
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 14,

@@ -149,14 +149,24 @@ class _CustomHeaderSearchbarState extends State<CustomHeaderSearchbar>
                       ],
                     ),
                     onTap: () {
-                      _searchBarController.text = _suggestedProducts[index].name;
+                      final selectedProduct = _suggestedProducts[index];
+
+                      _searchBarController.clear();
+                      
                       _removeOverlay();
+
                       FocusManager.instance.primaryFocus?.unfocus();
+
                       _toggleSearchSection();
+                      
                       Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-                        return ProductDetailsScreen(productId: _suggestedProducts[index].id, onBackPressed: () {},);
+                        return ProductDetailsScreen(
+                          productId: selectedProduct.id, 
+                          onBackPressed: () {},
+                        );
                       }));
                     },
+                    trailing: Icon(Icons.keyboard_arrow_right, size: 20),
                   );
                 },
               ),

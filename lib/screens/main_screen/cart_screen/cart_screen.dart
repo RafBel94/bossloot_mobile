@@ -8,6 +8,7 @@ import 'package:bossloot_mobile/providers/user_provider.dart';
 import 'package:bossloot_mobile/screens/main_screen/cart_screen/cart_item_card.dart';
 import 'package:bossloot_mobile/screens/main_screen/cart_screen/empty_cart_container.dart';
 import 'package:bossloot_mobile/screens/main_screen/cart_screen/login_container.dart';
+import 'package:bossloot_mobile/utils/dialog_util.dart';
 import 'package:bossloot_mobile/widgets/shared/custom_elevated_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -60,7 +61,7 @@ class _CartScreenState extends State<CartScreen> {
       body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/images/background-image-goblin-shop-1.png'),
+            image: AssetImage('assets/images/background-image-goblin-shop-2.png'),
             fit: BoxFit.cover,
           ),
         ),
@@ -95,7 +96,7 @@ class _CartScreenState extends State<CartScreen> {
     return RefreshIndicator(
       onRefresh: _loadCart,
       child: ListView.builder(
-        padding: EdgeInsets.all(16),
+        padding: EdgeInsets.all(8),
         itemCount: cartProvider.itemCount,
         itemBuilder: (ctx, i) {
           final item = cartProvider.cart!.items[i];
@@ -115,10 +116,9 @@ class _CartScreenState extends State<CartScreen> {
               setState(() {
                 _isLoading = true;
               });
-              cartProvider.removeItem(item.id).then((_) {
-                setState(() {
-                  _isLoading = false;
-                });
+              DialogUtil.showRemoveFromCartDialog(context, cartProvider, item);
+              setState(() {
+                _isLoading = false;
               });
             },
           );

@@ -3,14 +3,14 @@
 
 import 'dart:convert';
 import 'package:bossloot_mobile/domain/models/checkout_response.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:bossloot_mobile/domain/models/api_response.dart';
 import 'package:bossloot_mobile/services/token_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class OrderService {
-  // final String baseUrl = 'https://bossloot-kbsiw.ondigitalocean.app/api';
-  final String baseUrl = 'http://192.168.1.49:8000/api';
+  String baseUrl = dotenv.get('API_URL');
   final TokenService tokenService;
 
   OrderService(this.tokenService);

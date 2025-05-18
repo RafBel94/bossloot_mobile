@@ -23,7 +23,6 @@ class PayPalProvider extends ChangeNotifier {
   // Method to create a PayPal order
   Future<bool> createPayPalOrder(int orderId) async {
   try {
-    // Configuración inicial - sin notificar aún
     _error = null;
     _paymentSuccess = false;
     _paypalResponse = null;
@@ -32,27 +31,22 @@ class PayPalProvider extends ChangeNotifier {
     _paypalResponse = response;
     
     if (response.success) {
-      // Verificar si tenemos una URL de aprobación
       final url = response.getApprovalUrl();
       if (url == null || url.isEmpty) {
         _error = 'No approval URL found in the PayPal response';
-        // Notificar solo UNA VEZ al final
         notifyListeners();
         return false;
       }
       
-      // Notificar solo UNA VEZ al final si todo fue exitoso
       notifyListeners();
       return true;
     } else {
       _error = response.message;
-      // Notificar solo UNA VEZ al final
       notifyListeners();
       return false;
     }
   } catch (e) {
     _error = e.toString();
-    // Notificar solo UNA VEZ al final
     notifyListeners();
     return false;
   }

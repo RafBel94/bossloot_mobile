@@ -1,7 +1,6 @@
 // lib/screens/cart_screen.dart
 // ignore_for_file: library_private_types_in_public_api
 
-import 'package:bossloot_mobile/screens/main_screen/cart_screen/login_button.dart' as cart;
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/svg.dart';
@@ -21,7 +20,7 @@ class EmptyCartContainer extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 16, vertical: 150),
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage('assets/images/background-image-workshop-2.png'),
+          image: AssetImage('assets/images/background-image-goblin-shop-2.png'),
           fit: BoxFit.cover,
         ),
       ),
@@ -65,7 +64,7 @@ class EmptyCartContainer extends StatelessWidget {
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Container(
-                      padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
+                      padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
                       decoration: BoxDecoration(
                         color: const Color.fromARGB(203, 255, 255, 255),
                         borderRadius: BorderRadius.circular(8),

@@ -1,13 +1,13 @@
 // lib/services/paypal_service.dart
 import 'dart:convert';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:bossloot_mobile/domain/models/api_response.dart';
 import 'package:bossloot_mobile/domain/models/paypal_response.dart'; // Nuevo modelo
 import 'package:bossloot_mobile/services/token_service.dart';
 
 class PayPalService {
-  // final String baseUrl = 'https://bossloot-kbsiw.ondigitalocean.app/api';
-  final String baseUrl = 'http://192.168.1.49:8000/api';
+  String baseUrl = dotenv.get('API_URL');
   final TokenService tokenService;
 
   PayPalService(this.tokenService);

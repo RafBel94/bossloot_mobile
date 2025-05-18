@@ -21,7 +21,7 @@ class LoginContainer extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 16, vertical: 150),
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage('assets/images/background-image-workshop-2.png'),
+          image: AssetImage('assets/images/background-image-goblin-shop-2.png'),
           fit: BoxFit.cover,
         ),
       ),
@@ -65,7 +65,7 @@ class LoginContainer extends StatelessWidget {
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Container(
-                      padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
+                      padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 8),
                       decoration: BoxDecoration(
                         color: const Color.fromARGB(203, 255, 255, 255),
                         borderRadius: BorderRadius.circular(8),
@@ -111,7 +111,7 @@ class LoginContainer extends StatelessWidget {
                       ),
                     ),
                   ),
-                SizedBox(height: 28),
+                Spacer(),
                 cart.LoginButton()
               ],
             ),

@@ -4,11 +4,12 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:bossloot_mobile/domain/models/api_response.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class UserService {
-  // final String baseUrl = 'https://bossloot-kbsiw.ondigitalocean.app/api';
-  final String baseUrl = 'http://192.168.1.49:8000/api';
+  String baseUrl = dotenv.get('API_URL');
 
   // Login endpoint
   Future<ApiResponse> login(String email, String password) async {
@@ -29,19 +30,30 @@ class UserService {
   // Register endpoint
   Future<ApiResponse> register(String name, String email, String password, String repeatPassword) async {
     final endpoint = '$baseUrl/register';
-    final response = await http.post(
-      Uri.parse(endpoint),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: jsonEncode({
-        'name': name,
-        'email': email,
-        'password': password,
-        'repeatPassword': repeatPassword,
-      }),
-    );
-    return ApiResponse.fromJson(json.decode(response.body));
+    
+    try {
+      final response = await http.post(
+        Uri.parse(endpoint),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: jsonEncode({
+          'name': name,
+          'email': email,
+          'password': password,
+          'repeatPassword': repeatPassword,
+        }),
+      );
+      
+      return ApiResponse.fromJson(json.decode(response.body));
+    } catch (e) {
+      print('Error durante el registro: $e');
+      return ApiResponse(
+        success: false,
+        message: 'Error de conexión: ${e.toString()}',
+        data: null,
+      );
+    }
   }
 
   // Update user endpoint
@@ -90,14 +102,25 @@ class UserService {
 
   // Get user by ID endpoint
   Future<ApiResponse> getUserById(int userId) async {
-    final endpoint = '$baseUrl/user/$userId';
+    final prefs = await SharedPreferences.getInstance();
+    final token = prefs.getString('user_token');
+    final endpoint = '$baseUrl/users/$userId';
+    try {
     final response = await http.get(
       Uri.parse(endpoint),
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': 'Bearer $token',
       },
     );
-    return ApiResponse.fromJson(json.decode(response.body));
+      print('User id: $userId');
+      print('URI: $endpoint');
+      print ('Response body: ${response.body}');
+      return ApiResponse.fromJson(json.decode(response.body));
+    } catch (error) {
+      print('Error fetching user: $error');
+      return ApiResponse(success: false, message: 'Error fetching user', data: null);
+    }
   }
 
   // Check email verification endpoint

@@ -2,6 +2,7 @@
 // ignore_for_file: use_build_context_synchronously, library_private_types_in_public_api, deprecated_member_use
 
 import 'package:bossloot_mobile/providers/paypal/paypal_provider.dart';
+import 'package:bossloot_mobile/providers/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:webview_flutter/webview_flutter.dart';
@@ -217,7 +218,6 @@ class _PayPalPaymentScreenState extends State<PayPalPaymentScreen> {
   }
 
   Future<void> _handlePayPalRedirect(String url) async {
-    // Success URL (the one you configured in the backend)
     if (url.contains('/paypal/success') && !_isProcessingPayment) {
       setState(() {
         _isProcessingPayment = true;
@@ -252,6 +252,10 @@ class _PayPalPaymentScreenState extends State<PayPalPaymentScreen> {
           _isProcessingPayment = false;
           _error = e.toString();
         });
+      } finally {
+        // Update the user data
+        final userProvider = Provider.of<UserProvider>(context, listen: false);
+        userProvider.getUserById(userProvider.currentUser!.id);
       }
     }
     

@@ -2,6 +2,7 @@
 
 import 'package:bossloot_mobile/providers/user_provider.dart';
 import 'package:bossloot_mobile/screens/auth/login_screen.dart';
+import 'package:bossloot_mobile/utils/dialog_util.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -10,16 +11,19 @@ void registerAction(BuildContext context, String name, String email, String pass
 
   await userProvider.registerUser(name, email, password, repeatPassword);
 
-  if (userProvider.errorMessage != null) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(userProvider.errorMessage!)),
-    );
-
+  if (userProvider.validationError != null) {
+    if (userProvider.validationError == "The email has already been taken.") {
+      DialogUtil.showValidationErrorDialog(context, null);
+    } else {
+      DialogUtil.showValidationErrorDialog(context, userProvider.validationError!);
+    }
+    return;
+  } 
+  else if (userProvider.errorMessage != null) {
+    DialogUtil.showValidationErrorDialog(context, userProvider.errorMessage);
     return;
   }
 
-  ScaffoldMessenger.of(context).showSnackBar(
-    SnackBar(content: Text("Registration successful! Please verify your email.")),
-  );
+  await DialogUtil.showRegistrationSuccessDialog(context);
   Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const LoginScreen()));
 }
