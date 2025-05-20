@@ -153,7 +153,7 @@ class _LoadingScreenState extends State<LoadingScreen>
       body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/images/background-image-workshop-3.png'),
+            image: AssetImage('assets/images/loading-image-4.png'),
             fit: BoxFit.cover,
           ),
         ),
@@ -169,7 +169,7 @@ class _LoadingScreenState extends State<LoadingScreen>
                     child: Transform.scale(
                       scale: _scaleAnimation.value,
                       child: Image.asset(
-                        'assets/images/bossloot-logo-margin.png',
+                        'assets/images/bossloot-logo-margin-2.png',
                         height: 150,
                       ),
                     ),

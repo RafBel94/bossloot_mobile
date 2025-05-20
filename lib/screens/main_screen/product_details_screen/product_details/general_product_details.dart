@@ -83,6 +83,9 @@ class _GeneralProductDetailsState extends State<GeneralProductDetails> {
     final bool isFavorite = favoriteProvider.favoriteList.any((favorite) => 
       favorite.productId == widget.product.id);
 
+    // Get the total valorations
+    int totalValorations = _countVerifiedValorations(widget.product.valorations);
+
     return SingleChildScrollView(
       controller: _scrollController,
       child: Padding(
@@ -258,20 +261,23 @@ class _GeneralProductDetailsState extends State<GeneralProductDetails> {
                             children: [
                               ...buildStarRating(widget.product.avg_rating ?? 0),
                               const SizedBox(width: 6),
-                                Text(widget.product.valorations.length > 0 ? '${(widget.product.avg_rating).toStringAsFixed(1)}' : '0.0', style: TextStyle(fontSize: 16, )),
-                              Text('  |  ${AppLocalizations.of(context)!.product_details_screen_valoration_part1} ${widget.product.valorations.length} ${AppLocalizations.of(context)!.product_details_screen_valoration_part2}', style: TextStyle(fontSize: 13,)),
+                              Text(widget.product.valorations.length > 0 ? '${(widget.product.avg_rating).toStringAsFixed(1)}' : '0', style: TextStyle(fontSize: 16, )),
+                              Text('  |  ${AppLocalizations.of(context)!.product_details_screen_valoration_part1} ${totalValorations} ${AppLocalizations.of(context)!.product_details_screen_valoration_part2}', style: TextStyle(fontSize: 13,)),
                             ],
                           ),
                         ),
                   
-                        const SizedBox(height: 5),
+                        const SizedBox(height: 15),
             
                         // ---- Product Name
                         Align(
                           alignment: Alignment.centerLeft,
-                          child: Text(
-                            widget.product.name,
-                            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                          child: FittedBox(
+                            fit: BoxFit.scaleDown,
+                            child: Text(
+                              widget.product.name,
+                              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                            ),
                           ),
                         ),
 
@@ -291,7 +297,29 @@ class _GeneralProductDetailsState extends State<GeneralProductDetails> {
 
                               Text(
                                 widget.product.model,
-                                style: TextStyle(fontSize: 16, color: Colors.grey),
+                                style: TextStyle(fontSize: 16, color: const Color.fromARGB(255, 95, 95, 95)),
+                              ),
+                            ],
+                          ),
+                        ),
+
+                        const SizedBox(height: 5),
+
+                        // ---- Product Brand
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Row(
+                            children: [
+                              Text(
+                                '${AppLocalizations.of(context)!.product_details_screen_brand_label}: ',
+                                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                              ),
+
+                              const SizedBox(width: 5),
+
+                              Text(
+                                widget.product.brand,
+                                style: TextStyle(fontSize: 16, color: const Color.fromARGB(255, 95, 95, 95)),
                               ),
                             ],
                           ),
@@ -410,13 +438,19 @@ class _GeneralProductDetailsState extends State<GeneralProductDetails> {
                 color: const Color.fromARGB(220, 239, 239, 239),
                 borderRadius: BorderRadius.circular(10),
               ),
-              child: ProductValorations(valorations: widget.product.valorations),
+              child: ProductValorations(valorations: widget.product.valorations, productId: widget.product.id,),
             ),
+
+            const SizedBox(height: 30),
           ],
         ),
       ),
     );
   }
+
+  int _countVerifiedValorations(List<dynamic> valorations) {
+      return valorations.where((v) => v.verified == true).length;
+    }
 
   List<Widget> buildStarRating(double rating) {
     List<Widget> stars = [];

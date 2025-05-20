@@ -9,6 +9,7 @@ import 'package:bossloot_mobile/providers/paypal/paypal_provider.dart';
 import 'package:bossloot_mobile/providers/product_provider.dart';
 import 'package:bossloot_mobile/providers/size_provider.dart';
 import 'package:bossloot_mobile/providers/user_provider.dart';
+import 'package:bossloot_mobile/providers/valoration_provider.dart';
 import 'package:bossloot_mobile/screens/loading_screen/loading_screen.dart';
 import 'package:bossloot_mobile/screens/main_screen/cart_screen/cart_screen.dart';
 import 'package:bossloot_mobile/screens/main_screen/checkout_screen/checkout_screen.dart';
@@ -25,6 +26,7 @@ import 'package:bossloot_mobile/services/paypal/paypal_service.dart';
 import 'package:bossloot_mobile/services/product_service.dart';
 import 'package:bossloot_mobile/services/token_service.dart';
 import 'package:bossloot_mobile/services/user_service.dart';
+import 'package:bossloot_mobile/services/valoration_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -88,6 +90,9 @@ class _MainAppState extends State<MainApp> {
         ),
         ChangeNotifierProvider(
           create: (_) => FavoriteProvider(favoriteService: FavoriteService(), tokenService: TokenService(),),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => ValorationProvider(valorationService: ValorationService()),
         ),
         ChangeNotifierProvider(
           create: (_) => LanguageProvider(),

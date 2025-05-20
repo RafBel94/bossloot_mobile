@@ -16,6 +16,11 @@
         "description": "Text for cancel"
     },
 
+    "app_confirm": "CONFIRM",
+    "@app_confirm": {
+        "description": "Text for confirm"
+    },
+
     "app_clear": "Clear",
     "@app_clear": {
         "description": "Text for clear"
@@ -675,6 +680,11 @@
         "description": "Text for the no valorations message on the product details screen"
     },
 
+    "product_details_screen_valorations_button": "WRITE VALORATION",
+    "@product_details_screen_valorations_button": {
+        "description": "Text for the write valoration button on the product details screen"
+    },
+
     "product_details_screen_catalog_button": "Catalog",
     "@product_details_screen_catalog_button": {
         "description": "Text for the catalog button on the product details screen"
@@ -688,6 +698,90 @@
     "product_details_screen_buy_now_button": "Buy Now",
     "@product_details_screen_buy_now_button": {
         "description": "Text for the buy now button on the product details screen"
+    },
+
+
+
+
+    "valoration_screen_title": "RATE PRODUCT",
+    "@valoration_screen_title": {
+        "description": "Title for the valoration screen"
+    },
+
+    "valoration_screen_rating_label": "Rating",
+    "@valoration_screen_rating_label": {
+        "description": "Text for the rating label on the valoration screen"
+    },
+
+    "valoration_screen_commentary_label": "Commentary",
+    "@valoration_screen_commentary_label": {
+        "description": "Text for the commentary label on the valoration screen"
+    },
+
+    "valoration_screen_commentary_hint": "Write your commentary",
+    "@valoration_screen_commentary_hint": {
+        "description": "Hint text for the commentary field on the valoration screen"
+    },
+
+    "valoration_screen_image_label": "Attach image (optional)",
+    "@valoration_screen_image_label": {
+        "description": "Text for the attach image label on the valoration screen"
+    },
+
+    "valoration_screen_send_button": "SEND RATING",
+    "@valoration_screen_send_button": {
+        "description": "Text for the send valoration button on the valoration screen"
+    },
+
+
+
+
+    "valoration_dialog_error_title": "ERROR",
+    "@valoration_dialog_error_title": {
+        "description": "Title for the error dialog on the valoration screen"
+    },
+
+    "valoration_dialog_error_subtitle": "SOMETHING WENT WRONG!",
+    "@valoration_dialog_error_subtitle": {
+        "description": "Subtitle for the error dialog on the valoration screen"
+    },
+
+    "valoration_dialog_error_text": "The valoration could not be sent. Please check your internet connection and try again.",
+    "@valoration_dialog_error_text": {
+        "description": "Text for the error message on the valoration screen"
+    },
+
+    "valoration_dialog_success_title": "VALORATION SENT",
+    "@valoration_dialog_success_title": {
+        "description": "Title for the success dialog on the valoration screen"
+    },
+
+    "valoration_dialog_success_subtitle": "VALORATION SENT SUCCESFULLY!",
+    "@valoration_dialog_success_subtitle": {
+        "description": "Subtitle for the success dialog on the valoration screen"
+    },
+
+    "valoration_dialog_success_text": "Your valoration has been successfully sent and will be reviewed by our team. Thank you for your feedback!",
+    "@valoration_dialog_success_text": {
+        "description": "Text for the success message on the valoration screen"
+    },
+
+
+
+
+    "valoration_confirm_dialog_title": "CONFIRM VALORATION",
+    "@valoration_confirm_dialog_title": {
+        "description": "Title for the confirm valoration dialog"
+    },
+
+    "valoration_confirm_dialog_subtitle": "ARE YOU SURE?",
+    "@valoration_confirm_dialog_subtitle": {
+        "description": "Subtitle for the confirm valoration dialog"
+    },
+
+    "valoration_confirm_dialog_text": "You are about to send this valoration. Do you want to proceed?",
+    "@valoration_confirm_dialog_text": {
+        "description": "Text for the confirm valoration dialog"
     },
 
 

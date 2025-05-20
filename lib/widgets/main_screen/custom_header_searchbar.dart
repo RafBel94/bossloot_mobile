@@ -223,7 +223,7 @@ class _CustomHeaderSearchbarState extends State<CustomHeaderSearchbar>
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Image.asset('assets/images/bossloot-logo-margin.png', height: 35),
+                Image.asset('assets/images/bossloot-logo-margin-2.png', height: 35),
                 const SizedBox(width: 8),
                 Image.asset('assets/images/bossloot-title-only.png', height: 20),
               ],

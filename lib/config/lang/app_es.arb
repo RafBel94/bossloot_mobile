@@ -15,6 +15,11 @@
     "@app_cancel": {
         "description": "Text for cancel"
     },
+    
+    "app_confirm": "CONFIRMAR",
+    "@app_confirm": {
+        "description": "Text for confirm"
+    },
 
     "app_clear": "Limpiar",
     "@app_clear": {
@@ -674,6 +679,11 @@
         "description": "Text for the no valorations message on the product details screen"
     },
 
+    "product_details_screen_valorations_button": "ESCRIBIR VALORACION",
+    "@product_details_screen_valorations_button": {
+        "description": "Text for the write valoration button on the product details screen"
+    },
+
     "product_details_screen_catalog_button": "Catálogo",
     "@product_details_screen_catalog_button": {
         "description": "Text for the catalog button on the product details screen"
@@ -687,6 +697,90 @@
     "product_details_screen_buy_now_button": "Comprar",
     "@product_details_screen_buy_now_button": {
         "description": "Text for the buy now button on the product details screen"
+    },
+
+
+
+
+    "valoration_screen_title": "VALORAR PRODUCTO",
+    "@valoration_screen_title": {
+        "description": "Title for the valoration screen"
+    },
+
+    "valoration_screen_rating_label": "Valoracion",
+    "@valoration_screen_rating_label": {
+        "description": "Text for the rating label on the valoration screen"
+    },
+
+    "valoration_screen_commentary_label": "Comentario",
+    "@valoration_screen_commentary_label": {
+        "description": "Text for the commentary label on the valoration screen"
+    },
+
+    "valoration_screen_commentary_hint": "Escribe tu comentario",
+    "@valoration_screen_commentary_hint": {
+        "description": "Hint text for the commentary field on the valoration screen"
+    },
+
+    "valoration_screen_image_label": "Adjuntar imagen (opcional)",
+    "@valoration_screen_image_label": {
+        "description": "Text for the attach image label on the valoration screen"
+    },
+
+    "valoration_screen_send_button": "ENVIAR VALORACION",
+    "@valoration_screen_send_button": {
+        "description": "Text for the send valoration button on the valoration screen"
+    },
+
+
+
+
+    "valoration_dialog_error_title": "ERROR",
+    "@valoration_dialog_error_title": {
+        "description": "Title for the error dialog on the valoration screen"
+    },
+
+    "valoration_dialog_error_subtitle": "¡ALGO SALIO MAL!",
+    "@valoration_dialog_error_subtitle": {
+        "description": "Subtitle for the error dialog on the valoration screen"
+    },
+
+    "valoration_dialog_error_text": "Parece que hubo un error al enviar tu valoration. Por favor, revisa tu conexión a internet y vuelve a intentarlo.",
+    "@valoration_dialog_error_text": {
+        "description": "Text for the error message on the valoration screen"
+    },
+
+    "valoration_dialog_success_title": "VALORACION ENVIADA",
+    "@valoration_dialog_success_title": {
+        "description": "Title for the success dialog on the valoration screen"
+    },
+
+    "valoration_dialog_success_subtitle": "¡VALORACION ENVIADA CORRECTAMENTE!",
+    "@valoration_dialog_success_subtitle": {
+        "description": "Subtitle for the success dialog on the valoration screen"
+    },
+
+    "valoration_dialog_success_text": "Tu valoración ha sido enviada correctamente y será revisada y publicada en breve.\n\nGracias por compartir tu opinión con nosotros.",
+    "@valoration_dialog_success_text": {
+        "description": "Text for the success message on the valoration screen"
+    },
+
+
+
+
+    "valoration_confirm_dialog_title": "CONFIRMAR",
+    "@valoration_confirm_dialog_title": {
+        "description": "Title for the confirm valoration dialog"
+    },
+
+    "valoration_confirm_dialog_subtitle": "¿ESTA TODO CORRECTO?",
+    "@valoration_confirm_dialog_subtitle": {
+        "description": "Subtitle for the confirm valoration dialog"
+    },
+
+    "valoration_confirm_dialog_text": "Tu valoración será enviada y revisada por nuestro equipo.\n\n¿Quieres continuar?",
+    "@valoration_confirm_dialog_text": {
+        "description": "Text for the confirm valoration dialog"
     },
 
 

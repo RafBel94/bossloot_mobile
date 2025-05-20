@@ -6,6 +6,7 @@ import 'package:bossloot_mobile/screens/main_screen/main_screen.dart';
 import 'package:bossloot_mobile/screens/main_screen/product_details_screen/product_details/general_product_details.dart';
 import 'package:bossloot_mobile/utils/dialog_util.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -142,7 +143,9 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                ElevatedButton(
+                ElevatedButton.icon(
+                  label: Text(AppLocalizations.of(context)!.product_details_screen_add_to_cart_button, style: GoogleFonts.orbitron(fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold)),
+                  icon: Icon(Icons.add_shopping_cart, color: Colors.white, size: 25,),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.purple[800],
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
@@ -155,7 +158,6 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                       DialogUtil.showAddToCartDialog(context, cartProvider, widget.productId);
                     }
                   },
-                  child: Text(AppLocalizations.of(context)!.product_details_screen_add_to_cart_button, style: TextStyle(color: Colors.white)),
                 ),
               ],
             ),

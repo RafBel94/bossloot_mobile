@@ -6,6 +6,7 @@ class Valoration {
   final int productId;
   final double rating;
   final String? comment;
+  final bool verified;
   final User user;
   final String? image;
   final DateTime createdAt;
@@ -17,6 +18,7 @@ class Valoration {
     required this.productId,
     required this.rating,
     this.comment,
+    this.verified = false,
     required this.user,
     this.image,
     required this.createdAt,
@@ -30,6 +32,7 @@ class Valoration {
       productId: json['product_id'],
       rating: double.parse(json['rating'].toString()),
       comment: json['comment'],
+      verified: json['verified'] == 1,
       user: User.fromValorationJson(json['user']),
       image: json['image'],
       createdAt: DateTime.parse(json['created_at']),
@@ -44,6 +47,7 @@ class Valoration {
       'product_id': productId,
       'rating': rating,
       'comment': comment,
+      'verified': verified ? 1 : 0,
       'created_at': createdAt,
       'updated_at': updatedAt,
     };

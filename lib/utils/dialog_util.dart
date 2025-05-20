@@ -1674,6 +1674,200 @@ class DialogUtil {
       )
     );
   }
+
+  static Future<dynamic> showValorationDialog(BuildContext context, bool success) {
+    return showDialog(
+      context: context,
+      builder: (context) => Dialog(
+        backgroundColor: Colors.transparent,
+        child: Container(
+          padding: EdgeInsets.all(20),
+          decoration: BoxDecoration(
+            color: Color(0xFF2A0E4D),
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(
+              color: Colors.purpleAccent,
+              width: 2,
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: const Color.fromRGBO(156, 39, 176, 0.5),
+                blurRadius: 10,
+                spreadRadius: 3,
+              ),
+            ],
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              FittedBox(
+                child: Text(
+                  success ? AppLocalizations.of(context)!.valoration_dialog_success_title : AppLocalizations.of(context)!.valoration_dialog_error_title,
+                  style: GoogleFonts.pressStart2p(
+                    fontSize: 18,
+                    color: Colors.amber,
+                    shadows: [
+                      Shadow(
+                        color: Colors.purple,
+                        offset: Offset(2, 2),
+                        blurRadius: 0,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              
+              SizedBox(height: 25),
+              
+              // General Information
+              _buildInfoSection(
+                title: success ? AppLocalizations.of(context)!.valoration_dialog_success_subtitle : AppLocalizations.of(context)!.valoration_dialog_error_subtitle,
+                content: success 
+                  ? AppLocalizations.of(context)!.valoration_dialog_success_text
+                  : AppLocalizations.of(context)!.valoration_dialog_error_text,
+                color: Colors.pinkAccent,
+              ),
+              
+              SizedBox(height: 20),
+              
+              // Button
+              Center(
+                child: ElevatedButton(
+                  onPressed: () => Navigator.pop(context),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.purple,
+                    foregroundColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      side: BorderSide(color: Colors.white, width: 2),
+                    ),
+                    padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                  ),
+                  child: Text(
+                    AppLocalizations.of(context)!.app_confirm,
+                    style: GoogleFonts.pressStart2p(
+                      fontSize: 12,
+                      letterSpacing: 1,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      )
+    );
+  }
+
+  static Future<bool?> showValorationConfirmDialog(BuildContext context) {
+    return showDialog<bool>(
+      context: context,
+      builder: (context) => Dialog(
+        backgroundColor: Colors.transparent,
+        child: Container(
+          padding: EdgeInsets.all(20),
+          decoration: BoxDecoration(
+            color: Color(0xFF2A0E4D),
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(
+              color: Colors.orangeAccent,
+              width: 2,
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: const Color.fromRGBO(255, 152, 0, 0.5),
+                blurRadius: 10,
+                spreadRadius: 3,
+              ),
+            ],
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Title
+              Text(
+                AppLocalizations.of(context)!.valoration_confirm_dialog_title,
+                style: GoogleFonts.pressStart2p(
+                  fontSize: 18,
+                  color: Colors.amber,
+                  shadows: [
+                    Shadow(
+                      color: Colors.deepOrange,
+                      offset: Offset(2, 2),
+                      blurRadius: 0,
+                    ),
+                  ],
+                ),
+              ),
+              
+              SizedBox(height: 25),
+              
+              // General Information
+              _buildInfoSection(
+                title: AppLocalizations.of(context)!.valoration_confirm_dialog_subtitle,
+                content: AppLocalizations.of(context)!.valoration_confirm_dialog_text,
+                color: Colors.orangeAccent,
+              ),
+              
+              SizedBox(height: 30),
+              
+              // Buttons Row
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  // Cancel Button
+                  ElevatedButton(
+                    onPressed: () => Navigator.pop(context, false),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.blueGrey,
+                      foregroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                        side: BorderSide(color: Colors.white, width: 2),
+                      ),
+                      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                    ),
+                    child: Text(
+                      AppLocalizations.of(context)!.app_cancel.toUpperCase(),
+                      style: GoogleFonts.pressStart2p(
+                        fontSize: 10,
+                        letterSpacing: 1,
+                      ),
+                    ),
+                  ),
+                  
+                  // Confirm Button
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.pop(context, true);
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.red,
+                      foregroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                        side: BorderSide(color: Colors.white, width: 2),
+                      ),
+                      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                    ),
+                    child: Text(
+                      AppLocalizations.of(context)!.app_confirm,
+                      style: GoogleFonts.pressStart2p(
+                        fontSize: 10,
+                        letterSpacing: 1,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
 }
 
 // Info Section Widget for the dialogs

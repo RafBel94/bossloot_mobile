@@ -221,18 +221,6 @@ class _OrdersScreenState extends State<OrdersScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset(
-              'assets/images/empty_orders.png',
-              height: 150,
-              width: 150,
-              fit: BoxFit.contain,
-              errorBuilder: (ctx, _, __) => Icon(
-                Icons.shopping_bag_outlined,
-                size: 100,
-                color: Colors.grey[400],
-              ),
-            ),
-            const SizedBox(height: 24),
             Text(
               AppLocalizations.of(context)!.orders_screen_empty_orders_label,
               style: GoogleFonts.poppins(
