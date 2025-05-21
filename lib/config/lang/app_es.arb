@@ -199,6 +199,69 @@
 
 
 
+    "app_drawer_category_ram": "Memoria RAM",
+    "@app_drawer_category_ram": {
+        "description": "Text for the RAM category in the drawer"
+    },
+
+    "app_drawer_category_cpu": "Procesador",
+    "@app_drawer_category_cpu": {
+        "description": "Text for the CPU category in the drawer"
+    },
+
+    "app_drawer_category_gpu": "Tarjeta Gráfica",
+    "@app_drawer_category_gpu": {
+        "description": "Text for the GPU category in the drawer"
+    },
+
+    "app_drawer_category_motherboard": "Placa base",
+    "@app_drawer_category_motherboard": {
+        "description": "Text for the Motherboard category in the drawer"
+    },
+
+    "app_drawer_category_storage": "Almacenamiento",
+    "@app_drawer_category_storage": {
+        "description": "Text for the Storage category in the drawer"
+    },
+
+    "app_drawer_category_psu": "Alimentación",
+    "@app_drawer_category_psu": {
+        "description": "Text for the Power Supply category in the drawer"
+    },
+
+    "app_drawer_category_case": "Caja",
+    "@app_drawer_category_case": {
+        "description": "Text for the Case category in the drawer"
+    },
+
+    "app_drawer_category_cooler": "Refrigeración",
+    "@app_drawer_category_cooler": {
+        "description": "Text for the Cooler category in the drawer"
+    },
+
+    "app_drawer_category_display": "Pantalla",
+    "@app_drawer_category_display": {
+        "description": "Text for the Display category in the drawer"
+    },
+
+    "app_drawer_category_keyboard": "Teclado",
+    "@app_drawer_category_keyboard": {
+        "description": "Text for the Keyboard category in the drawer"
+    },
+
+    "app_drawer_category_mouse": "Ratón",
+    "@app_drawer_category_mouse": {
+        "description": "Text for the Mouse category in the drawer"
+    },
+
+    "app_drawer_brand_label": "Marca",
+    "@app_drawer_brand_label": {
+        "description": "Text for the brand label in the drawer"
+    },
+
+
+
+
     "home_screen_featured_title": "LOS MAS CODICIADOS",
     "@home_screen_featured_title": {
         "description": "Text for the featured section on the home screen"

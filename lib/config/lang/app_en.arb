@@ -199,6 +199,69 @@
 
 
 
+    "app_drawer_category_ram": "Memory",
+    "@app_drawer_category_ram": {
+        "description": "Text for the RAM category in the drawer"
+    },
+
+    "app_drawer_category_cpu": "Processor",
+    "@app_drawer_category_cpu": {
+        "description": "Text for the CPU category in the drawer"
+    },
+
+    "app_drawer_category_gpu": "Graphics Card",
+    "@app_drawer_category_gpu": {
+        "description": "Text for the GPU category in the drawer"
+    },
+
+    "app_drawer_category_motherboard": "Motherboard",
+    "@app_drawer_category_motherboard": {
+        "description": "Text for the Motherboard category in the drawer"
+    },
+
+    "app_drawer_category_storage": "Storage",
+    "@app_drawer_category_storage": {
+        "description": "Text for the Storage category in the drawer"
+    },
+
+    "app_drawer_category_psu": "Power Supply",
+    "@app_drawer_category_psu": {
+        "description": "Text for the Power Supply category in the drawer"
+    },
+
+    "app_drawer_category_case": "Case",
+    "@app_drawer_category_case": {
+        "description": "Text for the Case category in the drawer"
+    },
+
+    "app_drawer_category_cooler": "Cooler",
+    "@app_drawer_category_cooler": {
+        "description": "Text for the Cooler category in the drawer"
+    },
+
+    "app_drawer_category_display": "Display",
+    "@app_drawer_category_display": {
+        "description": "Text for the Display category in the drawer"
+    },
+
+    "app_drawer_category_keyboard": "Keyboard",
+    "@app_drawer_category_keyboard": {
+        "description": "Text for the Keyboard category in the drawer"
+    },
+
+    "app_drawer_category_mouse": "Mouse",
+    "@app_drawer_category_mouse": {
+        "description": "Text for the Mouse category in the drawer"
+    },
+
+    "app_drawer_brand_label": "Brand",
+    "@app_drawer_brand_label": {
+        "description": "Text for the brand label in the drawer"
+    },
+
+
+
+
     "home_screen_featured_title": "FOR REAL ADVENTURERS",
     "@home_screen_featured_title": {
         "description": "Text for the featured section on the home screen"

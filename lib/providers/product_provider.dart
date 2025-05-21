@@ -22,6 +22,17 @@ class ProductProvider extends ChangeNotifier{
   List<CatalogProduct> catalogProductList = [];
   List<CatalogProduct> featuredProductList = [];
 
+  // Filtered products lists
+  List<CatalogProduct> filteredCatalogList = [];
+  List<CatalogProduct> filteredFeaturedList = [];
+  
+  // Filter options
+  List<String> selectedCategories = [];
+  List<String> selectedBrands = [];
+  double? minPrice;
+  double? maxPrice;
+  String priceOrder = ''; // 'asc', 'desc' or empty string for no order
+
   dynamic currentProductDetails;
 
   String? errorMessage;

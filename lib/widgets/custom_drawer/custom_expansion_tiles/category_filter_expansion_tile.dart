@@ -1,12 +1,12 @@
 // ignore_for_file: must_be_immutable
 
-import 'package:bossloot_mobile/domain/models/category.dart';
+import 'package:bossloot_mobile/providers/category_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
 
 class CategoryFilterExpansionTile extends StatefulWidget {
-  List<Category> categories = [];
-  CategoryFilterExpansionTile({super.key, required this.categories});
+  const CategoryFilterExpansionTile({super.key});
 
   @override
   State<CategoryFilterExpansionTile> createState() => _CategoryFilterExpansionTileState();
@@ -21,6 +21,7 @@ class _CategoryFilterExpansionTileState extends State<CategoryFilterExpansionTil
 
   @override
   Widget build(BuildContext context) {
+    CategoryProvider categoryProvider = context.watch<CategoryProvider>();
     return ExpansionTile(
       backgroundColor: const Color.fromARGB(255, 220, 220, 220),
       shape: RoundedRectangleBorder(
@@ -35,15 +36,15 @@ class _CategoryFilterExpansionTileState extends State<CategoryFilterExpansionTil
         Text(AppLocalizations.of(context)!.app_category),
       ],
       ),
-      children: widget.categories.map((category) {
+      children: categoryProvider.categories.map((category) {
         return ListTile(
           contentPadding: EdgeInsets.only(left: 40),
           tileColor: const Color.fromARGB(255, 242, 242, 242),
           title: Row(
             children: [
-              Icon(Icons.more_horiz_outlined),
+              Icon(Icons.double_arrow_sharp, size: 12),
               SizedBox(width: 10),
-              Text(category.name),
+              Text(_getCategoryName(category.name)),
             ],
           ),
           onTap: () {
@@ -52,5 +53,34 @@ class _CategoryFilterExpansionTileState extends State<CategoryFilterExpansionTil
         );
       }).toList(),
     );
+  }
+
+  String _getCategoryName(String name) {
+    switch (name) {
+      case 'ram':
+        return AppLocalizations.of(context)!.app_drawer_category_ram;
+      case 'cpu':
+        return AppLocalizations.of(context)!.app_drawer_category_cpu;
+      case 'gpu':
+        return AppLocalizations.of(context)!.app_drawer_category_gpu;
+      case 'motherboard':
+        return AppLocalizations.of(context)!.app_drawer_category_motherboard;
+      case 'storage':
+        return AppLocalizations.of(context)!.app_drawer_category_storage;
+      case 'psu':
+        return AppLocalizations.of(context)!.app_drawer_category_psu;
+      case 'cooler':
+        return AppLocalizations.of(context)!.app_drawer_category_cooler;
+      case 'display':
+        return AppLocalizations.of(context)!.app_drawer_category_display;
+      case 'case':
+        return AppLocalizations.of(context)!.app_drawer_category_case;
+      case 'keyboard':
+        return AppLocalizations.of(context)!.app_drawer_category_keyboard;
+      case 'mouse':
+        return AppLocalizations.of(context)!.app_drawer_category_mouse;
+      default:
+        return name;
+    }
   }
 }

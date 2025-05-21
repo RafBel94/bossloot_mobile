@@ -1,3 +1,4 @@
+import 'package:bossloot_mobile/providers/brand_provider.dart';
 import 'package:bossloot_mobile/providers/cart/cart_provider.dart';
 import 'package:bossloot_mobile/providers/category_provider.dart';
 import 'package:bossloot_mobile/providers/coin_exchange_provider.dart';
@@ -16,6 +17,7 @@ import 'package:bossloot_mobile/screens/main_screen/checkout_screen/checkout_scr
 import 'package:bossloot_mobile/screens/main_screen/main_screen.dart';
 import 'package:bossloot_mobile/screens/main_screen/orders_screen/order_confirmation_screen.dart';
 import 'package:bossloot_mobile/screens/main_screen/orders_screen/orders_screen.dart';
+import 'package:bossloot_mobile/services/brand_service.dart';
 import 'package:bossloot_mobile/services/cart/cart_service.dart';
 import 'package:bossloot_mobile/services/category_service.dart';
 import 'package:bossloot_mobile/services/coin_exchange_service.dart';
@@ -90,6 +92,9 @@ class _MainAppState extends State<MainApp> {
         ),
         ChangeNotifierProvider(
           create: (_) => FavoriteProvider(favoriteService: FavoriteService(), tokenService: TokenService(),),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => BrandProvider(brandService: BrandService()),
         ),
         ChangeNotifierProvider(
           create: (_) => ValorationProvider(valorationService: ValorationService()),

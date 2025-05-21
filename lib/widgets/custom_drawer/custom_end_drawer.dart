@@ -1,12 +1,9 @@
-import 'package:bossloot_mobile/providers/category_provider.dart';
 import 'package:bossloot_mobile/widgets/custom_drawer/custom_drawer_buttons/drawer_apply_button.dart';
 import 'package:bossloot_mobile/widgets/custom_drawer/custom_drawer_buttons/drawer_clear_button.dart';
 import 'package:bossloot_mobile/widgets/custom_drawer/custom_expansion_tiles/brand_filter_expansion_tile.dart';
 import 'package:bossloot_mobile/widgets/custom_drawer/custom_expansion_tiles/category_filter_expansion_tile.dart';
-import 'package:bossloot_mobile/widgets/custom_drawer/custom_expansion_tiles/date_filter_expansion_tile.dart';
 import 'package:bossloot_mobile/widgets/custom_drawer/custom_expansion_tiles/price_filter_expansion_tile.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CustomEndDrawer extends StatefulWidget {
@@ -17,21 +14,10 @@ class CustomEndDrawer extends StatefulWidget {
 }
 
 class _CustomEndDrawerState extends State<CustomEndDrawer> {
-  bool _isLoading = true;
 
   @override
   void initState() {
     super.initState();
-    _initializeCategories();
-  }
-  Future<void> _initializeCategories() async {
-    final categoryProvider = context.read<CategoryProvider>();
-    await categoryProvider.fetchCategories();
-    if(mounted) {
-      setState(() {
-        _isLoading = false;
-      });
-    }
   }
 
   @override
@@ -48,9 +34,7 @@ class _CustomEndDrawerState extends State<CustomEndDrawer> {
         ),
       ),
       backgroundColor: Colors.white,
-      child: _isLoading 
-      ? const Center(child: CircularProgressIndicator())
-      : Column(
+      child: Column(
         mainAxisSize: MainAxisSize.max,
         children: [
   
@@ -91,16 +75,13 @@ class _CustomEndDrawerState extends State<CustomEndDrawer> {
                 padding: EdgeInsets.zero,
                 children: [      
                   // CATEGORY FILTER
-                  CategoryFilterExpansionTile(categories: context.watch<CategoryProvider>().categories),
+                  CategoryFilterExpansionTile(),
               
                   // BRAND FILTER
                   BrandFilterExpansionTile(),
               
                   // PRICE FILTER
                   PriceFilterExpansionTile(),
-              
-                  // DATE FILTER
-                  DateFilterExpansionTile(),
                 ],
               ),
             ),
