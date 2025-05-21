@@ -139,6 +139,28 @@ class _GeneralProductDetailsState extends State<GeneralProductDetails> {
                         ),
                       ),
 
+                      // Out of stock label
+                      if (widget.product.quantity == 0)
+                        Positioned(
+                          bottom: 15,
+                          left: 0,
+                          right: 0,
+                          child: Center(
+                            child: Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                            decoration: BoxDecoration(
+                              color: const Color.fromARGB(93, 207, 27, 27),
+                              borderRadius: BorderRadius.circular(5),
+                              border: Border.all(color: const Color.fromARGB(158, 135, 18, 18), width: 1),
+                            ),
+                            child: Text(
+                                AppLocalizations.of(context)!.product_details_screen_no_stock_label,
+                                style: const TextStyle(fontSize: 23, color: Color.fromARGB(255, 255, 255, 255), fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          ),
+                        ),
+
                       // ---- Favorite Button
                       if (userProvider.currentUser != null)
                       Positioned(

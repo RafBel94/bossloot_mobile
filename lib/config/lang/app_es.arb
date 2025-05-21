@@ -717,6 +717,11 @@
         "description": "Text for the ratings label on the product details screen"
     },
 
+    "product_details_screen_no_stock_label": "¡Agotado!",
+    "@product_details_screen_no_stock_label": {
+        "description": "Text for the stock label on the product details screen"
+    },
+
     "product_details_screen_description_label": "Descripción",
     "@product_details_screen_description_label": {
         "description": "Text for the description label on the product details screen"
@@ -954,6 +959,24 @@
     "cart_dialog_removed_text": "El producto se ha eliminado correctamente de tu carrito.\nPuedes ver tu carrito para proceder al pago si has terminado.",
     "@cart_dialog_removed_text": {
         "description": "Text for the product removed confirmation dialog"
+    },
+
+
+
+
+    "out_of_stock_dialog_title": "PRODUCTO AGOTADO",
+    "@out_of_stock_dialog_title": {
+        "description": "Title for the out of stock dialog"
+    },
+
+    "out_of_stock_dialog_subtitle": "¡EL PRODUCTO ESTA AGOTADO!",
+    "@out_of_stock_dialog_subtitle": {
+        "description": "Subtitle for the out of stock dialog"
+    },
+
+    "out_of_stock_dialog_text": "Este producto está agotado y no está disponible para la compra en este momento.\n\nPuedes volver más tarde o buscar productos similares en nuestra tienda.",
+    "@out_of_stock_dialog_text": {
+        "description": "Text for the out of stock dialog"
     },
 
 

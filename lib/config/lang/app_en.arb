@@ -718,6 +718,11 @@
         "description": "Text for the ratings label on the product details screen"
     },
 
+    "product_details_screen_no_stock_label": "Out of stock!",
+    "@product_details_screen_no_stock_label": {
+        "description": "Text for the stock label on the product details screen"
+    },
+
     "product_details_screen_description_label": "Description",
     "@product_details_screen_description_label": {
         "description": "Text for the description label on the product details screen"
@@ -956,6 +961,24 @@
     "cart_dialog_removed_text": "The product has been successfully removed from your cart. You can view your cart to proceed with the checkout if you are done!.",
     "@cart_dialog_removed_text": {
         "description": "Text for the product removed confirmation dialog"
+    },
+
+
+
+
+    "out_of_stock_dialog_title": "OUT OF STOCK",
+    "@out_of_stock_dialog_title": {
+        "description": "Title for the out of stock dialog"
+    },
+
+    "out_of_stock_dialog_subtitle": "PRODUCT UNAVAILABLE!",
+    "@out_of_stock_dialog_subtitle": {
+        "description": "Subtitle for the out of stock dialog"
+    },
+
+    "out_of_stock_dialog_text": "The product you are trying to add to your cart is currently out of stock. Please check back later or choose a different product.",
+    "@out_of_stock_dialog_text": {
+        "description": "Text for the out of stock dialog"
     },
 
 
