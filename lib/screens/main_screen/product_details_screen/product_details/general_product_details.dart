@@ -262,7 +262,7 @@ class _GeneralProductDetailsState extends State<GeneralProductDetails> {
                               ...buildStarRating(widget.product.avg_rating ?? 0),
                               const SizedBox(width: 6),
                               Text(widget.product.valorations.length > 0 ? '${(widget.product.avg_rating).toStringAsFixed(1)}' : '0', style: TextStyle(fontSize: 16, )),
-                              Text('  |  ${AppLocalizations.of(context)!.product_details_screen_valoration_part1} ${totalValorations} ${AppLocalizations.of(context)!.product_details_screen_valoration_part2}', style: TextStyle(fontSize: 13,)),
+                              Text('  |  ${AppLocalizations.of(context)!.product_details_screen_valoration_part1} $totalValorations ${AppLocalizations.of(context)!.product_details_screen_valoration_part2}', style: TextStyle(fontSize: 13,)),
                             ],
                           ),
                         ),

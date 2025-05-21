@@ -11,70 +11,61 @@ class CatalogScreen extends StatefulWidget {
 }
 
 class _CatalogScreenState extends State<CatalogScreen> {
-  bool _isLoading = false;
-
   @override
   void initState() {
     super.initState();
   }
 
-  Future<void> _refreshCatalogProducts() async {
-    await context.read<ProductProvider>().fetchCatalogProducts();
-
-    if (mounted) {
-      setState(() {
-        _isLoading = false;
-      });
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
-    return _isLoading 
-      ? Center(
-          child: Container(
-            height: double.infinity,
-            width: double.infinity,
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [Color(0xFF270140), Color.fromARGB(255, 141, 24, 112)],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              )
-            ),
-            child: const CircularProgressIndicator(color: Colors.white),
-          )
-        )
-      : RefreshIndicator(
-          onRefresh: () => _refreshCatalogProducts(),
-        child: Container(
-            height: double.infinity,
-            width: double.infinity,
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('assets/images/loading-image-2.png'),
-                fit: BoxFit.fill,
-                repeat: ImageRepeat.repeat
-              ),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.only(top: 5.0, left: 8.0, right: 8.0),
-              child: GridView.builder(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 9.0,
-                  mainAxisSpacing: 9.0,
-                  mainAxisExtent: 289
-                ),
-                itemCount: context.read<ProductProvider>().catalogProductList.length,
-                itemBuilder: (context, index) {
-                  final product = context.read<ProductProvider>().catalogProductList[index];
-                  return CatalogProductCard(product: product);
-                },
-              ),
-            ),
+    final productProvider = context.watch<ProductProvider>();
+    final isLoading = productProvider.isLoading;
+    final products = productProvider.filteredCatalogList;
+    
+    return Container(
+      height: double.infinity,
+      width: double.infinity,
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage('assets/images/loading-image-2.png'),
+          fit: BoxFit.fill,
+          repeat: ImageRepeat.repeat
+        ),
+      ),
+      child: Stack(
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(top: 5.0, left: 8.0, right: 8.0),
+            child: isLoading && products.isNotEmpty
+                ? Container()
+                : GridView.builder(
+                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 9.0,
+                      mainAxisSpacing: 9.0,
+                      mainAxisExtent: 289
+                    ),
+                    itemCount: products.length,
+                    itemBuilder: (context, index) {
+                      final product = products[index];
+                      return CatalogProductCard(product: product);
+                    },
+                  ),
           ),
-      );
+          
+          // Loading overlay
+          if (isLoading)
+            Container(
+              color: const Color.fromRGBO(0, 0, 0, 0.3),
+              child: Center(
+                child: CircularProgressIndicator(
+                  valueColor: AlwaysStoppedAnimation<Color>(Colors.deepPurple),
+                  strokeWidth: 5.0,
+                ),
+              ),
+            ),
+        ],
+      ),
+    );
   }
 }

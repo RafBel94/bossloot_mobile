@@ -259,6 +259,16 @@
         "description": "Text for the brand label in the drawer"
     },
 
+    "app_drawer_offer_label": "Offers",
+    "@app_drawer_offer_label": {
+        "description": "Text for the offer label in the drawer"
+    },
+
+    "app_drawer_only_offers_label": "Only offers",
+    "@app_drawer_only_offers_label": {
+        "description": "Text for the only offers label in the drawer"
+    },
+
 
 
 

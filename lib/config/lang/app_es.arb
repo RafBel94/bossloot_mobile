@@ -259,6 +259,16 @@
         "description": "Text for the brand label in the drawer"
     },
 
+    "app_drawer_offer_label": "Ofertas",
+    "@app_drawer_offer_label": {
+        "description": "Text for the offer label in the drawer"
+    },
+
+    "app_drawer_only_offers_label": "Solo en oferta",
+    "@app_drawer_only_offers_label": {
+        "description": "Text for the only offers label in the drawer"
+    },
+
 
 
 
@@ -1275,7 +1285,7 @@
 
 
 
-    "drawer_title": "FILTRAR",
+    "drawer_title": "FILTROS",
     "@drawer_title": {
         "description": "Title for the filters drawer"
     },

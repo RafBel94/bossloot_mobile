@@ -2,9 +2,11 @@ import 'package:bossloot_mobile/widgets/custom_drawer/custom_drawer_buttons/draw
 import 'package:bossloot_mobile/widgets/custom_drawer/custom_drawer_buttons/drawer_clear_button.dart';
 import 'package:bossloot_mobile/widgets/custom_drawer/custom_expansion_tiles/brand_filter_expansion_tile.dart';
 import 'package:bossloot_mobile/widgets/custom_drawer/custom_expansion_tiles/category_filter_expansion_tile.dart';
+import 'package:bossloot_mobile/widgets/custom_drawer/custom_expansion_tiles/offer_filter_expansion_tile.dart';
 import 'package:bossloot_mobile/widgets/custom_drawer/custom_expansion_tiles/price_filter_expansion_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class CustomEndDrawer extends StatefulWidget {
   const CustomEndDrawer({super.key});
@@ -40,7 +42,7 @@ class _CustomEndDrawerState extends State<CustomEndDrawer> {
   
           // HEADER (LOGO, TITLE AND SEARCH BAR)
           SizedBox(
-            height: 80,
+            height: 90,
             child: DrawerHeader(
               decoration: BoxDecoration(
                 color: Colors.white,
@@ -49,19 +51,18 @@ class _CustomEndDrawerState extends State<CustomEndDrawer> {
                 ),
                 boxShadow: [
                   BoxShadow(
-                    color: Color.fromARGB(255, 184, 184, 184),
-                    blurRadius: 5.0,
-                    spreadRadius: 1.0,
-                    offset: Offset(0.0, 2.0),
+                    color: const Color.fromARGB(51, 115, 23, 168),
+                    spreadRadius: 1,
+                    blurRadius: 5,
+                    offset: const Offset(0, 3),
                   ),
                 ],
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.max,
                 children: [
-                  Icon(Icons.filter_alt, color: Colors.black, size: 30),
-                  Text(AppLocalizations.of(context)!.drawer_title, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 28),),
-                  SizedBox(width: 10),
+                  Text(AppLocalizations.of(context)!.drawer_title, style: GoogleFonts.orbitron(fontWeight: FontWeight.bold, color: const Color.fromARGB(255, 74, 74, 74), fontSize: 28),),
                 ],
               ),
             ),
@@ -82,6 +83,9 @@ class _CustomEndDrawerState extends State<CustomEndDrawer> {
               
                   // PRICE FILTER
                   PriceFilterExpansionTile(),
+
+                  // OFFERS FILTER
+                  OfferFilterExpansionTile(),
                 ],
               ),
             ),
@@ -98,10 +102,10 @@ class _CustomEndDrawerState extends State<CustomEndDrawer> {
               ),
               boxShadow: [
                 BoxShadow(
-                  color: Color.fromARGB(255, 184, 184, 184),
-                  blurRadius: 5.0,
-                  spreadRadius: 1.0,
-                  offset: Offset(0.0, -2.0),
+                  color: Color.fromARGB(51, 115, 23, 168),
+                  spreadRadius: 1,
+                  blurRadius: 5,
+                  offset: Offset(0, -3),
                 ),
               ]
             ),

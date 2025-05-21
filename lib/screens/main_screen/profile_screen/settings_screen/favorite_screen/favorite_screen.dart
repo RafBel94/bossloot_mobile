@@ -8,10 +8,9 @@ import 'package:bossloot_mobile/screens/main_screen/profile_screen/settings_scre
 import 'package:bossloot_mobile/screens/main_screen/profile_screen/settings_screen/favorite_screen/favorite_product_card.dart';
 import 'package:bossloot_mobile/utils/dialog_util.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class FavoriteScreen extends StatefulWidget {
   final User? user;
