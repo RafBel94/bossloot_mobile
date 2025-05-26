@@ -16,6 +16,7 @@ class Product {
   bool featured;
   String image;
   int points;
+  bool deleted;
   List<Valoration> valorations;
   double avg_rating;
 
@@ -33,6 +34,7 @@ class Product {
     required this.featured,
     required this.image,
     required this.points,
+    required this.deleted,
     required this.valorations,
     required this.avg_rating,
   });
@@ -52,6 +54,7 @@ class Product {
       'featured': featured,
       'image': image,
       'points': points,
+      'deleted': deleted,
       'valorations': valorations.map((x) => x.toJson()).toList(),
       'avg_rating': avg_rating
     };
@@ -72,6 +75,7 @@ class Product {
       featured: map['featured'] ?? false,
       image: map['image'] ?? '',
       points: map['points']?.toInt() ?? 0,
+      deleted: map['deleted'] ?? false,
       valorations: List<Valoration>.from(map['valorations']?.map((x) => Valoration.fromJson(x))),
       avg_rating: map['avg_rating']?.toDouble() ?? 0.0,
     );

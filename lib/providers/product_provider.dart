@@ -51,7 +51,10 @@ class ProductProvider extends ChangeNotifier{
 
       FetchResponse response = await productService.getCatalogProducts();
       if (response.success) {
-        catalogProductList = response.data.map((item) => CatalogProduct.fromJson(item)).toList();
+        catalogProductList = response.data
+            .where((item) => item['deleted'] == 0)
+            .map((item) => CatalogProduct.fromJson(item))
+            .toList();
         filteredCatalogList = List.from(catalogProductList);
 
         errorMessage = null;
@@ -89,7 +92,10 @@ class ProductProvider extends ChangeNotifier{
     try {
       FetchResponse response = await productService.getProductsByCategory(category);
       if (response.success) {
-        catalogProductList = response.data.map((item) => CatalogProduct.fromJson(item)).toList();
+        catalogProductList = response.data
+            .where((item) => item['deleted'] == 0)
+            .map((item) => CatalogProduct.fromJson(item))
+            .toList();
         errorMessage = null;
       } else {
         errorMessage = response.message[0];
@@ -145,7 +151,10 @@ class ProductProvider extends ChangeNotifier{
 
       FetchResponse response = await productService.getFeaturedProducts();
       if (response.success) {
-        featuredProductList = response.data.map((item) => CatalogProduct.fromJson(item)).toList();
+        featuredProductList = response.data
+            .where((item) => item['deleted'] == 0)
+            .map((item) => CatalogProduct.fromJson(item))
+            .toList();
         filteredFeaturedList = List.from(featuredProductList);
         
         errorMessage = null;
@@ -262,7 +271,10 @@ class ProductProvider extends ChangeNotifier{
       
       if (response.success) {
         // Update the filtered catalog list
-        filteredCatalogList = response.data.map((item) => CatalogProduct.fromJson(item)).toList();
+        filteredCatalogList = response.data
+            .where((item) => item['deleted'] == 0)
+            .map((item) => CatalogProduct.fromJson(item))
+            .toList();
         
         // Apply the same filters to the featured products
         if (params.isEmpty) {
@@ -292,7 +304,10 @@ class ProductProvider extends ChangeNotifier{
       FetchResponse response = await productService.getFilteredProducts(params);
       
       if (response.success) {
-        return response.data.map((item) => CatalogProduct.fromJson(item)).toList();
+        return response.data
+        .where((item) => item['deleted'] == 0)
+        .map((item) => CatalogProduct.fromJson(item))
+        .toList();
       } else {
         return [];
       }

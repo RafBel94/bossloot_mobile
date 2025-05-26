@@ -32,6 +32,7 @@ class DisplayProduct extends Product{
     required super.featured,
     required super.image,
     required super.points,
+    required super.deleted,
     required super.valorations,
     required super.avg_rating,
     required this.resolution,
@@ -64,6 +65,7 @@ class DisplayProduct extends Product{
       featured: json['featured'] == 1,
       image: json['image'],
       points: json['points'],
+      deleted: json['deleted'] == 1 || json['deleted'] == true,
       valorations: (json['valorations'] as List)
           .map((valoration) => Valoration.fromJson(valoration))
           .toList(),

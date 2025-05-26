@@ -17,7 +17,7 @@ class EmptyCartContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 150),
+      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 130),
       decoration: BoxDecoration(
         image: DecorationImage(
           image: AssetImage('assets/images/background-image-goblin-shop-2.png'),

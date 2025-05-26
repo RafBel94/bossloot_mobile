@@ -13,6 +13,7 @@ class SimpleProduct {
   final bool featured;
   final String? image;
   final int? points;
+  final bool deleted;
 
   SimpleProduct({
     required this.id,
@@ -26,6 +27,7 @@ class SimpleProduct {
     required this.featured,
     this.image,
     this.points,
+    this.deleted = false,
   });
 
   Map<String, dynamic> toMap() {
@@ -41,6 +43,7 @@ class SimpleProduct {
       'featured': featured,
       'image': image,
       'points': points,
+      'deleted': deleted,
     };
   }
 
@@ -65,6 +68,7 @@ class SimpleProduct {
       featured: map['featured'] == 1 || map['featured'] == true,
       image: map['image'],
       points: map['points']?.toInt(),
+      deleted: map['deleted'] == 1 || map['deleted'] == true,
     );
   }
 
