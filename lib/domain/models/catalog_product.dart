@@ -10,6 +10,7 @@ class CatalogProduct {
   final bool featured;
   final String image;
   final int points;
+  final bool deleted;
   final String category;
   final String brand;
 
@@ -25,6 +26,7 @@ class CatalogProduct {
     this.featured,
     this.image,
     this.points,
+    this.deleted,
     this.category,
     this.brand
   );
@@ -42,6 +44,7 @@ class CatalogProduct {
       json['featured'] == 1,
       json['image'],
       json['points'],
+      json['deleted'] == 1,
       json['category'],
       json['brand']
     );

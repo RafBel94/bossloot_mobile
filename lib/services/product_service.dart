@@ -64,4 +64,42 @@ class ProductService {
 
     return FetchResponse.fromJson(json.decode(response.body));
   }
+
+  // Method to filter products based on various criteria
+Future<FetchResponse> getFilteredProducts(Map<String, dynamic> filters) async {
+  String endpoint = '$baseUrl/products/filter';
+  
+  // Añadir los parámetros de consulta a la URL
+  if (filters.isNotEmpty) {
+    endpoint += '?';
+    filters.forEach((key, value) {
+      if (value is List) {
+        // Para listas, las codificamos como JSON
+        endpoint += '$key=${Uri.encodeComponent(jsonEncode(value))}&';
+      } else {
+        // Para valores simples, simplemente los convertimos a string
+        endpoint += '$key=${Uri.encodeComponent(value.toString())}&';
+      }
+    });
+    // Eliminar el último '&'
+    endpoint = endpoint.substring(0, endpoint.length - 1);
+  }
+  
+  try {
+    final response = await http.get(
+      Uri.parse(endpoint),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    );
+    
+    return FetchResponse.fromJson(json.decode(response.body));
+  } catch (e) {
+    return FetchResponse(
+      success: false,
+      message: 'Network error: $e',
+      data: [],
+    );
+  }
+}
 }

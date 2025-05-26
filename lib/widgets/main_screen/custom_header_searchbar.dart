@@ -72,7 +72,7 @@ class _CustomHeaderSearchbarState extends State<CustomHeaderSearchbar>
     
     // Filter the product list based on the search query
     final filteredList = productProvider.catalogProductList
-        .where((product) => product.name.toLowerCase().contains(query))
+        .where((product) => product.name.toLowerCase().contains(query) && product.deleted == false)
         .take(5)
         .toList();
     

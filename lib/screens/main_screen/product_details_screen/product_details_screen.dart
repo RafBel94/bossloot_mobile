@@ -154,6 +154,8 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     if (userProvider.currentUser == null) {
                       DialogUtil.showLoginRequiredDialog(context);
                       return;
+                    } else if (productProvider.currentProductDetails.quantity == 0) {
+                      DialogUtil.showProductOutOfStockDialog(context);
                     } else {
                       DialogUtil.showAddToCartDialog(context, cartProvider, widget.productId);
                     }

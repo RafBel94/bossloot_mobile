@@ -1,11 +1,13 @@
+
+import 'package:bossloot_mobile/providers/brand_provider.dart';
+import 'package:bossloot_mobile/providers/category_provider.dart';
 import 'package:bossloot_mobile/providers/coin_exchange_provider.dart';
 import 'package:bossloot_mobile/providers/language_provider.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:bossloot_mobile/providers/category_provider.dart';
 import 'package:bossloot_mobile/providers/product_provider.dart';
 import 'package:bossloot_mobile/screens/main_screen/main_screen.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:provider/provider.dart';
 
 class LoadingScreen extends StatefulWidget {
   const LoadingScreen({super.key});
@@ -101,6 +103,7 @@ class _LoadingScreenState extends State<LoadingScreen>
     final LanguageProvider languageProvider = context.read<LanguageProvider>();
     final coinExchangeProvider = context.read<CoinExchangeProvider>();
     final categoryProvider = context.read<CategoryProvider>();
+    final BrandProvider brandProvider = context.read<BrandProvider>();
     final productProvider = context.read<ProductProvider>();
     
     await languageProvider.initialize();
@@ -108,6 +111,7 @@ class _LoadingScreenState extends State<LoadingScreen>
     await productProvider.fetchCatalogProducts();
     await productProvider.fetchFeaturedProducts();
     await categoryProvider.fetchCategories();
+    await brandProvider.fetchBrands();
 
     // Preload images
     await _preloadImages();

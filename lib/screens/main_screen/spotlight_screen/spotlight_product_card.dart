@@ -1,4 +1,5 @@
 import 'package:bossloot_mobile/domain/models/catalog_product.dart';
+import 'package:bossloot_mobile/providers/cart/cart_provider.dart';
 import 'package:bossloot_mobile/providers/coin_exchange_provider.dart';
 import 'package:bossloot_mobile/providers/user_provider.dart';
 import 'package:bossloot_mobile/screens/main_screen/product_details_screen/product_details_screen.dart';
@@ -19,6 +20,7 @@ class SpotlightProductCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     UserProvider userProvider = context.read<UserProvider>();
+    CartProvider cartProvider = context.read<CartProvider>();
     CoinExchangeProvider coinExchangeProvider = context.read<CoinExchangeProvider>();
 
     String formatedDiscount = product.discount % 1 == 0 
@@ -211,6 +213,10 @@ class SpotlightProductCard extends StatelessWidget {
                     onPressed: () {
                       if (userProvider.currentUser == null) {
                         DialogUtil.showLoginRequiredDialog(context);
+                      } else if (product.quantity == 0) {
+                        DialogUtil.showProductOutOfStockDialog(context);
+                      } else {
+                        DialogUtil.showAddToCartDialog(context, cartProvider, product.id);
                       }
                     },
                   ),

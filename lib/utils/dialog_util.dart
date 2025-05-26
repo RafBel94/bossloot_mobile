@@ -547,15 +547,15 @@ class DialogUtil {
                 // Levels
                 _buildInfoSection(
                   icon: Icons.attach_money_rounded,
-                  title: '${AppLocalizations.of(context)!.app_discount}s:',
+                  title: '${AppLocalizations.of(context)!.app_discount.toUpperCase()}S:',
                   content: null,
                   color: Colors.green,
                 ),
 
-                FittedBox(fit: BoxFit.scaleDown, child: Text('${AppLocalizations.of(context)!.app_level} 1 - 0% ${AppLocalizations.of(context)!.app_discount}', style: TextStyle(color: Colors.white70, fontSize: 15))),
-                FittedBox(fit: BoxFit.scaleDown, child: Text('${AppLocalizations.of(context)!.app_level} 2 (300 ${AppLocalizations.of(context)!.app_points}) - 5% ${AppLocalizations.of(context)!.app_discount}', style: TextStyle(color: Colors.white70, fontSize: 15))),
-                FittedBox(fit: BoxFit.scaleDown, child: Text('${AppLocalizations.of(context)!.app_level} 3 (500 ${AppLocalizations.of(context)!.app_points}) - 10% ${AppLocalizations.of(context)!.app_discount}', style: TextStyle(color: Colors.white70, fontSize: 15))),
-                FittedBox(fit: BoxFit.scaleDown, child: Text('${AppLocalizations.of(context)!.app_level} 4 (800 ${AppLocalizations.of(context)!.app_points}) - 15% ${AppLocalizations.of(context)!.app_discount}', style: TextStyle(color: Colors.white70, fontSize: 15))),
+                FittedBox(fit: BoxFit.scaleDown, child: Text('${AppLocalizations.of(context)!.app_level} 1 - 0% ${AppLocalizations.of(context)!.app_discount}', style: TextStyle(color: const Color.fromARGB(241, 255, 255, 255), fontSize: 15))),
+                FittedBox(fit: BoxFit.scaleDown, child: Text('${AppLocalizations.of(context)!.app_level} 2 (300 ${AppLocalizations.of(context)!.app_points}) - 5% ${AppLocalizations.of(context)!.app_discount}', style: TextStyle(color: const Color.fromARGB(241, 255, 255, 255), fontSize: 15))),
+                FittedBox(fit: BoxFit.scaleDown, child: Text('${AppLocalizations.of(context)!.app_level} 3 (500 ${AppLocalizations.of(context)!.app_points}) - 10% ${AppLocalizations.of(context)!.app_discount}', style: TextStyle(color: const Color.fromARGB(241, 255, 255, 255), fontSize: 15))),
+                FittedBox(fit: BoxFit.scaleDown, child: Text('${AppLocalizations.of(context)!.app_level} 4 (800 ${AppLocalizations.of(context)!.app_points}) - 15% ${AppLocalizations.of(context)!.app_discount}', style: TextStyle(color: const Color.fromARGB(241, 255, 255, 255), fontSize: 15))),
                 
                 SizedBox(height: 20),
                 
@@ -1481,6 +1481,93 @@ class DialogUtil {
     );
   }
 
+  static Future<bool?> showProductOutOfStockDialog(BuildContext context) {
+    return showDialog<bool>(
+      context: context,
+      builder: (context) => Dialog(
+        backgroundColor: Colors.transparent,
+        child: Container(
+          padding: EdgeInsets.all(20),
+          decoration: BoxDecoration(
+            color: Color(0xFF2A0E4D),
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(
+              color: Colors.orangeAccent,
+              width: 2,
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: const Color.fromRGBO(255, 152, 0, 0.5),
+                blurRadius: 10,
+                spreadRadius: 3,
+              ),
+            ],
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Title
+              FittedBox(
+                fit: BoxFit.scaleDown,
+                child: Text(
+                  AppLocalizations.of(context)!.out_of_stock_dialog_title,
+                  style: GoogleFonts.pressStart2p(
+                    fontSize: 18,
+                    color: Colors.amber,
+                    shadows: [
+                      Shadow(
+                        color: Colors.deepOrange,
+                        offset: Offset(2, 2),
+                        blurRadius: 0,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              
+              SizedBox(height: 25),
+              
+              // General Information
+              _buildInfoSection(
+                title: AppLocalizations.of(context)!.out_of_stock_dialog_subtitle,
+                content: AppLocalizations.of(context)!.out_of_stock_dialog_text,
+                color: const Color.fromARGB(255, 255, 89, 64),
+              ),
+              
+              SizedBox(height: 30),
+              
+              // Button
+              Center(
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.pop(context, true);
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.red,
+                    foregroundColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      side: BorderSide(color: Colors.white, width: 2),
+                    ),
+                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  ),
+                  child: Text(
+                    AppLocalizations.of(context)!.profile_details_help_dialog_button,
+                    style: GoogleFonts.pressStart2p(
+                      fontSize: 10,
+                      letterSpacing: 1,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
   static Future<bool?> showDeleteFavoriteConfirmDialog(BuildContext context) {
     return showDialog<bool>(
       context: context,
@@ -1912,13 +1999,13 @@ Widget _buildInfoSection({
                 ),
         ),
       
-      SizedBox(height: 6),
+      SizedBox(height: 15),
 
       if (content != null)
       Text(
         content,
         style: TextStyle(
-          color: Colors.white70,
+          color: const Color.fromARGB(232, 255, 255, 255),
           fontSize: 14,
           height: 1.4,
         ),

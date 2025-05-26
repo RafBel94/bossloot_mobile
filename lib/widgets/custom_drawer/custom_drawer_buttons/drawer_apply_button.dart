@@ -1,24 +1,24 @@
+import 'package:bossloot_mobile/providers/product_provider.dart';
+import 'package:bossloot_mobile/widgets/shared/custom_elevated_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
 
 class DrawerApplyButton extends StatelessWidget {
   const DrawerApplyButton({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
+    return CustomElevatedButton(
+      text: AppLocalizations.of(context)!.app_apply,
       onPressed: () {
-        // Handle apply button press
+        // Aplicar los filtros
+        final productProvider = Provider.of<ProductProvider>(context, listen: false);
+        productProvider.applyFilters();
+        
+        // Cerrar el drawer
+        Navigator.pop(context);
       },
-      style: ElevatedButton.styleFrom(
-        shape: RoundedRectangleBorder(
-          side: const BorderSide(color: Colors.white, width: 2),
-          borderRadius: BorderRadius.circular(10)
-        ),
-        backgroundColor: const Color.fromARGB(255, 248, 225, 254),
-        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 30),
-      ),
-      child: Text(AppLocalizations.of(context)!.app_apply, style: TextStyle(fontSize: 16, color: Color.fromARGB(255, 48, 48, 48), fontWeight: FontWeight.bold)),
     );
   }
 }

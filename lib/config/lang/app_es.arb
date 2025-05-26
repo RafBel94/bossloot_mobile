@@ -199,6 +199,79 @@
 
 
 
+    "app_drawer_category_ram": "Memoria RAM",
+    "@app_drawer_category_ram": {
+        "description": "Text for the RAM category in the drawer"
+    },
+
+    "app_drawer_category_cpu": "Procesador",
+    "@app_drawer_category_cpu": {
+        "description": "Text for the CPU category in the drawer"
+    },
+
+    "app_drawer_category_gpu": "Tarjeta Gráfica",
+    "@app_drawer_category_gpu": {
+        "description": "Text for the GPU category in the drawer"
+    },
+
+    "app_drawer_category_motherboard": "Placa base",
+    "@app_drawer_category_motherboard": {
+        "description": "Text for the Motherboard category in the drawer"
+    },
+
+    "app_drawer_category_storage": "Almacenamiento",
+    "@app_drawer_category_storage": {
+        "description": "Text for the Storage category in the drawer"
+    },
+
+    "app_drawer_category_psu": "Alimentación",
+    "@app_drawer_category_psu": {
+        "description": "Text for the Power Supply category in the drawer"
+    },
+
+    "app_drawer_category_case": "Caja",
+    "@app_drawer_category_case": {
+        "description": "Text for the Case category in the drawer"
+    },
+
+    "app_drawer_category_cooler": "Refrigeración",
+    "@app_drawer_category_cooler": {
+        "description": "Text for the Cooler category in the drawer"
+    },
+
+    "app_drawer_category_display": "Pantalla",
+    "@app_drawer_category_display": {
+        "description": "Text for the Display category in the drawer"
+    },
+
+    "app_drawer_category_keyboard": "Teclado",
+    "@app_drawer_category_keyboard": {
+        "description": "Text for the Keyboard category in the drawer"
+    },
+
+    "app_drawer_category_mouse": "Ratón",
+    "@app_drawer_category_mouse": {
+        "description": "Text for the Mouse category in the drawer"
+    },
+
+    "app_drawer_brand_label": "Marca",
+    "@app_drawer_brand_label": {
+        "description": "Text for the brand label in the drawer"
+    },
+
+    "app_drawer_offer_label": "Ofertas",
+    "@app_drawer_offer_label": {
+        "description": "Text for the offer label in the drawer"
+    },
+
+    "app_drawer_only_offers_label": "Solo en oferta",
+    "@app_drawer_only_offers_label": {
+        "description": "Text for the only offers label in the drawer"
+    },
+
+
+
+
     "home_screen_featured_title": "LOS MAS CODICIADOS",
     "@home_screen_featured_title": {
         "description": "Text for the featured section on the home screen"
@@ -644,6 +717,11 @@
         "description": "Text for the ratings label on the product details screen"
     },
 
+    "product_details_screen_no_stock_label": "¡Agotado!",
+    "@product_details_screen_no_stock_label": {
+        "description": "Text for the stock label on the product details screen"
+    },
+
     "product_details_screen_description_label": "Descripción",
     "@product_details_screen_description_label": {
         "description": "Text for the description label on the product details screen"
@@ -881,6 +959,24 @@
     "cart_dialog_removed_text": "El producto se ha eliminado correctamente de tu carrito.\nPuedes ver tu carrito para proceder al pago si has terminado.",
     "@cart_dialog_removed_text": {
         "description": "Text for the product removed confirmation dialog"
+    },
+
+
+
+
+    "out_of_stock_dialog_title": "PRODUCTO AGOTADO",
+    "@out_of_stock_dialog_title": {
+        "description": "Title for the out of stock dialog"
+    },
+
+    "out_of_stock_dialog_subtitle": "¡EL PRODUCTO ESTA AGOTADO!",
+    "@out_of_stock_dialog_subtitle": {
+        "description": "Subtitle for the out of stock dialog"
+    },
+
+    "out_of_stock_dialog_text": "Este producto está agotado y no está disponible para la compra en este momento.\n\nPuedes volver más tarde o buscar productos similares en nuestra tienda.",
+    "@out_of_stock_dialog_text": {
+        "description": "Text for the out of stock dialog"
     },
 
 
@@ -1212,7 +1308,7 @@
 
 
 
-    "drawer_title": "FILTRAR",
+    "drawer_title": "FILTROS",
     "@drawer_title": {
         "description": "Title for the filters drawer"
     },
