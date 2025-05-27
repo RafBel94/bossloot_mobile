@@ -12,7 +12,6 @@ class SimpleProduct {
   final double? discount;
   final bool featured;
   final String? image;
-  final int? points;
   final bool deleted;
 
   SimpleProduct({
@@ -26,7 +25,6 @@ class SimpleProduct {
     this.discount,
     required this.featured,
     this.image,
-    this.points,
     this.deleted = false,
   });
 
@@ -42,7 +40,6 @@ class SimpleProduct {
       'discount': discount,
       'featured': featured,
       'image': image,
-      'points': points,
       'deleted': deleted,
     };
   }
@@ -67,7 +64,6 @@ class SimpleProduct {
             : map['discount'].toDouble(),
       featured: map['featured'] == 1 || map['featured'] == true,
       image: map['image'],
-      points: map['points']?.toInt(),
       deleted: map['deleted'] == 1 || map['deleted'] == true,
     );
   }

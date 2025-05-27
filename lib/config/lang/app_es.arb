@@ -622,6 +622,24 @@
 
 
 
+    
+    "account_deactivated_dialog_title": "ACCESO DENEGADO",
+    "@account_deactivated_dialog_title": {
+        "description": "Title for the account deactivated dialog"
+    },
+
+    "account_deactivated_dialog_subtitle": "!TU CUENTA ESTA SUSPENDIDA!",
+    "@account_deactivated_dialog_subtitle": {
+        "description": "Subtitle for the account deactivated dialog"
+    },
+
+    "account_deactivated_dialog_text": "Tu cuenta ha sido suspendida. Por favor, escribenos a través del formulario de contacto para reactivarla.",
+    "@account_deactivated_dialog_text": {
+        "description": "Text for the account deactivated dialog"
+    },
+
+
+
 
     "register_screen_name_field": "Nombre",
     "@register_screen_name_field": {

@@ -312,6 +312,89 @@ class DialogUtil {
     );
   }
 
+  static Future<dynamic> showAccountDeactivatedDialog(BuildContext context) {
+    return showDialog(
+      context: context,
+      builder: (context) => Dialog(
+        backgroundColor: Colors.transparent,
+        child: Container(
+          padding: EdgeInsets.all(20),
+          decoration: BoxDecoration(
+            color: Color(0xFF2A0E4D),
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(
+              color: Colors.purpleAccent,
+              width: 2,
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: const Color.fromRGBO(156, 39, 176, 0.5),
+                blurRadius: 10,
+                spreadRadius: 3,
+              ),
+            ],
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+
+              // Title
+              Text(
+                AppLocalizations.of(context)!.account_deactivated_dialog_title,
+                style: GoogleFonts.pressStart2p(
+                  fontSize: 18,
+                  color: Colors.amber,
+                  shadows: [
+                    Shadow(
+                      color: Colors.purple,
+                      offset: Offset(2, 2),
+                      blurRadius: 0,
+                    ),
+                  ],
+                ),
+              ),
+
+              SizedBox(height: 25),
+
+              // General Information
+              _buildInfoSection(
+                title: AppLocalizations.of(context)!.account_deactivated_dialog_subtitle,
+                content: AppLocalizations.of(context)!.account_deactivated_dialog_text,
+                color: Colors.pinkAccent,
+              ),
+
+              SizedBox(height: 20),
+
+              // Button
+              Center(
+                child: ElevatedButton(
+                  onPressed: () => Navigator.pop(context),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.purple,
+                    foregroundColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      side: BorderSide(color: Colors.white, width: 2),
+                    ),
+                    padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                  ),
+                  child: Text(
+                    AppLocalizations.of(context)!.login_required_dialog_button,
+                    style: GoogleFonts.pressStart2p(
+                      fontSize: 12,
+                      letterSpacing: 1,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
   static Future<dynamic> showValidationErrorDialog(BuildContext context, String? errorMessage) {
     return showDialog(
       context: context,

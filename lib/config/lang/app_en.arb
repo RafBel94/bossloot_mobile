@@ -623,6 +623,24 @@
 
 
 
+    
+    "account_deactivated_dialog_title": "ACCESS DENIED",
+    "@account_deactivated_dialog_title": {
+        "description": "Title for the account deactivated dialog"
+    },
+
+    "account_deactivated_dialog_subtitle": "YOUR ACCOUNT IS DEACTIVATED!",
+    "@account_deactivated_dialog_subtitle": {
+        "description": "Subtitle for the account deactivated dialog"
+    },
+
+    "account_deactivated_dialog_text": "Your account has been deactivated. Please contact us to reactivate your account through the contact form.",
+    "@account_deactivated_dialog_text": {
+        "description": "Text for the account deactivated dialog"
+    },
+
+
+
 
     "register_screen_name_field": "Name",
     "@register_screen_name_field": {

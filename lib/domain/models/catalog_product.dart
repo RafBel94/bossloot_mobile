@@ -9,7 +9,6 @@ class CatalogProduct {
   final double discount;
   final bool featured;
   final String image;
-  final int points;
   final bool deleted;
   final String category;
   final String brand;
@@ -25,7 +24,6 @@ class CatalogProduct {
     this.discount,
     this.featured,
     this.image,
-    this.points,
     this.deleted,
     this.category,
     this.brand
@@ -43,7 +41,6 @@ class CatalogProduct {
       double.parse(json['discount'].toString()),
       json['featured'] == 1,
       json['image'],
-      json['points'],
       json['deleted'] == 1,
       json['category'],
       json['brand']
